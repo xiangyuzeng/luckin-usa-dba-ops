@@ -1,0 +1,21 @@
+fingerprint_id,digest_short,table,verb,total_sec_D1_est,total_sec_B_mean_est,rank_D1,rank_B_mean,rank_delta,first_seen_within_7d,notes
+F1,"INSERT INTO t_user_event_track (user_no,event_type,event_name,p_os,channel,p_wifi,p_network_type,platform,...) VALUES (?,?,...)",t_user_event_track,INSERT,~30,~12,1,1,0,N,"Highest call count in slow log; clickstream events (page_end / $AppEnd / push_show_bw / $AppStart)"
+F2,"INSERT INTO t_user_event (user_no,event_type,event_sub_type,event_time,tenant,msg_id) VALUES (?,?,?,?,?,?)",t_user_event,INSERT,~25,~10,2,2,0,N,"event_type=10 (contact:ug:event) realtime triggers"
+F3,"INSERT INTO t_user_state (user_no,event_type,event_state_value,event_time,msg_id,tenant) VALUES (?,?,?,?,?,?)",t_user_state,INSERT,~22,~9,3,3,0,N,"event_type=6 (counter/state); paired with F4 in transactions"
+F4,"DELETE FROM t_user_state WHERE user_no=? AND event_type=? AND tenant='LKUS'",t_user_state,DELETE,~18,~7,4,4,0,N,"Compare-and-swap pattern: paired with F3 INSERT"
+F5,"SELECT 1 FROM t_user_event WHERE tenant='LKUS' AND (? IN (SELECT user_no FROM t_user_state WHERE event_type=8 AND event_value IN (?,?,?) AND tenant='LKUS')) LIMIT 1",t_user_event/t_user_state,SELECT,~6,~3,5,5,0,N,"Existence check via subquery"
+F6,commit,(any),COMMIT,~10,~5,6,6,0,N,"Group commit waits during burst — symptom not cause"
+
+# CRITICAL OBSERVATION (this is the answer to the Lead's question):
+#
+# The fingerprint set in D1 is IDENTICAL to the nighttime baseline B1 (2026-04-22 06:31-06:40 UTC).
+# Same writer user, same schema, same INSERT/DELETE pair on the same hot tables.
+#
+# rank_delta = 0 across all top fingerprints. No new entrants. No entrant has FIRST_SEEN < 7 days.
+#
+# Therefore: this is NOT a "new daytime workload" event.
+# This is the SAME workload, fired during NA daytime, with greater amplitude (~2x B1 by slow-log volume).
+#
+# total_sec values are estimates from per-row Query_time x slow-log row count, not exact —
+# perf_schema digests were overwritten before snapshot, so these are reconstructed not raw.
+# Rankings are reliable; absolute totals are best-effort.

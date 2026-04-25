@@ -1,0 +1,31 @@
+slot,sample_window,user,client_ip,subnet,role,resolution
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.40.123,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.35.188,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.47.125,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.47.164,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.47.224,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.40.140,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.33.135,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.46.170,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_w,10.238.33.143,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_o,10.238.47.125,10.238.0.0/16,CDP-realtime-read-pool,internal-vpc-EKS-pod
+D1,2026-04-25 13:00-13:15,icdprealtimeuge_A_o,10.238.46.170,10.238.0.0/16,CDP-realtime-read-pool,internal-vpc-EKS-pod
+B,nightly-baseline,icdprealtimeuge_A_w,10.238.x.x,10.238.0.0/16,CDP-realtime-write-pool,internal-vpc-EKS-pod
+B,nightly-baseline,icdprealtimeuge_A_o,10.238.x.x,10.238.0.0/16,CDP-realtime-read-pool,internal-vpc-EKS-pod
+LIVE_NOW,2026-04-25 18:14 UTC,datalink_canal,10.238.3.233,10.238.0.0/16,binlog-replicator,internal-vpc
+
+# 2C — Cross-region check
+#
+# All client IPs at D1 are in 10.238.0.0/16 — the EKS pod subnet for the us-east-1 production VPC.
+# NOT a single IP from non-us-east-1 networks (no CN VPCs, no transit gateways, no APAC ranges).
+#
+# Hypothesis 3 (cross-region traffic from CN evening peak hitting NA cluster) is DISCONFIRMED.
+#
+# 13:05 UTC = 21:05 Beijing was a coincidence. The traffic source is the same NA-resident
+# CDP application pool that runs 24/7.
+#
+# 2B — Live snapshot at 18:14 UTC (post-spike) had only 3 active threads and 0 from the
+# CDP write pool — the burst was over and pod connections had drained.
+# Therefore D1 distribution is reconstructed from the slow-log User@Host parse, not a
+# live PROCESSLIST. The slow-log captures every query >0.1s by every connection, so
+# the picture for the burst window is complete (757 entries).

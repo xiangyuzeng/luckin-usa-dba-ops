@@ -1,0 +1,119 @@
+================================================================================
+PHASE 1D — Slow query log digest, D1 window 12:55-13:25 UTC, 2026-04-25
+Source: /aws/rds/instance/aws-luckyus-isalescdp-rw/slowquery (CW Logs Insights)
+long_query_time = 0.1s (still pre-incident — recommendation #3 not applied)
+================================================================================
+
+Total slow log entries in window: 757
+
+Per-minute count distribution
+-----------------------------
+   12:56  5    | _
+   12:57  -    |
+   12:58  -    |
+   12:59  -    |
+   13:00  6    | _
+   13:01  -    |        <-- alert begins (CW Connections jump)
+   13:02  35   | ====
+   13:03  25   | ===
+   13:04  157  | =================
+   13:05  104  | ============
+   13:06  326  | ====================================  <-- PEAK
+   13:07  41   | =====
+   13:08  12   | =       <-- alert clears at 13:08:05
+   13:09  3    | _
+   13:10  4    | _
+   13:11  5    | _
+   13:12  3    | _
+   13:13  2    | _
+   13:14  -    |
+   13:15  8    | _
+   13:16  2    | _
+   13:17  4    | _
+   13:18  6    | _
+   13:19  -    |
+   13:20  5    | _
+   13:21  2    | _
+   13:22  -    |
+   13:23  -    |
+   13:24  -    |
+   13:25  2    | _
+
+Top users / source IPs (during 13:00-13:15)
+--------------------------------------------
+   icdprealtimeuge_A_w  10.238.40.123     123 entries  (write pool)
+   icdprealtimeuge_A_w  10.238.35.188     101
+   icdprealtimeuge_A_w  10.238.47.125      86
+   icdprealtimeuge_A_w  10.238.47.164      81
+   icdprealtimeuge_A_w  10.238.47.224      70
+   icdprealtimeuge_A_w  10.238.40.140      68
+   icdprealtimeuge_A_w  10.238.33.135      67
+   icdprealtimeuge_A_w  10.238.46.170      63
+   icdprealtimeuge_A_w  10.238.33.143      62
+   icdprealtimeuge_A_o  10.238.47.125       2  (read pool)
+   icdprealtimeuge_A_o  10.238.46.170       2
+   diagtools            10.238.10.251       2  (the DBA's own monitor)
+
+Single user `icdprealtimeuge_A_w/_o` accounts for ALL application slow queries.
+This is the CDP real-time user-growth event ingestion service.
+
+Sample fingerprints (extracted by hand from the raw entries)
+------------------------------------------------------------
+[F1] INSERT INTO t_user_event_track (user_no, event_type, event_name, p_os, channel,
+       p_wifi, p_network_type, platform, ..., event_time, msg_id, event_id, tenant)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+     event_type values seen: 'page_end', '$AppEnd', '$AppStart', 'push_show_bw'.
+     Avg Query_time 0.10-0.15s.
+
+[F2] INSERT INTO t_user_event (user_no, event_type, event_sub_type, event_time,
+       tenant, msg_id) VALUES (?, ?, ?, ?, ?, ?);
+     event_type=10 (contact:ug:event), event_sub_type 11 / 13 dominate.
+     Avg Query_time 0.13-0.15s.
+
+[F3] INSERT INTO t_user_state (user_no, event_type, event_state_value, event_time,
+       msg_id, tenant) VALUES (?, ?, ?, ?, ?, ?);
+     event_type=6 dominates (state value tag).
+     Avg Query_time 0.10-0.15s.
+
+[F4] DELETE FROM t_user_state WHERE user_no = ? AND event_type = ? AND tenant = 'LKUS';
+     event_type=6 and event_type=8 alternating; rows examined 1-4 each.
+     This is the realtime-CDP "compare-and-swap" pattern: delete-then-insert.
+     Avg Query_time 0.12-0.20s.
+
+[F5] SELECT 1 FROM t_user_event WHERE tenant = 'LKUS'
+       AND (?_user_no IN (SELECT user_no FROM t_user_state
+                          WHERE event_type=8 AND event_value IN (?,?,?)
+                          AND tenant='LKUS')) LIMIT 1;
+     Existence check using subquery; rows examined 0-1.
+     Avg Query_time 0.10-0.18s.
+
+[F6] commit;
+     Avg Query_time 0.10-0.20s — high commit latency under load (group commit + binlog fsync).
+
+Workload character
+------------------
+- 100% write/transactional. No long-running SELECT.
+- No new fingerprint compared to the historical CDP pipeline (cross-checked vs 2026-04-22 nightly).
+- All queries individually fast (0.10-0.20s) but volume saturates the t4g.medium's 2 vCPU.
+- Lock_time near zero everywhere — NOT a lock-contention issue at the row level.
+  (Confirmed by INNODB_METRICS lock_deadlocks=0, lock_row_lock_time_avg=11ms.)
+- The bottleneck is CPU + WriteIOPS + commit-throughput, not row locks.
+
+Comparison to nighttime baseline (B1: 2026-04-22 06:31-06:40 UTC)
+------------------------------------------------------------------
+   Window           Total slow entries   Peak/min   Peak time
+   B1 nightly       549                  164        06:36 UTC
+   B2 (04-15 5:40)  ~similar (sample period not pulled; CPU peak 85%)
+   B3 (04-21 04:00) ~similar
+   D1 daytime       757                  326        13:06 UTC  <-- 2x B1
+
+D1 is sharper and more intense than the most recent nightly fire B1.
+Same workload pattern, larger amplitude.
+
+Recent daytime precursors (also same fingerprint set)
+------------------------------------------------------
+   2026-04-19 14:23 UTC  CPU max 73%  (no alert - just under threshold)
+   2026-04-24 11:18 UTC  CPU max 81%  (likely fired but not in user's prompt)
+   2026-04-25 13:05 UTC  CPU max 86%  (D1 - this investigation)
+
+3 daytime saturation events in 7 days. The trend is real.

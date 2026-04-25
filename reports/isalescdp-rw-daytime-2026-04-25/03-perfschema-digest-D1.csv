@@ -1,0 +1,14 @@
+## Status: events_statements_summary_by_digest is OVERWRITTEN for the spike window
+## Query at 18:14 UTC (5 hours post-spike) returned only 5 introspection digests:
+##   - SELECT SYSTEM_USER ()  (last_seen 13:06:12 — 195 calls, 0.02s total)
+##   - SET NAMES `utf8`        (last_seen 13:11:05 — 27 calls)
+##   - SHOW PROCESSLIST query  (used by monitor — 4 calls)
+##   - SELECT VERSION()        (5 calls)
+##   - SHOW PROCESSLIST query  (1 call at 13:11:04)
+##
+## Why empty: performance_schema_digests_size default 10000.
+## At 326 slow-log events/min during the burst plus normal traffic, the digest table
+## was overflowed and trimmed long before this snapshot.
+##
+## Substitution: the slow-log fingerprint analysis in 04-slowlog-D1-digest.txt
+## provides the equivalent breakdown.
