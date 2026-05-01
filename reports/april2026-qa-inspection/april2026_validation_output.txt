@@ -1,0 +1,112 @@
+================================================================================
+APRIL 2026 INSPECTION DATA — VALIDATION OUTPUT
+Source: aws-luckyus-opqualitycontrol-rw / luckyus_opqualitycontrol
+================================================================================
+
+--- A. April inspection count by type ---
+inspection_type    cnt  stores
+门店自检                36      13
+QA审计                13      13
+区经检查                14      13
+TOTAL               63
+
+--- B. April severity distribution (across all deduction items) ---
+severity     cnt  total_deduction
+S             17              -85
+M             38             -190
+G            242             -476
+L             75              -61
+
+--- C. April distinct stores inspected ---
+stores_inspected_april = 14
+
+--- D. Stores with multiple inspection TYPES in April ---
+store_code store_name                type_variety  types_seen
+US00001    8th & Broadway                       3  QA审计 / 区经检查 / 门店自检
+US00002    28th & 6th                           3  QA审计 / 区经检查 / 门店自检
+US00003    100 Maiden Ln                        3  QA审计 / 区经检查 / 门店自检
+US00004    37th & Broadway                      3  QA审计 / 区经检查 / 门店自检
+US00005    54th & 8th                           3  QA审计 / 区经检查 / 门店自检
+US00006    102 Fulton                           3  QA审计 / 区经检查 / 门店自检
+US00008    33rd & 10th                          3  QA审计 / 区经检查 / 门店自检
+US00012    16th & 6th                           3  QA审计 / 区经检查 / 门店自检
+US00020    21st & 3rd                           3  QA审计 / 区经检查 / 门店自检
+US00024    15th & 3rd                           3  QA审计 / 区经检查 / 门店自检
+US00025    221 Grand                            3  QA审计 / 区经检查 / 门店自检
+US00027    52nd & Madison                       3  QA审计 / 区经检查 / 门店自检
+US00019    29th & 3rd                           2  区经检查 / 门店自检
+
+--- E. Same-store same-day repeats / large score swings (≥20 pts) ---
+store_code date         cnt swing  inspectors / scores
+US00020    2026-04-14     2    15  Javier Cruz(门店自检, score=95) | Javier Cruz(门店自检, score=80)
+US00020    2026-04-21     3    36  Darwin Coronel(门店自检, score=100) | Darwin Coronel(门店自检, score=100) | Darwin Coronel(门店自检, score=64)
+US00024    2026-04-25     2     5  Clara Mae Venturina(门店自检, score=90) | Daniel Chu(区经检查, score=85)
+US00025    2026-04-30     2     7  Eamonn Caballar(QA审计, score=87) | Daniel Chu(区经检查, score=94)
+US00027    2026-04-16     2     2  Wenny Lin(门店自检, score=65) | Jung Han Liang(区经检查, score=67)
+
+--- F. Q1+April trend (month × type) ---
+month      type           cnt  stores
+2026-01    门店自检            10       5
+2026-01    QA审计             5       5
+2026-01    区经检查             6       6
+2026-02    门店自检            10       5
+2026-02    QA审计             3       3
+2026-02    区经检查             0       0
+2026-03    门店自检            13       7
+2026-03    QA审计             3       2
+2026-03    区经检查             0       0
+2026-04    门店自检            36      13
+2026-04    QA审计            13      13
+2026-04    区经检查            14      13
+
+================================================================================
+SPECIAL CHECKS
+================================================================================
+INFO: QA审计 count in April = 13 (NOT zero — contradicts the prior context).
+INFO: 区经检查 count in April = 14 (NOT zero — contradicts the prior context).
+
+April active store count (distinct dept_id with inspection): 14
+March active store count (distinct dept_id with inspection): 8
+  -> April covered 7 stores not inspected in March: US00000, US00002, US00003, US00004, US00005, US00012, US00019
+  -> March covered 1 stores not inspected in April: US99999
+
+QA inspector workload by month:
+  Yu Jiang        : Jan=5  Feb=2  Mar=2  Apr=0
+  Eamonn Caballar : Jan=0  Feb=0  Mar=1  Apr=13
+
+================================================================================
+ADDITIONAL FINDING: SUBMITTED-ONLY (status=1) vs ALL-STATUSES BREAKDOWN
+================================================================================
+The task brief cites prior-month counts (Jan: 7+5+4=16, Feb: 5+2+0=7, Mar: 12+1+0=13).
+Those numbers only match when filtering t_shopcheck_data.status=1 (submitted/finalized).
+Our exports include all rows where deleted=0 (drafts + submitted), per the task rule
+"DO NOT skip rows or filter out edge cases". Both views below:
+
+month      type               all(deleted=0)    submitted(status=1)
+2026-01    门店自检                           10                      7
+2026-01    QA审计                            5                      5
+2026-01    区经检查                            6                      4
+2026-02    门店自检                           10                      5
+2026-02    QA审计                            3                      2
+2026-02    区经检查                            0                      0
+2026-03    门店自检                           13                     13
+2026-03    QA审计                            3                      1
+2026-03    区经检查                            0                      0
+2026-04    门店自检                           36                     33
+2026-04    QA审计                           13                     12
+2026-04    区经检查                           14                     14
+
+Aggregate (sum of three types):
+month             all    submitted
+2026-01            21           16
+2026-02            13            7
+2026-03            16           14
+2026-04            63           59
+
+NOTES FOR DOWNSTREAM REPORT LAYER:
+  - status=1 mirrors what prior monthly reports apparently used.
+  - all-statuses exposes draft-but-not-submitted activity.
+  - Drafts (status=0) often represent inspections started but never finalized;
+    they may signal a data-quality issue worth investigating.
+  - The CSVs deliberately keep BOTH (no status filter) — the report layer can
+    project to the desired view.
