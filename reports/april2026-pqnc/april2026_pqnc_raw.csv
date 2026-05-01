@@ -1,0 +1,67 @@
+pqnc_id,pqnc_no,created_time,status,initiator,discover_period,party_name,factory_name,problem_description,problem_qty,resp_code,responsibility,one_pqnc_type_code,pqnc_type,corrective_desc
+869,Q202604010001,2026-04-01 10:22:11,5,1,1,Yaqing Zuo,Le Petit Paris NY,cookies has a crack,1.00,1,Supplier,0004,General Defect,broken
+870,Q202604010002,2026-04-01 10:25:44,5,1,1,Andrew Chen,FREENOW USA INC.,The cookie came broken in half.,1.00,1,Supplier,0004,General Defect,broken
+871,Q202604010003,2026-04-01 10:30:35,5,1,1,Austin Gebhardt,Le Petit Paris NY,Broken cookie received during delivery.,1.00,1,Supplier,0004,General Defect,broken
+872,Q202604010004,2026-04-01 14:13:51,5,1,4,Juliana Li,JK Patisserire &Bakery LLC,Looks like mold on the croissants,3.00,1,Supplier,0004,General Defect,dark spots on surface.
+873,Q202604010005,2026-04-01 21:03:40,4,1,2,Jayson Rodriguez,Luckin Medium Roast Beans,Bag was open in container,907.00,1,Supplier,0004,General Defect,broken package in sealed box.
+874,Q202604030001,2026-04-03 14:21:42,5,1,1,Eric Park,J.K patisserie & Bakery Chocolate Chip,2 broken cookies,2.00,1,Supplier,0004,General Defect,broken
+875,Q202604050001,2026-04-05 21:19:06,5,1,2,Roxana Lucero,Block& Barrel,Missing front label sticker,1.00,1,Supplier,0004,General Defect,missing label
+876,Q202604060001,2026-04-06 10:30:54,5,1,1,Eric Park,Le petite Paris ny,Item was broken,1.00,1,Supplier,0004,General Defect,broken
+877,Q202604070001,2026-04-07 14:04:46,4,1,3,Dominique Meadows,New York Raw Material Warehouse Distribution Order,"Lids are loose on the cups and fall off large cups, regular cups are fine",119.00,1,Supplier,0004,General Defect,wrong size
+878,Q202604080001,2026-04-08 19:53:27,4,1,3,Jian Ming Juo,24 oz ice cups,4/8 when serving the coster drinks the drinking lid not able to fit the cups.,2.00,1,Supplier,0004,General Defect,wrong size
+879,Q202604080002,2026-04-08 22:49:18,4,1,3,Jian Ming Juo,24 ounce ice cup,04/08 We were attempting to finish a customer drink and the dome lids/drinking lids did not fit properly. Flat lids are fine.,14.00,1,Supplier,0004,General Defect,wrong size
+880,Q202604080003,2026-04-08 23:30:09,4,1,3,Jian Ming Juo,Large (24oz) iced cups,These large ice cups don't fit the dome and direct sipping lids. The flat lids fit on fine.,14.00,1,Supplier,0004,General Defect,Wrong size
+881,Q202604090001,2026-04-09 21:24:55,5,1,2,Eric Park,Block and Barrel,Missing label,1.00,1,Supplier,0004,General Defect,missing label
+882,Q202604100001,2026-04-10 16:24:27,4,1,1,Andy Weng,Timemore,Chipped interface upon receiving goods,2.00,2,Warehouse,0004,General Defect,broken scale
+883,Q202604100002,2026-04-10 17:09:19,4,1,3,Dominique Meadows,New York Raw Material Warehouse,Drinking lids do not fit on 24 oz ice cups,1000.00,1,Supplier,0004,General Defect,wrong size
+884,Q202604100003,2026-04-10 20:21:44,4,1,1,Andy Weng,Iris,Both drawers are structurally cracked,2.00,2,Warehouse,0004,General Defect,cracked upon delivery.
+885,Q202604130001,2026-04-13 12:29:09,4,1,3,Jian Ming Juo,Freenow USA Inc,There was a hair found in powder upon opening,300.00,1,Supplier,0003,Food Safety Issue,foreign material-hair
+886,Q202604130002,2026-04-13 15:54:52,5,1,2,Rukiah Ali,Luckin,No straw inside packaging also unopened.,1.00,1,Supplier,0004,General Defect,empty package
+888,Q202604140001,2026-04-14 11:28:23,5,1,3,Jian Ming Juo,Casa Solana,Opened the can to find brown clump of slightly hardened milk. Had a small sour smell,396.00,1,Supplier,0003,Food Safety Issue,spoilage
+889,Q202604140002,2026-04-14 20:28:10,4,1,3,Austin Gebhardt,NBJL,The drinking lids are not fitting firmly (no click noise/too big) onto the 24oz Ice Cups. We have noticed this issue starting lasting week 04/06/2026.,26.00,1,Supplier,0004,General Defect,wrong size
+891,Q202604160001,2026-04-16 11:00:00,4,1,2,Juliana Li,Cream-O-Land Dairy,Whole milk was open when it was discovered,3785.00,1,Supplier,0004,General Defect,leaking
+892,Q202604160002,2026-04-16 15:09:11,5,1,2,Dominique Meadows,FREENOW USA INC.,Chocolate chip cookie came broken in the pack.,1.00,1,Supplier,0004,General Defect,broken
+893,Q202604170001,2026-04-17 13:03:50,4,1,2,Yaqing Zuo,First Ray Trading (USA) LLC,There's a hole on the bottle and milk is coming out.,3785.00,1,Supplier,0004,General Defect,leaking
+895,Q202604170003,2026-04-17 13:18:46,4,1,2,Wenny Lin,Cream O Land,A leakage is occurring. There might be a small tiny whole near the opening cap causing the leakage,3785.00,1,Supplier,0004,General Defect,leaking
+897,Q202604170005,2026-04-17 18:55:05,4,1,2,Wenny Lin,Cream O Land,Leakage of the milk before it was even used. The milk is not full to the top,3785.00,1,Supplier,0004,General Defect,leaking
+898,Q202604170006,2026-04-17 22:59:04,4,1,1,Laurel Vorhies,Cream o land,Milk bottles underfilled,578.00,1,Supplier,0004,General Defect,underfilled.
+899,Q202604180001,2026-04-18 10:39:21,5,1,1,Joselyn Pacheco Trejo,J.k. Patisserie & bakery,Broken cookie when received,1.00,1,Supplier,0004,General Defect,broken
+900,Q202604180002,2026-04-18 15:23:03,5,1,1,Jalynn Whitfield,J.K patisserie bakery,Cookies were broken when receiving,2.00,1,Supplier,0004,General Defect,broken
+901,Q202604180003,2026-04-18 17:35:44,4,1,3,Wenny Lin,Casa solana,Found a foreign object inside a brand new condensed milk when we opened it. Looks burnt and it's in a form of a solid object,396.00,1,Supplier,0003,Food Safety Issue,"spoilage, mold was found inside the sealed can."
+902,Q202604180004,2026-04-18 21:10:35,4,1,2,Clara Mae Venturina,Morton Sea Salt Coarse,Not approved to use,200.00,4,Joint(Supplier+Warehouse),0004,General Defect,wrong item was shipped to store.
+903,Q202604180005,2026-04-18 21:13:00,4,1,4,Lucas MacCormack,Morton,Recovered course and not fine salt,193.00,4,Joint(Supplier+Warehouse),0004,General Defect,wrong item was shipped to store.
+904,Q202604180006,2026-04-18 21:17:06,4,1,1,Andrew Chen,New York Raw Materials Warehouse,We received corase and not fine sea salt.,500.00,1,Supplier,0004,General Defect,wrong item was shipped to store.
+905,Q202604180007,2026-04-18 21:19:31,5,1,2,Wenny Lin,Morton,Wrong sea salt,500.00,6,Unknown/reject,,Unclassified,
+906,Q202604180008,2026-04-18 21:41:08,4,1,2,Jessalyn Lopez,Morton,Different item than what was supposed to be received. Needs to be fine sea salt instead of coarse,500.00,4,Joint(Supplier+Warehouse),0004,General Defect,wrong item was shipped to store.
+907,Q202604180009,2026-04-18 22:21:55,4,1,2,Joselyn Pacheco Trejo,Morton Salt NY Raw Material Warehouse,Coarse sea salt instead of fine,500.00,4,Joint(Supplier+Warehouse),0004,General Defect,wrong item was shipped to store.
+908,Q202604180010,2026-04-18 22:30:57,4,1,3,Jian Ming Juo,Morton,It's coarse salt instead of fine,250.00,4,Joint(Supplier+Warehouse),0004,General Defect,wrong item was shipped to store.
+909,Q202604180011,2026-04-18 23:08:05,4,1,3,Darwin Coronel,Morton salt,This is coarse instead of fine,250.00,4,Joint(Supplier+Warehouse),0004,General Defect,wrong item was shipped to store.
+910,Q202604200001,2026-04-20 10:47:20,4,1,3,Luke Scorsone,Califia Farms,container was broken open at the top and the almond milk is rotten,11352.00,1,Supplier,0004,General Defect,leak and spoilage.
+914,Q202604220001,2026-04-22 10:09:39,5,1,1,Joselyn Pacheco Trejo,J.k. Patisserie & Bakery LLC,Broken cookie,1.00,1,Supplier,0004,General Defect,broken
+915,Q202604220002,2026-04-22 10:17:51,5,1,1,Yaqing Zuo,Le petit Paris Chocolate cookies,Broken,1.00,1,Supplier,0004,General Defect,broken
+916,Q202604220003,2026-04-22 11:11:09,4,1,3,Edwin Cabrera-Rivera,Foreign object,Small brownish material found inside,396.00,1,Supplier,0003,Food Safety Issue,spoilage
+917,Q202604220004,2026-04-22 17:07:51,5,1,2,Tunisia Hayward,J.K Patisserie & Bakery LLC,Cookie was found cracked after being stored. It was delivered on April 22nd 2026.,1.00,1,Supplier,0004,General Defect,broken
+918,Q202604220005,2026-04-22 19:59:13,5,1,2,Christopher Butler,FreeNow USA INC,"Cookie came broken within the pack, not sellable",1.00,1,Supplier,0004,General Defect,broken
+919,Q202604220006,2026-04-22 21:59:20,4,1,1,Kayen Wu He,Cream O Land,Lid half opened so leaked some out. Can't use it,3785.00,1,Supplier,0004,General Defect,leaking
+920,Q202604230001,2026-04-23 13:22:19,4,1,1,Dominique Mann,New York Raw Materials Warehouse Distribution Order,2 heavy cream boxes were leaking milk all down the sides of them,1816.00,1,Supplier,0004,General Defect,leaking
+921,Q202604230002,2026-04-23 20:00:14,5,1,1,Christopher Butler,New York Raw Material Warehouse,Product discontinued,30.00,6,Unknown/reject,,Unclassified,
+922,Q202604240001,2026-04-24 13:24:25,4,1,2,Natalie Dunckley,Plant No. 42-169,"No date of expiration , only month and year",3785.00,1,Supplier,0004,General Defect,blurry date code
+923,Q202604240002,2026-04-24 14:09:16,4,1,3,Britney Rosas Galindo,Block and barrel,The sausage egg and cheese croissant is missing the egg,1.00,1,Supplier,0004,General Defect,missing ingredient
+925,Q202604250001,2026-04-25 10:44:01,4,1,2,Shangxian Piao,Luckin drip coffee blend,Bag broken,907.00,1,Supplier,0004,General Defect,broken bag
+926,Q202604250002,2026-04-25 18:15:15,5,1,2,Britney Rosas Galindo,Cream o land,There not enough milk in the bottle,3785.00,6,Unknown/reject,,Unclassified,
+927,Q202604260001,2026-04-26 14:52:08,5,1,2,Edwin Cabrera-Rivera,Nanjing Apogee Food Tech,Expired on 04/25/2026,4200.00,6,Unknown/reject,,Unclassified,
+928,Q202604260002,2026-04-26 17:49:46,4,1,1,Carina Medrano,Luckin Coffee,came broken: handle and cracks,1.00,2,Warehouse,0004,General Defect,damaged upon delivery.
+929,Q202604270001,2026-04-27 11:43:35,4,1,2,Shuhana Islam,Cream O land,Whole seal was broken and whole milk is leaking,3785.00,1,Supplier,0004,General Defect,broken seal
+930,Q202604270002,2026-04-27 18:28:22,4,1,2,Lucas MacCormack,Cream O Land,Under filled milk gallon,3785.00,1,Supplier,0004,General Defect,leaking cause underweight
+931,Q202604280001,2026-04-28 15:31:34,4,1,2,Huichen Jiang,Califia Farms,Extreme denting in the boxes,1892.00,1,Supplier,0004,General Defect,Dented
+933,Q202604290002,2026-04-29 16:54:22,4,1,3,Wenny Lin,Block & barrel,The sausage has no cheese inside and it came with double egg instead,1.00,1,Supplier,0004,General Defect,missing ingredient
+934,Q202604300001,2026-04-30 10:34:12,4,1,1,Vanesli Francois,S&D Coffee Inc,Bag was discovered already bursted open inside the closed box,907.00,1,Supplier,0004,General Defect,broken package
+935,Q202604300002,2026-04-30 10:39:37,4,1,1,Vanesli Francois,Jk patlsserie & Bakery LLC,Found Cracked in two pieces,1.00,1,Supplier,0004,General Defect,broken
+936,Q202604300003,2026-04-30 11:51:09,4,1,3,Sterling Schreiner,New York Materials Warehouse,"chunks in condensed milk, not expired.",396.00,1,Supplier,0003,Food Safety Issue,Solid material in the condensed milk.
+937,Q202604300004,2026-04-30 17:01:59,4,1,3,Migdalia Jackson,J.K Pâtisserie & Bakery LLC,Went to make a cookie and saw broken one on bottom,1.00,1,Supplier,0004,General Defect,broken
+938,Q202604300005,2026-04-30 17:04:45,4,1,2,Clara Mae Venturina,Cream O Land 2% fat milk,Punctured hole and squished,3785.00,1,Supplier,0004,General Defect,punch hole on the bottle
+939,Q202604300006,2026-04-30 18:39:50,4,1,3,Darwin Coronel,Casa Solana,There was a hair in the can upon opening that did not come from an employee.,396.00,1,Supplier,0003,Food Safety Issue,foreign material
+940,Q202604300007,2026-04-30 18:45:02,5,1,3,Darwin Coronel,Casa Solana,There was a hair in the can upon opening that wasn't from an employee.,396.00,6,Unknown/reject,,Unclassified,
+941,Q202604300008,2026-04-30 18:57:35,5,1,3,Darwin Coronel,Casa Solana,A hair was found in the can upon opening,396.00,6,Unknown/reject,,Unclassified,
+942,Q202604300009,2026-04-30 18:59:52,5,1,3,Darwin Coronel,Casa Solana,There was a hair in the can upon opening,396.00,6,Unknown/reject,,Unclassified,
+943,Q202604300010,2026-04-30 21:20:04,4,1,1,Huichen Jiang,HEC,Toilet paper was extreme damp when discovered in the delivery,2.00,2,Warehouse,0004,General Defect,wet during delivery

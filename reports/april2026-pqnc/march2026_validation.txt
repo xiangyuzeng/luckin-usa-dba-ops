@@ -1,0 +1,99 @@
+PQNC March 2026 SQL Anchor Validation
+======================================
+Generated: 2026-05-01
+Server:    aws-luckyus-scmsrm-rw
+Schema:    luckyus_scm_srm
+Tables:    t_pqnc, t_pqnc_operate_detail
+
+Goal: lock in a SQL filter set that reproduces the canonical March deck numbers
+exactly (33 / 5 / 27 / 30 / 2 / 1) before extracting April. Without this anchor,
+April numbers can't be trusted.
+
+Canonical March numbers (from /app/PQNC_Mar2026_Breakdown.md, slide 7):
+  Total PQNC reported          : 33
+  Food Safety Issue (code 0003): 5
+  General Defect    (code 0004): 27
+  Sensory Abnormal  (code 0001): -
+  Other Unclear     (code 0002): -
+  Supplier responsibility      : 30
+  Warehouse responsibility     : 2
+  Store responsibility         : 0
+  Unknown/reject               : 1
+
+Locked filter set (final):
+--------------------------
+  p.tenant       = 'LKUS'             # USA tenant only (excludes IQA2 = 7 stray rows)
+  p.delete_flag  = 0                  # exclude soft-deleted
+  p.status IN (4, 5)                  # 4 = 待确认, 5 = 已完成 (i.e., closed/finalized cases)
+  p.created_time >= '2026-03-01' AND < '2026-04-01'
+
+  + LEFT JOIN to t_pqnc_operate_detail deduped by pqnc_id
+    (one_pqnc_type_code via MIN aggregate over operate_type=1 rows;
+     this collapses re-judgment rows where the same code was logged twice —
+     verified March pqnc_ids 852 and 853 each had 2 operate_type=1 rows
+     with identical code 0004)
+
+Final March re-extraction with locked filter set
+-------------------------------------------------
+SQL:
+  SELECT
+    COUNT(*) AS total_pqnc,
+    SUM(CASE WHEN p.responsibility=1 THEN 1 ELSE 0 END) AS supplier,
+    SUM(CASE WHEN p.responsibility=2 THEN 1 ELSE 0 END) AS warehouse,
+    SUM(CASE WHEN p.responsibility=3 THEN 1 ELSE 0 END) AS store,
+    SUM(CASE WHEN p.responsibility NOT IN (1,2,3) OR p.responsibility IS NULL
+             THEN 1 ELSE 0 END) AS unknown_reject,
+    SUM(CASE WHEN d.one_pqnc_type_code='0003' THEN 1 ELSE 0 END) AS food_safety,
+    SUM(CASE WHEN d.one_pqnc_type_code='0004' THEN 1 ELSE 0 END) AS general_defect,
+    SUM(CASE WHEN d.one_pqnc_type_code IS NULL THEN 1 ELSE 0 END) AS unclassified_type
+  FROM luckyus_scm_srm.t_pqnc p
+  LEFT JOIN (
+    SELECT pqnc_id, MIN(one_pqnc_type_code) AS one_pqnc_type_code
+    FROM luckyus_scm_srm.t_pqnc_operate_detail
+    WHERE operate_type=1
+    GROUP BY pqnc_id
+  ) d ON p.id = d.pqnc_id
+  WHERE p.tenant='LKUS'
+    AND p.delete_flag=0
+    AND p.status IN (4,5)
+    AND p.created_time >= '2026-03-01' AND p.created_time < '2026-04-01';
+
+Result row:
+  total_pqnc        : 33   ✅ matches canonical 33
+  supplier          : 30   ✅ matches canonical 30
+  warehouse         : 2    ✅ matches canonical 2
+  store             : 0    ✅ matches canonical 0
+  unknown_reject    : 1    ✅ matches canonical 1
+  food_safety       : 5    ✅ matches canonical 5
+  general_defect    : 27   ✅ matches canonical 27
+  unclassified_type : 1    ✅ explains the slide-7 PQNC Type table summing
+                              to 32 — the 1 unknown/reject case is
+                              responsibility=6 with no operate_type=1 row,
+                              i.e. closed without classification
+
+Calibration findings
+--------------------
+1. tenant='LKUS' is required: the table contains 7 IQA2 rows from another
+   tenant that would otherwise inflate counts.
+
+2. status IN (4,5) is the filter that distinguishes the deck's "reported
+   PQNC" from raw inbox. status=4 = 待确认 (pending acceptance by responsible
+   party), status=5 = 已完成 (closed). status 1/2/3 = pre-judgment states
+   that the deck excludes.
+
+3. responsibility column has an undocumented value 6 (the COLUMN_COMMENT
+   only lists 1-5). In March's data, 1 row has responsibility=6 and that
+   row maps to the deck's "Unknown/reject" bucket. Treating
+   responsibility NOT IN (1,2,3) → Unknown/reject is the correct mapping.
+
+4. operate_detail 1:N inflation: a small fraction of pqnc_ids have multiple
+   operate_type=1 rows (re-judgments). Deduping with MIN(one_pqnc_type_code)
+   over operate_type=1 gives one type per pqnc_id and reproduces canonical
+   counts. (For March, only 2 pqnc_ids — 852 and 853 — had this issue;
+   both had identical code 0004 across re-judgments, so MIN is safe.)
+
+Confidence
+----------
+The locked filter set reproduces all 6 canonical March metrics with zero
+gap. April numbers extracted with the same filter set are therefore
+methodologically directly comparable to March.
