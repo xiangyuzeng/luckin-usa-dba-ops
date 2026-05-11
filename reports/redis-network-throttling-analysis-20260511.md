@@ -9,9 +9,21 @@
 
 ## 1. 背景
 
-对全部 154 个 ElastiCache Redis 节点的 `NetworkBandwidthInAllowanceExceeded`（入站限流）和 `NetworkBandwidthOutAllowanceExceeded`（出站限流）指标进行了 7 天采集分析，识别存在网络带宽瓶颈的集群。
+今天在排查 Redis 实例 `luckyus-isales-commodity` 的流量报警时，偶然发现该节点存在入站网络带宽限流（`NetworkBandwidthInAllowanceExceeded`）的情况。随后将排查范围扩大至全部 154 个 ElastiCache Redis 节点，采集了近 7 天（5/4 ~ 5/10）的入站限流（`NetworkBandwidthInAllowanceExceeded`）和出站限流（`NetworkBandwidthOutAllowanceExceeded`）指标，汇总统计如下。
 
 ## 2. 发现
+
+### 关于网络带宽限流
+
+ElastiCache 每种节点类型都有一个**网络带宽上限**。以当前使用的 `cache.t4g.micro` 为例，AWS 标称网络性能为"Up to 5 Gbps"，但这是**突发（burst）上限**，不是持续可用的带宽：
+
+- **基线带宽（Baseline）**：节点可以**持续、稳定**使用的网络吞吐量。t4g.micro 的基线带宽远低于 5 Gbps，实际仅约数百 Mbps 级别。
+- **突发带宽（Burst）**：节点积累了网络信用（credit）后，可以短时间冲到标称的 5 Gbps，但信用耗尽后会**回落到基线**。
+- **限流（Throttling）**：当实际流量超过当前可用带宽（信用耗尽后即基线带宽），超出部分的数据包会被**丢弃或排队**，CloudWatch 将其记录为 `NetworkBandwidthIn/OutAllowanceExceeded`。
+
+简单说：AWS 宣传的"Up to 5 Gbps"只是峰值能力，日常能用多少取决于基线。对于 t4g 系列的 burstable 节点，如果业务流量持续超过基线，就会出现常态性限流。
+
+---
 
 154 个节点中，**7 个节点**在过去一周出现过限流，其中 3 个需要关注：
 
