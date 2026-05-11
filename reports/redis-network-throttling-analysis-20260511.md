@@ -60,14 +60,18 @@ ElastiCache 每种节点类型都有一个**网络带宽上限**。以当前使�
 
 ### luckyus-isales-commodity — 建议升级
 
-| 方案 | 节点类型 | 内存 | 网络带宽 | 月费/节点(EDP 69折) |
-|------|---------|------|---------|:------------------:|
-| 当前 | cache.t4g.micro | 0.5 GiB | 突发/基线极低 | ~$4 |
-| 经济型 | cache.t4g.medium | 1.59 GiB | 突发/基线提高 | ~$17 |
-| **推荐** | **cache.m6g.large** | **6.38 GiB** | **稳定 10 Gbps** | **~$56** |
-| 充裕型 | cache.r6g.large | 13.07 GiB | 稳定 10 Gbps | ~$73 |
+| 方案 | 节点类型 | 内存 | 基线带宽 | 突发带宽 | 月费/节点(EDP 69折) |
+|------|---------|------|:-------:|:-------:|:------------------:|
+| 当前 | cache.t4g.micro | 0.5 GiB | **0.064 Gbps (64 Mbps)** | 5 Gbps | ~$4 |
+| 经济型 | cache.t4g.medium | 1.59 GiB | 0.256 Gbps (256 Mbps) | 5 Gbps | ~$17 |
+| **推荐** | **cache.m6g.large** | **6.38 GiB** | **0.75 Gbps (750 Mbps)** | **10 Gbps** | **~$56** |
+| 充裕型 | cache.r6g.large | 13.07 GiB | 0.75 Gbps (750 Mbps) | 10 Gbps | ~$73 |
 
-**推荐 m6g.large**：彻底脱离 burstable 网络模型，获得稳定 10 Gbps 基线带宽，从根本上消除限流。2 节点（主+副本）月增约 $104。
+> 数据来源：[AWS ElastiCache Supported Node Types](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/CacheNodes.SupportedTypes.html)
+
+当前 t4g.micro 的基线带宽仅 **64 Mbps**，信用耗尽后实际可用带宽极低，这是造成每天 5~6 小时常态限流的根本原因。
+
+**推荐 m6g.large**：基线带宽提升至 750 Mbps（约 12 倍），突发上限 10 Gbps，彻底脱离 burstable 网络瓶颈。2 节点（主+副本）月增约 $104。
 
 ### luckyus-web — 暂不升级，持续监控
 
