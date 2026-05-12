@@ -88,18 +88,38 @@ MySQL 8.0 社区版 standard support 截止 **2026-07-31**。从 **2026-08-01** 
 
 | 文件 | 内容 |
 |------|------|
-| `instances.csv` | 61 个生产实例明细 + 合计行 |
+| `instances.csv` | 61 个生产实例明细 + 合计行（按月成本测算）|
 | `pricing_reference.csv` | Extended Support 价目表 + 按规格的月成本换算 |
+| `【执行】MySQL 8.0.45 小版本升级跟踪表 (2).xlsx` | 59 实例小版本升级执行进度（外部上传）|
+| **`instances_merged.csv`** | **跟踪表 0-12 列（至"研发负责人"）合并 `instances.csv` 的扩展支持月成本** |
 | `README.md` | 本说明 |
+
+### 4.1 `instances_merged.csv` 列结构
+
+| 来源 | 列 |
+|------|----|
+| CSV → | `Full_Instance`（完整实例名 `aws-luckyus-*-rw`）|
+| 跟踪表 0-12 | `#` / `实例名称` / `数据库列表` / `关联服务` / `服务等级` / `当前版本` / `规格` / `内存(GB)` / `可用内存(MB)` / `Swap(MB)` / `数据库大小` / `业务分组` / `研发负责人` |
+| 跟踪表已剔除 | 第 13 列起："批次" / "操作人" / "计划操作日期" / "升级状态" / "原库及蓝绿部署清理" / "备注"（按要求剔除）|
+| CSV → | `CSV_Class` / `CSV_EngineVersion` / `CSV_Multi_AZ` / `Y1_USD_per_month` / `Y2_USD_per_month` / `Y3_USD_per_month` |
+
+### 4.2 合并差异
+
+| 情况 | 数量 | 处理 |
+|------|------|------|
+| 两侧都有 | 59 | 主体合并表 |
+| **跟踪表有，CSV 无** | 0 | —— |
+| **CSV 有，跟踪表未覆盖** | **2** | `iluckyams-rw` (8.0.44)、`isalescouponservice-rw` (8.0.45) —— 已是 8.0.44/45，**不在 8.0.40/41→8.0.45 升级范围**，但**仍需付扩展支持费**（除非升级到 8.4 LTS） |
+| 命名差异 | 1 | 跟踪表 `ijumpserver` ↔ CSV `aws-luckyus-ijumpserver-jumpserver-rw`（已自动映射）|
 
 ---
 
 ## 5. 建议（节流方向）
 
 1. **立即清理 30 个蓝绿/测试实例**：节省 Y1 月费 ~$7,200，三年累计 ~$414K
-2. **升级到 MySQL 8.4 LTS**（standard support 至 2032）：彻底规避 Extended Support 费用
+2. **小版本升级 ≠ 免扩展支持费**：升到 8.0.45 仍属 MySQL 8.0 major，**2026-08-01 起仍按 vCPU-hr 收费**。要免费必须迁出 8.0 major → 8.4 LTS（standard support 至 2032）
 3. **若 2026-07-31 前无法完成 8.4 升级**，至少在 Year 3 之前完成（避免 $0.200 翻倍区间）
-4. **统计 8.0.40 实例**（40 台）的升级路径，8.0.45 已是最新 minor，无 minor patch 收益
+4. **跟踪表未覆盖的 2 实例**（iluckyams、isalescouponservice）虽已是 8.0.44/45，但仍在扩展支持收费范围内 —— 与跟踪表内的 59 个实例**升级 8.4 LTS 的范围一致**
 
 ---
 

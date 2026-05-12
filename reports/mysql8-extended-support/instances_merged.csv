@@ -1,0 +1,239 @@
+Full_Instance,#,实例名称,数据库列表,关联服务,服务等级,当前版本,规格,"内存
+(GB)","可用内存
+(MB)","Swap
+(MB)","数据库
+大小",业务分组,"研发
+负责人",CSV_Class,CSV_EngineVersion,CSV_Multi_AZ,Y1_USD_per_month,Y2_USD_per_month,Y3_USD_per_month
+aws-luckyus-ldas01-rw,1,ldas01,"luckyus_ldas_slowquery
+luckyus_db_collection","idataccm
+idbtask
+idbcollect","L2（普通基础服务）
+L1（重要基础服务）
+L2（普通基础服务）",8.0.41,db.t4g.large,8,649,219,101.45 GB,"架构
+运维",张杨,db.t4g.large,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-ilsopdevopsdata-rw,2,ilsopdevopsdata,luckyus_ilsopdevopsdata,ilsopdevopsdata,L2（普通基础服务）,8.0.40,db.t4g.micro,1,116,375,20.00 MB,质量效能,夏文涛,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iluckyhealth-rw,3,iluckyhealth,luckyus_iluckyhealth,iluckyhealth,L2（普通基础服务）,8.0.40,db.t3.small,2,66,868,29.44 GB,运维,叶荣海,db.t3.small,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-ldas-rw,4,ldas,"luckyus_dbmsdbsearch
+luckyus_ldas_cmdb
+luckyus_ozono
+luckyus_apigatewayadmin
+luckyus_ldas_nacos
+luckyus_ikafadmin","ildbquery
+ldascmdb
+luckyozono
+luckyapigatewayadmin
+ldasnacos
+ikafadmin","L1（重要基础服务）
+L1（重要基础服务）
+L2（普通基础服务）
+L2（普通基础服务）",8.0.40,db.t4g.large,8,1065,327,1.56 GB,"架构
+运维","张杨
+孔增
+金盛昌
+张黎明
+翁延海",db.t4g.large,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-ijumpserver-jumpserver-rw,5,ijumpserver,luckyus_ijumpserver_jumpserver,ijumpserver,L1（重要基础服务）,8.0.40,db.t4g.micro,1,96,627,116.95 MB,信息安全,刘成锡,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-devops-rw,6,devops,"luckyus_ilopamanager
+luckyus_uam
+luckyus_authservice
+luckyus_iluckyptsweb
+luckyus_auth
+luckyus_izeus
+luckyus_umbgrafana","izeusanomaly
+izeusmetric
+izeusalert
+izeusnotice
+izeusreceiver
+izeushome
+ilopamanager
+lauthservice
+luckyuam
+umbgrafana
+luckyauth","L1（重要基础服务）
+L2（普通基础服务）",8.0.40,db.t4g.medium,4,1604,9,281.91 MB,"质量效能
+运维","林鑫涛
+吴心一
+徐博轩
+杨涛
+姚清居
+桂升斌
+吴春林
+",db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-framework01-rw,7,framework01,"luckyus_lcp_noahusercenter
+luckyus_lcp_apiserver
+luckyus_nacos
+luckyus_isentineldashboard
+luckyus_iluckyenvsystemweb
+luckyus_koalaadmin
+luckyus_zkdoctor
+luckyus_kbx
+luckyus_horae
+luckyus_bsportal
+luckyus_sddl_platform
+luckyus_gaea","ucpmanagement
+luckynacos
+isentineldashboard
+iluckyenvsystemweb
+koalaadmin
+izkdoctor
+kbx
+horae
+luckybsportal
+luckysddladmin
+luckygaea","L1（重要基础服务）
+L2（普通基础服务）",8.0.40,db.t4g.medium,4,1601,32,291.56 MB,架构,"车永生
+罗宁
+黄国仲
+林正权
+王卫
+张隆洋
+刘俊琪",db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-framework02-rw,8,framework02,"luckyus_src
+luckyus_target
+luckyus_iluckyflowadmin
+luckyus_datalink
+luckyus_ihmonitorconsole
+luckyus_onepiececonsole
+luckyus_chronusconsole
+luckyus_ilkm","iluckyflowadmin
+luckydatalink
+ihmonitorconsole
+onepiececonsole
+onepiecesync
+chronusconsole
+chronusreporter
+chronussharding
+ilkm","L2（普通基础服务）
+L1（重要基础服务）",8.0.40,db.t4g.medium,4,997,88,3.31 GB,架构,"罗宁
+林正权
+张黎明
+代俊健
+王卫",db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-upush-rw,9,upush,"luckyus_iupushsms
+luckyus_iupushemail
+luckyus_iupushusercenter
+luckyus_iupushapp
+luckyus_iupushaid
+luckyus_iupushadmin
+luckyus_mdm
+luckyus_imdmext
+luckyus_mdmadmin","iupushsms
+iupushemail
+iupushusercenter
+iupushapp
+iupushaid
+iupushadmin
+luckymdm
+imdmext
+luckymdmadmin",L1（重要基础服务）,8.0.40,db.t4g.medium,4,256,335,18.45 GB,架构,"罗宁
+林智贤
+刘洋",db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iotplatform-rw,10,iotplatform,luckyus_iot_platform,"iotiplatformorderapi
+iotiplatformmanagement
+iotiplatformservice","L1（重要基础服务）
+L1（重要业务服务）
+L1（重要业务服务）",8.0.40,db.t4g.medium,4,1504,8,541.92 MB,AIot,"李晨端
+左达奇",db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-icyberdata-rw,11,icyberdata,"luckyus_icyberdata_nacos
+luckyus_icyberdata_user
+luckyus_icyberdata",icyberdata,L1（重要业务服务）,8.0.40,db.t4g.medium,4,676,1423,23.37 GB,大数据,田洪彬,db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iluckydorisops-rw,12,iluckydorisops,luckyus_iluckydorisops,iluckydorisops,L2（普通业务服务）,8.0.40,db.t4g.micro,1,124,405,0.19 MB,大数据,苏晓博,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-scm-wmssimulate-rw,13,scm-wmssimulate,luckyus_scm_wmssimulate,iscmwmssimulate,L2（普通业务服务）,8.0.40,db.t4g.micro,1,111,534,32.00 MB,国际供应链,方思扬,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-fichargecontrol-rw,14,fichargecontrol,luckyus_fi_chargecontrol,ifichargecontrolservice,L2（普通业务服务）,8.0.40,db.t4g.micro,1,105,559,39.84 MB,国际公共平台,尤志杰,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-ifiaccounting-rw,15,ifiaccounting,luckyus_ifiaccounting,ifiaccounting,L2（普通业务服务）,8.0.40,db.t4g.micro,1,99,871,239.23 MB,国际公共平台,尤志杰,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iopocp-rw,16,iopocp,luckyus_iopocp,iopocp,L2（普通业务服务）,8.0.40,db.t4g.micro,1,96,622,1.64 GB,国际运营,陈培浩,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-opqualitycontrol-rw,17,opqualitycontrol,luckyus_opqualitycontrol,iopqualitycontrol,L2（普通业务服务）,8.0.40,db.t4g.micro,1,90,754,586.31 MB,国际运营,陈培浩,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-oplog-rw,18,oplog,luckyus_oplog,iopdaq,L2（普通基础服务）,8.0.40,db.t4g.micro,1,110,410,0.16 MB,国际运营,张少群,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iadmin-rw,19,iadmin,luckyus_iadmin,iadmin,L1（重要业务服务）,8.0.40,db.t4g.micro,1,113,511,82.78 MB,国际公共平台,陈亮,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-ibizconfigcenter-rw,20,ibizconfigcenter,luckyus_ibizconfigcenter,ibizconfigcenter,L1（重要业务服务）,8.0.40,db.t4g.micro,1,116,435,21.42 MB,国际公共平台,陈亮,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-igers-rw,21,igers,luckyus_igers,igers,L1（重要业务服务）,8.0.40,db.t4g.micro,1,118,401,0.25 MB,国际公共平台,陈亮,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iluckyauthapi-rw,22,iluckyauthapi,luckyus_iluckyauthapi,iluckyauthapi,L1（重要业务服务）,8.0.40,db.t4g.micro,1,112,408,0.11 MB,国际公共平台,陈亮,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-ibillingcentersrv-rw,23,ibillingcentersrv,luckyus_ibillingcenterservice,ibillingcenterservice,L1（重要业务服务）,8.0.40,db.t4g.micro,1,104,670,1.28 GB,国际公共平台,陈亮,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iehr-rw,24,iehr,luckyus_iehr,iehr,L1（重要业务服务）,8.0.40,db.t4g.micro,1,109,554,20.44 MB,国际公共平台,陈亮,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iopenlinker-rw,25,iopenlinker,luckyus_iopenlinker,"iopenlinkeradmin
+iopenlinker",L1（重要业务服务）,8.0.40,db.t4g.micro,1,117,493,93.30 MB,国际营销增长,张晓松,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iopenservice-rw,26,iopenservice,luckyus_iopenservice,iopenservice,L1（重要业务服务）,8.0.40,db.t4g.micro,1,120,408,0.38 MB,国际公共平台,陈亮,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iopshopexpand-rw,27,iopshopexpand,luckyus_iopshopexpand,iopshopexpand,L1（重要业务服务）,8.0.40,db.t4g.micro,1,115,423,0.48 MB,国际运营,陈培浩,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iunifiedreconcile-rw,28,iunifiedreconcile,luckyus_iunifiedreconcile,iunifiedreconcile,L1（重要业务服务）,8.0.40,db.t4g.micro,1,126,426,3.92 MB,国际公共平台,"陈亮
+陈洪君",db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-mfranchise-rw,29,mfranchise,luckyus_mfranchise,imfranchiseservice,L1（重要业务服务）,8.0.40,db.t4g.micro,1,122,457,2.56 MB,国际公共平台,"陈亮
+陈洪君",db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-iworkflowmidlayer-rw,30,iworkflowmidlayer,luckyus_iworkflowmidlayer,"imessageflow
+iworkflowmidlayer","L1（重要基础服务）
+L1（重要业务服务）",8.0.40,db.t4g.medium,4,525,218,5.49 GB,国际公共平台,"陈亮
+陈洪君",db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-scm-asset-rw,31,scm-asset,luckyus_scm_asset,iscmasset,L1（重要业务服务）,8.0.40,db.t4g.micro,1,108,594,16.05 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scm-openapi-rw,32,scm-openapi,luckyus_scm_openapi,iscmopenapi,L1（重要业务服务）,8.0.40,db.t4g.micro,1,116,577,157.67 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scm-plan-rw,33,scm-plan,luckyus_scm_plan,iscmplan,L1（重要业务服务）,8.0.40,db.t4g.micro,1,119,472,4.97 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scm-ordering-rw,34,scm-ordering,luckyus_scm_ordering,iscmordering,L1（重要业务服务）,8.0.40,db.t4g.micro,1,90,771,331.47 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scm-purchase-rw,35,scm-purchase,luckyus_scm_purchase,iscmpurchase,L1（重要业务服务）,8.0.40,db.t4g.micro,1,101,799,146.27 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scm-wds-rw,36,scm-wds,luckyus_scm_wds,iscmwds,L1（重要业务服务）,8.0.40,db.t4g.micro,1,102,720,176.56 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scmsrm-rw,37,scmsrm,luckyus_scm_srm,iscmsrm,L1（重要业务服务）,8.0.40,db.t4g.micro,1,104,733,117.16 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-pubdm-rw,38,pubdm,luckyus_pub_dm,idm,L1（重要业务服务）,8.0.40,db.t4g.micro,1,109,511,8.66 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-iopenadmin-rw,39,iopenadmin,luckyus_iopenadmin,iopenadmin,L1（重要业务服务）,8.0.40,db.t4g.micro,1,123,419,0.66 MB,国际供应链,方思扬,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-ireplenishment-rw,40,ireplenishment,luckyus_ireplenishment,ireplenishment,L1（重要业务服务）,8.0.40,db.t4g.micro,1,119,647,1.42 GB,供应链算法,"高天牧
+黄方进",db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-opempefficiency-rw,41,opempefficiency,luckyus_opempefficiency,iopempefficiency,L1（重要业务服务）,8.0.40,db.t4g.micro,1,101,546,90.13 MB,国际运营,陈培浩,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-iluckymedia-rw,42,iluckymedia,luckyus_iluckymedia,iluckymedia,L1（重要业务服务）,8.0.40,db.t4g.micro,1,120,416,0.80 MB,国际运营,张少群,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-isalesmembermarketing-rw,43,isalesmembermarketing,luckyus_isalesmembermarketing,"isalesmembermarketingadmin
+isalesmembermarketingservice","L2（普通业务服务）
+L1（重要业务服务）",8.0.40,db.t4g.micro,1,115,425,0.95 MB,国际营销增长,"张翔
+刘洋",db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-isalesdatamarketing-rw,44,isalesdatamarketing,luckyus_isalesdatamarketing,"isalesdatamarketingservice
+isalesdatamarketingadmin","L1（重要业务服务）
+L1（重要业务服务）",8.0.40,db.t4g.medium,4,666,490,7.68 GB,国际营销增长,张晓松,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-iriskcontrolservice-rw,45,iriskcontrolservice,luckyus_iriskcontrolservice,iriskcontrolservice,L0（核心业务服务）,8.0.40,db.t4g.micro,1,94,1207,19.19 GB,信息安全,林宏鹏,db.t4g.medium,8.0.45,Y,288.0,288.0,576.0
+aws-luckyus-ipermission-rw,46,ipermission,luckyus_ipermission,"iopenauth
+ipermission","L0（核心业务服务）
+L1（重要业务服务）",8.0.40,db.t4g.micro,1,96,591,89.39 MB,国际公共平台,陈亮,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-fitax-rw,47,fitax,luckyus_fi_tax,ifitax,L0（核心业务服务）,8.0.40,db.t4g.micro,1,119,393,0.52 MB,国际公共平台,尤志杰,db.t4g.micro,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scm-shopstock-rw,48,scm-shopstock,luckyus_scm_shopstock,"iscmsims
+iscmshopstock","L1（重要业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.medium,4,466,325,6.64 GB,国际供应链,方思扬,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-scmcommodity-rw,49,scmcommodity,luckyus_scm_commodity,"iscmcommodityadmin
+iscmcommodity","L1（重要业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.medium,4,2057,0,175.95 MB,国际供应链,方思扬,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-opproduction-rw,50,opproduction,luckyus_opproduction,iopproduction,L0（核心业务服务）,8.0.40,db.t4g.micro,1,90,594,4.31 GB,国际运营,陈培浩,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-opshopsale-rw,51,opshopsale,luckyus_opshopsale,iopshopsaleservice,L0（核心业务服务）,8.0.40,db.t4g.micro,1,83,658,283.16 MB,国际运营,张少群,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-opshop-rw,52,opshop,luckyus_opshop,"iopshopservice
+iopshopadmin","L0（核心业务服务）
+L2（普通业务服务）",8.0.40,db.t4g.medium,4,2254,0,30.11 MB,国际运营,张少群,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-isalesprivatedomain-rw,53,isalesprivatedomain,luckyus_isales_privatedomain,"isalesprivatedomainadmin
+isalesmarketingadmin
+isalesprivatedomainservice","L2（普通业务服务）
+L1（重要业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.medium,4,661,135,2.06 GB,国际营销增长,"张翔
+上官锦程
+王良",db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-salescrm-rw,54,salescrm,luckyus_sales_crm,"isalesmarketingadmin
+isalescrmservice
+isalescrmadmin","L0（核心业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.medium,4,1785,0,556.63 MB,国际营销增长,"张翔
+高如森",db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-cdpactivity-rw,55,cdpactivity,luckyus_cdp_activity,"icdpactivityengine
+isalesmarketingservice
+isalesmarketingadmin","L1（重要业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.medium,4,485,375,15.20 GB,国际营销增长,张晓松,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-isalescdp-rw,56,isalescdp,luckyus_isales_cdp,"isalesmarketingadmin
+icdprealtimeusergroupengine","L1（重要业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.medium,4,993,0,1.73 GB,国际营销增长,张晓松,db.t4g.large,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-salesmarketing-rw,57,salesmarketing,luckyus_sales_marketing,"icdprealtimeusergroupengine
+isalesmarketingservice
+isalesmarketingadmin","L1（重要业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.xlarge,16,1509,204,46.09 GB,国际营销增长,张晓松,db.t4g.xlarge,8.0.40,Y,576.0,576.0,1152.0
+aws-luckyus-salespayment-rw,58,salespayment,luckyus_sales_payment,"isalespaymentservice
+isalespaymentadmin","L0（核心业务服务）
+L1（重要业务服务）",8.0.40,db.t4g.medium,4,1687,0,628.58 MB,国际营销增长,张晓松,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-salesorder-rw,59,salesorder,luckyus_sales_order,"isalesmarketingadmin
+isalesordersync
+isalesorderservice
+isalesorderadmin","L0（核心业务服务）
+L2（普通业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.40,db.t4g.medium,4,421,218,4.86 GB,国际营销增长,张晓松,db.t4g.medium,8.0.40,Y,288.0,288.0,576.0
+aws-luckyus-iluckyams-rw,,iluckyams,,,,,db.t4g.micro,,,,,,,db.t4g.micro,8.0.44,Y,288.0,288.0,576.0
+aws-luckyus-isalescouponservice-rw,,isalescouponservice,,,,,db.t4g.micro,,,,,,,db.t4g.micro,8.0.45,Y,288.0,288.0,576.0
+TOTAL,,,,,,,,,,,,,,,,,17856.00,17856.00,35712.00
