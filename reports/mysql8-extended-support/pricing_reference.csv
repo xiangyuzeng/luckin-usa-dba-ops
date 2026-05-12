@@ -1,0 +1,12 @@
+Tier,Period,Start_Date,End_Date,Rate_USD_per_vCPU_hour,Notes
+Year 1,2026-08-01 ~ 2027-07-31,2026-08-01,2027-07-31,0.100,MySQL 8.0 community EOL = 2026-07-31. Year 1 billing starts day after.
+Year 2,2027-08-01 ~ 2028-07-31,2027-08-01,2028-07-31,0.100,Same rate as Year 1.
+Year 3,2028-08-01 ~ 2029-07-31,2028-08-01,2029-07-31,0.200,Rate doubles.
+
+Instance Class,vCPU per instance,Multi-AZ billed vCPU,Y1/Y2 USD/month,Y3 USD/month,30-day month
+db.t3.micro,2,4,288.0,576.0,720h
+db.t3.small,2,4,288.0,576.0,720h
+db.t4g.micro,2,4,288.0,576.0,720h
+db.t4g.medium,2,4,288.0,576.0,720h
+db.t4g.large,2,4,288.0,576.0,720h
+db.t4g.xlarge,4,8,576.0,1152.0,720h
