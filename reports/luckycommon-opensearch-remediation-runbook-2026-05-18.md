@@ -9,9 +9,52 @@
 
 ---
 
-## 一、变更概述
+## 一、背景与整改依据
 
-本手册覆盖 **6 项配置级整改措施**（仅修改集群配置和 ISM 策略，不变更实例规格、副本存储扩容等资源），分两批执行：
+### 1. 事件回顾
+
+luckycommon OpenSearch 集群在 **3 个月内连续发生 3 次 RED 状态事件**：
+
+| 日期 (UTC) | 编号 | 直接触发机制 | RED 持续 | 应用影响 |
+|---|---|---|---|---|
+| 2026-03-08 07:00 | LCNA-INC-2026-008 | ISM 一次性删除 41GB / 4M docs（占集群 26%），节点 merge I/O 饱和掉线 | ~1 min（总恢复 7 min） | 3 个 5xx, 55 个 4xx, 搜索延迟 1.8→8.1ms |
+| 2026-04-20 18:18 | （未编号） | 瞬态主节点选举抖动 / 极短分片状态转换 | <1 min（亚分钟级） | 无可观测影响 |
+| 2026-05-17 | LCNA-INC-2026-026 | 待确认（昨日事件，与前两次根因疑似同源） | TBD | TBD |
+
+### 2. 共同结构性根因
+
+所有 3 次事件指向同一组配置层面问题，**它们之间互相放大**：
+
+| 编号 | 根因 | 当前状态 | 影响事件 |
+|---|---|---|---|
+| R1 | **~18 个主分片 `number_of_replicas=0`** | 59 primary + 41 replica = 100 total shards | 直接放大 4/20 和 5/17 — 任何持有 0 副本分片的节点瞬时不可达即触发 RED |
+| R2 | **ISM 一次性大批量删除** | 3/8 事件中 41GB / 2 min 删除 | 直接触发 3/8 事件 |
+| R3 | **慢性 JVM 锯齿波（74–76% 峰值）** | AutoTune DISABLED, 每 4–8h Major GC 一次 | 提高所有事件的发生概率 |
+| R4 | **merge throttle 可能受限** | ES 6.8 默认 unlimited，AWS 托管层未知 | 拖长删除后节点高压窗口（25–49 min） |
+| R5 | **index template 默认 0 副本** | 待 P0-1 后审计验证 | 即便修复现有 0 副本，新索引仍会持续以 0 副本创建 |
+| R6 | **DBA 无 VPC 内 REST API 访问权限** | access policy 未授权 databasecheck IAM 用户 | 3/9 验证报告、4/23 分析报告都因此无法完成 — 阻塞所有整改 |
+
+### 3. 整改策略说明
+
+本手册聚焦**配置级整改**，定位为"用现有资源把可消除的风险先消除"：
+
+- **R1、R5**：通过修改 `number_of_replicas` 和 index template → 消除 0 副本结构性脆弱点
+- **R2**：通过 ISM 策略调整（rollover + 调度低峰）→ 消除批量删除触发器
+- **R3**：通过启用 AutoTune → 让 AWS 自动调优 JVM
+- **R4**：通过 cluster setting 显式调整 → 缩短节点高压窗口
+- **R6**：通过 access policy 追加 → 解锁所有后续运维操作
+
+实例规格升级（master t3.small → m5.large，数据节点 m5.large → r5.large）和引擎升级（ES 6.8 → OpenSearch 2.x）**不在本手册范围内**，作为单独项目规划。
+
+### 4. 历史建议执行情况
+
+3/8 和 4/23 两份报告共提出 12 项整改建议，截至昨日 **0 项执行**（4/20 报告附录已确认）。本手册是这些建议中**可在 1–2 周内独立完成**部分的合集，目的是先把"能做的"做了，避免同一事件第 4 次发生。
+
+---
+
+## 二、变更概述
+
+本手册覆盖 **6 项配置级整改措施**，分两批执行：
 
 | 阶段 | 编号 | 措施 | 风险 | 预计耗时 |
 |---|---|---|---|---|
@@ -32,7 +75,7 @@
 
 ---
 
-## 二、前置检查（执行任何步骤前必做）
+## 三、前置检查（执行任何步骤前必做）
 
 ### 2.1 集群健康基线检查
 
@@ -81,11 +124,15 @@ aws opensearch describe-domain-config --domain-name luckycommon --region us-east
 
 ---
 
-## 三、P0 措施执行（本周内，UTC 02:00–05:00 窗口）
+## 四、P0 措施执行（本周内，UTC 02:00–05:00 窗口）
 
 ### P0-1: 打通 VPC 内 REST API 访问通道
 
-**目标**: 让 DBA 能从内网调用 `_cluster/*`、`_cat/*`、`_opendistro/_ism/*` 等 API，否则后续所有步骤无法执行。
+**解决的问题**: DBA IAM 用户 `databasecheck` 未被 luckycommon 域的 access policy 授权，无法调用 OpenSearch REST API。3 次事件的事后调查（3/9 验证报告、4/23 升级成本分析、5/17 昨日事件）都因此**未能审计 ISM 策略、分片配置、index template** —— 所有后续整改步骤都依赖这条通道。
+
+**修改原因**: 3/9 验证报告 R1 明确指出："Enable cluster API access for the DBA IAM role via the domain's access policy ... This unblocks all Phase 3 B1–B9 queries and prevents future investigations from being stalled." 该建议 2 个月未执行，导致 4/20 和 5/17 事件再次受阻。
+
+**预期效果**: 解锁 `_cluster/health`、`_cat/indices`、`_opendistro/_ism/*`、`_template` 等所有运维 API。后续 P0-2/P0-3/P1-5/P1-6 步骤都依赖此通道。
 
 **方案选择**（按优先级）：
 
@@ -170,7 +217,19 @@ awscurl --service es --region us-east-1 \
 
 ### P0-2: 给 18 个无副本主分片添加副本
 
-**目标**: 消除 0 副本分片这一 RED 触发器最大单点。
+**解决的问题**: 集群当前 59 个主分片中**约 18 个 `number_of_replicas=0`**（基于 4/20 事件报告：59 primary + 41 replica = 100 total shards）。任何持有 0 副本分片的数据节点出现哪怕极短暂的不可达（GC 暂停、网络抖动、合并 I/O 饱和），该分片立即进入 unassigned 状态 → 集群直接 RED。
+
+**修改原因**: 这是 **3 次 RED 事件最关键的共同结构性根因**：
+- 3/8 事件：节点因 41GB 大删除 merge 饱和而短暂掉出集群，0 副本分片瞬间不可用 → RED
+- 4/20 事件：根因报告附录第六章明确列为"P0 #1 整改项"，4/23 成本分析方案 D1 确认现有 EBS 余量 177GB 足以容纳约 68GB 的新副本
+- 5/17 事件：复发同一模式
+
+修复后任一持有该索引的节点掉线，副本分片立即接管，**集群最多进入 YELLOW 而不会到 RED**。
+
+**预期效果**:
+- 消除单节点抖动直接触发 RED 的路径（结构性根除最大风险）
+- 集群从 100 shards 增至约 118 shards，存储占用从 ~223 GB 增至 ~291 GB（仍在 400 GB EBS 总容量内）
+- 副本同时分担查询负载，对搜索性能略有正向收益
 
 **前置确认**：
 
@@ -251,7 +310,17 @@ aws opensearch update-domain-config --domain-name luckycommon --region us-east-1
 
 ### P0-3: ISM 删除策略改小批次 + 调度到低峰窗口
 
-**目标**: 避免 ISM 一次性删除 >5GB / >100 万文档导致节点超载（3/8 RED 直接根因）。
+**解决的问题**: 当前 ISM 策略在业务高峰时段（3/8 事件触发时间为 07:00 UTC = 美东 03:00 EST 凌晨批量任务窗口）一次性删除超过 41GB / 4M docs。删除产生的 segment merge I/O 在 m5.large 数据节点（2 vCPU, 仅 ~4GB JVM heap）上持续 25–49 分钟，期间节点处于高压状态，**任一节点掉出集群叠加 R1（0 副本分片）即触发 RED**。
+
+**修改原因**:
+- 3/8 验证报告 (LCNA-INC-2026-008) 直接归因："Large single-batch index deletion — 41 GB deleted in ~2 min, no throttling — **ROOT CAUSE**"
+- 3/8 Action 1 建议：reduce batch size + schedule to maintenance window + low-traffic windows — **2 个月未执行**
+- 3/9 验证报告 R5 建议 raise merge throttle 上限同向印证（本手册 P1-5 配套执行）
+
+**预期效果**:
+- 单次 ISM 周期删除量从 41GB / 4M docs 降至每索引 ≤ 5GB / ≤ 200K docs（通过 rollover 控制单索引体量）
+- 删除调度移至业务低峰（UTC 02:00），即便发生节点抖动也不影响应用层
+- 配合 P1-5 调高 merge throttle，节点高压窗口从 25–49 min 缩短至 < 5 min
 
 #### 步骤 1: 审计现有 ISM 策略
 
@@ -385,11 +454,22 @@ awscurl --service es --region us-east-1 \
 
 ---
 
-## 四、P1 措施执行（两周内，任意时段）
+## 五、P1 措施执行（两周内，任意时段）
 
 ### P1-4: 启用 AutoTune
 
-**目标**: 让 AWS 自动调优 JVM 参数和查询缓存设置，缓解慢性 JVM 锯齿波（74–76% 峰值）。
+**解决的问题**: 集群当前 `AutoTuneOptions.DesiredState = DISABLED`（4/23 `describe-domain` 确认）。JVM 内存压力呈典型锯齿波模式：每 4–8 小时 Major GC 一次，压力从 34–42% 爬升至 74–76% 后跌落（4/20 报告附录 C 24 小时趋势）。**JVM 压力慢性偏高使集群对所有外部扰动（删除、merge、查询尖峰）容错性下降**，间接放大 R1/R2 风险。
+
+**修改原因**:
+- 3/8 报告长期建议清单：P2 "Enable Auto-Tune — Let AWS optimize JVM and thread pool settings automatically"
+- 4/20 报告 P2 重申同样建议
+- 数据节点 m5.large 8GB RAM → ~4GB JVM heap 对当前工作负载本就偏小，启用 AutoTune 是在不升级实例前提下可获取的最大 JVM 优化收益
+
+**预期效果**:
+- AWS 在维护窗口内自动调整 JVM 参数（heap 分配、GC 策略）和查询/字段数据缓存
+- 预期 JVM 峰值压力从 74–76% 降至 60–70% 区间
+- 缩短 GC pause 时间，降低节点因 GC 暂停被误判为"不可达"的概率
+- 减少手动调优工作量
 
 ```bash
 # 通过 AWS CLI 启用（推荐）
@@ -429,7 +509,17 @@ aws opensearch describe-domain --domain-name luckycommon --region us-east-1 \
 
 ### P1-5: 调高 `indices.store.throttle.max_bytes_per_sec`
 
-**目标**: 让 merge I/O 上限更高，缩短删除后段合并窗口（25–49 min → <5 min）。
+**解决的问题**: 大批量删除后产生大量待合并 segment。若 merge I/O 速率被限制在较低值（如 20 MB/s），需要 25–49 分钟才能完成合并；这段时间节点 I/O 持续饱和，CPU/JVM 压力升高，**进一步放大节点掉线 → RED 的概率**。
+
+**修改原因**:
+- 3/9 验证报告 R5："The current merge throttle may be too low for the deletion volumes (~260K–1M docs per ISM cycle). Increasing the merge I/O ceiling reduces the duration of post-deletion segment merge windows, shortening node stress periods from the observed 25–49 minutes to < 5 minutes."
+- ES 6.8 默认 `indices.store.throttle.type = none`（unlimited），但 AWS OpenSearch 托管层可能有隐式限制
+- 该项与 P0-3 是配套关系：P0-3 控制"删多少"，P1-5 控制"合并多快"
+
+**预期效果**:
+- 删除后 segment merge 窗口从 25–49 min 缩短至 < 5 min
+- 节点高压时间锐减，掉线概率显著下降
+- 与 P0-3 配套实施可基本消除 R2 触发路径
 
 > ⚠️ ES 6.8 中此设置已**默认不限制**（`unlimited`）。OpenDistro/AWS 受托管层可能有隐式限制。先确认当前值。
 
@@ -470,7 +560,17 @@ awscurl --service es --region us-east-1 \
 
 ### P1-6: 修改 index template 默认 `replicas=1`
 
-**目标**: 防止未来再有新索引以 0 副本创建（治本，防止 P0-2 整改后又出现新的 0 副本索引）。
+**解决的问题**: P0-2 只修复**现有** 18 个 0 副本索引，但如果 index template 默认 `number_of_replicas=0`，**每天通过 ISM rollover 或应用创建的新索引仍会继续以 0 副本生成**，几周后 RED 风险即可恢复。
+
+**修改原因**:
+- 4/20 报告 P1 整改项 #3："审计所有 index template — 确保默认模板包含 `number_of_replicas: 1`，防止新索引继续以 0 副本创建"
+- R5（结构性根因第 5 项）的根本治理 — 单次修复无法持续，必须从模板层根除
+- P0-2 + P1-6 = 短期修复 + 长期治本，缺一不可
+
+**预期效果**:
+- 所有未来通过 template 匹配创建的新索引默认带 1 个副本
+- 杜绝 R1 风险在整改后重新积累
+- 配合 ISM 的 rollover（P0-3 引入）形成完整的索引生命周期治理
 
 #### 步骤 1: 列出现有 templates
 
@@ -533,7 +633,7 @@ print('FAIL:', fail) if fail else print('All templates replicas >= 1 ✓')
 
 ---
 
-## 五、完整验证清单（全部执行后）
+## 六、完整验证清单（全部执行后）
 
 执行以下所有检查，全部通过才能认为整改完成：
 
@@ -589,7 +689,7 @@ awscurl --service es --region us-east-1 \
 
 ---
 
-## 六、回滚方案
+## 七、回滚方案
 
 ### P0-2 回滚（撤销副本添加）
 
@@ -655,7 +755,7 @@ EOF
 
 ---
 
-## 七、风险评估
+## 八、风险评估
 
 | 步骤 | 主要风险 | 缓解措施 |
 |---|---|---|
@@ -673,7 +773,7 @@ EOF
 
 ---
 
-## 八、变更后观察期
+## 九、变更后观察期
 
 | 时段 | 观察重点 | 告警阈值 |
 |---|---|---|
@@ -688,7 +788,7 @@ EOF
 
 ---
 
-## 九、变更日志（执行时填写）
+## 十、变更日志（执行时填写）
 
 | 日期 (UTC) | 步骤 | 执行人 | 结果 | 备注 |
 |---|---|---|---|---|
