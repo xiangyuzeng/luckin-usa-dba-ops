@@ -19,7 +19,7 @@ luckycommon OpenSearch 集群在 **3 个月内连续发生 3 次 RED 状态事�
 |---|---|---|---|---|
 | 2026-03-08 07:00 | LCNA-INC-2026-008 | ISM 一次性删除 41GB / 4M docs（占集群 26%），节点 merge I/O 饱和掉线 | ~1 min（总恢复 7 min） | 3 个 5xx, 55 个 4xx, 搜索延迟 1.8→8.1ms |
 | 2026-04-20 18:18 | （未编号） | 瞬态主节点选举抖动 / 极短分片状态转换 | <1 min（亚分钟级） | 无可观测影响 |
-| 2026-05-17 | LCNA-INC-2026-026 | 待确认（昨日事件，与前两次根因疑似同源） | TBD | TBD |
+| 2026-05-17 13:22 | LCNA-INC-2026-026 | 数据节点 `WZNuw2r0TKWIWzUWVKboUQ` (m5.large) CPU 飙至 89%，JVM 指标采样缺失（指向长时 STW GC 暂停或进程僵死）；5 个 `replicas=0` 索引的 5 个 primary 因无副本不可恢复 | ~2 min（CloudWatch 红色窗口），总恢复 14 min（13:22→13:36） | 4.21M docs 不可搜索 2 min；`writes_blocked=0`, `5xx=0`，应用层未感知 |
 
 ### 2. 共同结构性根因
 
@@ -27,11 +27,11 @@ luckycommon OpenSearch 集群在 **3 个月内连续发生 3 次 RED 状态事�
 
 | 编号 | 根因 | 当前状态 | 影响事件 |
 |---|---|---|---|
-| R1 | **~18 个主分片 `number_of_replicas=0`** | 59 primary + 41 replica = 100 total shards | 直接放大 4/20 和 5/17 — 任何持有 0 副本分片的节点瞬时不可达即触发 RED |
+| R1 | **5 个生产索引 `number_of_replicas=0`**（5/17 已确认）：`chronus_task_sharding_log` + `es_task_2026-05-14/15/16/17`，占总索引数 19 的 26%；总分片框架仍为 59 primary + 41 replica = 100 shards（AWS Cluster Insight "Misconfigured Replica" MEDIUM 长期 ACTIVE） | **直接触发 5/17 RED**：5 个 primary 因节点抖动不可恢复（59→54）；同一脆弱性也是 3/8 事件升级到 RED 的根因 |
 | R2 | **ISM 一次性大批量删除** | 3/8 事件中 41GB / 2 min 删除 | 直接触发 3/8 事件 |
 | R3 | **慢性 JVM 锯齿波（74–76% 峰值）** | AutoTune DISABLED, 每 4–8h Major GC 一次 | 提高所有事件的发生概率 |
-| R4 | **merge throttle 可能受限** | ES 6.8 默认 unlimited，AWS 托管层未知 | 拖长删除后节点高压窗口（25–49 min） |
-| R5 | **index template 默认 0 副本** | 待 P0-1 后审计验证 | 即便修复现有 0 副本，新索引仍会持续以 0 副本创建 |
+| R4 | **merge throttle 实际生效值需经 P0-1 拉取确认** | ES 6.8 原生默认 unlimited；AWS OpenSearch 托管层是否覆盖默认值需通过 `GET /_cluster/settings?include_defaults=true` 直接核对（P0-1 完成后执行） | 若实际受限，会拖长删除后节点高压窗口（3/9 验证报告观测到 25–49 min） |
+| R5 | **es_task 系列日索引每天以 0 副本生成** | 5/17 报告 §6.5 确认每日 rollover 仍以 replicas=0 创建（5 个 0 副本索引中 4 个为 es_task 日索引），需通过 P0-1 拉取实际 template/ISM 进一步定位是 template 还是 ISM rollover 配置 | 即便修复现有 0 副本，**次日 es_task 当日索引仍以 0 副本创建**，RED 风险快速积累回来 |
 | R6 | **DBA 无 VPC 内 REST API 访问权限** | access policy 未授权 databasecheck IAM 用户 | 3/9 验证报告、4/23 分析报告都因此无法完成 — 阻塞所有整改 |
 
 ### 3. 整改策略说明
@@ -59,7 +59,7 @@ luckycommon OpenSearch 集群在 **3 个月内连续发生 3 次 RED 状态事�
 | 阶段 | 编号 | 措施 | 风险 | 预计耗时 |
 |---|---|---|---|---|
 | **P0** | 1 | VPC 内 REST API 访问通道 | 低 | 30 min |
-| **P0** | 2 | 18 个主分片添加副本 | 中（产生数据复制 I/O） | 30–60 min |
+| **P0** | 2 | 5 个 0 副本索引添加副本（chronus_task_sharding_log + 4 个 es_task 日索引） | 中（产生数据复制 I/O） | 30–60 min |
 | **P0** | 3 | ISM 删除策略改小批次 + 调度到低峰窗口 | 低 | 30 min |
 | **P1** | 4 | 启用 AutoTune | 低 | 5 min（AWS Console） |
 | **P1** | 5 | 调高 `indices.store.throttle.max_bytes_per_sec` | 低 | 5 min |
@@ -215,41 +215,59 @@ awscurl --service es --region us-east-1 \
 
 ---
 
-### P0-2: 给 18 个无副本主分片添加副本
+### P0-2: 给 5 个 0 副本索引添加副本
 
-**解决的问题**: 集群当前 59 个主分片中**约 18 个 `number_of_replicas=0`**（基于 4/20 事件报告：59 primary + 41 replica = 100 total shards）。任何持有 0 副本分片的数据节点出现哪怕极短暂的不可达（GC 暂停、网络抖动、合并 I/O 饱和），该分片立即进入 unassigned 状态 → 集群直接 RED。
+**解决的问题**: 5/17 事件已**精确定位**到 5 个生产索引 `number_of_replicas=0`，占总索引数 19 的 26%（AWS Cluster Insight "Misconfigured Replica" MEDIUM 长期 ACTIVE）：
+
+| 索引名 | 类型 | 5/17 影响 |
+|---|---|---|
+| `chronus_task_sharding_log` | 应用任务调度日志（单实例） | RED 直接贡献 |
+| `es_task_2026-05-14` | es_task 系列日索引 (T-3) | RED 直接贡献 |
+| `es_task_2026-05-15` | es_task 系列日索引 (T-2) | RED 直接贡献 |
+| `es_task_2026-05-16` | es_task 系列日索引 (T-1) | RED 直接贡献 |
+| `es_task_2026-05-17` | es_task 系列日索引 (T, 当日) | RED 直接贡献 |
+
+任何持有这 5 个索引的数据节点出现哪怕极短暂的不可达（如 5/17 的 GC 暂停），相关 primary 分片立即进入 unassigned 状态 → 集群直接 RED。注意：`es_task` 是**日索引**，每天新增 1 个新成员（如未修复 P1-6 template，5/18 当日索引仍会以 0 副本创建）。
 
 **修改原因**: 这是 **3 次 RED 事件最关键的共同结构性根因**：
-- 3/8 事件：节点因 41GB 大删除 merge 饱和而短暂掉出集群，0 副本分片瞬间不可用 → RED
-- 4/20 事件：根因报告附录第六章明确列为"P0 #1 整改项"，4/23 成本分析方案 D1 确认现有 EBS 余量 177GB 足以容纳约 68GB 的新副本
-- 5/17 事件：复发同一模式
+- 3/8 事件 (LCNA-INC-2026-008)：节点因 41GB 大删除 merge 饱和而短暂掉出集群，0 副本分片瞬间不可用 → RED
+- 4/20 事件：根因报告附录第六章明确列为"P0 #1 整改项"；4/23 成本分析方案 D1 确认现有 EBS 余量 177GB 足以容纳新副本
+- 5/17 事件 (LCNA-INC-2026-026)：节点 `WZNuw2r0TKWIWzUWVKboUQ` CPU 89%/JVM 心跳中断 2 min，**5 个 primary 因 0 副本不可恢复**，导致 ActivePrimary 59→54 + SearchableDocuments 跌 4.21M
+- 5/17 报告 §6.5 明确："INC-008 提出的「将 es_task 系列与 chronus_task_sharding_log 副本数升至 1」整改项在 INC-026 发生时仍未执行 — 因此本次是同一根因的再次显现"
 
 修复后任一持有该索引的节点掉线，副本分片立即接管，**集群最多进入 YELLOW 而不会到 RED**。
 
 **预期效果**:
 - 消除单节点抖动直接触发 RED 的路径（结构性根除最大风险）
-- 集群从 100 shards 增至约 118 shards，存储占用从 ~223 GB 增至 ~291 GB（仍在 400 GB EBS 总容量内）
+- 新增约 18 个副本分片（5 个索引中 chronus 含多 primary），存储占用从 ~223 GB 增至 ~291 GB（仍在 400 GB EBS 总容量内）
 - 副本同时分担查询负载，对搜索性能略有正向收益
 
 **前置确认**：
 
 ```bash
-# 步骤 1: 列出所有 0 副本索引
+# 步骤 1: 列出所有 0 副本索引（与 5/17 报告的 5 个交叉核验）
 awscurl --service es --region us-east-1 \
   "https://${ENDPOINT}/_cat/indices?h=index,pri,rep,docs.count,store.size&v" \
   | awk 'NR==1 || $3==0' \
   | tee zero-replica-indices.txt
 
-# 步骤 2: 确认数量与上次报告一致（~18 个）
-ZERO_REPLICA_COUNT=$(awk 'NR>1' zero-replica-indices.txt | wc -l)
-echo "Zero-replica indices count: $ZERO_REPLICA_COUNT"
+# 步骤 2: 确认 5/17 已知的 5 个索引都在清单中
+EXPECTED='chronus_task_sharding_log es_task_2026-05-14 es_task_2026-05-15 es_task_2026-05-16 es_task_2026-05-17'
+for IDX in $EXPECTED; do
+  grep -q "^$IDX " zero-replica-indices.txt && echo "✓ $IDX" || echo "✗ $IDX (MISSING — 已被修复或已 rollover?)"
+done
 
-# 步骤 3: 估算新增存储需求（应 < 现有 EBS 余量 177 GB）
-awk 'NR>1 {gsub(/gb|mb|kb/,"",$5); sum+=$5} END {print "Estimated additional storage: " sum " (units mixed - 复核)"}' zero-replica-indices.txt
+# 步骤 3: 检查是否有"新增"的 0 副本索引（如 es_task_2026-05-18 等当日索引）
+echo "All zero-replica indices currently:"
+awk 'NR>1 {print "  " $1}' zero-replica-indices.txt
+
+# 步骤 4: 估算新增存储需求（应 < 现有 EBS 余量 177 GB）
+awk 'NR>1 {gsub(/gb|mb|kb/,"",$5); sum+=$5} END {print "Estimated additional storage: " sum " (单位混合，需复核)"}' zero-replica-indices.txt
 ```
 
 **通过标准**：
-- 数量在 15–25 区间（与历史报告一致）
+- 5/17 报告的 5 个索引应在清单中（如已 rollover 或已被修复则可少）
+- 总数应在 5–10 区间（含 es_task 系列每日新增的索引）
 - 估算新增存储 < 100 GB（保留 80GB 安全余量）
 
 **执行变更**：
@@ -263,7 +281,35 @@ aws opensearch update-domain-config \
   --access-policies file://current-policy.json
 # 等待 Processing 完成（5–15 分钟）
 
-# 批量给 0 副本索引加副本
+# 方案 A（推荐）：先处理 chronus_task_sharding_log（单索引，shard 数较多）
+# 观察其复制完成、unassigned=0 后，再处理 es_task 系列
+awscurl --service es --region us-east-1 \
+  -X PUT \
+  -H "Content-Type: application/json" \
+  -d '{"index": {"number_of_replicas": 1}}' \
+  "https://${ENDPOINT}/chronus_task_sharding_log/_settings"
+
+# 等待该索引复制完成（每 30s 检查一次）
+while true; do
+  UNASSIGNED=$(awscurl --service es --region us-east-1 "https://${ENDPOINT}/_cluster/health" \
+    | python3 -c "import sys,json; print(json.load(sys.stdin)['unassigned_shards'])")
+  echo "$(date -u +%H:%M:%S) unassigned_shards=$UNASSIGNED"
+  [ "$UNASSIGNED" = "0" ] && break
+  sleep 30
+done
+
+# 方案 A 续：批量处理 es_task 日索引（每条间隔 5s）
+for IDX in es_task_2026-05-14 es_task_2026-05-15 es_task_2026-05-16 es_task_2026-05-17 es_task_2026-05-18; do
+  echo "Setting replicas=1 on $IDX"
+  awscurl --service es --region us-east-1 \
+    -X PUT \
+    -H "Content-Type: application/json" \
+    -d '{"index": {"number_of_replicas": 1}}' \
+    "https://${ENDPOINT}/${IDX}/_settings" 2>&1 | grep -v "index_not_found"
+  sleep 5
+done
+
+# 方案 B（兜底）：从清单批量处理（如方案 A 之外还发现其他 0 副本索引）
 while read -r INDEX; do
   [ -z "$INDEX" ] && continue
   echo "Setting replicas=1 on $INDEX"
@@ -272,7 +318,7 @@ while read -r INDEX; do
     -H "Content-Type: application/json" \
     -d '{"index": {"number_of_replicas": 1}}' \
     "https://${ENDPOINT}/${INDEX}/_settings"
-  sleep 5  # 给集群留缓冲，避免一次性发起所有复制
+  sleep 5
 done < <(awk 'NR>1 {print $1}' zero-replica-indices.txt)
 ```
 
