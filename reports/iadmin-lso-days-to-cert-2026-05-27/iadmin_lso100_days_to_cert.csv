@@ -1,0 +1,204 @@
+﻿employee_no,full_name,email,hire_date,lso_acquired_date,days_to_cert,store_id,dept_name,current_position_code,current_position_name,employee_status,data_anomaly,cert_level
+US202505130002,Jay Gregory,jayrgregory99@gmail.com,2025-05-12,2025-05-28 02:15:54,16,,100 Maiden Ln,LKUS00000082,Store Manager,Separated,N,LSO100
+US202505280004,Karen Liu,karenliu37@gmail.com,2025-05-28,2025-06-03 23:54:16,6,,NJ Test Kitchen,LKUS00000083,Assistant Store Manager,Separated,N,LSO100
+US202505280001,Huanchun Xu,eunice.xu@luckincoffee.us,2025-05-27,2025-06-09 08:04:56,13,,Store Operations Department,LKUS00000094,OPS Support,Active,N,LSO100
+US202505280006,Dominique Meadows,dominiquemeadows@yahoo.com,2025-05-27,2025-06-10 02:47:53,14,,100 Maiden Ln,LKUS00000082,Store Manager,Active,N,LSO100
+US202505280002,Robert Baldwin,rbaldwin910@gmail.com,2025-05-27,2025-06-13 04:47:32,17,,100 Maiden Ln,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202505280008,Milos Banzic,banzicmilos@yahoo.com,2025-05-27,2025-06-13 09:40:27,17,,33rd & 10th,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202505280003,Daniel Maor,danimaor3@gmail.com,2025-05-28,2025-06-14 04:57:58,17,,8th & Broadway,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202505280007,Stephanie Thomas,stephanie77.t@gmail.com,2025-05-27,2025-06-18 01:41:58,22,,28th & 6th,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202506160001,Wenny Lin,wennylin07@gmail.com,2025-06-16,2025-06-25 04:13:38,9,,52nd & Madison,LKUS00000082,Store Manager,Active,N,LSO100
+US202506160009,Jian Ming Juo,neoisleo@gmail.com,2025-06-16,2025-06-25 04:28:14,9,,40th & 10th,LKUS00000082,Store Manager,Active,N,LSO100
+US202506160003,Tunisia Hayward,tunisiarenee@yahoo.com,2025-06-16,2025-06-26 01:16:44,10,,37th & Broadway,LKUS00000082,Store Manager,Active,N,LSO100
+US202506160005,Darwin Coronel,darwinc321@gmail.com,2025-06-16,2025-06-26 01:17:38,10,,29th & 3rd,LKUS00000082,Store Manager,Active,N,LSO100
+US202506180003,Andrew Hu,huandrew321@gmail.com,2025-06-18,2025-06-26 10:45:35,8,,28th & 6th,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202506160006,Clara Mae Venturina,cmventurina@gmail.com,2025-06-16,2025-06-27 01:59:13,11,,15th & 3rd,LKUS00000082,Store Manager,Active,N,LSO100
+US202506160007,Juliana Li,juulih00@gmail.com,2025-06-16,2025-06-28 02:47:57,12,,154 Bleecker,LKUS00000082,Store Manager,Active,N,LSO100
+US202506160002,Louis Persia,louisgpersia@gmail.com,2025-06-16,2025-06-28 02:48:08,12,,28th & 6th,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202506160004,Rea Washington,reawashington@me.com,2025-06-16,2025-06-28 23:02:40,12,,102 Fulton,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202506260003,Huichen Jiang,chenhuij96@gmail.com,2025-06-26,2025-07-31 06:46:19,35,,23rd & 8th,LKUS00000082,Store Manager,Active,N,LSO100
+US202507090002,Kenneth Ng,kennethng821@gmail.com,2025-07-09,2025-08-14 23:49:46,36,,16th & 6th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202506180001,Dulce Guzman,dulceeg7@gmail.com,2025-06-18,2025-08-24 00:36:00,67,,52nd & Madison,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202507090003,Juan Ortiz-Fontanez,j.ortiz-fontanez@outlook.com,2025-07-09,2025-08-28 09:53:17,50,,108th & Broadway,LKUS00000082,Store Manager,Active,N,LSO100
+US202507170004,Carina Medrano,carina.medrano30@gmail.com,2025-07-17,2025-09-02 23:23:55,47,,41st & Lexington,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202506260005,Vita Magnier,vmagnier87@gmail.com,2025-06-26,2025-09-03 17:17:59,69,,15th & 3rd,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202507170003,Eric Park,ericseungwonpark@gmail.com,2025-07-17,2025-09-06 05:02:50,51,,54th & 8th,LKUS00000082,Store Manager,Active,N,LSO100
+US202506160010,Kenneth Dobson,kenneth.a.dobson@gmail.com,2025-06-16,2025-09-09 07:40:08,85,,221 Grand,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202507170005,Jayson Rodriguez,jaysonmrodriguez28@gmail.com,2025-07-17,2025-09-18 11:16:27,63,,102 Fulton,LKUS00000085,Shift Supervisor,Separated,N,LSO100
+US202508120003,Afsana Gu,afsanagu25@gmail.com,2025-08-12,2025-09-20 03:50:22,39,,41st & Lexington,LKUS00000082,Store Manager,Active,N,LSO100
+US202508270001,Andrew Chen,andrewchen0213@gmail.com,2025-08-27,2025-09-22 22:45:50,26,,23rd & 8th,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202506280002,Chao Qun Yang,chaoquny0@gmail.com,2025-06-27,2025-09-24 03:13:55,89,,8th & Broadway,LKUS00000084,Barista,Separated,N,LSO100
+US202508120002,Rebecca Chow,rchow1279@gmail.com,2025-08-12,2025-09-26 22:31:58,45,,37th & Broadway,LKUS00000084,Barista,Active,N,LSO100
+US202508050006,Brionna Jiles,brionnajiles95@gmail.com,2025-08-05,2025-09-27 22:04:38,53,,28th & 6th,LKUS00000082,Store Manager,Active,N,LSO100
+US202507090001,Devin Ruan,devinruan1234@gmail.com,2025-07-09,2025-10-02 03:39:25,85,,37th & Broadway,LKUS00000084,Barista,Separated,N,LSO100
+US202507280003,Kimika H Wiggins,kimika.wiggins04@gmail.com,2025-07-28,2025-10-04 04:50:25,68,,33rd & 10th,LKUS00000084,Barista,Active,N,LSO100
+US202508050003,Kyuse Naito,naitokyuse@gmail.com,2025-08-05,2025-10-05 03:51:57,61,,33rd & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202508190004,Angel Galindo Pena,agp112000@gmail.com,2025-08-19,2025-10-07 23:02:45,49,,154 Bleecker,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202507280004,Shangxian Piao,piaoshangxian3@gmail.com,2025-07-28,2025-10-08 01:54:27,72,,102 Fulton,LKUS00000082,Store Manager,Active,N,LSO100
+US202508190010,Maclayne Inkley,maclayne@ratenow.net,2025-08-19,2025-10-08 23:59:06,50,,37th & Broadway,LKUS00000084,Barista,Separated,N,LSO100
+US202509090003,Austin Gebhardt,austingebhardt5@gmail.com,2025-09-09,2025-10-15 03:15:35,36,,37th & Broadway,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202509090009,Kayen Wu He,kayenkwh@gmail.com,2025-09-09,2025-10-22 01:49:45,43,,221 Grand,LKUS00000082,Store Manager,Active,N,LSO100
+US202508120001,Aren Durand,arendurand@gmail.com,2025-08-12,2025-10-23 02:43:49,72,,8th & Broadway,LKUS00000085,Shift Supervisor,Separated,N,LSO100
+US202509300008,Tevin Mccalman,tevinmccalman@gmail.com,2025-09-30,2025-10-28 01:42:47,28,,40th & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202508050002,Tedd Jules P Saibuddhabun,teddsaibuddhabun@gmail.com,2025-08-05,2025-10-28 02:09:03,84,,33rd & 10th,LKUS00000084,Barista,Separated,N,LSO100
+US202509230002,Yongyu Li,liliyjanice@gmail.com,2025-09-23,2025-10-29 03:49:38,36,,221 Grand,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202506280004,Emma Hendrickson,emma.h1403@gmail.com,2025-06-27,2025-10-31 01:08:09,126,,37th & Broadway,LKUS00000084,Barista,Separated,N,LSO100
+US202506270001,Jack Ransom,jackransom43@gmail.com,2025-06-27,2025-11-01 04:54:47,127,,21st & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202509160008,Andy Weng,andywengchen@gmail.com,2025-09-16,2025-11-04 07:09:13,49,,29th & 3rd,LKUS00000083,Assistant Store Manager,Separated,N,LSO100
+US202506270002,Jacob Duran,jrsky101@gmail.com,2025-06-27,2025-11-05 02:59:34,131,,15th & 3rd,LKUS00000084,Barista,Separated,N,LSO100
+US202509230011,Derson Liang,derson.liang@gmail.com,2025-09-23,2025-11-05 09:03:58,43,,33rd & 10th,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202509230007,Fola Zhen,folazhen518@gmail.com,2025-09-23,2025-11-06 01:17:59,44,,154 Bleecker,LKUS00000084,Barista,Active,N,LSO100
+US202509100001,Britney Rosas Galindo,britneyrosasnyc@gmail.com,2025-09-10,2025-11-07 09:50:22,58,,54th & 8th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202510060002,Daniel Chu,daniel.chu@luckincoffee.us,2026-05-04,2025-11-08 01:10:33,-177,,Store Operations Department,LKUS00000076,Operation Manager,Separated,Y,LSO100
+US202509230009,Jady Yip,yip.jady@gmail.com,2025-09-23,2025-11-12 01:24:07,50,,221 Grand,LKUS00000084,Barista,Active,N,LSO100
+US202508050008,Alexander G Harry,alexandergharry@gmail.com,2025-08-05,2025-11-12 05:19:10,99,,154 Bleecker,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202510140004,Qianxin Lu,lqxin1990@gmail.com,2025-10-14,2025-11-12 09:29:28,29,,221 Grand,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202510070006,Betty Xu,byxu43@gmail.com,2025-10-07,2025-11-13 18:51:35,37,,41st & Lexington,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202510060001,Renee Offei,renee.offei@luckincoffee.us,2025-10-06,2025-11-14 04:27:21,39,,Operations Excellence Department,LKUS00000076,Operation Manager,Separated,N,LSO100
+US202509020005,Jonathan Soto,sjonathansoto1@gmail.com,2025-09-02,2025-11-15 03:20:21,74,,221 Grand,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202510070002,Joselyn Pacheco Trejo,joselyn34pacheco@gmail.com,2025-10-07,2025-11-15 19:15:47,39,,16th & 6th,LKUS00000082,Store Manager,Active,N,LSO100
+US202508260007,Emma Vande Krol,Emmavandekrol7@gmail.com,2025-08-26,2025-11-25 04:46:47,91,,8th & Broadway,LKUS00000084,Barista,Separated,N,LSO100
+US202508190001,Joshua G Guillen,joshuaguillen07@icloud.com,2025-08-19,2025-11-25 09:06:36,98,,37th & Broadway,LKUS00000084,Barista,Separated,N,LSO100
+US202508050005,Maria C Weyer,mariaweyer8@gmail.com,2025-08-05,2025-11-25 20:03:36,112,,28th & 6th,LKUS00000084,Barista,Active,N,LSO100
+US202510280002,Tommy Tran,tdtran95@gmail.com,2025-10-28,2025-11-27 01:55:21,30,,221 Grand,LKUS00000084,Barista,Active,N,LSO100
+US202509300006,Natalie Dunckley,blakedunckley1@gmail.com,2025-09-30,2025-11-27 02:31:38,58,,15th & 3rd,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202509160006,Steven Aragon,stevencaragon@gmail.com,2025-09-16,2025-11-27 03:02:20,72,,23rd & 8th,LKUS00000084,Barista,Active,N,LSO100
+US202509090007,William Ma,williamma01@hotmail.com,2025-09-09,2025-11-27 04:50:22,79,,221 Grand,LKUS00000084,Barista,Separated,N,LSO100
+US202510070001,Edwin Cabrera-Rivera,cabreraedwin922@gmail.com,2025-10-07,2025-11-27 10:47:37,51,,37th & Broadway,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202510210001,Javier Cruz,javiercruz52495@gmail.com,2025-10-21,2025-11-28 04:12:29,38,,21st & 3rd,LKUS00000082,Store Manager,Active,N,LSO100
+US202510140003,Lluvia Agosto,lluvia0917@gmail.com,2025-10-14,2025-11-28 07:43:54,45,,40th & 10th,LKUS00000084,Barista,Active,N,LSO100
+US202509160007,Hannah Phung,hanp0512@gmail.com,2025-09-16,2025-11-28 07:44:49,73,,40th & 10th,LKUS00000084,Barista,Active,N,LSO100
+US202510280005,Darnailia Holmes,darnailiaholmes@gmail.com,2025-10-28,2025-11-29 06:03:23,32,,28th & 6th,LKUS00000097,Assistant Store Manager Trainee,Separated,N,LSO100
+US202509090006,Amanda Louie,louieamanda888@gmail.com,2025-09-09,2025-11-29 20:19:21,81,,100 Maiden Ln,LKUS00000084,Barista,Separated,N,LSO100
+US202509230008,Chance Lee,chancelee2015@gmail.com,2025-09-23,2025-12-02 00:01:50,70,,21st & 3rd,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202509160009,Gabriela Canedo,gabyrcanedo@gmail.com,2025-09-16,2025-12-02 00:07:58,77,,28th & 6th,LKUS00000084,Barista,Active,N,LSO100
+US202510280003,Rukiah Ali,Rukia1247@gmail.com,2025-10-28,2025-12-02 05:17:21,35,,54th & 8th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202510280004,Sami Dalao,dalao.sami@gmail.com,2025-10-28,2025-12-04 01:26:48,37,,102 Fulton,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202509300009,Vidal Mouet,vimouet@gmail.com,2025-09-30,2025-12-04 04:49:00,65,,52nd & Madison,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202509230010,Kwun Pok Barney Wong,barneywong@ymail.com,2025-09-23,2025-12-05 00:53:48,73,,40th & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202507090006,Xiao Lan Zhong,zhong860926@gmail.com,2025-07-09,2025-12-05 01:48:47,149,,23rd & 8th,LKUS00000084,Barista,Active,N,LSO100
+US202509160005,Christian Guzman,cguzman0802@gmail.com,2025-09-16,2025-12-05 01:57:20,80,,37th & Broadway,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202510210008,Vanesli Francois,vfrancois77@gmail.com,2025-10-21,2025-12-06 05:40:15,46,,23rd & 8th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202509300005,Fiona Ren,fionaren617@gmail.com,2025-09-30,2025-12-08 08:54:40,69,,21st & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202509300004,Gary Chan,garychan544@gmail.com,2025-09-30,2025-12-10 07:01:31,71,,100 Maiden Ln,LKUS00000084,Barista,Active,N,LSO100
+US202509300002,Meagan Quinones,meaganquinones2024@gmail.com,2025-09-30,2025-12-12 06:38:40,73,,37th & Broadway,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202510070003,Azhar Samad,azharsamad2003@gmail.com,2025-10-07,2025-12-17 00:12:04,71,,37th & Broadway,LKUS00000084,Barista,Active,N,LSO100
+US202509300010,Janice Jackson,janice_Jackson21@yahoo.com,2025-09-30,2025-12-17 03:50:17,78,,21st & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202511250003,Eva Moustafa,evamoustafa8@gmail.com,2025-11-25,2025-12-19 00:46:36,24,,108th & Broadway,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202510140002,Jocelyn Lopez,jocelyn.lopez.garcia1@gmail.com,2026-01-18,2025-12-19 03:42:39,-30,,108th & Broadway,LKUS00000084,Barista,Active,Y,LSO100
+US202510210002,Chung Hanh Tran,jackchan21042006@gmail.com,2025-10-21,2025-12-20 20:35:28,60,,100 Maiden Ln,LKUS00000084,Barista,Separated,N,LSO100
+US202510140009,Laquan Perkins,qperkins0516@gmail.com,2025-10-14,2025-12-20 20:40:49,67,,8th & Broadway,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202510210005,Lucas MacCormack,lucasmccrmck@gmail.com,2025-10-21,2025-12-30 17:20:25,70,,33rd & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202510010001,Jhon Garcia,jhongarciadec3@gmail.com,2025-10-01,2026-01-06 06:05:11,97,,100 Maiden Ln,LKUS00000084,Barista,Active,N,LSO100
+US202511180005,Makayla Franco,makaylatfranco@gmail.com,2025-11-18,2026-01-07 10:03:11,50,,21st & 3rd,LKUS00000085,Shift Supervisor,Separated,N,LSO100
+US202511250001,Chanel Hodge,chanel.hodge97@gmail.com,2025-11-25,2026-01-07 12:09:35,43,,29th & 3rd,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202510140008,Helen Neundorff,neundorff.helen@gmail.com,2025-10-14,2026-01-08 01:14:21,86,,29th & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202510210003,Tieu Binh Diep,cindydiep2006@gmail.com,2025-10-21,2026-01-09 04:29:10,80,,221 Grand,LKUS00000084,Barista,Separated,N,LSO100
+US202511180004,Jalynn Whitfield,whitfieldjalynn291@gmail.com,2025-11-18,2026-01-10 20:59:55,53,,52nd & Madison,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512090005,Oscar Lam Ho,oscarlam84@gmail.com,2025-12-09,2026-01-13 08:32:34,35,,102 Fulton,LKUS00000097,Assistant Store Manager Trainee,Separated,N,LSO100
+US202511100001,Joseph Oleksy,thefotocon@gmail.com,2025-11-10,2026-01-17 01:18:16,68,,221 Grand,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202512220008,Laurel Vorhies,jack.vorhies@gmail.com,2025-12-22,2026-01-21 01:48:56,30,,23rd & 8th,LKUS00000083,Assistant Store Manager,Active,N,LSO100
+US202512020001,Nathanael Vasquez-Pinales,nathanaelpinales@gmail.com,2025-12-02,2026-01-22 00:29:41,51,,16th & 6th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512170005,Felix Abarca,fabarca862@gmail.com,2025-12-16,2026-01-24 20:09:35,39,,102 Fulton,LKUS00000084,Barista,Active,N,LSO100
+US202510280001,Shuhana Islam,shuhanaislam10@gmail.com,2025-10-28,2026-01-24 23:00:17,88,,23rd & 8th,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202512090008,Seline Abreu Pichardo,seline.abreu123456@gmail.com,2025-12-09,2026-01-25 04:43:46,47,,28th & 6th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512170002,Xander Villanueva,xandervillanueva2@gmail.com,2025-12-16,2026-01-28 04:09:29,43,,37th & Broadway,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202512220002,Juan Cardenas,juancardenas12812@gmail.com,2025-12-22,2026-01-30 07:18:57,39,,21st & 3rd,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202511100005,Imani Jordan,imanijordan205@gmail.com,2025-11-10,2026-01-31 02:46:21,82,,221 Grand,LKUS00000084,Barista,Separated,N,LSO100
+US202512170001,Dekayla Davis,dekayladavis13@gmail.com,2025-12-16,2026-02-06 01:00:44,52,,221 Grand,LKUS00000084,Barista,Separated,N,LSO100
+US202601060002,Dominique Mann,dominique.mann23@aol.com,2026-01-06,2026-02-06 01:49:22,31,,100 Maiden Ln,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512220006,Isaiah Garcia,isaiahgx01@gmail.com,2025-12-22,2026-02-06 01:58:04,46,,102 Fulton,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202601060007,John Daniel Alberio,johndaniieel@gmail.com,2026-01-06,2026-02-06 02:01:26,31,,41st & Lexington,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512170008,Nicole Ali-Rashid,nicoleali82@yahoo.com,2025-12-16,2026-02-08 23:10:30,54,,52nd & Madison,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512290003,Jeric Taborn,jeric.taborn@gmail.com,2025-12-29,2026-02-11 02:17:09,44,,154 Bleecker,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512020004,Marisol Nolasco,nolasco.m.26@gmail.com,2025-12-02,2026-02-12 20:50:18,72,,54th & 8th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202601130006,Roxana Lucero,luceroroxana005@gmail.com,2026-01-13,2026-02-12 23:19:00,30,,221 Grand,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512290006,Hayden Linden,haydenlinden1@gmail.com,2025-12-29,2026-02-13 11:54:31,46,,21st & 3rd,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202601130003,Khadijah Mitchell,khadijah2626@gmail.com,2026-01-13,2026-02-13 20:32:36,31,,29th & 3rd,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202601060004,Darnell Jean-Louis,darnelljeanlouis2@gmail.com,2026-01-06,2026-02-14 02:34:11,39,,16th & 6th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202601200003,Alexis Becton,alexisbecton1@gmail.com,2026-01-20,2026-02-14 08:15:32,25,,37th & Broadway,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202511180002,Thomas Shi,thomshi27@gmail.com,2025-11-18,2026-02-15 05:52:21,89,,40th & 10th,LKUS00000084,Barista,Active,N,LSO100
+US202512290004,Andri Perez,26andrii@gmail.com,2025-12-29,2026-02-17 07:09:46,50,,33rd & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512290002,Elsa Nana,elsanana044@gmail.com,2025-12-29,2026-02-19 01:37:31,52,,21st & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202601200007,Luke Scorsone,lukescorsone@gmail.com,2026-01-20,2026-02-21 01:17:45,32,,15th & 3rd,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202509160002,Taylor Spivey,taylormspivey8@gmail.com,2025-09-16,2026-02-21 12:02:40,158,,16th & 6th,LKUS00000084,Barista,Active,N,LSO100
+US202512020003,Axel Lisman,axelbirthmay7@gmail.com,2025-12-02,2026-02-22 05:02:09,82,,8th & Broadway,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202601270005,Michelle Martinez,mm10292002@gmail.com,2026-01-27,2026-02-24 02:38:37,28,,52nd & Madison,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202601270004,Netyali Ortega-Figuereo,netyali28@gmail.com,2026-01-27,2026-02-24 23:15:42,28,,54th & 8th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202601200005,Jessalyn Lopez,lopezjessie33@gmail.com,2026-01-20,2026-02-25 10:33:19,36,,102 Fulton,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512020006,Ashley Cirilo Hernandez,ashley419cirilo@gmail.com,2025-12-02,2026-02-27 03:31:44,87,,28th & 6th,LKUS00000084,Barista,Separated,N,LSO100
+US202601200004,Justin Guzman,justing1468@gmail.com,2026-01-20,2026-02-27 20:26:36,38,,154 Bleecker,LKUS00000084,Barista,Active,N,LSO100
+US202512020012,Matthew Drake,matthew@drake.net,2025-12-02,2026-02-28 03:02:15,88,,28th & 6th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512220003,Jack Hughes,jackhughes025@gmail.com,2025-12-22,2026-02-28 03:24:10,68,,40th & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602100006,Helena Bassarally,hbassarally@yahoo.com,2026-02-10,2026-03-03 04:56:41,21,,37th & Broadway,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202601130002,Tiana Hall,tiana.h174@gmail.com,2026-01-13,2026-03-04 23:42:33,50,,15th & 3rd,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202601130001,Christopher Butler,butlerchristopher117@gmail.com,2026-01-13,2026-03-06 23:52:59,52,,100 Maiden Ln,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602100003,Migdalia Jackson,migdaliajackson22501@gmail.com,2026-02-10,2026-03-07 02:28:41,25,,108th & Broadway,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202512170006,Giovanni Garcia,giovanni.rubio7@icloud.com,2025-12-16,2026-03-07 04:16:32,81,,37th & Broadway,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202509090005,Jose Velasquez,rodrigomtx68@gmail.com,2025-09-09,2026-03-08 01:29:10,180,,37th & Broadway,LKUS00000084,Barista,Active,N,LSO100
+US202601200006,Sterling Schreiner,sterlingschreiner@outlook.com,2026-01-20,2026-03-10 01:23:32,49,,100 Maiden Ln,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202601270002,Axel Guzman,axelguzman1603@gmail.com,2026-01-27,2026-03-11 02:23:51,43,,16th & 6th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202601200008,Skarline Mora,skarlinemora17@gmail.com,2026-01-20,2026-03-12 01:31:08,51,,15th & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202602180008,Chamarie Pryce,chamariepryce@gmail.com,2026-02-17,2026-03-12 05:27:18,23,,108th & Broadway,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602180017,Tiffany Watson,tiffanywatson0721@gmail.com,2026-02-17,2026-03-13 09:34:03,24,,108th & Broadway,LKUS00000098,Store Manager Trainee,Separated,N,LSO100
+US202602180005,Calib Wolters,calibwolters@gmail.com,2026-02-17,2026-03-14 20:09:27,25,,16th & 6th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602180009,Frances John,francesj1120@gmail.com,2026-02-17,2026-03-17 04:48:50,28,,21st & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202601130004,No Name Given Hamza,hamzafnu7@gmail.com,2026-01-13,2026-03-17 18:24:41,63,,28th & 6th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202602180006,Angelique Soto,angeliquesoto2017@gmail.com,2026-02-17,2026-03-17 20:11:18,28,,21st & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202602180010,Gabriella Palmeri,gabriellatpalmeri@gmail.com,2026-02-17,2026-03-18 10:04:11,29,,41st & Lexington,LKUS00000084,Barista,Active,N,LSO100
+US202601270003,Nicole Winchell,niccolewin@gmail.com,2026-01-27,2026-03-19 05:06:25,51,,8th & Broadway,LKUS00000084,Barista,Separated,N,LSO100
+US202512090001,Tenzin Choney,choney3457@gmail.com,2025-12-09,2026-03-19 07:32:22,100,,54th & 8th,LKUS00000084,Barista,Separated,N,LSO100
+US202601270001,Lorenso Rios Morales,lorensorios320@gmail.com,2026-01-27,2026-03-19 11:30:02,51,,102 Fulton,LKUS00000084,Barista,Active,N,LSO100
+US202601200011,Deliverance Fabolu,deliosas06@gmail.com,2026-01-20,2026-03-21 03:50:39,60,,41st & Lexington,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602240007,Zhen Jie Zhong,jzhong4247@gmail.com,2026-02-24,2026-03-24 20:23:03,28,,23rd & 8th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602180014,Kasiah Henry,kasiahhenry@yahoo.com,2026-02-17,2026-03-25 04:07:58,36,,37th & Broadway,LKUS00000084,Barista,Active,N,LSO100
+US202602180016,Dae Acosta,dae.acosta21@gmail.com,2026-02-17,2026-03-26 09:33:42,37,,37th & Broadway,LKUS00000084,Barista,Active,N,LSO100
+US202602030004,John Eisenberg,jzenyc@gmail.com,2026-02-03,2026-03-27 20:54:28,52,,15th & 3rd,LKUS00000084,Barista,Separated,N,LSO100
+US202603030002,Julian Lozada,julzlozada18@gmail.com,2026-03-03,2026-03-28 00:28:30,25,,21st & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202602240006,Danisha Dehut,danisha.dehut@icloud.com,2026-02-24,2026-03-28 00:45:36,32,,102 Fulton,LKUS00000084,Barista,Active,N,LSO100
+US202511180007,Alina Roberts,alinaroberts93@gmail.com,2025-11-18,2026-03-28 02:09:40,130,,8th & Broadway,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202602030006,Joakim Lesporis,joakimlesporis25@gmail.com,2026-02-03,2026-03-29 01:21:06,54,,102 Fulton,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602180011,Amari Hayes,amarijhayes200@gmail.com,2026-02-17,2026-03-31 23:35:11,42,,29th & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202602180021,Justin Liu,justinliu103@gmail.com,2026-02-17,2026-04-01 02:21:00,43,,15th & 3rd,LKUS00000084,Barista,Separated,N,LSO100
+US202602180002,Tatiana Mendoza,tatimendoza11@gmail.com,2026-02-17,2026-04-02 01:46:30,44,,221 Grand,LKUS00000084,Barista,Active,N,LSO100
+US202601270007,Gary Ealey,gme1984@aol.com,2026-01-27,2026-04-02 05:07:30,65,,37th & Broadway,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202602180019,Manuel Medina,3kyrie3@gmail.com,2026-02-17,2026-04-02 23:09:33,44,,54th & 8th,LKUS00000084,Barista,Active,N,LSO100
+US202602180012,Carla Cuahutle,carlajimena132004@gmail.com,2026-02-17,2026-04-03 02:51:38,45,,15th & 3rd,LKUS00000084,Barista,Active,N,LSO100
+US202601130011,Stanley Lee,stanmb2021@gmail.com,2026-01-13,2026-04-03 03:00:55,80,,33rd & 10th,LKUS00000084,Barista,Active,N,LSO100
+US202603030001,Izzy Bantug,bantugizzy@gmail.com,2026-03-03,2026-04-04 00:19:42,32,,23rd & 8th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202603030007,Becky Carreon,b.carreon.rf@gmail.com,2026-03-03,2026-04-04 01:49:09,32,,54th & 8th,LKUS00000084,Barista,Separated,N,LSO100
+US202603100001,Andres Rosario,arosario609@gmail.com,2026-03-10,2026-04-04 01:59:26,25,,41st & Lexington,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202512020002,Justin Johnson,adoynus@gmail.com,2025-12-02,2026-04-04 02:20:30,123,,52nd & Madison,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603170007,Valerie Campos,valeriecampos10@gmail.com,2026-03-17,2026-04-04 04:24:01,18,,33rd & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202603170001,Naomi Gonser,naomi.gonser@gmail.com,2026-03-17,2026-04-06 21:42:05,20,,108th & Broadway,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202603030006,Kevin Morales,moraleskev77@gmail.com,2026-03-03,2026-04-07 22:58:02,35,,108th & Broadway,LKUS00000084,Barista,Active,N,LSO100
+US202603170002,Diego Cabrera,diego.cabrera.28055@gmail.com,2026-03-17,2026-04-09 02:30:35,23,,29th & 3rd,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202602180018,Elizabeth Jay,elizafjay@gmail.com,2026-02-17,2026-04-10 19:41:14,52,,21st & 3rd,LKUS00000096,Barista Trainee,Separated,N,LSO100
+US202603030008,Kyi Phyu Pwint Oo,kyiphyupwintoo559@gmail.com,2026-03-03,2026-04-10 19:48:39,38,,28th & 6th,LKUS00000084,Barista,Active,N,LSO100
+US202603100008,Tyla Baxter,tyla.baxter01@gmail.com,2026-03-10,2026-04-14 19:58:23,35,,21st & 3rd,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202603030005,Axel Molina,molina.axel@rocketmail.com,2026-03-03,2026-04-15 04:14:59,43,,154 Bleecker,LKUS00000084,Barista,Active,N,LSO100
+US202603100002,Shawn Smith,shawnsmith.s99.s@gmail.com,2026-03-10,2026-04-15 22:59:32,36,,29th & 3rd,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603260009,Previn Coleman,previnscott@gmail.com,2026-03-26,2026-04-21 01:51:33,26,,16th & 6th,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202603100011,Britney Jimenez,britneyjimenez05@gmail.com,2026-03-10,2026-04-21 01:55:49,42,,100 Maiden Ln,LKUS00000084,Barista,Active,N,LSO100
+US202603260010,Aidan Aroubas,aaroubas@gmail.com,2026-03-26,2026-04-21 04:45:01,26,,33rd & 10th,LKUS00000085,Shift Supervisor,Active,N,LSO100
+US202603260002,Travis Winter,twinter41@gmail.com,2026-03-26,2026-04-21 04:48:09,26,,52nd & Madison,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202603260004,Patricia Torres,patcareers95@gmail.com,2026-03-26,2026-04-22 01:26:42,27,,40th & 10th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603260013,Zoey Roman,zoeyroman1015@gmail.com,2026-03-26,2026-04-27 22:44:53,32,,15th & 3rd,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202604020002,Sierra Theogene,stheogene123@gmail.com,2026-04-02,2026-04-30 01:02:39,28,,102 Fulton,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202602180007,Gabriela Padilla,gabypadilla919@gmail.com,2026-02-17,2026-04-30 01:54:40,72,,28th & 6th,LKUS00000084,Barista,Active,N,LSO100
+US202601060010,Tyler Brown,tbrown8642@gmail.com,2026-01-06,2026-05-03 10:18:06,117,,108th & Broadway,LKUS00000095,Shift Supervisor Trainee,Separated,N,LSO100
+US202603260007,Mohammad Hossain,alif.hossain2001@gmail.com,2026-03-26,2026-05-04 23:21:01,39,,33rd & 10th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603030004,Tamara Duclosel,aramatd16@gmail.com,2026-03-03,2026-05-05 01:24:06,63,,29th & 3rd,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202604020003,Arthur O Yeames III,tyeames96@gmail.com,2026-04-02,2026-05-07 02:14:19,35,,16th & 6th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603170004,Skylin Lee,leeskylin19@gmail.com,2026-03-17,2026-05-07 08:59:14,51,,154 Bleecker,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603260003,Vincent Pabon,pabonvincent@yahoo.com,2026-03-26,2026-05-09 09:19:54,44,,29th & 3rd,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202604020005,Lorenni Vasquez,vasquezlorenni06@gmail.com,2026-04-02,2026-05-09 19:21:49,37,,40th & 10th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202604020006,Christina Knotts,christinak2026@yahoo.com,2026-04-02,2026-05-12 02:32:08,40,,33rd & 10th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202604160003,Min Thein Kyaw,mintheinkyaw4905@gmail.com,2026-04-16,2026-05-14 23:41:33,28,,221 Grand,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202604160001,Kianee Carlton,kilacarlton@gmail.com,2026-04-16,2026-05-19 00:20:11,33,,54th & 8th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202604160002,Edward Garcia,edwardgarciajr410@gmail.com,2026-04-16,2026-05-19 23:06:35,33,,54th & 8th,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603260001,Bryant Cabrera,bryant.cabrera03@gmail.com,2026-03-26,2026-05-23 09:32:40,58,,41st & Lexington,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202604280003,Marquita Henry,marquitahenry17@gmail.com,2026-04-28,2026-05-26 02:59:00,28,,100 Maiden Ln,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603100012,Sha'mar Dennison,shamardennison@gmail.com,2026-03-10,2026-05-27 22:44:39,78,,54th & 8th,LKUS00000098,Store Manager Trainee,Active,N,LSO100
+US202604210001,Sharied Newkirk,shariednewkirk@gmail.com,2026-04-21,2026-05-27 23:53:32,36,,108th & Broadway,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
+US202603100005,Lewis Francis,lewismchs@gmail.com,2026-03-10,2026-05-28 04:17:08,79,,221 Grand,LKUS00000095,Shift Supervisor Trainee,Active,N,LSO100
