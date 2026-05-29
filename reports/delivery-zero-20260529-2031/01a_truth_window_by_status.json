@@ -1,0 +1,18 @@
+{
+  "query_window_utc": "2026-05-29 16:00:00 → 2026-05-29 18:00:00",
+  "query_window_et":  "2026-05-29 12:00:00 → 2026-05-29 14:00:00 (EDT)",
+  "filter": "tenant='LKUS', US shops (excl US00000), channels 8/9/10, all statuses",
+  "rows": [
+    {"channel": 8,  "status": 90, "n": 2, "first_ct_utc": "2026-05-29T16:19:51", "last_ct_utc": "2026-05-29T16:42:03"},
+    {"channel": 9,  "status": 90, "n": 2, "first_ct_utc": "2026-05-29T16:32:21", "last_ct_utc": "2026-05-29T17:00:20"},
+    {"channel": 10, "status": 20, "n": 1, "first_ct_utc": "2026-05-29T16:28:01", "last_ct_utc": "2026-05-29T16:28:01"},
+    {"channel": 10, "status": 90, "n": 2, "first_ct_utc": "2026-05-29T16:00:24", "last_ct_utc": "2026-05-29T16:34:35"}
+  ],
+  "summary": {
+    "ch8_doordash":  2,
+    "ch9_grubhub":   2,
+    "ch10_ubereats": 3,
+    "total": 7,
+    "observation": "Real delivery orders occurred during alert window. status=20 (paid/active) and status=90 (completed). No stuck pileup signature."
+  }
+}

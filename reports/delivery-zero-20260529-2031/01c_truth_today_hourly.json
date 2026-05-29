@@ -1,0 +1,15 @@
+{
+  "rows_by_et_hour_channel": [
+    {"et_hour": "2026-05-29 07:00", "ch8": 3, "ch9": 1, "ch10": 3, "total": 7},
+    {"et_hour": "2026-05-29 08:00", "ch8": 1, "ch9": 0, "ch10": 6, "total": 7},
+    {"et_hour": "2026-05-29 09:00", "ch8": 2, "ch9": 0, "ch10": 4, "total": 6},
+    {"et_hour": "2026-05-29 10:00", "ch8": 3, "ch9": 0, "ch10": 4, "total": 7},
+    {"et_hour": "2026-05-29 11:00", "ch8": 1, "ch9": 0, "ch10": 3, "total": 4},
+    {"et_hour": "2026-05-29 12:00", "ch8": 2, "ch9": 1, "ch10": 3, "total": 6},
+    {"et_hour": "2026-05-29 13:00", "ch8": 0, "ch9": 1, "ch10": 0, "total": 1, "note": "Alert window middle hour — lowest of day but NOT zero"},
+    {"et_hour": "2026-05-29 14:00", "ch8": 0, "ch9": 1, "ch10": 1, "total": 2, "note": "Alert continued firing"},
+    {"et_hour": "2026-05-29 15:00", "ch8": 3, "ch9": 2, "ch10": 1, "total": 6, "note": "Recovered to normal"},
+    {"et_hour": "2026-05-29 16:00", "ch8": 1, "ch9": 0, "ch10": 1, "total": 2, "note": "Partial hour at query time"}
+  ],
+  "key_finding": "Today's delivery traffic = 6–7/hr typical with a clear dip to 1/hr at 13:00 ET (alert window) and 2/hr at 14:00 ET. Then recovered. Truth in alert window (12:00–14:00 ET) sums to 7, NOT zero. Alert fired at 0."
+}

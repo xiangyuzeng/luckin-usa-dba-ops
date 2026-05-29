@@ -1,0 +1,21 @@
+{
+  "replica_lag_check": {
+    "status": "BLOCKED",
+    "tried": ["SELECT * FROM information_schema.REPLICA_HOST_STATUS — Unknown table (not Aurora cluster table or not exposed)", "SHOW REPLICA STATUS — Access denied; need SUPER/REPLICATION CLIENT"],
+    "limitation": "databasecheck IAM user lacks REPLICATION CLIENT. Cannot directly verify reader lag from this account.",
+    "indirect_evidence": "Latest insert in t_collect_order_inter is 2026-05-29 20:33 UTC and latest t_order row at 20:34:36 UTC — writer endpoint is fresh. If the Prometheus exporter reads a heavily lagged reader, that could still mask data, but we cannot confirm/refute from here. Recommend Michael / RDS console check on aws-luckyus-iluckyhealth-* reader lag if H1 is escalated.",
+    "server_metadata": {"version": "8.0.45", "hostname": "ip-172-17-0-190", "read_only": 0}
+  },
+  "table_freshness": {
+    "latest_t_order_any_us_utc": "2026-05-29T20:34:36",
+    "latest_t_order_any_us_et":  "2026-05-29T16:34:36",
+    "verdict": "t_order is real-time fresh. No DB-side freeze."
+  },
+  "status_pileup_since_12_utc": {
+    "rows": [
+      {"status": 20, "n": 1,  "note": "paid/active (in progress)"},
+      {"status": 90, "n": 40, "note": "completed"}
+    ],
+    "verdict": "Normal distribution. No abnormal-status pileup at intermediate states. No platform-callback failure signature."
+  }
+}

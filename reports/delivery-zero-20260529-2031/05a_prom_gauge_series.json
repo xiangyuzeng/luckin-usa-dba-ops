@@ -1,0 +1,8 @@
+{
+  "attempted_endpoints": [
+    {"url": "http://10.238.3.136:9090", "reachable": true, "result": "metric business_order_channel_count NOT FOUND in __name__ values (135 total names; none match business_order/order_channel/channel_count). This is the DBA-ops Prometheus (Redis + RDS exporters), separate from the Zeus alert's Prometheus."},
+    {"url": "https://iumbgrafana.luckincoffee.us/grafana", "reachable_health": true, "result": "Reachable but $GRAFANA_API_KEY is not set in this session — cannot run authenticated /api/datasources/proxy/<uid>/api/v1/query against the Zeus Prometheus datasource."}
+  ],
+  "limitation_documented": "Cannot independently confirm the Prometheus gauge state. However, the DB reconciliation in 03a/03b shows the COLLECTOR layer (t_collect_order_inter) holds correct real-time counts that match t_order exactly. Therefore: if the Prom gauge truly read 0 at fire time, the break is between t_collect_order_inter → Prometheus exporter/scrape, not in the DB.",
+  "value=0_vs_NoData_reasoning_still_holds": "The alert expression sums an absent series → empty (NoData), not 0. It fired at 0 → the series existed in the Zeus Prometheus. So either (a) the exporter scraped stale 0s, or (b) a label rename/relabel dropped only the channel_id=8|9|10 cardinality, or (c) the exporter writes a literal 0 when the source has no recent rows in a sliding window (and the window is wrong for ET — see migration artifact note in Phase 6)."
+}

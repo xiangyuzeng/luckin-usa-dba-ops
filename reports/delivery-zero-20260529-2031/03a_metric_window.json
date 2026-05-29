@@ -1,0 +1,11 @@
+{
+  "query_window_utc": "2026-05-29 16:00:00 → 2026-05-29 18:00:00",
+  "rows": [
+    {"channel": 8,  "orders": 2, "rows": 2, "first_insert_utc": "2026-05-29T16:20:00", "last_insert_utc": "2026-05-29T16:43:00"},
+    {"channel": 9,  "orders": 2, "rows": 2, "first_insert_utc": "2026-05-29T16:33:00", "last_insert_utc": "2026-05-29T17:01:00"},
+    {"channel": 10, "orders": 3, "rows": 3, "first_insert_utc": "2026-05-29T16:01:00", "last_insert_utc": "2026-05-29T16:35:00"}
+  ],
+  "totals": {"ch8":2, "ch9":2, "ch10":3, "sum": 7},
+  "reconcile_with_truth": "EXACT MATCH (ch8=2/2, ch9=2/2, ch10=3/3). Collector pipeline writing the right counts at the right times.",
+  "interpretation": "Collector DB write path is HEALTHY. The break is downstream — between t_collect_order_inter and the Prometheus gauge business_order_channel_count{channel_id=~'8|9|10'}. Must be one of: (a) exporter that scrapes t_collect_order_inter into Prometheus is stuck/lagging, (b) gauge is sourced from a different (broken) path, (c) Prometheus relabel/label issue dropping channel_id=8/9/10, (d) alert evaluator stale."
+}

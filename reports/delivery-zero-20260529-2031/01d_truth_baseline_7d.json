@@ -1,0 +1,16 @@
+{
+  "window": "12:00–14:00 ET each day (16:00–18:00 UTC), channels 8/9/10",
+  "rows_by_date": [
+    {"et_date": "2026-05-22 (Fri)", "ch8": 2, "ch9": 1, "ch10": 4, "total": 7},
+    {"et_date": "2026-05-23 (Sat)", "ch8": 1, "ch9": 0, "ch10": 10, "total": 11},
+    {"et_date": "2026-05-24 (Sun)", "ch8": 4, "ch9": 0, "ch10": 7, "total": 11},
+    {"et_date": "2026-05-25 (Mon)", "ch8": 4, "ch9": 2, "ch10": 3, "total": 9},
+    {"et_date": "2026-05-26 (Tue)", "ch8": 2, "ch9": 1, "ch10": 2, "total": 5},
+    {"et_date": "2026-05-27 (Wed)", "ch8": 3, "ch9": 2, "ch10": 0, "total": 5},
+    {"et_date": "2026-05-28 (Thu)", "ch8": 2, "ch9": 0, "ch10": 6, "total": 8},
+    {"et_date": "2026-05-29 (Fri TODAY)", "ch8": 2, "ch9": 2, "ch10": 3, "total": 7}
+  ],
+  "median_total": 7.5,
+  "today_vs_baseline": "Today (7) matches the 7-day median (~7.5). Identical to last Friday. NOT anomalous.",
+  "key_finding": "Real delivery volume in the alert window is normal. Alert at 0 is FALSE — there is no business outage in delivery."
+}

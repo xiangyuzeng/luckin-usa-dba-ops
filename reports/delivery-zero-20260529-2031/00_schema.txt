@@ -1,0 +1,30 @@
+=== Phase 0 schema confirmation ===
+
+SERVER: aws-luckyus-salesorder-rw  (NOTE: gateway key has no hyphen between 'sales' and 'order')
+SCHEMA.TABLE: luckyus_sales_order.t_order
+ENGINE: InnoDB,  TABLE_ROWS (estimated): 966,740,  CREATE_TIME: 2025-12-23 09:08:43 UTC
+
+Columns used:
+ - tenant          varchar
+ - channel         smallint
+ - shop_number     varchar
+ - status          tinyint
+ - refund_status   smallint
+ - create_time     datetime  (key: MUL — indexed)
+
+SERVER: aws-luckyus-iluckyhealth-rw
+SCHEMA.TABLE: luckyus_iluckyhealth.t_collect_order_inter
+ENGINE: InnoDB,  TABLE_ROWS (estimated): 17,840,843,  UPDATE_TIME: 2026-05-29 19:49:02 UTC (informational only — InnoDB stats time)
+
+Columns:
+ - id                   bigint PRI
+ - metric_name          varchar (MUL)
+ - metric_name_comment  varchar
+ - metric_value         int                 -- channel id when metric_name='order_channel_create'
+ - metric_value_comment varchar
+ - metric_count         int                 -- order count
+ - metric_count_comment varchar
+ - create_time          timestamp (MUL)
+ - insert_time          datetime  (MUL)
+
+Both layers reachable, schema matches plan. Proceeding.

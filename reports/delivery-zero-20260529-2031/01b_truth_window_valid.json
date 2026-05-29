@@ -1,0 +1,10 @@
+{
+  "query_window_utc": "2026-05-29 16:00:00 → 2026-05-29 18:00:00",
+  "filter": "standard LKUS valid (status IN 20,90 AND refund_status<>5)",
+  "rows": [
+    {"channel": 8,  "n": 2},
+    {"channel": 9,  "n": 2},
+    {"channel": 10, "n": 3}
+  ],
+  "total_valid_delivery_orders_in_alert_window": 7
+}

@@ -1,0 +1,25 @@
+{
+  "window": "2026-05-15 → 2026-05-29 20:59 UTC, channels 8/9/10",
+  "alert_hour_gate_utc": "13 <= h <= 22 (10 hours/day)",
+  "buckets_evaluated": 150,
+  "buckets_with_row_and_value_gt_0": 144,
+  "buckets_with_explicit_value_0": 0,
+  "buckets_missing_no_row": 6,
+  "missing_buckets": [
+    {"date": "2026-05-18", "h_utc": 21, "et": "17:00 ET (Mon)"},
+    {"date": "2026-05-20", "h_utc": 20, "et": "16:00 ET (Wed)"},
+    {"date": "2026-05-23", "h_utc": 22, "et": "18:00 ET (Sat)"},
+    {"date": "2026-05-26", "h_utc": 20, "et": "16:00 ET (Tue)"},
+    {"date": "2026-05-29", "h_utc": 21, "note": "query window artifact — future hour"},
+    {"date": "2026-05-29", "h_utc": 22, "note": "query window artifact — future hour"}
+  ],
+  "lowest_nonzero_hours": [
+    {"d": "2026-05-15", "h_utc": 19, "n": 1, "et": "15:00 ET"},
+    {"d": "2026-05-15", "h_utc": 20, "n": 1, "et": "16:00 ET"},
+    {"d": "2026-05-15", "h_utc": 22, "n": 1, "et": "18:00 ET"},
+    {"d": "2026-05-22", "h_utc": 17, "n": 1, "et": "13:00 ET (last Fri lunch dip)"},
+    {"d": "2026-05-29", "h_utc": 17, "n": 1, "et": "13:00 ET (today, alert window)"}
+  ],
+  "alert_window_today": {"h_utc": [16,17], "et": "12:00-13:59 ET", "metric_layer_sum": 7, "truth_sum": 7, "matched": true},
+  "interpretation": "Recurrence shows a clean 14-day history: no clean-zero business hours, no chronic post-migration noise pattern. Only 4 prior single-hour absences across 14 days (all low-volume 16:00–18:00 ET slots) where genuinely no delivery order arrived. THIS IS THE FIRST REAL FIRE of the migrated rule. So the verdict is not 'migration noise' — it is a real divergence between the Prometheus gauge and the DB layer that happened on 2026-05-29 around 12:00 ET."
+}

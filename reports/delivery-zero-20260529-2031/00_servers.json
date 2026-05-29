@@ -1,0 +1,6 @@
+{
+  "salesorder_server": "aws-luckyus-salesorder-rw",
+  "iluckyhealth_server": "aws-luckyus-iluckyhealth-rw",
+  "note": "Spec mentioned 'aws-luckyus-sales-order-rw' but actual key in gateway is 'aws-luckyus-salesorder-rw' (no hyphen). Using actual key.",
+  "captured_at_utc": "2026-05-29T20:31:00Z"
+}

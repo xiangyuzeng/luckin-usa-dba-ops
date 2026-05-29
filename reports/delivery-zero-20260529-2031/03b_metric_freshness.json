@@ -1,0 +1,8 @@
+{
+  "metric_name": "order_channel_create",
+  "latest_insert_utc": "2026-05-29T20:33:00",
+  "latest_create_utc": "2026-05-29T20:33:02",
+  "query_time_utc_approx": "2026-05-29T20:33-20:34",
+  "lag_observed": "0 seconds — collector writes in real time",
+  "conclusion": "Collector → t_collect_order_inter pipeline is HEALTHY end-to-end. Any 'zero' in the Prometheus gauge must originate downstream (exporter, scrape, relabel, or alert evaluator)."
+}

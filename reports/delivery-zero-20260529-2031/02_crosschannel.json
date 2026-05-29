@@ -1,0 +1,14 @@
+{
+  "window_utc": "2026-05-29 16:00:00 → 2026-05-29 18:00:00",
+  "rows": [
+    {"channel": 1, "name": "In-Store",    "n": 79},
+    {"channel": 2, "name": "Mobile App",  "n": 668},
+    {"channel": 3, "name": "Mini Program","n": 46},
+    {"channel": 8, "name": "DoorDash",    "n": 2},
+    {"channel": 9, "name": "Grubhub",     "n": 2},
+    {"channel": 10,"name": "UberEats",    "n": 3}
+  ],
+  "totals": {"in_house_1_2_3": 793, "delivery_8_9_10": 7},
+  "discriminator": "BOTH in-house and delivery have rows in window. Order ingestion path is healthy globally. Delivery has normal-low lunch volume, not zero.",
+  "rule_out": "H2-global-outage RULED OUT. H2-delivery-write-path RULED OUT (rows landed in t_order). Remaining live hypotheses: H1 (metric pipeline) or alert-strategy artifact."
+}
