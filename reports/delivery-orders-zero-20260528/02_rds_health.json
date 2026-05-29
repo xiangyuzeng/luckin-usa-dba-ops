@@ -1,0 +1,16 @@
+{
+  "window_utc": "2026-05-28 20:30 → 23:59",
+  "clusters_checked": ["aws-luckyus-salesorder-rw", "aws-luckyus-iluckyhealth-rw"],
+  "salesorder_rw": {
+    "DatabaseConnections_avg_5min": {"min": 56.0, "max": 58.5, "verdict": "flat — no storm, no drop"},
+    "CPUUtilization_max_5min_pct": {"min": 5.3, "max": 14.3, "verdict": "normal range, no spike"},
+    "rds_events": "EMPTY — no failover/reboot/storage/parameter changes",
+    "verdict": "Rock stable through alert window"
+  },
+  "iluckyhealth_rw": {
+    "DatabaseConnections_avg_5min": {"min": 4.25, "max": 7.0, "verdict": "flat"},
+    "rds_events": "EMPTY",
+    "verdict": "Rock stable through alert window"
+  },
+  "conclusion": "No transactional DB anomaly during 5/28 21:57–22:57 UTC. Rules out H2 (DB write outage, failover, lock contention, connection exhaustion)."
+}

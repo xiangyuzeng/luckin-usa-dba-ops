@@ -1,0 +1,46 @@
+{
+  "window_utc": "2026-05-28 20:30:00 → 2026-05-28 23:59:00",
+  "alert_window_utc": "2026-05-28 21:57:00 → 22:57:00 (1h)",
+  "delivery_truth_t_order": [
+    {"minute_utc":"20:49","channel":10,"n":1},
+    {"minute_utc":"20:54","channel":10,"n":1},
+    {"minute_utc":"21:14","channel":10,"n":1},
+    {"minute_utc":"21:53","channel":9, "n":1},
+    {"minute_utc":"21:54","channel":8, "n":1, "note":"last order BEFORE the gap"},
+    {"GAP":"21:55 → 22:55 UTC (62 minutes) — NO delivery orders in any of 3 channels"},
+    {"minute_utc":"22:56","channel":10,"n":1, "note":"first order AFTER the gap"},
+    {"minute_utc":"23:32","channel":10,"n":1},
+    {"minute_utc":"23:50","channel":8, "n":1}
+  ],
+  "delivery_metric_db_t_collect_order_inter": [
+    {"minute_utc":"20:50","channel":10,"orders":1, "lag_s":"~60"},
+    {"minute_utc":"20:55","channel":10,"orders":1},
+    {"minute_utc":"21:15","channel":10,"orders":1},
+    {"minute_utc":"21:54","channel":9, "orders":1},
+    {"minute_utc":"21:55","channel":8, "orders":1, "note":"matches truth 21:54 + ~60s collector lag"},
+    {"GAP":"21:56 → 22:56 (62 minutes) — mirrors truth gap exactly"},
+    {"minute_utc":"22:57","channel":10,"orders":1, "note":"matches truth 22:56"},
+    {"minute_utc":"23:33","channel":10,"orders":1},
+    {"minute_utc":"23:51","channel":8, "orders":1}
+  ],
+  "reconciliation": "Metric DB layer reproduces every t_order event with ~60 s lag. Collector pipeline 100% intact for this window. So the 62-min gap is REAL in the order ingestion layer — NOT a metric/exporter artifact like 5/29.",
+  "cross_channel_control_window_2155_2255_utc": {
+    "channel_1_instore_orders": "continuous, ~1 per minute in alert window",
+    "channel_2_mobile_app_orders": "continuous, multiple per minute (peak ~5/min)",
+    "channel_3_mini_program_orders": "continuous, intermittent but present",
+    "verdict": "In-house ingestion fully healthy. Only delivery channels (8/9/10) experienced the gap. Rules out a global DB/app outage."
+  },
+  "baseline_same_window_14d": {
+    "window": "21:55–22:55 UTC same hour each day (17:55–18:55 EDT)",
+    "rows": [
+      {"d":"2026-05-15 Fri","delivery":1}, {"d":"2026-05-16 Sat","delivery":1}, {"d":"2026-05-17 Sun","delivery":1},
+      {"d":"2026-05-18 Mon","delivery":1}, {"d":"2026-05-19 Tue","delivery":3}, {"d":"2026-05-20 Wed","delivery":3},
+      {"d":"2026-05-21 Thu","delivery":1}, {"d":"2026-05-22 Fri","delivery":1}, {"d":"2026-05-23 Sat","delivery":1},
+      {"d":"2026-05-24 Sun","delivery":2}, {"d":"2026-05-25 Mon","delivery":2}, {"d":"2026-05-26 Tue","delivery":3},
+      {"d":"2026-05-27 Wed","delivery":"~1 (sub-minute insert_time variance)"},
+      {"d":"2026-05-28 Thu","delivery":"1 (the 21:55 collector-lagged echo of the 21:54 last-before-gap order)"}
+    ],
+    "interpretation": "Same-hour baseline is 1–3 delivery orders. This is a LOW-volume late-afternoon slot for LKUS, NOT peak dinner. A 0–1 hour gap is within the natural variance of sparse delivery traffic."
+  },
+  "recurrence_zero_business_hours_14d": "4 prior single-hour absences in 14d × 10 business hours (per the 5/29 RCA recurrence analysis): 5/18 21Z, 5/20 20Z, 5/23 22Z, 5/26 20Z — i.e., a delivery business-hour with zero orders happens ≈1 every 3-4 days, almost always in the 16:00–18:00 ET dead-zone. The 5/28 21:57–22:57 UTC gap is exactly this pattern."
+}

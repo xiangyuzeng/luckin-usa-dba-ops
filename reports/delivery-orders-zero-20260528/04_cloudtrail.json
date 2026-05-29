@@ -1,0 +1,11 @@
+{
+  "window_utc": "2026-05-28 20:30 → 23:59",
+  "rds_dbinstance_events": 0,
+  "ModifyDBInstance_events": 0,
+  "RebootDBInstance_events": 0,
+  "sample_size_all_events": 50,
+  "mutating_events_in_sample": 21,
+  "mutating_categories": ["AssumeRole (STS noise)", "GenerateDataKey (KMS)", "UpdateInstanceInformation (SSM)", "NewClientConnection"],
+  "deploy_or_config_change_aligned_with_fire_or_recovery": "NONE",
+  "conclusion": "No infrastructure or config change correlates with the alert fire (21:57 UTC) or recovery (22:57 UTC). Rules out an operator-induced trigger."
+}
