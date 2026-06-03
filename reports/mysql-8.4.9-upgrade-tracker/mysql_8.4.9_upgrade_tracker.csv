@@ -1,0 +1,237 @@
+﻿序号,实例名称,数据库列表,关联服务,服务等级,当前版本,目标版本,规格,内存(GB),可用内存(MB),Swap(MB),内存风险¹,数据库大小,业务分组,研发负责人,批次,操作人,计划操作日期【北京时间】,升级状态,原库及蓝绿部署清理,备注
+1,ldas01,"luckyus_ldas_slowquery
+luckyus_db_collection","idataccm
+idbtask
+idbcollect","L2（普通业务服务）
+L1（重要业务服务）
+L2（普通业务服务）",8.0.45,8.4.9,db.t4g.large,8,649,219,低,127.64 GB,"架构
+运维",张杨,第1批,待定,未开始,未开始,原 8.0.41，已随车队升至 8.0.45；major 升级需新建 mysql8.4 参数组
+2,ilsopdevopsdata,luckyus_ilsopdevopsdata,ilsopdevopsdata,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,116,375,高,20.00 MB,质量效能,夏文涛,第1批,待定,未开始,未开始,大小为 5月基线（未经 gateway 暴露，未刷新）
+3,iluckyhealth,luckyus_iluckyhealth,iluckyhealth,L2（普通业务服务）,8.0.45,8.4.9,db.t3.small,2,66,868,高,34.66 GB,运维,叶荣海,第1批,待定,未开始,未开始,可用内存仅 66MB，车队最低；major 升级 Multi-AZ failover 内存压力风险高
+4,ldas,"luckyus_dbmsdbsearch
+luckyus_ldas_cmdb
+luckyus_ozono
+luckyus_apigatewayadmin
+luckyus_ldas_nacos
+luckyus_ikafadmin","ildbquery
+ldascmdb
+luckyozono
+luckyapigatewayadmin
+ldasnacos
+ikafadmin","L1（重要业务服务）
+L1（重要业务服务）
+L2（普通业务服务）
+L2（普通业务服务）",8.0.45,8.4.9,db.t4g.large,8,1065,327,低,1.58 GB,"架构
+运维","张杨
+孔增
+金盛昌
+张黎明
+翁延海",第1批,待定,未开始,未开始,8.0.45 升级曾多次部署失败、参数组缺 lower_case_table_names；8.4 必须新建 mysql8.4 参数组且 lctn 创建后不可改
+5,ijumpserver,luckyus_ijumpserver_jumpserver,ijumpserver,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,96,627,高,153.58 MB,信息安全,刘成锡,第1批,待定,未开始,未开始,
+6,devops,"luckyus_ilopamanager
+luckyus_uam
+luckyus_authservice
+luckyus_iluckyptsweb
+luckyus_auth
+luckyus_izeus
+luckyus_umbgrafana","izeusanomaly
+izeusmetric
+izeusalert
+izeusnotice
+izeusreceiver
+izeushome
+ilopamanager
+lauthservice
+luckyuam
+umbgrafana
+luckyauth","L1（重要业务服务）
+L2（普通业务服务）",8.0.45,8.4.9,db.t4g.medium,4,1604,9,低,343.14 MB,"质量效能
+运维","林鑫涛
+吴心一
+徐博轩
+杨涛
+姚清居
+桂升斌
+吴春林",第1批,待定,未开始,未开始,存储 gp2；含 uam/auth 鉴权库 —— 重点核查 mysql_native_password 用户
+7,framework01,"luckyus_lcp_noahusercenter
+luckyus_lcp_apiserver
+luckyus_nacos
+luckyus_isentineldashboard
+luckyus_iluckyenvsystemweb
+luckyus_koalaadmin
+luckyus_zkdoctor
+luckyus_kbx
+luckyus_horae
+luckyus_bsportal
+luckyus_sddl_platform
+luckyus_gaea","ucpmanagement
+luckynacos
+isentineldashboard
+iluckyenvsystemweb
+koalaadmin
+izkdoctor
+kbx
+horae
+luckybsportal
+luckysddladmin
+luckygaea","L1（重要业务服务）
+L2（普通业务服务）",8.0.45,8.4.9,db.t4g.medium,4,1601,32,低,511.50 MB,架构,"车永生
+罗宁
+黄国仲
+林正权
+王卫
+张隆洋
+刘俊琪",第1批,待定,未开始,未开始,12 库 283 表；含 Nacos 配置中心 —— 升级期间确认配置中心连接驱动兼容 caching_sha2_password
+8,framework02,"luckyus_src
+luckyus_target
+luckyus_iluckyflowadmin
+luckyus_datalink
+luckyus_ihmonitorconsole
+luckyus_onepiececonsole
+luckyus_chronusconsole
+luckyus_ilkm","iluckyflowadmin
+luckydatalink
+ihmonitorconsole
+onepiececonsole
+onepiecesync
+chronusconsole
+chronusreporter
+chronussharding
+ilkm","L2（普通业务服务）
+L1（重要业务服务）",8.0.45,8.4.9,db.t4g.medium,4,997,88,低,3.32 GB,架构,"罗宁
+林正权
+张黎明
+代俊健
+王卫",第1批,待定,未开始,未开始,
+9,upush,"luckyus_iupushsms
+luckyus_iupushemail
+luckyus_iupushusercenter
+luckyus_iupushapp
+luckyus_iupushaid
+luckyus_iupushadmin
+luckyus_mdm
+luckyus_imdmext
+luckyus_mdmadmin","iupushsms
+iupushemail
+iupushusercenter
+iupushapp
+iupushaid
+iupushadmin
+luckymdm
+imdmext
+luckymdmadmin",L1（重要业务服务）,8.0.45,8.4.9,db.t4g.medium,4,256,335,中,20.11 GB,架构,"罗宁
+林智贤
+刘洋",第1批,待定,未开始,未开始,可用内存偏低 256MB；上轮因 datalink 续传 binlog 问题暂缓，本轮蓝绿前需复核
+10,iotplatform,luckyus_iot_platform,"iotiplatformorderapi
+iotiplatformmanagement
+iotiplatformservice","L1（重要业务服务）
+L1（重要业务服务）
+L1（重要业务服务）",8.0.45,8.4.9,db.t4g.medium,4,1504,8,低,692.48 MB,AIot,"李晨端
+左达奇",第1批,待定,未开始,未开始,上轮因 datalink 续传 binlog 问题暂缓，本轮蓝绿前需复核
+11,icyberdata,"luckyus_icyberdata_nacos
+luckyus_icyberdata_user
+luckyus_icyberdata",icyberdata,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.medium,4,676,1423,低,26.11 GB,大数据,田洪彬,第1批,待定,未开始,未开始,最大存储 635GB；Swap 1423MB
+12,iluckydorisops,luckyus_iluckydorisops,iluckydorisops,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,124,405,高,8.16 MB,大数据,苏晓博,第1批,待定,未开始,未开始,
+13,scm-wmssimulate,luckyus_scm_wmssimulate,iscmwmssimulate,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,111,534,高,44.41 MB,国际供应链,方思扬,第2批,待定,未开始,未开始,
+14,fichargecontrol,luckyus_fi_chargecontrol,ifichargecontrolservice,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,105,559,高,51.70 MB,国际公共平台,尤志杰,第2批,待定,未开始,未开始,
+15,ifiaccounting,luckyus_ifiaccounting,ifiaccounting,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,99,871,高,323.23 MB,国际公共平台,尤志杰,第2批,待定,未开始,未开始,
+16,iopocp,luckyus_iopocp,iopocp,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,96,622,高,2.17 GB,国际运营,陈培浩,第2批,待定,未开始,未开始,
+17,opqualitycontrol,luckyus_opqualitycontrol,iopqualitycontrol,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,90,754,高,707.34 MB,国际运营,陈培浩,第2批,待定,未开始,未开始,
+18,oplog,luckyus_oplog,iopdaq,L2（普通业务服务）,8.0.45,8.4.9,db.t4g.micro,1,110,410,高,8.13 MB,国际运营,张少群,第2批,待定,未开始,未开始,
+19,iadmin,luckyus_iadmin,iadmin,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,113,511,高,129.11 MB,国际公共平台,陈亮,第3批,待定,未开始,未开始,
+20,ibizconfigcenter,luckyus_ibizconfigcenter,ibizconfigcenter,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,116,435,高,32.55 MB,国际公共平台,陈亮,第3批,待定,未开始,未开始,
+21,igers,luckyus_igers,igers,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,118,401,高,8.22 MB,国际公共平台,陈亮,第3批,待定,未开始,未开始,
+22,iluckyauthapi,luckyus_iluckyauthapi,iluckyauthapi,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,112,408,高,8.06 MB,国际公共平台,陈亮,第3批,待定,未开始,未开始,鉴权服务 —— 重点核查 mysql_native_password 用户与连接驱动
+23,ibillingcentersrv,luckyus_ibillingcenterservice,ibillingcenterservice,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,104,670,高,1.76 GB,国际公共平台,陈亮,第3批,待定,未开始,未开始,
+24,iehr,luckyus_iehr,iehr,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,109,554,高,40.64 MB,国际公共平台,陈亮,第3批,待定,未开始,未开始,
+25,iopenlinker,luckyus_iopenlinker,"iopenlinkeradmin
+iopenlinker",L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,117,493,高,124.00 MB,国际营销增长,张晓松,第3批,待定,未开始,未开始,
+26,iopenservice,luckyus_iopenservice,iopenservice,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,120,408,高,8.34 MB,国际公共平台,陈亮,第3批,待定,未开始,未开始,
+27,iopshopexpand,luckyus_iopshopexpand,iopshopexpand,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,115,423,高,8.86 MB,国际运营,陈培浩,第3批,待定,未开始,未开始,
+28,iunifiedreconcile,luckyus_iunifiedreconcile,iunifiedreconcile,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,126,426,高,11.92 MB,国际公共平台,"陈亮
+陈洪君",第3批,待定,未开始,未开始,
+29,mfranchise,luckyus_mfranchise,imfranchiseservice,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,122,457,高,10.67 MB,国际公共平台,"陈亮
+陈洪君",第3批,待定,未开始,未开始,
+30,iworkflowmidlayer,luckyus_iworkflowmidlayer,"imessageflow
+iworkflowmidlayer","L1（重要业务服务）
+L1（重要业务服务）",8.0.45,8.4.9,db.t4g.medium,4,525,218,低,6.29 GB,国际公共平台,"陈亮
+陈洪君",第3批,待定,未开始,未开始,1/31 发生过 innodb_buffer_pool_size 被缩减事故，升级后必须验证 buffer pool 配置
+31,scm-asset,luckyus_scm_asset,iscmasset,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,108,594,高,25.72 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+32,scm-openapi,luckyus_scm_openapi,iscmopenapi,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,116,577,高,165.69 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+33,scm-plan,luckyus_scm_plan,iscmplan,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,119,472,高,13.03 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+34,scm-ordering,luckyus_scm_ordering,iscmordering,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,90,771,高,513.42 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+35,scm-purchase,luckyus_scm_purchase,iscmpurchase,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,101,799,高,159.84 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+36,scm-wds,luckyus_scm_wds,iscmwds,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,102,720,高,214.83 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+37,scmsrm,luckyus_scm_srm,iscmsrm,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,104,733,高,125.89 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+38,pubdm,luckyus_pub_dm,idm,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,109,511,高,16.81 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+39,iopenadmin,luckyus_iopenadmin,iopenadmin,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,123,419,高,8.66 MB,国际供应链,方思扬,第3批,待定,未开始,未开始,
+40,ireplenishment,luckyus_ireplenishment,ireplenishment,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,119,647,高,1.93 GB,供应链算法,"高天牧
+黄方进",第3批,待定,未开始,未开始,
+41,opempefficiency,luckyus_opempefficiency,iopempefficiency,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,101,546,高,117.27 MB,国际运营,陈培浩,第3批,待定,未开始,未开始,
+42,iluckymedia,luckyus_iluckymedia,iluckymedia,L1（重要业务服务）,8.0.45,8.4.9,db.t4g.micro,1,120,416,高,8.83 MB,国际运营,张少群,第3批,待定,未开始,未开始,
+43,isalesmembermarketing,luckyus_isalesmembermarketing,"isalesmembermarketingadmin
+isalesmembermarketingservice","L2（普通业务服务）
+L1（重要业务服务）",8.0.45,8.4.9,db.t4g.micro,1,115,425,高,8.97 MB,国际营销增长,"李加彬
+张翔
+张晓松",第3批,待定,未开始,未开始,
+44,isalesdatamarketing,luckyus_isalesdatamarketing,"isalesdatamarketingservice
+isalesdatamarketingadmin","L1（重要业务服务）
+L1（重要业务服务）",8.0.45,8.4.9,db.t4g.medium,4,666,490,低,9.47 GB,国际营销增长,"李加彬
+张翔
+张晓松",第3批,待定,未开始,未开始,
+45,iriskcontrolservice,luckyus_iriskcontrolservice,iriskcontrolservice,L0（核心业务服务）,8.0.45,8.4.9,db.t4g.micro,1,94,1207,高,23.59 GB,信息安全,林宏鹏,第3批,待定,未开始,未开始,Swap 最高 1207MB；L0 核心，1GB 机型承载 23.6GB 数据，蓝绿期间内存压力高
+46,ipermission,luckyus_ipermission,"iopenauth
+ipermission","L0（核心业务服务）
+L1（重要业务服务）",8.0.45,8.4.9,db.t4g.micro,1,96,591,高,99.61 MB,国际公共平台,"陈亮
+张晓松",第4批,待定,未开始,未开始,L0 鉴权 —— 重点核查 mysql_native_password 用户
+47,fitax,luckyus_fi_tax,ifitax,L0（核心业务服务）,8.0.45,8.4.9,db.t4g.micro,1,119,393,高,8.67 MB,国际公共平台,尤志杰,第4批,待定,未开始,未开始,
+48,scm-shopstock,luckyus_scm_shopstock,"iscmsims
+iscmshopstock","L1（重要业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.medium,4,466,325,低,8.11 GB,国际供应链,方思扬,第4批,待定,未开始,未开始,
+49,scmcommodity,luckyus_scm_commodity,"iscmcommodityadmin
+iscmcommodity","L1（重要业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.medium,4,2057,0,低,199.91 MB,国际供应链,方思扬,第4批,待定,未开始,未开始,
+50,opproduction,luckyus_opproduction,iopproduction,L0（核心业务服务）,8.0.45,8.4.9,db.t4g.micro,1,90,594,高,5.80 GB,国际运营,"陈培浩
+游熖",第4批,待定,未开始,未开始,L0 核心，1GB 机型承载 5.8GB 数据
+51,opshopsale,luckyus_opshopsale,iopshopsaleservice,L0（核心业务服务）,8.0.45,8.4.9,db.t4g.micro,1,83,658,高,304.28 MB,国际运营,"陈培浩
+游熖",第4批,待定,未开始,未开始,可用内存 83MB，车队偏低；L0 核心
+52,opshop,luckyus_opshop,"iopshopservice
+iopshopadmin","L0（核心业务服务）
+L2（普通业务服务）",8.0.45,8.4.9,db.t4g.medium,4,2254,0,低,40.53 MB,国际运营,"陈培浩
+游熖",第4批,待定,未开始,未开始,
+53,isalesprivatedomain,luckyus_isales_privatedomain,"isalesprivatedomainadmin
+isalesmarketingadmin
+isalesprivatedomainservice","L2（普通业务服务）
+L1（重要业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.medium,4,661,135,低,2.64 GB,国际营销增长,"张翔
+上官锦程
+王良",第4批,待定,未开始,未开始,
+54,salescrm,luckyus_sales_crm,"isalesmarketingadmin
+isalescrmservice
+isalescrmadmin","L0（核心业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.medium,4,1785,0,低,632.09 MB,国际营销增长,"张翔
+高如森",第4批,待定,未开始,未开始,全 L0 核心
+55,cdpactivity,luckyus_cdp_activity,"icdpactivityengine
+isalesmarketingservice
+isalesmarketingadmin","L1（重要业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.medium,4,485,375,低,18.19 GB,国际营销增长,张晓松,第4批,待定,未开始,未开始,
+56,isalescdp,luckyus_isales_cdp,"isalesmarketingadmin
+icdprealtimeusergroupengine","L1（重要业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.medium,4,993,0,低,2.69 GB,国际营销增长,张晓松,第4批,待定,未开始,未开始,3/12 发生过 OOM/Multi-AZ 故障转移事故，升级后扩展验证
+57,salesmarketing,luckyus_sales_marketing,"icdprealtimeusergroupengine
+isalesmarketingservice
+isalesmarketingadmin","L1（重要业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.xlarge,16,1509,204,低,25.20 GB,国际营销增长,张晓松,第4批,待定,未开始,未开始,车队最大实例 xlarge 16GB；大小由 46GB→25GB（疑似清理/binlog 回收）；最后升级、全面验证
+58,salespayment,luckyus_sales_payment,"isalespaymentservice
+isalespaymentadmin","L0（核心业务服务）
+L1（重要业务服务）",8.0.45,8.4.9,db.t4g.medium,4,1687,0,低,793.06 MB,国际营销增长,张晓松,第4批,待定,未开始,未开始,核心支付系统，逐个升级、单独蓝绿
+59,salesorder,luckyus_sales_order,"isalesmarketingadmin
+isalesordersync
+isalesorderservice
+isalesorderadmin","L0（核心业务服务）
+L2（普通业务服务）
+L0（核心业务服务）
+L0（核心业务服务）",8.0.45,8.4.9,db.t4g.medium,4,421,218,低,5.82 GB,国际营销增长,张晓松,第4批,待定,未开始,未开始,核心订单系统；升级后必须验证 group_concat_max_len = 1048576
