@@ -312,23 +312,40 @@ def main():
     conn = connect(autocommit=True)
     cur = conn.cursor()
 
-    # 预检: 列出当前 >60s 长事务(便于低峰判断/人工排查)
+    # 预检: 列出当前 >60s 长事务，并区分"活跃长查询"与"空闲事务(idle-in-trx)"。
+    #   trx_state=RUNNING 只表示事务活动，不代表有 SQL 在跑;
+    #   若连接 COMMAND=Sleep 且 trx_query 为空 → 是开着事务但当前不执行 SQL 的空闲连接。
     cur.execute(
         "SELECT t.trx_mysql_thread_id, "
-        "       TIMESTAMPDIFF(SECOND, t.trx_started, NOW()) AS secs, "
-        "       t.trx_state, p.USER, p.HOST, "
-        "       LEFT(REPLACE(REPLACE(IFNULL(t.trx_query,''), '\\n',' '), '\\t',' '), 100) AS q "
+        "       TIMESTAMPDIFF(SECOND, t.trx_started, NOW()) AS trx_age, "
+        "       p.COMMAND, p.TIME AS cmd_time, IFNULL(t.trx_rows_modified,0), "
+        "       p.USER, p.HOST, "
+        "       LEFT(REPLACE(REPLACE(IFNULL(NULLIF(t.trx_query,''), p.INFO), '\\n',' '), '\\t',' '), 100) AS q "
         "FROM information_schema.INNODB_TRX t "
         "LEFT JOIN information_schema.PROCESSLIST p ON p.ID = t.trx_mysql_thread_id "
         "WHERE TIMESTAMPDIFF(SECOND, t.trx_started, NOW()) > 60 "
-        "ORDER BY secs DESC")
+        "ORDER BY trx_age DESC")
     long_rows = cur.fetchall()
     if long_rows:
-        log.warning("预检: 存在 %d 个 >60s 长事务，建议低峰再删。明细如下:", len(long_rows))
-        log.warning("    %-10s %-7s %-10s %-24s %s", "thread", "secs", "state", "user@host", "query(截断100)")
-        for tid, secs, state, usr, host, q in long_rows:
+        active, idle = [], []
+        for r in long_rows:
+            cmd, q = (r[2] or ""), (r[7] or "")
+            (active if (q or cmd not in ("Sleep", "")) else idle).append(r)
+        log.warning("预检: 存在 %d 个 >60s 长事务 —— 活跃查询 %d 个, 空闲事务(idle-in-trx) %d 个。",
+                    len(long_rows), len(active), len(idle))
+        log.warning("    %-10s %-8s %-7s %-8s %-7s %-24s %s",
+                    "thread", "trx_age", "cmd", "cmd_t", "rows_w", "user@host", "query(截断100)")
+        for tid, trx_age, cmd, cmd_t, rows_w, usr, host, q in long_rows:
             who = "%s@%s" % (usr or "?", (host or "?").split(":")[0])
-            log.warning("    %-10s %-7s %-10s %-24s %s", tid, int(secs), state or "", who, q or "")
+            kind = "空闲" if (not q and (cmd or "") in ("Sleep", "")) else "活跃"
+            log.warning("    %-10s %-8s %-7s %-8s %-7s %-24s [%s]%s",
+                        tid, int(trx_age), cmd or "?", int(cmd_t or 0), int(rows_w), who, kind, q or "")
+        if idle:
+            log.warning("    注: %d 个为空闲事务，不抢 CPU 但会阻塞 InnoDB purge 与 DDL"
+                        "(swap 的 RENAME / OPTIMIZE 重建会被元数据锁卡)。", len(idle))
+            log.warning("    删大表/重建前，建议请应用方提交或回收这些空闲连接(或 KILL 对应 thread)。")
+        if active:
+            log.warning("    注: %d 个为活跃长查询，会抢资源/致主从延迟，建议低峰再删。", len(active))
 
     grand_deleted = 0
     for spec in targets:
