@@ -152,6 +152,21 @@ def table_size(cur, db, table):
     return (int(row[0]), int(row[1]), int(row[2])) if row else (0, 0, 0)
 
 
+def fetch_sizes(cur, db, tables):
+    """一次性取多张表的 (总字节, 行数, data_free)，避免逐表往返。
+    返回 {table: (size_b, rows, free_b)}; 不存在的表不在结果里。
+    """
+    if not tables:
+        return {}
+    ph = ",".join(["%s"] * len(tables))
+    cur.execute(
+        "SELECT table_name, IFNULL(data_length+index_length,0), IFNULL(table_rows,0), IFNULL(data_free,0) "
+        "FROM information_schema.TABLES "
+        "WHERE table_schema=%s AND table_name IN (" + ph + ")",
+        [db] + list(tables))
+    return {name: (int(sz), int(rows), int(free)) for name, sz, rows, free in cur.fetchall()}
+
+
 def count_expired(cur, db, table, time_col, days):
     cur.execute(
         "SELECT COUNT(*) FROM `%s`.`%s` WHERE `%s` < DATE_SUB(CURDATE(), INTERVAL %d DAY)"
@@ -195,8 +210,10 @@ def optimize_table(cur, db, table):
 
 
 def maybe_optimize(cur, db, table, free_b, min_free_bytes):
-    """仅当可回收碎片 data_free >= 阈值时才 OPTIMIZE。
-    碎片过小则重建不划算(纯耗 IO/binlog 却几乎回收不到空间)，跳过。
+    """按 data_free 决定是否 OPTIMIZE —— 仅用于 processlist 这类"外部已持续清理、
+    纯空间膨胀"的重建路径(此时 data_free 大致反映可回收量)。
+    注意: 大批 DELETE 后 data_free 并不可靠(释放页不计入)，删除路径改用删除占比估算，
+    不要把本函数用在删除后。碎片过小则重建不划算(纯耗 IO/binlog)，跳过。
     """
     if free_b < min_free_bytes:
         log.info("    跳过 OPTIMIZE: data_free %s < 阈值 %s，碎片过小不值得重建。",
@@ -287,7 +304,8 @@ def main():
     p.add_argument("--sleep", type=float, default=0.5, help="批间隔秒(默认 0.5，节流防主从延迟)")
     p.add_argument("--max-seconds", type=int, default=0, help="单表删除时间上限秒(0=不限)")
     p.add_argument("--min-free-gb", type=float, default=1.0,
-                   help="OPTIMIZE 的 data_free 下限(GB,默认 1.0); 表碎片小于此值则跳过重建")
+                   help="OPTIMIZE 回收下限(GB,默认 1.0); 删除路径按删除占比估算可回收空间、"
+                        "processlist 重建路径按 data_free，低于此值则跳过 OPTIMIZE")
     p.add_argument("--min-table-gb", type=float, default=2.0,
                    help="整表总大小下限(GB,默认 2.0); 小于此值的表整张跳过(不删/不重建)")
     args = p.parse_args()
@@ -363,20 +381,26 @@ def main():
             log.info("    注: 纯只读空闲事务通常无害(连接池保活)，不阻塞 DELETE；"
                      "但仍 pin read view 致删后空间回收滞后，若要 swap/OPTIMIZE 且其持表 MDL 需先回收。")
 
+    # 一次性拉取所有候选表的大小，用阈值在结果集层面过滤出"值得处理"的表，
+    # 再只遍历这批 —— 不逐表往返查询、也不分析将被跳过的小表。
+    sizes = fetch_sizes(cur, db, [s["table"] for s in targets])
+    if args.only:
+        proc = targets  # --only 显式点名，不受大小过滤
+    else:
+        proc = [s for s in targets if sizes.get(s["table"], (0, 0, 0))[0] >= min_table_bytes]
+        skipped = [s["table"] for s in targets if s not in proc]
+        if skipped:
+            log.info("按 <%s 过滤后跳过 %d 张小表: %s",
+                     fmt_gb(min_table_bytes), len(skipped), ", ".join(skipped))
+        log.info("将处理 %d 张表(总大小 ≥ %s)。", len(proc), fmt_gb(min_table_bytes))
+
     grand_deleted = 0
-    for spec in targets:
+    for spec in proc:
         table, time_col, days, tier = spec["table"], spec["time_col"], spec["days"], spec["tier"]
-        size_b, est_rows, free_b = table_size(cur, db, table)
+        size_b, est_rows, free_b = sizes.get(table, (0, 0, 0))
         log.info("-" * 70)
         log.info("[%s] %s  当前 %s (估算 %s 行, 可回收碎片 %s)",
                  tier, table, fmt_gb(size_b), f"{est_rows:,}", fmt_gb(free_b))
-
-        # 整表过小: 不值得处理(删/重建收益有限)，整张跳过。
-        # 注: --only 显式点名的表不受此限，便于强制处理小表。
-        if size_b < min_table_bytes and not args.only:
-            log.info("    跳过: 整表 %s < 阈值 %s，太小不处理。",
-                     fmt_gb(size_b), fmt_gb(min_table_bytes))
-            continue
 
         # processlist: 仅 OPTIMIZE
         if days is None:
@@ -421,9 +445,17 @@ def main():
         grand_deleted += deleted
         log.info("    删除完成: %s 行，用时 %.1fs", f"{deleted:,}", time.time() - t0)
         if args.optimize:
-            # 删除后碎片已增长，重新读取 data_free 再判断是否值得 OPTIMIZE。
-            _, _, free_after = table_size(cur, db, table)
-            maybe_optimize(cur, db, table, free_after, min_free_bytes)
+            # 删除后不看 data_free: InnoDB 大批 DELETE 释放的页不计入 data_free，
+            # 直接看 data_free 会在最该重建时误判"碎片太小"。改用删除占比估算可回收空间:
+            #   est_reclaim ≈ 删前总大小 × (本次删除行 / 删前行数)
+            est_reclaim = int(size_b * deleted / est_rows) if est_rows else 0
+            if est_reclaim >= min_free_bytes:
+                log.info("    估算可回收 ~%s (删 %s / 删前 %s 行) ≥ 阈值 %s，执行 OPTIMIZE。",
+                         fmt_gb(est_reclaim), f"{deleted:,}", f"{est_rows:,}", fmt_gb(min_free_bytes))
+                optimize_table(cur, db, table)
+            else:
+                log.info("    估算可回收 ~%s < 阈值 %s，删除量小不值得重建，跳过 OPTIMIZE。",
+                         fmt_gb(est_reclaim), fmt_gb(min_free_bytes))
 
     cur.close()
     conn.close()
