@@ -327,25 +327,41 @@ def main():
         "ORDER BY trx_age DESC")
     long_rows = cur.fetchall()
     if long_rows:
-        active, idle = [], []
+        # 三类: 活跃查询 / 空闲但有未提交写入(rows_w>0) / 纯只读空闲(rows_w=0,疑似连接池保底)。
+        #   前两类有实际风险 → WARNING; 纯只读空闲多为连接池保活 → 仅 INFO 提示。
+        active, idle_write, idle_read = [], [], []
         for r in long_rows:
-            cmd, q = (r[2] or ""), (r[7] or "")
-            (active if (q or cmd not in ("Sleep", "")) else idle).append(r)
-        log.warning("预检: 存在 %d 个 >60s 长事务 —— 活跃查询 %d 个, 空闲事务(idle-in-trx) %d 个。",
-                    len(long_rows), len(active), len(idle))
-        log.warning("    %-10s %-8s %-7s %-8s %-7s %-24s %s",
-                    "thread", "trx_age", "cmd", "cmd_t", "rows_w", "user@host", "query(截断100)")
+            cmd, rows_w, q = (r[2] or ""), int(r[4] or 0), (r[7] or "")
+            if q or cmd not in ("Sleep", ""):
+                active.append(r)
+            elif rows_w > 0:
+                idle_write.append(r)
+            else:
+                idle_read.append(r)
+        concerning = active + idle_write
+        emit = log.warning if concerning else log.info
+        emit("预检: %d 个 >60s 长事务 —— 活跃查询 %d, 空闲未提交写 %d, 纯只读空闲 %d(疑似连接池保底)。",
+             len(long_rows), len(active), len(idle_write), len(idle_read))
+        emit("    %-10s %-8s %-7s %-8s %-7s %-24s %s",
+             "thread", "trx_age", "cmd", "cmd_t", "rows_w", "user@host", "query(截断100)")
         for tid, trx_age, cmd, cmd_t, rows_w, usr, host, q in long_rows:
             who = "%s@%s" % (usr or "?", (host or "?").split(":")[0])
-            kind = "空闲" if (not q and (cmd or "") in ("Sleep", "")) else "活跃"
-            log.warning("    %-10s %-8s %-7s %-8s %-7s %-24s [%s]%s",
-                        tid, int(trx_age), cmd or "?", int(cmd_t or 0), int(rows_w), who, kind, q or "")
-        if idle:
-            log.warning("    注: %d 个为空闲事务，不抢 CPU 但会阻塞 InnoDB purge 与 DDL"
-                        "(swap 的 RENAME / OPTIMIZE 重建会被元数据锁卡)。", len(idle))
-            log.warning("    删大表/重建前，建议请应用方提交或回收这些空闲连接(或 KILL 对应 thread)。")
+            if q or (cmd or "") not in ("Sleep", ""):
+                kind = "活跃"
+            elif int(rows_w or 0) > 0:
+                kind = "空闲写"
+            else:
+                kind = "只读空闲"
+            emit("    %-10s %-8s %-7s %-8s %-7s %-24s [%s]%s",
+                 tid, int(trx_age), cmd or "?", int(cmd_t or 0), int(rows_w), who, kind, q or "")
         if active:
             log.warning("    注: %d 个为活跃长查询，会抢资源/致主从延迟，建议低峰再删。", len(active))
+        if idle_write:
+            log.warning("    注: %d 个空闲事务持有未提交写入，阻塞 purge 且可能持锁，"
+                        "建议先让应用方提交或 KILL 对应 thread 再删/重建。", len(idle_write))
+        if idle_read and not concerning:
+            log.info("    注: 纯只读空闲事务通常无害(连接池保活)，不阻塞 DELETE；"
+                     "但仍 pin read view 致删后空间回收滞后，若要 swap/OPTIMIZE 且其持表 MDL 需先回收。")
 
     grand_deleted = 0
     for spec in targets:
