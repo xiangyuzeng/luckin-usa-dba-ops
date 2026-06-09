@@ -101,11 +101,18 @@ def setup_logging():
     sh = logging.StreamHandler(sys.stdout)
     sh.setFormatter(fmt)
     log.addHandler(sh)
-    fh = logging.FileHandler(
-        os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                     "cleanup_run_%s.log" % datetime.now().strftime("%Y%m%d_%H%M%S")))
+    # 日志默认写到脚本目录下的 logs/ 子目录(不再散落在脚本同级目录);
+    # 可用环境变量 LDAS_LOG_DIR 覆盖。目录不存在则自动创建。
+    log_dir = os.environ.get(
+        "LDAS_LOG_DIR",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs"))
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(
+        log_dir, "cleanup_run_%s.log" % datetime.now().strftime("%Y%m%d_%H%M%S"))
+    fh = logging.FileHandler(log_path)
     fh.setFormatter(fmt)
     log.addHandler(fh)
+    log.info("日志文件: %s", log_path)
 
 
 def connect(autocommit=True):
@@ -129,7 +136,9 @@ def connect(autocommit=True):
 
 
 def fmt_gb(b):
-    return "%.2f GB" % (b / 1024.0 / 1024.0 / 1024.0)
+    # MySQL 驱动可能把 data_length+index_length 返回为 decimal.Decimal，
+    # Decimal / float 在 Python3 会抛 TypeError，这里统一转 float。
+    return "%.2f GB" % (float(b) / 1024.0 / 1024.0 / 1024.0)
 
 
 def table_size(cur, db, table):
@@ -138,7 +147,8 @@ def table_size(cur, db, table):
         "FROM information_schema.TABLES WHERE table_schema=%s AND table_name=%s",
         (db, table))
     row = cur.fetchone()
-    return (row[0], row[1]) if row else (0, 0)
+    # 驱动可能返回 Decimal，统一转 int 便于后续算术/格式化(避免 Decimal/float 混算报错)。
+    return (int(row[0]), int(row[1])) if row else (0, 0)
 
 
 def count_expired(cur, db, table, time_col, days):
