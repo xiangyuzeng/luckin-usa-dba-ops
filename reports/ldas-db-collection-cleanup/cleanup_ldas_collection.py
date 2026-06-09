@@ -288,8 +288,11 @@ def main():
     p.add_argument("--max-seconds", type=int, default=0, help="单表删除时间上限秒(0=不限)")
     p.add_argument("--min-free-gb", type=float, default=1.0,
                    help="OPTIMIZE 的 data_free 下限(GB,默认 1.0); 表碎片小于此值则跳过重建")
+    p.add_argument("--min-table-gb", type=float, default=2.0,
+                   help="整表总大小下限(GB,默认 2.0); 小于此值的表整张跳过(不删/不重建)")
     args = p.parse_args()
     min_free_bytes = int(args.min_free_gb * 1024 ** 3)
+    min_table_bytes = int(args.min_table_gb * 1024 ** 3)
 
     setup_logging()
     db = os.environ.get("LDAS_DB", "luckyus_db_collection")
@@ -334,6 +337,13 @@ def main():
         log.info("-" * 70)
         log.info("[%s] %s  当前 %s (估算 %s 行, 可回收碎片 %s)",
                  tier, table, fmt_gb(size_b), f"{est_rows:,}", fmt_gb(free_b))
+
+        # 整表过小: 不值得处理(删/重建收益有限)，整张跳过。
+        # 注: --only 显式点名的表不受此限，便于强制处理小表。
+        if size_b < min_table_bytes and not args.only:
+            log.info("    跳过: 整表 %s < 阈值 %s，太小不处理。",
+                     fmt_gb(size_b), fmt_gb(min_table_bytes))
+            continue
 
         # processlist: 仅 OPTIMIZE
         if days is None:
