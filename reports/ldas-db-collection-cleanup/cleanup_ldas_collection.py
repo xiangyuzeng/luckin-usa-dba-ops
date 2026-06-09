@@ -142,13 +142,14 @@ def fmt_gb(b):
 
 
 def table_size(cur, db, table):
+    """返回 (总字节, 估算行数, data_free 字节)。data_free 即可回收的碎片空间。"""
     cur.execute(
-        "SELECT IFNULL(data_length+index_length,0), IFNULL(table_rows,0) "
+        "SELECT IFNULL(data_length+index_length,0), IFNULL(table_rows,0), IFNULL(data_free,0) "
         "FROM information_schema.TABLES WHERE table_schema=%s AND table_name=%s",
         (db, table))
     row = cur.fetchone()
     # 驱动可能返回 Decimal，统一转 int 便于后续算术/格式化(避免 Decimal/float 混算报错)。
-    return (int(row[0]), int(row[1])) if row else (0, 0)
+    return (int(row[0]), int(row[1]), int(row[2])) if row else (0, 0, 0)
 
 
 def count_expired(cur, db, table, time_col, days):
@@ -193,6 +194,19 @@ def optimize_table(cur, db, table):
     log.info("    ANALYZE 完成，用时 %.1fs", time.time() - t1)
 
 
+def maybe_optimize(cur, db, table, free_b, min_free_bytes):
+    """仅当可回收碎片 data_free >= 阈值时才 OPTIMIZE。
+    碎片过小则重建不划算(纯耗 IO/binlog 却几乎回收不到空间)，跳过。
+    """
+    if free_b < min_free_bytes:
+        log.info("    跳过 OPTIMIZE: data_free %s < 阈值 %s，碎片过小不值得重建。",
+                 fmt_gb(free_b), fmt_gb(min_free_bytes))
+        return False
+    log.info("    data_free %s ≥ 阈值 %s，执行 OPTIMIZE。", fmt_gb(free_b), fmt_gb(min_free_bytes))
+    optimize_table(cur, db, table)
+    return True
+
+
 def has_unique_key(cur, db, table):
     """表是否有主键/唯一键(决定 swap 回补能否安全去重)。"""
     cur.execute(
@@ -215,7 +229,7 @@ def swap_rebuild(cur, db, table, time_col, days, execute):
     cur.execute("SELECT COUNT(*) FROM `%s`.`%s` WHERE `%s` >= %s"
                 % (db, table, time_col, cutoff))
     keep = cur.fetchone()[0]
-    _, est_rows = table_size(cur, db, table)
+    _, est_rows, _ = table_size(cur, db, table)
     drop_est = max(est_rows - keep, 0)
 
     if not execute:
@@ -272,7 +286,10 @@ def main():
     p.add_argument("--batch", type=int, default=20000, help="每批删除行数(默认 20000)")
     p.add_argument("--sleep", type=float, default=0.5, help="批间隔秒(默认 0.5，节流防主从延迟)")
     p.add_argument("--max-seconds", type=int, default=0, help="单表删除时间上限秒(0=不限)")
+    p.add_argument("--min-free-gb", type=float, default=1.0,
+                   help="OPTIMIZE 的 data_free 下限(GB,默认 1.0); 表碎片小于此值则跳过重建")
     args = p.parse_args()
+    min_free_bytes = int(args.min_free_gb * 1024 ** 3)
 
     setup_logging()
     db = os.environ.get("LDAS_DB", "luckyus_db_collection")
@@ -292,29 +309,44 @@ def main():
     conn = connect(autocommit=True)
     cur = conn.cursor()
 
-    # 预检: 确认无明显长事务
-    cur.execute("SELECT COUNT(*) FROM information_schema.INNODB_TRX "
-                "WHERE TIMESTAMPDIFF(SECOND, trx_started, NOW()) > 60")
-    long_trx = cur.fetchone()[0]
-    if long_trx:
-        log.warning("预检: 存在 %d 个 >60s 长事务，建议低峰再删。", long_trx)
+    # 预检: 列出当前 >60s 长事务(便于低峰判断/人工排查)
+    cur.execute(
+        "SELECT t.trx_mysql_thread_id, "
+        "       TIMESTAMPDIFF(SECOND, t.trx_started, NOW()) AS secs, "
+        "       t.trx_state, p.USER, p.HOST, "
+        "       LEFT(REPLACE(REPLACE(IFNULL(t.trx_query,''), '\\n',' '), '\\t',' '), 100) AS q "
+        "FROM information_schema.INNODB_TRX t "
+        "LEFT JOIN information_schema.PROCESSLIST p ON p.ID = t.trx_mysql_thread_id "
+        "WHERE TIMESTAMPDIFF(SECOND, t.trx_started, NOW()) > 60 "
+        "ORDER BY secs DESC")
+    long_rows = cur.fetchall()
+    if long_rows:
+        log.warning("预检: 存在 %d 个 >60s 长事务，建议低峰再删。明细如下:", len(long_rows))
+        log.warning("    %-10s %-7s %-10s %-24s %s", "thread", "secs", "state", "user@host", "query(截断100)")
+        for tid, secs, state, usr, host, q in long_rows:
+            who = "%s@%s" % (usr or "?", (host or "?").split(":")[0])
+            log.warning("    %-10s %-7s %-10s %-24s %s", tid, int(secs), state or "", who, q or "")
 
     grand_deleted = 0
     for spec in targets:
         table, time_col, days, tier = spec["table"], spec["time_col"], spec["days"], spec["tier"]
-        size_b, est_rows = table_size(cur, db, table)
+        size_b, est_rows, free_b = table_size(cur, db, table)
         log.info("-" * 70)
-        log.info("[%s] %s  当前 %s (估算 %s 行)", tier, table, fmt_gb(size_b), f"{est_rows:,}")
+        log.info("[%s] %s  当前 %s (估算 %s 行, 可回收碎片 %s)",
+                 tier, table, fmt_gb(size_b), f"{est_rows:,}", fmt_gb(free_b))
 
         # processlist: 仅 OPTIMIZE
         if days is None:
             log.info("    策略: 仅重建(外部采集已只留数小时, 纯空间膨胀)")
             if args.execute and args.optimize:
-                optimize_table(cur, db, table)
+                maybe_optimize(cur, db, table, free_b, min_free_bytes)
             elif args.execute:
                 log.info("    (未加 --optimize, 跳过重建)")
+            elif free_b < min_free_bytes:
+                log.info("    DRY-RUN: data_free %s < 阈值 %s，将跳过 OPTIMIZE",
+                         fmt_gb(free_b), fmt_gb(min_free_bytes))
             else:
-                log.info("    DRY-RUN: 将执行 OPTIMIZE 回收 ~%s", fmt_gb(size_b))
+                log.info("    DRY-RUN: 将执行 OPTIMIZE 回收 ~%s", fmt_gb(free_b))
             continue
 
         # 时间删除类: 选择 swap 还是分批 DELETE。
@@ -346,7 +378,9 @@ def main():
         grand_deleted += deleted
         log.info("    删除完成: %s 行，用时 %.1fs", f"{deleted:,}", time.time() - t0)
         if args.optimize:
-            optimize_table(cur, db, table)
+            # 删除后碎片已增长，重新读取 data_free 再判断是否值得 OPTIMIZE。
+            _, _, free_after = table_size(cur, db, table)
+            maybe_optimize(cur, db, table, free_after, min_free_bytes)
 
     cur.close()
     conn.close()
