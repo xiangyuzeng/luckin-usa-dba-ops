@@ -1,0 +1,22 @@
+﻿store_code,dept_id,store_name,store_status_code,store_status_cn,time_zone,open_date,is_internal
+US00000,1131,NJ Test Kitchen,1,已开业,America/New_York,2025-05-09,Y
+US00001,1127,8th & Broadway,1,已开业,America/New_York,2025-06-30,N
+US00002,1128,28th & 6th,1,已开业,America/New_York,2025-06-30,N
+US00003,1140,100 Maiden Ln,1,已开业,America/New_York,2025-09-09,N
+US00004,20011,37th & Broadway,1,已开业,America/New_York,2025-11-20,N
+US00005,1141,54th & 8th,1,已开业,America/New_York,2025-08-24,N
+US00006,20010,102 Fulton,1,已开业,America/New_York,2025-08-28,N
+US00007,20009,108th & Broadway,1,已开业,America/New_York,2026-04-30,N
+US00008,20008,33rd & 10th,1,已开业,America/New_York,2025-12-01,N
+US00010,20016,154 Bleecker,1,已开业,America/New_York,2026-04-28,N
+US00012,20019,16th & 6th,1,已开业,America/New_York,2026-03-23,N
+US00015,20022,41st & Lexington,1,已开业,America/New_York,2026-04-30,N
+US00018,20025,40th & 10th,1,已开业,America/New_York,2026-05-20,N
+US00019,20026,29th & 3rd,1,已开业,America/New_York,2026-04-11,N
+US00020,20027,21st & 3rd,1,已开业,America/New_York,2026-02-06,N
+US00022,20029,23rd & 8th,1,已开业,America/New_York,2026-05-20,N
+US00024,20031,15th & 3rd,1,已开业,America/New_York,2025-12-14,N
+US00025,20032,221 Grand,1,已开业,America/New_York,2025-12-15,N
+US00027,20035,52nd & Madison,1,已开业,America/New_York,2026-02-26,N
+US99998,20046,Shanghai Test Kitchen,1,已开业,America/New_York,2025-11-14,Y
+US99999,20007,NJ Test Kitchen 2,1,已开业,America/New_York,2025-06-26,Y
