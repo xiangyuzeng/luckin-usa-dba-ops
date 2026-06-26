@@ -1,7 +1,7 @@
 {
   "uid": "luckin-redis-mysql",
   "title": "Luckin USA — Redis 监控 · B 视图 (MySQL 采集库)",
-  "description": "Redis 全景监控,数据源:ldas / luckyus_db_collection。CPU/Engine/内存/积分来自 t_dba_collect_redis_cluster_metrics;命中率/连接/键来自 t_dba_collect_redis_group_info 每日快照。",
+  "description": "Redis 全景监控,数据源 ldas / luckyus_db_collection。概览=全局问题集群 Top-N(与 A 视图对齐);明细随 $service。积分需采集器 --write 后生效。",
   "tags": [
     "redis",
     "elasticache",
@@ -65,7 +65,7 @@
     {
       "id": 1,
       "type": "row",
-      "title": "📊 概览（MySQL 采集库 ldas）",
+      "title": "📊 概览 · 问题集群定位（全局,与 $service 无关）",
       "collapsed": false,
       "gridPos": {
         "x": 0,
@@ -87,23 +87,23 @@
       "gridPos": {
         "x": 0,
         "y": 1,
-        "w": 6,
+        "w": 4,
         "h": 4
       },
       "fieldConfig": {
         "defaults": {
           "unit": "short",
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": null
               }
             ]
-          },
-          "color": {
-            "mode": "thresholds"
           }
         },
         "overrides": []
@@ -116,8 +116,8 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "area",
-        "colorMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
         "textMode": "auto",
         "justifyMode": "auto",
         "orientation": "auto"
@@ -146,14 +146,17 @@
         "uid": "LJ7ObqYNk"
       },
       "gridPos": {
-        "x": 6,
+        "x": 4,
         "y": 1,
-        "w": 6,
+        "w": 4,
         "h": 4
       },
       "fieldConfig": {
         "defaults": {
           "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -170,9 +173,6 @@
                 "value": 50
               }
             ]
-          },
-          "color": {
-            "mode": "thresholds"
           }
         },
         "overrides": []
@@ -185,8 +185,8 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "area",
-        "colorMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
         "textMode": "auto",
         "justifyMode": "auto",
         "orientation": "auto"
@@ -215,14 +215,17 @@
         "uid": "LJ7ObqYNk"
       },
       "gridPos": {
-        "x": 12,
+        "x": 8,
         "y": 1,
-        "w": 6,
+        "w": 4,
         "h": 4
       },
       "fieldConfig": {
         "defaults": {
           "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -239,9 +242,6 @@
                 "value": 85
               }
             ]
-          },
-          "color": {
-            "mode": "thresholds"
           }
         },
         "overrides": []
@@ -254,8 +254,8 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "area",
-        "colorMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
         "textMode": "auto",
         "justifyMode": "auto",
         "orientation": "auto"
@@ -277,21 +277,93 @@
     {
       "id": 5,
       "type": "stat",
-      "title": "最低积分余额",
-      "description": "下次 --write 采集后生效",
+      "title": "内存使用率 峰值",
+      "description": "",
       "datasource": {
         "type": "mysql",
         "uid": "LJ7ObqYNk"
       },
       "gridPos": {
-        "x": 18,
+        "x": 12,
         "y": 1,
-        "w": 6,
+        "w": 4,
+        "h": 4
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT ROUND(MAX(x.average),1) AS value FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='DatabaseMemoryUsagePercentage' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='DatabaseMemoryUsagePercentage') x",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "stat",
+      "title": "最低积分余额",
+      "description": "采集器跑过 --write 后生效",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 1,
+        "w": 4,
         "h": 4
       },
       "fieldConfig": {
         "defaults": {
           "unit": "short",
+          "color": {
+            "mode": "thresholds"
+          },
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -308,9 +380,6 @@
                 "value": 100
               }
             ]
-          },
-          "color": {
-            "mode": "thresholds"
           }
         },
         "overrides": []
@@ -323,8 +392,8 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "area",
-        "colorMode": "value",
+        "colorMode": "background",
+        "graphMode": "none",
         "textMode": "auto",
         "justifyMode": "auto",
         "orientation": "auto"
@@ -344,20 +413,845 @@
       ]
     },
     {
-      "id": 6,
-      "type": "row",
-      "title": "💳 CPU 积分（MySQL: t_dba_collect_redis_cluster_metrics）",
-      "collapsed": false,
+      "id": 7,
+      "type": "stat",
+      "title": "积分余额<50 节点数",
+      "description": "",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 20,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1
+              },
+              {
+                "color": "red",
+                "value": 3
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "colorMode": "background",
+        "graphMode": "none",
+        "textMode": "auto",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT COUNT(*) AS value FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUCreditBalance' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='CPUCreditBalance') x WHERE x.average < 50",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "table",
+      "title": "⚠️ 最低积分余额 Top10",
+      "description": "余额最低=最接近被限流",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
       "gridPos": {
         "x": 0,
         "y": 5,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "积分余额"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "green",
+                      "value": 100
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "积分余额",
+            "desc": false
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT m.cluster_id AS `集群节点`, ROUND(m.average,1) AS `积分余额` FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUCreditBalance' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='CPUCreditBalance') m ORDER BY m.average ASC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "table",
+      "title": "🔥 最高 Engine CPU Top10",
+      "description": "单线程饱和信号",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 6,
+        "y": 5,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "EngineCPU%"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 50
+                    },
+                    {
+                      "color": "red",
+                      "value": 85
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "EngineCPU%",
+            "desc": true
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT m.cluster_id AS `集群节点`, ROUND(m.average,1) AS `EngineCPU%` FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='EngineCPUUtilization' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='EngineCPUUtilization') m ORDER BY m.average DESC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "table",
+      "title": "🔥 最高整机 CPU Top10",
+      "description": "",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 5,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CPU%"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 20
+                    },
+                    {
+                      "color": "red",
+                      "value": 50
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "CPU%",
+            "desc": true
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT m.cluster_id AS `集群节点`, ROUND(m.average,1) AS `CPU%` FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUUtilization' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='CPUUtilization') m ORDER BY m.average DESC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "table",
+      "title": "🧠 最高内存使用率 Top10",
+      "description": "",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 18,
+        "y": 5,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "内存%"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 70
+                    },
+                    {
+                      "color": "red",
+                      "value": 90
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "内存%",
+            "desc": true
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT m.cluster_id AS `集群节点`, ROUND(m.average,1) AS `内存%` FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='DatabaseMemoryUsagePercentage' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='DatabaseMemoryUsagePercentage') m ORDER BY m.average DESC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "table",
+      "title": "💳 最高积分消耗 Top10",
+      "description": "持续高=净透支风险",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 13,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "消耗/分钟"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 0.5
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "消耗/分钟",
+            "desc": true
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT m.cluster_id AS `集群节点`, ROUND(m.average,3) AS `消耗/分钟` FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUCreditUsage' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='CPUCreditUsage') m ORDER BY m.average DESC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "type": "table",
+      "title": "📉 最低命中率 Top10",
+      "description": "group_info 每日快照",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 6,
+        "y": 13,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "命中率%"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "red",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 80
+                    },
+                    {
+                      "color": "green",
+                      "value": 95
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "命中率%",
+            "desc": false
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT g.group_name AS `实例`, ROUND(g.hit_rate,1) AS `命中率%` FROM (SELECT g.* FROM luckyus_db_collection.t_dba_collect_redis_group_info g JOIN (SELECT group_name, MAX(collect_time) mx FROM luckyus_db_collection.t_dba_collect_redis_group_info GROUP BY group_name) t ON g.group_name=t.group_name AND g.collect_time=t.mx) g ORDER BY g.hit_rate ASC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "type": "table",
+      "title": "🗑️ 最高驱逐(累计) Top10",
+      "description": "group_info 每日快照(累计计数,非速率)",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 13,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "驱逐累计"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "驱逐累计",
+            "desc": true
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT g.group_name AS `实例`, g.evicted_keys AS `驱逐累计` FROM (SELECT g.* FROM luckyus_db_collection.t_dba_collect_redis_group_info g JOIN (SELECT group_name, MAX(collect_time) mx FROM luckyus_db_collection.t_dba_collect_redis_group_info GROUP BY group_name) t ON g.group_name=t.group_name AND g.collect_time=t.mx) g ORDER BY g.evicted_keys DESC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "type": "table",
+      "title": "🔌 最高连接数 Top10",
+      "description": "group_info 每日快照",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 18,
+        "y": 13,
+        "w": 6,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": "auto",
+            "filterable": false
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "连接数"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 110
+              }
+            ]
+          }
+        ]
+      },
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "连接数",
+            "desc": true
+          }
+        ]
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT g.group_name AS `实例`, g.connected_clients AS `连接数` FROM (SELECT g.* FROM luckyus_db_collection.t_dba_collect_redis_group_info g JOIN (SELECT group_name, MAX(collect_time) mx FROM luckyus_db_collection.t_dba_collect_redis_group_info GROUP BY group_name) t ON g.group_name=t.group_name AND g.collect_time=t.mx) g ORDER BY g.connected_clients DESC LIMIT 10",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "row",
+      "title": "💳 CPU 积分 明细（MySQL: cluster_metrics）",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 21,
         "w": 24,
         "h": 1
       },
       "panels": []
     },
     {
-      "id": 7,
+      "id": 17,
       "type": "text",
       "title": "ℹ️ 积分数据来源",
       "datasource": {
@@ -366,17 +1260,17 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 6,
+        "y": 22,
         "w": 24,
         "h": 3
       },
       "options": {
         "mode": "markdown",
-        "content": "本视图全部取自 **ldas** 数据源 → `luckyus_db_collection`。积分来自 `t_dba_collect_redis_cluster_metrics`(metric_name = CPUCreditBalance / CPUCreditUsage),由 `collect_cloudwatch.py --tasks redis_metrics --write` 写入;在该任务以新配置跑过一次前,积分两行显示 *No data*,其它(CPU/内存)历史已在表中。"
+        "content": "本视图取自 **ldas** → `luckyus_db_collection`。积分来自 `t_dba_collect_redis_cluster_metrics`(metric_name = CPUCreditBalance / CPUCreditUsage),由 `collect_cloudwatch.py --tasks redis_metrics --write` 写入。在采集器以新配置跑过一次(`populate_credits.sh`)前,积分相关面板显示 *No data*。"
       }
     },
     {
-      "id": 8,
+      "id": 18,
       "type": "timeseries",
       "title": "积分余额 CPUCreditBalance",
       "description": "micro 上限 288 / small·medium 上限 576",
@@ -386,7 +1280,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 9,
+        "y": 25,
         "w": 12,
         "h": 9
       },
@@ -459,7 +1353,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": 19,
       "type": "timeseries",
       "title": "积分消耗 CPUCreditUsage(每分钟)",
       "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支",
@@ -469,7 +1363,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 9,
+        "y": 25,
         "w": 12,
         "h": 9
       },
@@ -522,30 +1416,30 @@
       ]
     },
     {
-      "id": 10,
+      "id": 20,
       "type": "row",
-      "title": "🔥 CPU（MySQL: cluster_metrics）",
+      "title": "🔥 CPU 明细（MySQL: cluster_metrics）",
       "collapsed": false,
       "gridPos": {
         "x": 0,
-        "y": 18,
+        "y": 34,
         "w": 24,
         "h": 1
       },
       "panels": []
     },
     {
-      "id": 11,
+      "id": 21,
       "type": "timeseries",
       "title": "整机 CPUUtilization",
-      "description": "花积分依据。baseline micro10%/small·medium20%",
+      "description": "baseline micro10%/small·medium20%",
       "datasource": {
         "type": "mysql",
         "uid": "LJ7ObqYNk"
       },
       "gridPos": {
         "x": 0,
-        "y": 19,
+        "y": 35,
         "w": 12,
         "h": 9
       },
@@ -618,7 +1512,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": 22,
       "type": "timeseries",
       "title": "EngineCPUUtilization(单线程)",
       "description": "100%=一个核打满",
@@ -628,7 +1522,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 19,
+        "y": 35,
         "w": 12,
         "h": 9
       },
@@ -701,20 +1595,20 @@
       ]
     },
     {
-      "id": 13,
+      "id": 23,
       "type": "row",
-      "title": "🧠 内存 & 🔑 引擎指标（MySQL: redis_group_info 每日快照）",
+      "title": "🧠 内存 & 🔑 引擎指标 明细（MySQL: group_info 每日快照）",
       "collapsed": false,
       "gridPos": {
         "x": 0,
-        "y": 28,
+        "y": 44,
         "w": 24,
         "h": 1
       },
       "panels": []
     },
     {
-      "id": 14,
+      "id": 24,
       "type": "timeseries",
       "title": "内存使用率 DatabaseMemoryUsagePercentage",
       "description": "来自 cluster_metrics",
@@ -724,7 +1618,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 29,
+        "y": 45,
         "w": 12,
         "h": 8
       },
@@ -798,7 +1692,7 @@
       ]
     },
     {
-      "id": 15,
+      "id": 25,
       "type": "timeseries",
       "title": "已用内存 used_memory",
       "description": "group_info 每日快照(点稀疏属正常)",
@@ -808,7 +1702,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 29,
+        "y": 45,
         "w": 12,
         "h": 8
       },
@@ -861,7 +1755,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": 26,
       "type": "timeseries",
       "title": "命中率 Hit Rate %",
       "description": "group_info 每日快照",
@@ -871,7 +1765,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 37,
+        "y": 53,
         "w": 8,
         "h": 8
       },
@@ -945,7 +1839,7 @@
       ]
     },
     {
-      "id": 17,
+      "id": 27,
       "type": "timeseries",
       "title": "连接数 connected_clients",
       "description": "group_info 每日快照",
@@ -955,7 +1849,7 @@
       },
       "gridPos": {
         "x": 8,
-        "y": 37,
+        "y": 53,
         "w": 8,
         "h": 8
       },
@@ -1008,7 +1902,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": 28,
       "type": "timeseries",
       "title": "总键数 total_keys",
       "description": "group_info 每日快照",
@@ -1018,7 +1912,7 @@
       },
       "gridPos": {
         "x": 16,
-        "y": 37,
+        "y": 53,
         "w": 8,
         "h": 8
       },
@@ -1071,7 +1965,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": 29,
       "type": "timeseries",
       "title": "驱逐 evicted_keys(累计)",
       "description": "group_info 每日快照(累计值)",
@@ -1081,7 +1975,7 @@
       },
       "gridPos": {
         "x": 0,
-        "y": 45,
+        "y": 61,
         "w": 12,
         "h": 7
       },
@@ -1134,7 +2028,7 @@
       ]
     },
     {
-      "id": 20,
+      "id": 30,
       "type": "timeseries",
       "title": "过期 expired_keys(累计)",
       "description": "group_info 每日快照(累计值)",
@@ -1144,7 +2038,7 @@
       },
       "gridPos": {
         "x": 12,
-        "y": 45,
+        "y": 61,
         "w": 12,
         "h": 7
       },
