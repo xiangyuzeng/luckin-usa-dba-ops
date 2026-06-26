@@ -1,55 +1,4 @@
 {
-  "uid": "luckin-redis-cw",
-  "title": "Luckin USA — Redis 监控 (cloudwatch-exporter)",
-  "description": "Redis 全景监控。概览含问题集群 Top-N 定位;选定服务后看下方明细。",
-  "tags": [
-    "redis",
-    "elasticache",
-    "dba",
-    "cpu-credits",
-    "view:cloudwatch"
-  ],
-  "timezone": "browser",
-  "schemaVersion": 39,
-  "version": 2,
-  "editable": true,
-  "graphTooltip": 1,
-  "refresh": "1m",
-  "time": {
-    "from": "now-6h",
-    "to": "now"
-  },
-  "templating": {
-    "list": [
-      {
-        "type": "query",
-        "name": "service",
-        "label": "服务 (Redis 集群)",
-        "datasource": {
-          "type": "prometheus",
-          "uid": "D3SA3spNk"
-        },
-        "definition": "label_values(aws_elasticache_cpuutilization_average, cache_cluster_id)",
-        "query": {
-          "qryType": 1,
-          "query": "label_values(aws_elasticache_cpuutilization_average, cache_cluster_id)",
-          "refId": "StandardVariableQuery"
-        },
-        "regex": "/(.*)-\\d+$/",
-        "includeAll": true,
-        "multi": true,
-        "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": "$__all"
-        },
-        "refresh": 2,
-        "sort": 1,
-        "hide": 0,
-        "options": []
-      }
-    ]
-  },
   "annotations": {
     "list": [
       {
@@ -61,42 +10,49 @@
         "enable": true,
         "hide": true,
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
+  "description": "Redis 全景监控。概览含问题集群 Top-N 定位;选定服务后看下方明细。",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
   "panels": [
     {
-      "id": 1,
-      "type": "row",
-      "title": "📊 概览 · 问题集群定位（All 视图先看这里,锁定后再下钻明细）",
       "collapsed": false,
       "gridPos": {
-        "x": 0,
-        "y": 0,
+        "h": 1,
         "w": 24,
-        "h": 1
+        "x": 0,
+        "y": 0
       },
-      "panels": []
+      "id": 1,
+      "panels": [],
+      "title": "📊 概览",
+      "type": "row"
     },
     {
-      "id": 2,
-      "type": "stat",
-      "title": "节点数",
-      "description": "采集到积分的节点数",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 0,
-        "y": 1,
-        "w": 4,
-        "h": 4
-      },
+      "description": "采集到积分的节点数",
       "fieldConfig": {
         "defaults": {
-          "unit": "short",
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -106,13 +62,22 @@
               }
             ]
           },
-          "color": {
-            "mode": "thresholds"
-          }
+          "unit": "short"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
       "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -120,12 +85,9 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "none",
-        "colorMode": "background",
-        "textMode": "auto",
-        "justifyMode": "auto",
-        "orientation": "auto"
+        "textMode": "auto"
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -134,32 +96,30 @@
           },
           "editorMode": "code",
           "expr": "count({__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "节点数",
+      "type": "stat"
     },
     {
-      "id": 3,
-      "type": "stat",
-      "title": "整机 CPU 峰值",
-      "description": "",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 4,
-        "y": 1,
-        "w": 4,
-        "h": 4
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -177,13 +137,22 @@
               }
             ]
           },
-          "color": {
-            "mode": "thresholds"
-          }
+          "unit": "percent"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 3,
       "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "max"
@@ -191,12 +160,9 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "none",
-        "colorMode": "background",
-        "textMode": "auto",
-        "justifyMode": "auto",
-        "orientation": "auto"
+        "textMode": "auto"
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -205,32 +171,30 @@
           },
           "editorMode": "code",
           "expr": "max(aws_elasticache_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "整机 CPU 峰值",
+      "type": "stat"
     },
     {
-      "id": 4,
-      "type": "stat",
-      "title": "Engine CPU 峰值",
-      "description": "单线程,100%=一个核打满",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 8,
-        "y": 1,
-        "w": 4,
-        "h": 4
-      },
+      "description": "单线程,100%=一个核打满",
       "fieldConfig": {
         "defaults": {
-          "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -248,13 +212,22 @@
               }
             ]
           },
-          "color": {
-            "mode": "thresholds"
-          }
+          "unit": "percent"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 1
+      },
+      "id": 4,
       "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "max"
@@ -262,12 +235,9 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "none",
-        "colorMode": "background",
-        "textMode": "auto",
-        "justifyMode": "auto",
-        "orientation": "auto"
+        "textMode": "auto"
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -276,32 +246,30 @@
           },
           "editorMode": "code",
           "expr": "max(aws_elasticache_engine_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "Engine CPU 峰值",
+      "type": "stat"
     },
     {
-      "id": 5,
-      "type": "stat",
-      "title": "内存使用率 峰值",
-      "description": "",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 12,
-        "y": 1,
-        "w": 4,
-        "h": 4
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "unit": "percent",
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -319,13 +287,22 @@
               }
             ]
           },
-          "color": {
-            "mode": "thresholds"
-          }
+          "unit": "percent"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "id": 5,
       "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "max"
@@ -333,12 +310,9 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "none",
-        "colorMode": "background",
-        "textMode": "auto",
-        "justifyMode": "auto",
-        "orientation": "auto"
+        "textMode": "auto"
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -347,32 +321,28 @@
           },
           "editorMode": "code",
           "expr": "max(aws_elasticache_database_memory_usage_percentage_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "内存使用率 峰值",
+      "type": "stat"
     },
     {
-      "id": 6,
-      "type": "stat",
-      "title": "最低积分余额",
-      "description": "",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 16,
-        "y": 1,
-        "w": 4,
-        "h": 4
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "unit": "short",
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -390,13 +360,22 @@
               }
             ]
           },
-          "color": {
-            "mode": "thresholds"
-          }
+          "unit": "short"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 6,
       "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "min"
@@ -404,12 +383,9 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "none",
-        "colorMode": "background",
-        "textMode": "auto",
-        "justifyMode": "auto",
-        "orientation": "auto"
+        "textMode": "auto"
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -418,32 +394,28 @@
           },
           "editorMode": "code",
           "expr": "min({__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "最低积分余额",
+      "type": "stat"
     },
     {
-      "id": 7,
-      "type": "stat",
-      "title": "积分余额<50 节点数",
-      "description": "",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 20,
-        "y": 1,
-        "w": 4,
-        "h": 4
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
-          "unit": "short",
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -461,13 +433,22 @@
               }
             ]
           },
-          "color": {
-            "mode": "thresholds"
-          }
+          "unit": "short"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 7,
       "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -475,12 +456,9 @@
           "fields": "",
           "values": false
         },
-        "graphMode": "none",
-        "colorMode": "background",
-        "textMode": "auto",
-        "justifyMode": "auto",
-        "orientation": "auto"
+        "textMode": "auto"
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -489,34 +467,45 @@
           },
           "editorMode": "code",
           "expr": "count({__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"} < 50)",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "积分余额<50 节点数",
+      "type": "stat"
     },
     {
-      "id": 8,
-      "type": "table",
-      "title": "⚠️ 最低积分余额 Top10",
-      "description": "余额最低=最接近被限流",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 0,
-        "y": 5,
-        "w": 6,
-        "h": 8
-      },
+      "description": "余额最低=最接近被限流",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -561,20 +550,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 5
+      },
+      "id": 8,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "积分余额",
-            "desc": false
+            "desc": false,
+            "displayName": "积分余额"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -582,14 +591,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "bottomk(10, {__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "bottomk(10, last_over_time({__name__=~\"aws_elasticache_cpu_?credit_balance.*\"}[15m]))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "⚠️ 最低积分余额 Top10",
       "transformations": [
         {
           "id": "organize",
@@ -597,42 +607,52 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
               "exported_job": true,
+              "instance": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "instance": true
+              "team": true
             },
             "renameByName": {
-              "cache_cluster_id": "集群节点",
-              "Value": "积分余额"
+              "Value": "积分余额",
+              "cache_cluster_id": "集群节点"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 9,
-      "type": "table",
-      "title": "🔥 最高 Engine CPU Top10",
-      "description": "单线程饱和信号",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 6,
-        "y": 5,
-        "w": 6,
-        "h": 8
-      },
+      "description": "单线程饱和信号",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -677,20 +697,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 5
+      },
+      "id": 9,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "EngineCPU%",
-            "desc": true
+            "desc": true,
+            "displayName": "EngineCPU%"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -698,14 +738,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "topk(10, aws_elasticache_engine_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "topk(10, last_over_time(aws_elasticache_engine_cpuutilization_average[15m]))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "🔥 最高 Engine CPU Top10",
       "transformations": [
         {
           "id": "organize",
@@ -713,42 +754,52 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
               "exported_job": true,
+              "instance": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "instance": true
+              "team": true
             },
             "renameByName": {
-              "cache_cluster_id": "集群节点",
-              "Value": "EngineCPU%"
+              "Value": "EngineCPU%",
+              "cache_cluster_id": "集群节点"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 10,
-      "type": "table",
-      "title": "🔥 最高整机 CPU Top10",
-      "description": "",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 12,
-        "y": 5,
-        "w": 6,
-        "h": 8
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -793,20 +844,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 5
+      },
+      "id": 10,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "CPU%",
-            "desc": true
+            "desc": true,
+            "displayName": "CPU%"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -814,14 +885,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "topk(10, aws_elasticache_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "topk(10, last_over_time(aws_elasticache_cpuutilization_average[15m]))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "🔥 最高整机 CPU Top10",
       "transformations": [
         {
           "id": "organize",
@@ -829,42 +901,52 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
               "exported_job": true,
+              "instance": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "instance": true
+              "team": true
             },
             "renameByName": {
-              "cache_cluster_id": "集群节点",
-              "Value": "CPU%"
+              "Value": "CPU%",
+              "cache_cluster_id": "集群节点"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 11,
-      "type": "table",
-      "title": "🧠 最高内存使用率 Top10",
-      "description": "",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 18,
-        "y": 5,
-        "w": 6,
-        "h": 8
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -909,20 +991,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 5
+      },
+      "id": 11,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "内存%",
-            "desc": true
+            "desc": true,
+            "displayName": "内存%"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -930,14 +1032,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "topk(10, aws_elasticache_database_memory_usage_percentage_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "topk(10, last_over_time(aws_elasticache_database_memory_usage_percentage_average[15m]))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "🧠 最高内存使用率 Top10",
       "transformations": [
         {
           "id": "organize",
@@ -945,42 +1048,52 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
               "exported_job": true,
+              "instance": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "instance": true
+              "team": true
             },
             "renameByName": {
-              "cache_cluster_id": "集群节点",
-              "Value": "内存%"
+              "Value": "内存%",
+              "cache_cluster_id": "集群节点"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 12,
-      "type": "table",
-      "title": "💳 最高积分消耗 Top10",
-      "description": "持续高=净透支风险",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 0,
-        "y": 13,
-        "w": 6,
-        "h": 8
-      },
+      "description": "持续高=净透支风险",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -1025,20 +1138,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 13
+      },
+      "id": 12,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "消耗/分钟",
-            "desc": true
+            "desc": true,
+            "displayName": "消耗/分钟"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -1046,14 +1179,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "topk(10, {__name__=~\"aws_elasticache_cpu_?credit_usage.*\", cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "topk(10, last_over_time({__name__=~\"aws_elasticache_cpu_?credit_usage.*\"}[15m]))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "💳 最高积分消耗 Top10",
       "transformations": [
         {
           "id": "organize",
@@ -1061,42 +1195,52 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
               "exported_job": true,
+              "instance": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "instance": true
+              "team": true
             },
             "renameByName": {
-              "cache_cluster_id": "集群节点",
-              "Value": "消耗/分钟"
+              "Value": "消耗/分钟",
+              "cache_cluster_id": "集群节点"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 13,
-      "type": "table",
-      "title": "📉 最低命中率 Top10",
-      "description": "仅统计有流量的实例",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 6,
-        "y": 13,
-        "w": 6,
-        "h": 8
-      },
+      "description": "仅统计有流量的实例",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -1141,20 +1285,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 13
+      },
+      "id": 13,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "命中率%",
-            "desc": false
+            "desc": false,
+            "displayName": "命中率%"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -1162,14 +1326,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "bottomk(10, (100*(sum by(instance)(rate(redis_keyspace_hits_total{instance=~\".*(${service})\\\\..*\"}[5m])))/clamp_min((sum by(instance)(rate(redis_keyspace_hits_total{instance=~\".*(${service})\\\\..*\"}[5m])))+(sum by(instance)(rate(redis_keyspace_misses_total{instance=~\".*(${service})\\\\..*\"}[5m]))),1)) and ((sum by(instance)(rate(redis_keyspace_hits_total{instance=~\".*(${service})\\\\..*\"}[5m])))+(sum by(instance)(rate(redis_keyspace_misses_total{instance=~\".*(${service})\\\\..*\"}[5m]))) > 0.5))",
+          "expr": "bottomk(10, label_replace( (100*(sum by(instance)(rate(redis_keyspace_hits_total[5m])))/clamp_min((sum by(instance)(rate(redis_keyspace_hits_total[5m])))+(sum by(instance)(rate(redis_keyspace_misses_total[5m]))),1)) and ((sum by(instance)(rate(redis_keyspace_hits_total[5m])))+(sum by(instance)(rate(redis_keyspace_misses_total[5m]))) > 0.5), \"instance\", \"$1\", \"instance\", \".*?(luckyus-[a-z0-9-]+?)\\\\..*\"))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "📉 最低命中率 Top10",
       "transformations": [
         {
           "id": "organize",
@@ -1177,42 +1342,52 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
+              "cache_cluster_id": true,
               "exported_job": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "cache_cluster_id": true
+              "team": true
             },
             "renameByName": {
-              "instance": "实例",
-              "Value": "命中率%"
+              "Value": "命中率%",
+              "instance": "实例"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 14,
-      "type": "table",
-      "title": "🗑️ 最高驱逐速率 Top10",
-      "description": "非0=内存压力淘汰键",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 12,
-        "y": 13,
-        "w": 6,
-        "h": 8
-      },
+      "description": "非0=内存压力淘汰键",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -1253,20 +1428,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 13
+      },
+      "id": 14,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "驱逐/秒",
-            "desc": true
+            "desc": true,
+            "displayName": "驱逐/秒"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -1274,14 +1469,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "topk(10, sum by(instance)(rate(redis_evicted_keys_total{instance=~\".*(${service})\\\\..*\"}[5m])))",
+          "expr": "topk(10, label_replace(sum by(instance)(rate(redis_evicted_keys_total[5m])), \"instance\", \"$1\", \"instance\", \".*?(luckyus-[a-z0-9-]+?)\\\\..*\"))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "🗑️ 最高驱逐速率 Top10",
       "transformations": [
         {
           "id": "organize",
@@ -1289,42 +1485,52 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
+              "cache_cluster_id": true,
               "exported_job": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "cache_cluster_id": true
+              "team": true
             },
             "renameByName": {
-              "instance": "实例",
-              "Value": "驱逐/秒"
+              "Value": "驱逐/秒",
+              "instance": "实例"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 15,
-      "type": "table",
-      "title": "🔌 最高连接数 Top10",
-      "description": "",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 18,
-        "y": 13,
-        "w": 6,
-        "h": 8
-      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {
             "align": "auto",
-            "filterable": false
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           }
         },
         "overrides": [
@@ -1361,20 +1567,40 @@
                 "value": {
                   "mode": "thresholds"
                 }
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           }
         ]
       },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 13
+      },
+      "id": 15,
       "options": {
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
         "showHeader": true,
         "sortBy": [
           {
-            "displayName": "连接数",
-            "desc": true
+            "desc": true,
+            "displayName": "连接数"
           }
         ]
       },
+      "pluginVersion": "9.4.17",
       "targets": [
         {
           "datasource": {
@@ -1382,14 +1608,15 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "topk(10, redis_connected_clients{instance=~\".*(${service})\\\\..*\"})",
+          "expr": " topk(10, label_replace(redis_connected_clients, \"instance\", \"$1\", \"instance\", \".*?(luckyus-[a-z0-9-]+?)\\\\..*\"))",
+          "format": "table",
+          "instant": true,
           "legendFormat": "",
           "range": false,
-          "instant": true,
-          "format": "table",
           "refId": "A"
         }
       ],
+      "title": "🔌 最高连接数 Top10",
       "transformations": [
         {
           "id": "organize",
@@ -1397,68 +1624,79 @@
             "excludeByName": {
               "Time": true,
               "__name__": true,
-              "job": true,
+              "cache_cluster_id": true,
               "exported_job": true,
+              "job": true,
               "namespace": true,
-              "team": true,
               "prometheus": true,
               "prometheus_replica": true,
-              "cache_cluster_id": true
+              "team": true
             },
             "renameByName": {
-              "instance": "实例",
-              "Value": "连接数"
+              "Value": "连接数",
+              "instance": "实例"
             }
           }
         }
-      ]
+      ],
+      "type": "table"
     },
     {
-      "id": 16,
-      "type": "row",
-      "title": "💳 CPU 积分 明细",
       "collapsed": false,
       "gridPos": {
-        "x": 0,
-        "y": 21,
+        "h": 1,
         "w": 24,
-        "h": 1
+        "x": 0,
+        "y": 21
       },
-      "panels": []
+      "id": 16,
+      "panels": [],
+      "title": "💳 CPU 积分 明细",
+      "type": "row"
     },
     {
-      "id": 17,
-      "type": "timeseries",
-      "title": "积分余额 CPUCreditBalance",
-      "description": "micro 上限 288 / small·medium 上限 576",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 0,
-        "y": 22,
-        "w": 12,
-        "h": 9
-      },
+      "description": "micro 上限 288 / small·medium 上限 576",
       "fieldConfig": {
         "defaults": {
-          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
             "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
             "lineInterpolation": "linear",
             "lineWidth": 1,
-            "fillOpacity": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
             "showPoints": "never",
             "spanNulls": true,
-            "axisPlacement": "auto",
             "stacking": {
+              "group": "A",
               "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "dashed"
             }
           },
+          "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1476,19 +1714,26 @@
               }
             ]
           },
-          "min": 0
+          "unit": "short"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "id": 17,
       "options": {
         "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
           "calcs": [
             "lastNotNull",
             "max"
-          ]
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1503,57 +1748,92 @@
           },
           "editorMode": "code",
           "expr": "{__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"}",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "{{cache_cluster_id}}",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "积分余额 CPUCreditBalance",
+      "type": "timeseries"
     },
     {
-      "id": 18,
-      "type": "timeseries",
-      "title": "积分消耗 CPUCreditUsage(每分钟)",
-      "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支",
       "datasource": {
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "gridPos": {
-        "x": 12,
-        "y": 22,
-        "w": 12,
-        "h": 9
-      },
+      "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支",
       "fieldConfig": {
         "defaults": {
-          "unit": "short",
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
             "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
             "lineInterpolation": "linear",
             "lineWidth": 1,
-            "fillOpacity": 0,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
             "showPoints": "never",
             "spanNulls": true,
-            "axisPlacement": "auto",
             "stacking": {
+              "group": "A",
               "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
           },
-          "min": 0
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
         },
         "overrides": []
       },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      },
+      "id": 18,
       "options": {
         "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
           "calcs": [
             "lastNotNull",
             "max"
-          ]
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
@@ -1568,722 +1848,869 @@
           },
           "editorMode": "code",
           "expr": "{__name__=~\"aws_elasticache_cpu_?credit_usage.*\", cache_cluster_id=~\"(${service})-\\\\d+\"}",
+          "format": "time_series",
+          "instant": false,
           "legendFormat": "{{cache_cluster_id}}",
           "range": true,
-          "instant": false,
-          "format": "time_series",
           "refId": "A"
         }
-      ]
+      ],
+      "title": "积分消耗 CPUCreditUsage(每分钟)",
+      "type": "timeseries"
     },
     {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
       "id": 19,
-      "type": "row",
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "baseline micro10%/small·medium20%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 4,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 20
+                  },
+                  {
+                    "color": "red",
+                    "value": 50
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 23
+          },
+          "id": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "aws_elasticache_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"}",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{cache_cluster_id}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "整机 CPUUtilization",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "100%=一个核打满",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 4,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 50
+                  },
+                  {
+                    "color": "red",
+                    "value": 85
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 23
+          },
+          "id": 21,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "aws_elasticache_engine_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"}",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{cache_cluster_id}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "EngineCPUUtilization(单线程)",
+          "type": "timeseries"
+        }
+      ],
       "title": "🔥 CPU 明细",
-      "collapsed": false,
+      "type": "row"
+    },
+    {
+      "collapsed": true,
       "gridPos": {
-        "x": 0,
-        "y": 31,
+        "h": 1,
         "w": 24,
-        "h": 1
-      },
-      "panels": []
-    },
-    {
-      "id": 20,
-      "type": "timeseries",
-      "title": "整机 CPUUtilization",
-      "description": "baseline micro10%/small·medium20%",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
         "x": 0,
-        "y": 32,
-        "w": 12,
-        "h": 9
+        "y": 32
       },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 4,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "dashed"
-            }
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 20
-              },
-              {
-                "color": "red",
-                "value": 50
-              }
-            ]
-          },
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "aws_elasticache_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"}",
-          "legendFormat": "{{cache_cluster_id}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "id": 21,
-      "type": "timeseries",
-      "title": "EngineCPUUtilization(单线程)",
-      "description": "100%=一个核打满",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 12,
-        "y": 32,
-        "w": 12,
-        "h": 9
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 4,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "dashed"
-            }
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 50
-              },
-              {
-                "color": "red",
-                "value": 85
-              }
-            ]
-          },
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "aws_elasticache_engine_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"}",
-          "legendFormat": "{{cache_cluster_id}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
       "id": 22,
-      "type": "row",
+      "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 4,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed"
+                }
+              },
+              "mappings": [],
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 70
+                  },
+                  {
+                    "color": "red",
+                    "value": 90
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 24
+          },
+          "id": 23,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "aws_elasticache_database_memory_usage_percentage_average{cache_cluster_id=~\"(${service})-\\\\d+\"}",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{cache_cluster_id}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "内存使用率 DatabaseMemoryUsagePercentage",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 2,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 24
+          },
+          "id": 24,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "redis_memory_used_bytes{instance=~\".*(${service})\\\\..*\"}",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "已用内存 used_memory",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "axisPlacement": "auto",
+                "drawStyle": "line",
+                "fillOpacity": 2,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "mode": "none"
+                }
+              },
+              "min": 0,
+              "unit": "ops"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 32
+          },
+          "id": 25,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "sum by(instance)(rate(redis_commands_processed_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval]))",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "命令吞吐 ops/sec",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "axisPlacement": "auto",
+                "drawStyle": "line",
+                "fillOpacity": 2,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed"
+                }
+              },
+              "max": 100,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red"
+                  },
+                  {
+                    "color": "yellow",
+                    "value": 80
+                  },
+                  {
+                    "color": "green",
+                    "value": 95
+                  }
+                ]
+              },
+              "unit": "percent"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 8,
+            "y": 32
+          },
+          "id": 26,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "100 * sum by(instance)(rate(redis_keyspace_hits_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])) / clamp_min(sum by(instance)(rate(redis_keyspace_hits_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])) + sum by(instance)(rate(redis_keyspace_misses_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])), 1)",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "命中率 Hit Rate %",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "axisPlacement": "auto",
+                "drawStyle": "line",
+                "fillOpacity": 2,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "mode": "none"
+                }
+              },
+              "min": 0,
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 16,
+            "y": 32
+          },
+          "id": 27,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "redis_connected_clients{instance=~\".*(${service})\\\\..*\"}",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "连接数 connected_clients",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "非0=内存压力淘汰",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "axisPlacement": "auto",
+                "drawStyle": "line",
+                "fillOpacity": 4,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed"
+                }
+              },
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 0.01
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 40
+          },
+          "id": 28,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "rate(redis_evicted_keys_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "驱逐 evicted/sec",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "D3SA3spNk"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "axisPlacement": "auto",
+                "drawStyle": "line",
+                "fillOpacity": 2,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "showPoints": "never",
+                "spanNulls": true,
+                "stacking": {
+                  "mode": "none"
+                }
+              },
+              "min": 0,
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 40
+          },
+          "id": 29,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "D3SA3spNk"
+              },
+              "editorMode": "code",
+              "expr": "sum by(instance)(redis_db_keys{instance=~\".*(${service})\\\\..*\"})",
+              "format": "time_series",
+              "instant": false,
+              "legendFormat": "{{instance}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "总键数 db_keys",
+          "type": "timeseries"
+        }
+      ],
       "title": "🧠 内存 & 🔑 引擎指标 明细",
-      "collapsed": false,
-      "gridPos": {
-        "x": 0,
-        "y": 41,
-        "w": 24,
-        "h": 1
-      },
-      "panels": []
-    },
-    {
-      "id": 23,
-      "type": "timeseries",
-      "title": "内存使用率 DatabaseMemoryUsagePercentage",
-      "description": "",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 0,
-        "y": 42,
-        "w": 12,
-        "h": 8
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 4,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "dashed"
-            }
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 70
-              },
-              {
-                "color": "red",
-                "value": 90
-              }
-            ]
-          },
-          "max": 100,
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "aws_elasticache_database_memory_usage_percentage_average{cache_cluster_id=~\"(${service})-\\\\d+\"}",
-          "legendFormat": "{{cache_cluster_id}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "id": 24,
-      "type": "timeseries",
-      "title": "已用内存 used_memory",
-      "description": "",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 12,
-        "y": 42,
-        "w": 12,
-        "h": 8
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "bytes",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 2,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            }
-          },
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "redis_memory_used_bytes{instance=~\".*(${service})\\\\..*\"}",
-          "legendFormat": "{{instance}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "id": 25,
-      "type": "timeseries",
-      "title": "命令吞吐 ops/sec",
-      "description": "",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 0,
-        "y": 50,
-        "w": 8,
-        "h": 8
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "ops",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 2,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            }
-          },
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "sum by(instance)(rate(redis_commands_processed_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval]))",
-          "legendFormat": "{{instance}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "id": 26,
-      "type": "timeseries",
-      "title": "命中率 Hit Rate %",
-      "description": "",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 8,
-        "y": 50,
-        "w": 8,
-        "h": 8
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 2,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "dashed"
-            }
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "red",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 80
-              },
-              {
-                "color": "green",
-                "value": 95
-              }
-            ]
-          },
-          "max": 100,
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "100 * sum by(instance)(rate(redis_keyspace_hits_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])) / clamp_min(sum by(instance)(rate(redis_keyspace_hits_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])) + sum by(instance)(rate(redis_keyspace_misses_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])), 1)",
-          "legendFormat": "{{instance}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "id": 27,
-      "type": "timeseries",
-      "title": "连接数 connected_clients",
-      "description": "",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 16,
-        "y": 50,
-        "w": 8,
-        "h": 8
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 2,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            }
-          },
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "redis_connected_clients{instance=~\".*(${service})\\\\..*\"}",
-          "legendFormat": "{{instance}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "id": 28,
-      "type": "timeseries",
-      "title": "驱逐 evicted/sec",
-      "description": "非0=内存压力淘汰",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 0,
-        "y": 58,
-        "w": 12,
-        "h": 7
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 4,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "dashed"
-            }
-          },
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0.01
-              }
-            ]
-          },
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "rate(redis_evicted_keys_total{instance=~\".*(${service})\\\\..*\"}[$__rate_interval])",
-          "legendFormat": "{{instance}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
-    },
-    {
-      "id": 29,
-      "type": "timeseries",
-      "title": "总键数 db_keys",
-      "description": "",
-      "datasource": {
-        "type": "prometheus",
-        "uid": "D3SA3spNk"
-      },
-      "gridPos": {
-        "x": 12,
-        "y": 58,
-        "w": 12,
-        "h": 7
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "short",
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "fillOpacity": 2,
-            "showPoints": "never",
-            "spanNulls": true,
-            "axisPlacement": "auto",
-            "stacking": {
-              "mode": "none"
-            }
-          },
-          "min": 0
-        },
-        "overrides": []
-      },
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true,
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ]
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "D3SA3spNk"
-          },
-          "editorMode": "code",
-          "expr": "sum by(instance)(redis_db_keys{instance=~\".*(${service})\\\\..*\"})",
-          "legendFormat": "{{instance}}",
-          "range": true,
-          "instant": false,
-          "format": "time_series",
-          "refId": "A"
-        }
-      ]
+      "type": "row"
     }
-  ]
+  ],
+  "refresh": "1m",
+  "revision": 1,
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "redis",
+    "elasticache",
+    "dba",
+    "cpu-credits",
+    "view:cloudwatch"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "D3SA3spNk"
+        },
+        "definition": "label_values(aws_elasticache_cpuutilization_average, cache_cluster_id)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "服务 (Redis 集群)",
+        "multi": true,
+        "name": "service",
+        "options": [],
+        "query": {
+          "qryType": 1,
+          "query": "label_values(aws_elasticache_cpuutilization_average, cache_cluster_id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "/(.*)-\\d+$/",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Luckin USA — Redis 监控 (cloudwatch-exporter)",
+  "uid": "luckin-redis-cw",
+  "version": 4,
+  "weekStart": ""
 }
