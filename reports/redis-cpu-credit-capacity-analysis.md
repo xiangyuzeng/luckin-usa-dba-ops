@@ -8,12 +8,10 @@
 
 ---
 
-## TL;DR
+## 结论
 
-- 你们的 Redis 全部跑在 **burstable 机型(T3/T4g)**,"积分"= **CPU Credits**:平时 CPU 受限到 baseline,靠攒下的积分允许短时突增;积分耗尽 → ElastiCache 把 CPU **限流到 baseline**(无 unlimited 透支模式)→ 延迟飙升。
+- 当前绝对多数的 Redis 跑在 **burstable 机型(T3/T4g)**,"积分"= **CPU Credits**:平时 CPU 受限到 baseline,靠攒下的积分允许短时突增;积分耗尽 → ElastiCache 把 CPU **限流到 baseline**(无 unlimited 透支模式)→ 延迟飙升。
 - **真实风险 = 极低。** 全队列 `EngineCPUUtilization` 峰值最高仅 **9.3%**(p50=0.5%),没有任何节点 Redis 单线程跑到过半核;积分余额中位数 = **288(满)**,业务**从未消耗积分**。
-- 14 天内出现的 3 个"积分触底"节点全是 **节点 recovery/重建的生命周期假象**(新节点从 0 积分充电),**不是业务过载**。
-- 建议:加一条"积分低 + CPU 高于 baseline 持续 1h"的复合告警(自动忽略生命周期充电);机型选型合理,无需为积分扩容。
 
 ---
 
