@@ -1,7 +1,7 @@
 {
   "uid": "luckin-redis-cw",
-  "title": "Luckin USA — Redis 监控 · A 视图 (cloudwatch-exporter)",
-  "description": "Redis 全景监控(Prometheus,数据源写死 UMBQuerier-Luckin)。概览含问题集群 Top-N 定位;选定服务后看下方明细。",
+  "title": "Luckin USA — Redis 监控 (cloudwatch-exporter)",
+  "description": "Redis 全景监控。概览含问题集群 Top-N 定位;选定服务后看下方明细。",
   "tags": [
     "redis",
     "elasticache",
