@@ -1,0 +1,1200 @@
+{
+  "uid": "luckin-redis-mysql",
+  "title": "Luckin USA — Redis 监控 · B 视图 (MySQL 采集库)",
+  "description": "Redis 全景监控,数据源:ldas / luckyus_db_collection。CPU/Engine/内存/积分来自 t_dba_collect_redis_cluster_metrics;命中率/连接/键来自 t_dba_collect_redis_group_info 每日快照。",
+  "tags": [
+    "redis",
+    "elasticache",
+    "dba",
+    "cpu-credits",
+    "view:mysql"
+  ],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": true,
+  "graphTooltip": 1,
+  "refresh": "5m",
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "templating": {
+    "list": [
+      {
+        "type": "query",
+        "name": "service",
+        "label": "服务 (Redis 集群)",
+        "datasource": {
+          "type": "mysql",
+          "uid": "LJ7ObqYNk"
+        },
+        "definition": "SELECT DISTINCT group_name FROM luckyus_db_collection.t_dba_collect_redis_group_info ORDER BY group_name",
+        "query": "SELECT DISTINCT group_name FROM luckyus_db_collection.t_dba_collect_redis_group_info ORDER BY group_name",
+        "includeAll": true,
+        "multi": true,
+        "allValue": ".*",
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
+        "refresh": 2,
+        "sort": 1,
+        "hide": 0,
+        "options": [],
+        "regex": ""
+      }
+    ]
+  },
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "row",
+      "title": "📊 概览（MySQL 采集库 ldas）",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "采集节点数",
+      "description": "cluster_metrics 最新快照节点数",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 1,
+        "w": 6,
+        "h": 4
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "graphMode": "area",
+        "colorMode": "value",
+        "textMode": "auto",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT COUNT(*) AS value FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUUtilization' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='CPUUtilization') x",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "整机 CPU 峰值",
+      "description": "",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 6,
+        "y": 1,
+        "w": 6,
+        "h": 4
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "graphMode": "area",
+        "colorMode": "value",
+        "textMode": "auto",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT ROUND(MAX(x.average),1) AS value FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUUtilization' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='CPUUtilization') x",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "Engine CPU 峰值",
+      "description": "单线程,100%=一个核打满",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 1,
+        "w": 6,
+        "h": 4
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 85
+              }
+            ]
+          },
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "graphMode": "area",
+        "colorMode": "value",
+        "textMode": "auto",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT ROUND(MAX(x.average),1) AS value FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='EngineCPUUtilization' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='EngineCPUUtilization') x",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "最低积分余额",
+      "description": "下次 --write 采集后生效",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 18,
+        "y": 1,
+        "w": 6,
+        "h": 4
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 100
+              }
+            ]
+          },
+          "color": {
+            "mode": "thresholds"
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "graphMode": "area",
+        "colorMode": "value",
+        "textMode": "auto",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawSql": "SELECT ROUND(MIN(x.average),1) AS value FROM (SELECT m.cluster_id, m.average FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics m JOIN (SELECT cluster_id, MAX(collect_timestamp) mx FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUCreditBalance' GROUP BY cluster_id) t ON m.cluster_id=t.cluster_id AND m.collect_timestamp=t.mx WHERE m.metric_name='CPUCreditBalance') x",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "row",
+      "title": "💳 CPU 积分（MySQL: t_dba_collect_redis_cluster_metrics）",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 5,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 7,
+      "type": "text",
+      "title": "ℹ️ 积分数据来源",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 6,
+        "w": 24,
+        "h": 3
+      },
+      "options": {
+        "mode": "markdown",
+        "content": "本视图全部取自 **ldas** 数据源 → `luckyus_db_collection`。积分来自 `t_dba_collect_redis_cluster_metrics`(metric_name = CPUCreditBalance / CPUCreditUsage),由 `collect_cloudwatch.py --tasks redis_metrics --write` 写入;在该任务以新配置跑过一次前,积分两行显示 *No data*,其它(CPU/内存)历史已在表中。"
+      }
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "积分余额 CPUCreditBalance",
+      "description": "micro 上限 288 / small·medium 上限 576",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 9,
+        "w": 12,
+        "h": 9
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "green",
+                "value": 100
+              }
+            ]
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_timestamp AS time, cluster_id AS metric, average AS value FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUCreditBalance' AND $__timeFilter(collect_timestamp) AND cluster_id REGEXP concat('${service:regex}','-[0-9]+$') ORDER BY collect_timestamp",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "积分消耗 CPUCreditUsage(每分钟)",
+      "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 9,
+        "w": 12,
+        "h": 9
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 0,
+            "showPoints": "never",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_timestamp AS time, cluster_id AS metric, average AS value FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUCreditUsage' AND $__timeFilter(collect_timestamp) AND cluster_id REGEXP concat('${service:regex}','-[0-9]+$') ORDER BY collect_timestamp",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "row",
+      "title": "🔥 CPU（MySQL: cluster_metrics）",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 18,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 11,
+      "type": "timeseries",
+      "title": "整机 CPUUtilization",
+      "description": "花积分依据。baseline micro10%/small·medium20%",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 19,
+        "w": 12,
+        "h": 9
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 4,
+            "showPoints": "never",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 20
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_timestamp AS time, cluster_id AS metric, average AS value FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='CPUUtilization' AND $__timeFilter(collect_timestamp) AND cluster_id REGEXP concat('${service:regex}','-[0-9]+$') ORDER BY collect_timestamp",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "timeseries",
+      "title": "EngineCPUUtilization(单线程)",
+      "description": "100%=一个核打满",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 19,
+        "w": 12,
+        "h": 9
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 4,
+            "showPoints": "never",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 85
+              }
+            ]
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_timestamp AS time, cluster_id AS metric, average AS value FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='EngineCPUUtilization' AND $__timeFilter(collect_timestamp) AND cluster_id REGEXP concat('${service:regex}','-[0-9]+$') ORDER BY collect_timestamp",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "type": "row",
+      "title": "🧠 内存 & 🔑 引擎指标（MySQL: redis_group_info 每日快照）",
+      "collapsed": false,
+      "gridPos": {
+        "x": 0,
+        "y": 28,
+        "w": 24,
+        "h": 1
+      },
+      "panels": []
+    },
+    {
+      "id": 14,
+      "type": "timeseries",
+      "title": "内存使用率 DatabaseMemoryUsagePercentage",
+      "description": "来自 cluster_metrics",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 29,
+        "w": 12,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 4,
+            "showPoints": "never",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 90
+              }
+            ]
+          },
+          "max": 100,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_timestamp AS time, cluster_id AS metric, average AS value FROM luckyus_db_collection.t_dba_collect_redis_cluster_metrics WHERE metric_name='DatabaseMemoryUsagePercentage' AND $__timeFilter(collect_timestamp) AND cluster_id REGEXP concat('${service:regex}','-[0-9]+$') ORDER BY collect_timestamp",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "type": "timeseries",
+      "title": "已用内存 used_memory",
+      "description": "group_info 每日快照(点稀疏属正常)",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 29,
+        "w": 12,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 2,
+            "showPoints": "always",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_time AS time, group_name AS metric, used_memory AS value FROM luckyus_db_collection.t_dba_collect_redis_group_info WHERE $__timeFilter(collect_time) AND group_name REGEXP concat('^','${service:regex}','$') ORDER BY collect_time",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "timeseries",
+      "title": "命中率 Hit Rate %",
+      "description": "group_info 每日快照",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 37,
+        "w": 8,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 2,
+            "showPoints": "always",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 80
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "max": 100,
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_time AS time, group_name AS metric, hit_rate AS value FROM luckyus_db_collection.t_dba_collect_redis_group_info WHERE $__timeFilter(collect_time) AND group_name REGEXP concat('^','${service:regex}','$') ORDER BY collect_time",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "type": "timeseries",
+      "title": "连接数 connected_clients",
+      "description": "group_info 每日快照",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 8,
+        "y": 37,
+        "w": 8,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 2,
+            "showPoints": "always",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_time AS time, group_name AS metric, connected_clients AS value FROM luckyus_db_collection.t_dba_collect_redis_group_info WHERE $__timeFilter(collect_time) AND group_name REGEXP concat('^','${service:regex}','$') ORDER BY collect_time",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "type": "timeseries",
+      "title": "总键数 total_keys",
+      "description": "group_info 每日快照",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 16,
+        "y": 37,
+        "w": 8,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 2,
+            "showPoints": "always",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_time AS time, group_name AS metric, total_keys AS value FROM luckyus_db_collection.t_dba_collect_redis_group_info WHERE $__timeFilter(collect_time) AND group_name REGEXP concat('^','${service:regex}','$') ORDER BY collect_time",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "timeseries",
+      "title": "驱逐 evicted_keys(累计)",
+      "description": "group_info 每日快照(累计值)",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 0,
+        "y": 45,
+        "w": 12,
+        "h": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 2,
+            "showPoints": "always",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_time AS time, group_name AS metric, evicted_keys AS value FROM luckyus_db_collection.t_dba_collect_redis_group_info WHERE $__timeFilter(collect_time) AND group_name REGEXP concat('^','${service:regex}','$') ORDER BY collect_time",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "type": "timeseries",
+      "title": "过期 expired_keys(累计)",
+      "description": "group_info 每日快照(累计值)",
+      "datasource": {
+        "type": "mysql",
+        "uid": "LJ7ObqYNk"
+      },
+      "gridPos": {
+        "x": 12,
+        "y": 45,
+        "w": 12,
+        "h": 7
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "fillOpacity": 2,
+            "showPoints": "always",
+            "spanNulls": true,
+            "axisPlacement": "auto",
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "min": 0
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ]
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "mysql",
+            "uid": "LJ7ObqYNk"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawSql": "SELECT collect_time AS time, group_name AS metric, expired_keys AS value FROM luckyus_db_collection.t_dba_collect_redis_group_info WHERE $__timeFilter(collect_time) AND group_name REGEXP concat('^','${service:regex}','$') ORDER BY collect_time",
+          "rawQuery": true,
+          "refId": "A"
+        }
+      ]
+    }
+  ]
+}
