@@ -95,7 +95,7 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "count({__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "count({__name__=~\"aws_elasticache_cpu_?credit_balance.*\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
@@ -170,7 +170,7 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "max(aws_elasticache_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "max(aws_elasticache_cpuutilization_average)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
@@ -245,7 +245,7 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "max(aws_elasticache_engine_cpuutilization_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "max(aws_elasticache_engine_cpuutilization_average)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
@@ -320,7 +320,7 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "max(aws_elasticache_database_memory_usage_percentage_average{cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "max(aws_elasticache_database_memory_usage_percentage_average)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
@@ -393,7 +393,7 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "min({__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"})",
+          "expr": "min({__name__=~\"aws_elasticache_cpu_?credit_balance.*\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
@@ -466,7 +466,7 @@
             "uid": "D3SA3spNk"
           },
           "editorMode": "code",
-          "expr": "count({__name__=~\"aws_elasticache_cpu_?credit_balance.*\", cache_cluster_id=~\"(${service})-\\\\d+\"} < 50)",
+          "expr": "count({__name__=~\"aws_elasticache_cpu_?credit_balance.*\"} < 50) or vector(0)",
           "format": "time_series",
           "instant": false,
           "legendFormat": "",
