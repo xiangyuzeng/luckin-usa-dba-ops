@@ -1659,7 +1659,7 @@
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "description": "micro 上限 288 / small·medium 上限 576",
+      "description": "micro 上限 288 / small·medium 上限 576 ｜ ⚠️ 非 burstable 机型(luckyus-isales-market = m6g.large)没有 CPU 积分指标,选中它时此处为空属正常。",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1763,7 +1763,7 @@
         "type": "prometheus",
         "uid": "D3SA3spNk"
       },
-      "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支",
+      "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支 ｜ ⚠️ 非 burstable 机型(luckyus-isales-market = m6g.large)没有 CPU 积分指标,选中它时此处为空属正常。",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -2711,6 +2711,6 @@
   "timezone": "browser",
   "title": "Luckin USA — Redis 监控 (cloudwatch-exporter)",
   "uid": "luckin-redis-cw",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

@@ -11,7 +11,7 @@
   ],
   "timezone": "browser",
   "schemaVersion": 39,
-  "version": 1,
+  "version": 2,
   "editable": true,
   "graphTooltip": 1,
   "refresh": "5m",
@@ -1273,7 +1273,7 @@
       "id": 18,
       "type": "timeseries",
       "title": "积分余额 CPUCreditBalance",
-      "description": "micro 上限 288 / small·medium 上限 576",
+      "description": "micro 上限 288 / small·medium 上限 576 ｜ ⚠️ 非 burstable 机型(luckyus-isales-market = m6g.large)没有 CPU 积分指标,选中它时此处为空属正常。",
       "datasource": {
         "type": "mysql",
         "uid": "LJ7ObqYNk"
@@ -1356,7 +1356,7 @@
       "id": 19,
       "type": "timeseries",
       "title": "积分消耗 CPUCreditUsage(每分钟)",
-      "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支",
+      "description": "持续 > earn(micro 0.2 / small 0.4 每分钟)= 净透支 ｜ ⚠️ 非 burstable 机型(luckyus-isales-market = m6g.large)没有 CPU 积分指标,选中它时此处为空属正常。",
       "datasource": {
         "type": "mysql",
         "uid": "LJ7ObqYNk"
@@ -2090,5 +2090,6 @@
         }
       ]
     }
-  ]
+  ],
+  "id": null
 }
