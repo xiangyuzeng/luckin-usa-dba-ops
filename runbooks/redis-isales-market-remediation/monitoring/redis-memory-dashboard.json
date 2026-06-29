@@ -1,0 +1,287 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "redis-isales-market-memory",
+    "title": "Redis Memory Monitor — luckyus-isales-market",
+    "description": "Memory usage, key TTL distribution, eviction rate, and key pattern analysis for the iSales Marketing Redis cluster.",
+    "tags": ["redis", "isales-market", "memory", "sre"],
+    "timezone": "utc",
+    "editable": true,
+    "refresh": "30s",
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "Memory Usage %",
+        "description": "Redis memory usage percentage with alert thresholds at 60%, 70%, and 85%.",
+        "type": "timeseries",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "redis_memory_usage_ratio{cluster=\"luckyus-isales-market\"}",
+            "legendFormat": "Memory Usage %",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "color": "green", "value": null },
+                { "color": "yellow", "value": 60 },
+                { "color": "orange", "value": 70 },
+                { "color": "red", "value": 85 }
+              ]
+            },
+            "custom": {
+              "thresholdsStyle": { "mode": "dashed+area" },
+              "fillOpacity": 10,
+              "lineWidth": 2
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "Memory: Used vs Max",
+        "description": "Absolute memory usage in bytes compared to maxmemory limit.",
+        "type": "timeseries",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "redis_memory_used_bytes{cluster=\"luckyus-isales-market\"}",
+            "legendFormat": "Used Memory",
+            "refId": "A"
+          },
+          {
+            "expr": "redis_memory_max_bytes{cluster=\"luckyus-isales-market\"}",
+            "legendFormat": "Max Memory (2.32G)",
+            "refId": "B"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "bytes",
+            "custom": { "lineWidth": 2, "fillOpacity": 10 }
+          },
+          "overrides": [
+            {
+              "matcher": { "id": "byName", "options": "Max Memory (2.32G)" },
+              "properties": [
+                { "id": "custom.lineStyle", "value": { "fill": "dash", "dash": [10, 10] } },
+                { "id": "custom.fillOpacity", "value": 0 },
+                { "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "title": "Keys: With TTL vs Without TTL",
+        "description": "Total key count split by keys with and without TTL. No-TTL keys are not evictable under volatile-lfu.",
+        "type": "timeseries",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "redis_db_keys_expiring{cluster=\"luckyus-isales-market\", db=\"db0\"}",
+            "legendFormat": "Keys WITH TTL (evictable)",
+            "refId": "A"
+          },
+          {
+            "expr": "redis_db_keys{cluster=\"luckyus-isales-market\", db=\"db0\"} - redis_db_keys_expiring{cluster=\"luckyus-isales-market\", db=\"db0\"}",
+            "legendFormat": "Keys WITHOUT TTL (non-evictable)",
+            "refId": "B"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "stacking": { "mode": "normal" },
+              "fillOpacity": 40,
+              "lineWidth": 1
+            }
+          },
+          "overrides": [
+            {
+              "matcher": { "id": "byName", "options": "Keys WITH TTL (evictable)" },
+              "properties": [
+                { "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } }
+              ]
+            },
+            {
+              "matcher": { "id": "byName", "options": "Keys WITHOUT TTL (non-evictable)" },
+              "properties": [
+                { "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "title": "Eviction & Expiry Rate",
+        "description": "Rate of key evictions and expirations per second.",
+        "type": "timeseries",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "rate(redis_evicted_keys_total{cluster=\"luckyus-isales-market\"}[5m])",
+            "legendFormat": "Evictions/sec",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(redis_expired_keys_total{cluster=\"luckyus-isales-market\"}[5m])",
+            "legendFormat": "Expirations/sec",
+            "refId": "B"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ops",
+            "custom": { "lineWidth": 2, "fillOpacity": 10 }
+          },
+          "overrides": [
+            {
+              "matcher": { "id": "byName", "options": "Evictions/sec" },
+              "properties": [
+                { "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": 5,
+        "title": "No-TTL Key Ratio %",
+        "description": "Percentage of total keys that have no TTL set. Target: <10%. Current: ~39%.",
+        "type": "gauge",
+        "gridPos": { "h": 8, "w": 6, "x": 0, "y": 16 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "100 * (redis_db_keys{cluster=\"luckyus-isales-market\", db=\"db0\"} - redis_db_keys_expiring{cluster=\"luckyus-isales-market\", db=\"db0\"}) / redis_db_keys{cluster=\"luckyus-isales-market\", db=\"db0\"}",
+            "legendFormat": "No-TTL Ratio",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "color": "green", "value": null },
+                { "color": "yellow", "value": 10 },
+                { "color": "orange", "value": 20 },
+                { "color": "red", "value": 30 }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "Ops/sec",
+        "description": "Instantaneous operations per second.",
+        "type": "timeseries",
+        "gridPos": { "h": 8, "w": 6, "x": 6, "y": 16 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "redis_instantaneous_ops_per_sec{cluster=\"luckyus-isales-market\"}",
+            "legendFormat": "ops/sec",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ops",
+            "custom": { "lineWidth": 2, "fillOpacity": 10 }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "Connected Clients",
+        "description": "Number of connected clients and blocked clients.",
+        "type": "timeseries",
+        "gridPos": { "h": 8, "w": 6, "x": 12, "y": 16 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "redis_connected_clients{cluster=\"luckyus-isales-market\"}",
+            "legendFormat": "Connected",
+            "refId": "A"
+          },
+          {
+            "expr": "redis_blocked_clients{cluster=\"luckyus-isales-market\"}",
+            "legendFormat": "Blocked",
+            "refId": "B"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": { "lineWidth": 2, "fillOpacity": 10 }
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "Cache Hit Rate %",
+        "description": "Percentage of keyspace hits vs total lookups.",
+        "type": "timeseries",
+        "gridPos": { "h": 8, "w": 6, "x": 18, "y": 16 },
+        "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+        "targets": [
+          {
+            "expr": "100 * rate(redis_keyspace_hits_total{cluster=\"luckyus-isales-market\"}[5m]) / (rate(redis_keyspace_hits_total{cluster=\"luckyus-isales-market\"}[5m]) + rate(redis_keyspace_misses_total{cluster=\"luckyus-isales-market\"}[5m]))",
+            "legendFormat": "Hit Rate %",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                { "color": "red", "value": null },
+                { "color": "yellow", "value": 70 },
+                { "color": "green", "value": 85 }
+              ]
+            },
+            "custom": { "lineWidth": 2, "fillOpacity": 10 }
+          }
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "DS_PROMETHEUS",
+          "type": "datasource",
+          "query": "prometheus",
+          "current": { "text": "Prometheus", "value": "Prometheus" }
+        }
+      ]
+    }
+  },
+  "overwrite": true,
+  "folderUid": "sre-redis"
+}

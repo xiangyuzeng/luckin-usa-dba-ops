@@ -1,0 +1,130 @@
+# Prometheus Alerting Rules: Redis Memory for luckyus-isales-market
+# Deploy to: prometheus/rules/ or Grafana Managed Alerts
+#
+# Two-tier alerting:
+#   - Warning at 60% (early signal, allows proactive investigation)
+#   - Critical at 70% (existing threshold, requires immediate attention)
+#   - Emergency at 85% (near-maxmemory, risk of eviction or OOM)
+
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: redis-isales-market-memory
+  namespace: monitoring
+  labels:
+    team: sre
+    service: isales-market
+    component: redis
+spec:
+  groups:
+    - name: redis.isales-market.memory
+      interval: 30s
+      rules:
+        # ─── Warning: 60% ────────────────────────────────────────────────
+        - alert: RedisMemoryUsageWarning
+          expr: |
+            avg_over_time(redis_memory_usage_ratio{cluster="luckyus-isales-market"}[3m]) > 60
+          for: 5m
+          labels:
+            severity: warning
+            team: sre
+            service: isales-market
+            cluster: luckyus-isales-market
+          annotations:
+            summary: "Redis memory usage above 60% on luckyus-isales-market"
+            description: |
+              Redis memory usage is {{ $value | printf "%.1f" }}% (threshold: 60%).
+              Cluster: luckyus-isales-market
+              Node: {{ $labels.instance }}
+              This is an early warning. Investigate key growth patterns and check for
+              missing TTLs or unusually large key sets.
+            runbook_url: "https://github.com/xiangyuzeng/ec2-cost-optimization-report/blob/main/runbooks/redis-isales-market-remediation/RUNBOOK.md"
+            dashboard_url: "https://grafana.luckinus.com/d/redis-isales-market-memory"
+
+        # ─── Critical: 70% ───────────────────────────────────────────────
+        - alert: RedisMemoryUsageCritical
+          expr: |
+            avg_over_time(redis_memory_usage_ratio{cluster="luckyus-isales-market"}[3m]) > 70
+          for: 3m
+          labels:
+            severity: critical
+            team: sre
+            service: isales-market
+            cluster: luckyus-isales-market
+          annotations:
+            summary: "Redis memory usage above 70% on luckyus-isales-market"
+            description: |
+              Redis memory usage is {{ $value | printf "%.1f" }}% (threshold: 70%).
+              Cluster: luckyus-isales-market
+              Node: {{ $labels.instance }}
+              Immediate investigation required. Check for:
+              1. Burst of short-TTL keys (marketing campaigns, batch jobs)
+              2. Growth of no-TTL keys (MARKETING:COUPON:UNREAD:*, contact:userGroupLabel:set:*)
+              3. Abnormal client connection counts
+            runbook_url: "https://github.com/xiangyuzeng/ec2-cost-optimization-report/blob/main/runbooks/redis-isales-market-remediation/RUNBOOK.md"
+            dashboard_url: "https://grafana.luckinus.com/d/redis-isales-market-memory"
+
+        # ─── Emergency: 85% ──────────────────────────────────────────────
+        - alert: RedisMemoryUsageEmergency
+          expr: |
+            avg_over_time(redis_memory_usage_ratio{cluster="luckyus-isales-market"}[1m]) > 85
+          for: 1m
+          labels:
+            severity: critical
+            team: sre
+            service: isales-market
+            cluster: luckyus-isales-market
+            pagerduty: "true"
+          annotations:
+            summary: "EMERGENCY: Redis memory >85% on luckyus-isales-market"
+            description: |
+              Redis memory usage is {{ $value | printf "%.1f" }}% — approaching maxmemory (2.32G).
+              Cluster: luckyus-isales-market
+              Node: {{ $labels.instance }}
+
+              IMMEDIATE ACTION REQUIRED:
+              - Under volatile-lfu, only 60% of keys are evictable
+              - If burst continues, eviction will start and cache miss rate will spike
+              - Consider emergency scaling to cache.m7g.large
+            runbook_url: "https://github.com/xiangyuzeng/ec2-cost-optimization-report/blob/main/runbooks/redis-isales-market-remediation/RUNBOOK.md"
+
+        # ─── No-TTL Key Ratio ────────────────────────────────────────────
+        - alert: RedisHighNoTTLKeyRatio
+          expr: |
+            (redis_db_keys{cluster="luckyus-isales-market", db="db0"}
+             - redis_db_keys_expiring{cluster="luckyus-isales-market", db="db0"})
+            / redis_db_keys{cluster="luckyus-isales-market", db="db0"} > 0.30
+          for: 10m
+          labels:
+            severity: warning
+            team: sre
+            service: isales-market
+            cluster: luckyus-isales-market
+          annotations:
+            summary: "More than 30% of Redis keys have no TTL on luckyus-isales-market"
+            description: |
+              {{ $value | printf "%.1f" }}% of keys have no TTL.
+              Under volatile-lfu policy, these keys cannot be evicted under memory pressure.
+              This indicates application code is creating keys without expiry.
+              Review key patterns: MARKETING:COUPON:UNREAD:*, contact:userGroupLabel:set:*
+            runbook_url: "https://github.com/xiangyuzeng/ec2-cost-optimization-report/blob/main/runbooks/redis-isales-market-remediation/RUNBOOK.md"
+
+        # ─── Zero Evictions at High Memory ───────────────────────────────
+        - alert: RedisNoEvictionsHighMemory
+          expr: |
+            avg_over_time(redis_memory_usage_ratio{cluster="luckyus-isales-market"}[3m]) > 80
+            and
+            rate(redis_evicted_keys_total{cluster="luckyus-isales-market"}[5m]) == 0
+          for: 5m
+          labels:
+            severity: warning
+            team: sre
+            service: isales-market
+            cluster: luckyus-isales-market
+          annotations:
+            summary: "Redis at >80% memory with zero evictions — volatile-lfu may be ineffective"
+            description: |
+              Memory is at {{ $value | printf "%.1f" }}% but no keys are being evicted.
+              This means volatile-lfu has not yet kicked in, likely because non-evictable
+              (no-TTL) keys are consuming most of the memory headroom.
+              Consider adding TTLs to no-TTL keys or switching to allkeys-lfu policy.
