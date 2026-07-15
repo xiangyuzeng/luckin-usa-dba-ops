@@ -5,62 +5,83 @@
 **主机**：所有操作在 **dbtools01-prod-usa-aws** 上
 **最后更新**：2026-07-15
 **关联记忆**：`aws-redis-summary-monitoring-onboarding`、`redis-grafana-dashboard`、`redis-cpu-credit-capacity`
+**配套脚本**：`./scripts/sync_redis_monitoring.py`（一站式维护三文件，替代旧的 aws-redis.py / diff.py / target_diff.py）
 
 ---
 
-## 0. 次序总览（TL;DR）
+## 0. 一句话流程（TL;DR）
 
-接入顺序**不能颠倒**——先配 exporter（含密码），再配 Prometheus，最后验证：
+> **你只手工维护一个文件 `redis-password.file`——加一行 `{uri: token}`，其余交给脚本。**
 
-| 步骤 | 目录 | 改什么 | 是否重启 |
-|------|------|--------|----------|
-| **① redis_exporter** | `/data/redis-exporter/redis_exporter-v1.74.0.linux-amd64/` | `aws-redis-targets.json` 加 endpoint + `redis-password.file` 加密码 | **要重启 exporter**（密码文件启动时才读） |
-| **② Prometheus** | `/data/prometheus-2.43.0.linux-amd64/` | `aws-redis-targets.json` 加 endpoint | 不重启（file_sd 热加载） |
-| **③ 验证** | — | Prometheus targets / PromQL / 看板 | — |
+```bash
+cd /data/redis-exporter/redis_exporter-v1.74.0.linux-amd64
+# 1. 手工：往 redis-password.file 加一行（uri 前缀 = 真实 TLS）
+# 2. 预演（不写文件）
+python3 sync_redis_monitoring.py
+# 3. 确认无误后写回两个 targets 文件
+python3 sync_redis_monitoring.py --apply
+# 4. 因为改了密码文件 → 重启 exporter
+kill "$(pgrep -f 'redis_exporter .*-web.listen-address=\":9321\"')"; ./start.sh
+# 5. 验证（PromQL + 看板，见 §4）
+```
 
-> ⚠️ 两个目录各有一份 `aws-redis-targets.json`，**内容基本相同但有少许差异**（差异见 [§1.1](#11-两个-targets-文件的差异)，**待补充**）。两处都要加新集群。
+Prometheus 侧不用动手、不用 reload——脚本直接写好它的 targets 文件，file_sd 自动热加载。
 
 ---
 
-## 1. 监控架构（先理解，再动手）
+## 1. 监控架构与三文件模型
 
+### 1.1 数据流
 ```
 ElastiCache 集群 (primary endpoint, 带 AUTH token)
         │
-        │  ① exporter 侧: aws-redis-targets.json (拨号目标) + redis-password.file (URI→密码)
+        │  redis-password.file  ← 唯一手工维护的文件 {uri: token}，uri 前缀=真实 TLS
+        │        │
+        │        └── sync_redis_monitoring.py 派生 ↓↓↓
+        │
+   ┌────┴──────────────────────────────┐
+   │ exporter aws-redis-targets.json    │  全部 rediss://（去重排序）
+   │ prometheus aws-redis-targets.json  │  原样前缀 redis://redis://
+   └───────────────────────────────────┘
         ▼
-共享 redis_exporter  v1.74.0  监听 <host>:9321   (multi-target 模式，一个 exporter 服务所有集群)
-   start.sh:  ./redis_exporter -skip-tls-verification -web.listen-address=":9321" \
-              -redis.addr="" -redis.password-file=redis-password.file
+共享 redis_exporter v1.74.0  <host>:9321  (multi-target；-redis.addr="" -redis.password-file=redis-password.file)
         ▲
-        │  ② Prometheus 侧: file_sd 读 aws-redis-targets.json，把 target 作为 ?target= 传给 exporter
-        │     relabel: __address__ → __param_target → instance；__address__ 改写为 <host>:9321
+        │  Prometheus file_sd 读 prometheus 侧 targets，把 target 作为 ?target= 传给 exporter
+        │  relabel: __address__ → __param_target → instance；__address__ 改写为 <host>:9321
         │
-Prometheus 2.43.0  http://10.238.3.136:9090   (datasource uid r_ZpVoYHz)
-   两个 job:  aws-redis_exporter (多目标 /scrape)  +  redis_exporter (抓 exporter 自身 :9321/metrics)
-        │
+Prometheus 2.43.0  http://10.238.3.136:9090  (datasource uid r_ZpVoYHz)
+   job: aws-redis_exporter (多目标 /scrape) + redis_exporter (抓自身 :9321/metrics)
         ▼
-Grafana 看板
-  · AWS Redis Summary   uid gy7wsBsnk   (DBA folder)  ← 概览，所有面板 UNFILTERED
-  · AWS Redis Detail    uid kxTd1QEddd  (var-cluster 联动)  ← 单集群下钻
+Grafana:  AWS Redis Summary uid gy7wsBsnk (概览, UNFILTERED)  ·  AWS Redis Detail uid kxTd1QEddd (下钻)
 ```
 
-### 关键机制点
-- **共享 exporter，多目标（multi-target）**：所有集群共用一个 `redis_exporter`（`:9321`）。exporter 以 `-redis.addr=""` 启动，靠 Prometheus 传来的 `?target=` 现场拨号。→ **新增集群不需要起新 exporter**，但**需要**把新集群的密码加进 exporter 的密码文件。
-- **密码文件 `redis-password.file`**：JSON，`target URI → AUTH token`，**每集群一条**。exporter 按被抓的 target URI 查对应密码。**exporter 启动时读取该文件**，所以改完必须重启 exporter。
-- **`instance` 标签 = 你填进 targets.json 的 endpoint URL**，例如
-  `rediss://master.luckyus-isales-coupon.vyllrs.use1.cache.amazonaws.com:6379`
-- **所有概览面板 UNFILTERED**（`redis_memory_max_bytes{} by(instance)` 之类），被抓到就自动出现。→ **"集群不在看板上" = "没抓到"**，永远不是看板过滤问题。
-- **Prometheus file_sd 热加载**：`aws-redis-targets.json` 变更自动生效，**无需 SIGHUP / `/-/reload`**（几分钟内）。exporter 侧的密码文件**不是**热加载。
+### 1.2 三个文件 + 前缀规则（关键）
 
-### 1.1 两个 targets 文件的差异
-> **⚠️ 待补充**：exporter 目录与 prometheus 目录下的 `aws-redis-targets.json` 内容基本相同，但有少许差异。等确认具体差别后填入此处，避免两处直接照抄导致出错。
+| 文件 | 位置 | 前缀 | 谁来维护 |
+|------|------|------|----------|
+| **redis-password.file** | exporter 目录 | key 前缀 = **真实 TLS**：加密 `rediss://` / 非加密 `redis://` | **手工**（唯一源） |
+| exporter `aws-redis-targets.json` | exporter 目录 | **一律 `rediss://`** | 脚本生成 |
+| prometheus `aws-redis-targets.json` | `/data/prometheus-2.43.0.../` | **按真实 TLS**：`redis://` / `rediss://` | 脚本生成 |
+
+**为什么 exporter 全 `rediss://`、Prometheus 分前缀？**
+- Prometheus 侧 target 决定 `instance` 标签，也决定 exporter 实际用不用 TLS 拨号 → 必须反映真实 TLS。
+- exporter 那份 targets 不参与实际拨号（拨号目标由 Prometheus 的 `?target=` 传入），历史上仅作密码覆盖核对，故统一 `rediss://` 无妨。
+- **TLS 状态只能人工判定**：CMDB 表 `cache_cloud_app` 无 TLS 列（已确认），所以由你在密码文件 key 的前缀里编码。脚本据此把前缀正确地铺到两个 targets 文件。
+
+### 1.3 脚本 `sync_redis_monitoring.py` 做什么
+1. 读 `redis-password.file`（唯一源）。
+2. 自检：同一 host 多前缀重复、空密码计数。
+3. **旁路校验**（可选，需 `LDAS_PWD`）：对照 ldas `cache_cloud_app(app_status=1)`，报「在营却没进密码文件」和「密码文件里已下线的僵尸项」。
+4. 生成并写回两个 targets 文件：exporter 全 `rediss://`、prometheus 原样前缀；写前自动 `.bak` 备份，无变化则跳过。
+5. 默认 **dry-run**（只报告不写）；加 `--apply` 才写。
+
+> 旧脚本 `aws-redis.py`（从 CMDB 生成 exporter targets，全 rediss://）、`diff.py`、`target_diff.py` 已被本脚本取代——生成 + 两项一致性校验合一。
 
 ---
 
 ## 2. 前置信息采集
 
-动手前拿到集群的**真实** endpoint、TLS 状态，以及**建集群时设定的 AUTH token**（token 不在 AWS 里能直接读，是创建时自设的，从你的记录/密码库取）。不要凭记忆猜 endpoint 里的随机 token（如 `vyllrs.use1`，每个 RG 唯一）。
+拿到集群 endpoint、TLS 状态、AUTH token（token 建集群时自设，AWS 里读不到，从记录/密码库取）。
 
 ```bash
 aws elasticache describe-replication-groups \
@@ -74,171 +95,109 @@ aws elasticache describe-replication-groups \
       Port:NodeGroups[0].PrimaryEndpoint.Port
   }'
 ```
-
-确定三件事：
-1. **主节点 endpoint**（`PrimaryEndpoint.Address`），形如 `master.luckyus-<service>.<token>.use1.cache.amazonaws.com`。用 API 返回值，别手拼。
-2. **是否 TLS**（`TransitEncryptionEnabled`）：`true` → `rediss://`（两个 s）；`false` → `redis://`。
-3. **是否开 AUTH**（`AuthTokenEnabled`）+ 手上准备好 **AUTH token**（建集群时自设）。若无 AUTH，密码留空。
-
-拼出 target 字符串（后面两个文件都用它）：
-```
-TLS 集群:   rediss://<PrimaryEndpoint>:6379
-非 TLS 集群: redis://<PrimaryEndpoint>:6379
-```
+- `TransitEncryptionEnabled=true` → 密码文件 key 用 `rediss://`；`false` → 用 `redis://`。
+- endpoint 用 API 返回值（`vyllrs.use1` 这类 token 每 RG 唯一，别手拼）。
 
 ---
 
-## 3. 步骤 ① — 配置 redis_exporter
+## 3. 接入操作
 
 目录：`/data/redis-exporter/redis_exporter-v1.74.0.linux-amd64/`
 
-### 3.1 备份
+### 3.1 手工加一行到 redis-password.file（唯一手工步骤）
+JSON `{uri: token}`，一集群一条。**前缀按真实 TLS**，key 的 host:port 必须与 endpoint 完全一致：
+```jsonc
+{
+  // 加密集群（有 AUTH token）
+  "rediss://master.luckyus-<service>.<token>.use1.cache.amazonaws.com:6379": "<AUTH-TOKEN>",
+  // 非加密 / 无 AUTH 集群 → 前缀 redis://，token 留空串
+  "redis://master.luckyus-<plainsvc>.<token>.use1.cache.amazonaws.com:6379": ""
+}
+```
+> 密码文件含明文 token → 文件权限仅 root 可读；本 runbook / 提交 / 日志里**不要**回显真实 token。
+
+### 3.2 预演（dry-run，不写文件）
 ```bash
 cd /data/redis-exporter/redis_exporter-v1.74.0.linux-amd64
-cp aws-redis-targets.json aws-redis-targets.json.bak.$(date +%Y%m%d-%H%M%S)
-cp redis-password.file   redis-password.file.bak.$(date +%Y%m%d-%H%M%S)
+LDAS_PWD='<ldas只读密码>' python3 sync_redis_monitoring.py     # 带 LDAS_PWD 才做 CMDB 旁路校验
 ```
+看输出：确认新集群会被加入、无重复、CMDB 校验无 `[!]` 缺失项，两个文件的项数变化符合预期（各 +1）。
 
-### 3.2 加 target endpoint
-往 `aws-redis-targets.json` 的 `targets` 数组追加第 2 节拼好的 URL。用 Python 改，避免手抖漏逗号（一个语法错误会让整份文件解析失败、拖垮所有集群）：
+### 3.3 写回
 ```bash
-python3 - <<'PY'
-import json
-f = "aws-redis-targets.json"
-new_target = "rediss://master.luckyus-<service>.<token>.use1.cache.amazonaws.com:6379"  # ← 改这里
-data = json.load(open(f))
-block = data[0]                              # 结构: [ {targets:[...], labels:{...}} ]
-if new_target not in block["targets"]:
-    block["targets"].append(new_target)
-    block["targets"].sort()
-    json.dump(data, open(f, "w"), indent=2)
-    print("ADDED:", new_target)
-else:
-    print("ALREADY PRESENT:", new_target)
-PY
-python3 -m json.tool aws-redis-targets.json >/dev/null && echo "JSON OK"
+LDAS_PWD='<ldas只读密码>' python3 sync_redis_monitoring.py --apply
 ```
+脚本会给两个 targets 文件各生成 `.bak` 后写入。Prometheus file_sd 自动热加载，**无需 reload**。
 
-### 3.3 加密码到 redis-password.file
-`redis-password.file` 是 **JSON，key = target URI，value = AUTH token，每集群一条**。key 必须和 3.2 填的 target 字符串**完全一致**（含 `rediss://` 前缀和 `:6379`），否则 exporter 拨号时找不到密码、AUTH 失败。
+### 3.4 重启 exporter（因为改了密码文件）
+密码文件启动时才读，改了必须重启：
 ```bash
-python3 - <<'PY'
-import json
-f = "redis-password.file"
-uri   = "rediss://master.luckyus-<service>.<token>.use1.cache.amazonaws.com:6379"  # ← 与 3.2 完全一致
-token = "<AUTH-TOKEN-建集群时自设>"                                                  # ← 无 AUTH 则填 ""
-data = json.load(open(f))
-data[uri] = token
-json.dump(data, open(f, "w"), indent=2)
-print("SET password for:", uri)
-PY
-python3 -m json.tool redis-password.file >/dev/null && echo "JSON OK"
-```
-> 密码文件内容含明文 token，注意文件权限（应仅 root 可读）；本 runbook 及任何提交/日志里**不要**回显真实 token。
-
-### 3.4 重启 exporter（密码文件启动时才读，必须重启）
-```bash
-# 找到并停掉旧进程
 pgrep -af 'redis_exporter .*:9321'
-kill "$(pgrep -f 'redis_exporter .*-web.listen-address=":9321"')"
-sleep 2
-# 按 start.sh 重新拉起
-./start.sh
-# 确认监听恢复
+kill "$(pgrep -f 'redis_exporter .*-web.listen-address=\":9321\"')"
+sleep 2 && ./start.sh
 sleep 2 && curl -s http://localhost:9321/metrics | head -1 && echo "exporter up"
 ```
-> 重启期间 `:9321` 短暂中断 → 所有集群的 `redis_*` 指标会有一个抓取周期的缺口，属正常。挑低峰做。
+> 重启期间 `:9321` 短暂中断 → 所有集群 `redis_*` 指标有一个抓取周期缺口，属正常，挑低峰做。
 
 ---
 
-## 4. 步骤 ② — 配置 Prometheus
+## 4. 验证
 
-目录：`/data/prometheus-2.43.0.linux-amd64/`
-
-```bash
-cd /data/prometheus-2.43.0.linux-amd64
-cp aws-redis-targets.json aws-redis-targets.json.bak.$(date +%Y%m%d-%H%M%S)
-```
-把同一个 target endpoint 追加到**这个目录**的 `aws-redis-targets.json`（注意 [§1.1](#11-两个-targets-文件的差异) 两文件的少许差异）：
-```bash
-python3 - <<'PY'
-import json
-f = "aws-redis-targets.json"
-new_target = "rediss://master.luckyus-<service>.<token>.use1.cache.amazonaws.com:6379"  # ← 同上
-data = json.load(open(f))
-block = data[0]
-if new_target not in block["targets"]:
-    block["targets"].append(new_target); block["targets"].sort()
-    json.dump(data, open(f, "w"), indent=2); print("ADDED")
-else:
-    print("ALREADY PRESENT")
-PY
-python3 -m json.tool aws-redis-targets.json >/dev/null && echo "JSON OK"
-```
-**不需要**重启 Prometheus，也不发 `/-/reload`——file_sd 自动热加载，几分钟内生效。
-
----
-
-## 5. 步骤 ③ — 验证
-
-### 5.1 Prometheus target UP
-`http://10.238.3.136:9090/targets` → job `aws-redis_exporter` → 新 endpoint 应 `UP`。或 PromQL：
+### 4.1 target UP + 指标流入
 ```promql
-up{job="aws-redis_exporter", instance=~".*luckyus-<service>.*"}          # 期望 1
-```
-
-### 5.2 指标在流入（说明 AUTH 通了）
-```promql
-redis_up{instance=~".*luckyus-<service>.*"}                # 1 = 连上且认证成功
+up{job="aws-redis_exporter", instance=~".*luckyus-<service>.*"}       # 1
+redis_up{instance=~".*luckyus-<service>.*"}                            # 1 = 连上且认证成功
 redis_memory_used_bytes{instance=~".*luckyus-<service>.*"}
-redis_db_keys{instance=~".*luckyus-<service>.*"}
 ```
-> `up=1` 但 `redis_up=0` / 无 `redis_*` 指标 → 多半是**密码错/没加/URI 不匹配**（回到 3.3 核对 key 与 target 完全一致，并确认 3.4 已重启 exporter）。
+`up=1` 但 `redis_up=0` / 无 `redis_*` → 密码错、前缀不匹配、或改密码后没重启 exporter。核对密码文件、重跑 §3.4。
 
-### 5.3 看板确认
-打开 **AWS Redis Summary**（uid `gy7wsBsnk`）。面板 UNFILTERED，新集群自动出现。下钻用 **AWS Redis Detail**（uid `kxTd1QEddd`），`var-cluster` 选新集群。`instance` 是完整 URL，看板已用 `label_replace(...,"instance",".*?(luckyus-[a-z0-9-]+?)\\..*")` 清洗成短名。
+### 4.2 看板
+**AWS Redis Summary**（uid `gy7wsBsnk`）面板 UNFILTERED，新集群自动出现；下钻用 **AWS Redis Detail**（uid `kxTd1QEddd`）`var-cluster` 选它。`instance` 是完整 URL，看板已 `label_replace` 清洗成短名。
 
 ---
 
-## 6. 常见坑（真实踩过的）
+## 5. 常见坑
 
 | 现象 | 根因 | 处理 |
 |------|------|------|
-| `up=1` 但没有 `redis_*` 指标 / `redis_up=0` | 密码文件没加、token 错、或 key 与 target URI 不一致；或改了密码文件没重启 exporter | 核对 `redis-password.file` 的 key == targets 的 URL（含 `rediss://` 与 `:6379`）；重跑 3.4 重启 exporter |
-| 加了还是"看不到"，找 `coupondata` 找不到 | **命名不一致**：真实 RG 名是 `luckyus-isales-coupon`（连字符），不是别名/下划线 | 命名一律 `luckyus-<service>` 连字符；以 `ReplicationGroupId` 为准 |
-| 某 target 永久 `up=0`，DNS 解析失败 | endpoint 字符串有**尾随空格**（如 `...luckyus-iopenlinkeradmin .vyllrs...`） | 去掉空格；粘贴时警惕行尾空白 |
-| 编辑后**所有**集群一起掉 | 某个 json 语法错（漏/多逗号），file_sd 或 exporter 解析失败丢弃整份文件 | 两份文件都过 `python3 -m json.tool`；用脚本改而非手改；有 `.bak` 回滚 |
-| target UP 但看板短时无数据 | cloudwatch-exporter 侧 `aws_elasticache_*` 有 5–10min 延迟；瞬时查询撞 5m staleness | 等几分钟；Top-N 瞬时表用 `last_over_time(<sel>[15m])` |
-| 选中集群 CPU 积分面板 "No data" | 该集群**非 burstable**（如 `luckyus-isales-market` = `m6g.large`），无 CPU-credit 机制 | 正常，非 bug。只有 T3/T4g 有积分指标 |
+| `up=1` 但无 `redis_*` / `redis_up=0` | 密码错/前缀不匹配；改密码后没重启 exporter | 核对 `redis-password.file`；重跑 §3.4 |
+| Prometheus 抓不到、但你以为加了 | 只改了密码文件没跑 `--apply`（targets 没重生成） | 跑 `sync_redis_monitoring.py --apply` |
+| 脚本报「同一 host 多前缀重复」 | 密码文件里同一 host 既有 `redis://` 又有 `rediss://` | 一个 host 只留一条（按真实 TLS） |
+| 脚本 CMDB 校验报 `[!]` 缺失 | 在营实例还没进密码文件 | 补 §3.1 那一行 |
+| 脚本 CMDB 校验报 `[?]` 僵尸 | 密码文件里的实例已在 CMDB 下线 | 从密码文件删掉该条再 `--apply` |
+| 找 `coupondata` 找不到 | 命名不一致：真实 RG 名 `luckyus-isales-coupon`（连字符） | 以 `ReplicationGroupId` 为准 |
+| 某 target 永久 `up=0`，DNS 失败 | key 里有**尾随空格** | 去空格；粘贴警惕行尾空白 |
+| 选中集群 CPU 积分面板 "No data" | 集群非 burstable（如 `isales-market` = `m6g.large`），无积分机制 | 正常，仅 T3/T4g 有积分 |
 
 ---
 
-## 7. 补充：CPU 积分与其它口径
+## 6. 补充：CPU 积分与其它口径
 
 - 本 runbook 只覆盖 **AWS Redis Summary** 看板（Prometheus `redis_exporter` 口径）。
-- **CPU 积分（CPU Credits）** 不在 Prometheus，走 `ldas` MySQL 采集表 `t_dba_collect_redis_cluster_metrics`（`collect_cloudwatch.py --tasks redis_metrics --write` 喂）。新集群要在自建 unified 看板上出积分，需采集器配置带上它并跑一次。详见 `redis-grafana-dashboard` / `redis-cpu-credit-capacity`。
-- 建议告警（避开生命周期误报）：`CPUCreditBalance < 50(micro)/100(small)` **且** `CPUUtilization > baseline` 持续 1h。刚 failover/重建的节点从 0 积分起充（~9.4/hr 净充），非过载——用 `describe-events` 交叉验证。
+- **CPU 积分** 不在 Prometheus，走 `ldas` 采集表 `t_dba_collect_redis_cluster_metrics`（`collect_cloudwatch.py --tasks redis_metrics --write` 喂）。详见 `redis-grafana-dashboard` / `redis-cpu-credit-capacity`。
+- 建议告警：`CPUCreditBalance < 50(micro)/100(small)` 且 `CPUUtilization > baseline` 持续 1h；failover/重建节点从 0 积分起充非过载，用 `describe-events` 交叉验证。
 
 ---
 
-## 8. 检查清单（Checklist）
+## 7. 检查清单
 
-前置
-- [ ] `describe-replication-groups` 拿到真实 endpoint + TLS 状态 + AuthTokenEnabled
-- [ ] 手上有该集群的 AUTH token（建集群时自设）
-- [ ] 按 TLS 选对 `rediss://` / `redis://`，端口 6379
-
-① redis_exporter（`/data/redis-exporter/redis_exporter-v1.74.0.linux-amd64/`）
-- [ ] 备份 `aws-redis-targets.json` + `redis-password.file`
-- [ ] `aws-redis-targets.json` 追加 endpoint（无尾随空格）→ json.tool 通过
-- [ ] `redis-password.file` 追加 `URI:token`（key 与 target 完全一致）→ json.tool 通过
+- [ ] `describe-replication-groups` 拿到 endpoint + TransitEncryptionEnabled + AUTH token
+- [ ] `redis-password.file` 加一行 `{uri: token}`：**加密 `rediss://` / 非加密 `redis://`**，token（无 AUTH 填 `""`），host:port 与 endpoint 一致，无尾随空格
+- [ ] `sync_redis_monitoring.py`（dry-run）：新集群将被加入、无重复、CMDB 无 `[!]`、项数 +1
+- [ ] `sync_redis_monitoring.py --apply`：两个 targets 文件已备份并写回
 - [ ] **重启 exporter**（kill + `./start.sh`），`:9321/metrics` 恢复
-
-② Prometheus（`/data/prometheus-2.43.0.linux-amd64/`）
-- [ ] 备份并在**该目录**的 `aws-redis-targets.json` 追加 endpoint（留意 §1.1 差异）→ json.tool 通过
-- [ ] 不 reload，等 file_sd 热加载
-
-③ 验证
 - [ ] `up{job="aws-redis_exporter"}=1` 且 `redis_up=1`
 - [ ] 集群出现在 AWS Redis Summary 看板
 - [ ] （如需积分）另走 ldas 采集器口径接入
+
+---
+
+## 附录：脚本
+
+`scripts/sync_redis_monitoring.py` — 一站式维护三文件。
+- 源：`redis-password.file`（手工）；派生：exporter 全 `rediss://` + prometheus 真实前缀。
+- 校验：密码文件自检 + ldas `cache_cloud_app` 旁路校验（需 `LDAS_PWD`）。
+- 默认 dry-run，`--apply` 才写；写前 `.bak` 备份。
+- 顶部 4 个路径常量按主机实际调整；ldas 密码走环境变量 `LDAS_PWD`，不硬编码。
+
+（主机原件在 `/data/redis-exporter/redis_exporter-v1.74.0.linux-amd64/`。）
