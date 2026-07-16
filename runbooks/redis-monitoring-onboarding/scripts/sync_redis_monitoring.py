@@ -158,12 +158,35 @@ def render_files(entries: list):
             json.dumps(sd_obj, indent=2))
 
 
+def _canonical(obj):
+    """把 JSON 结构规范化：dict 用 == 天然忽略键序，list 按内容排序，从而顺序无关。"""
+    if isinstance(obj, dict):
+        return {k: _canonical(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return sorted((_canonical(x) for x in obj),
+                      key=lambda x: json.dumps(x, sort_keys=True, ensure_ascii=False))
+    return obj
+
+
+def content_equivalent(old_text: str, new_text: str) -> bool:
+    """语义等价判断：两边解析成 JSON 后忽略顺序/排版比较（targets 顺序、键序、缩进都无所谓）。
+
+    任一边解析不了（如空文件/损坏）就退回首尾 strip 的文本比较——空文件 vs 非空 => 不等价 => 算漂移。
+    这只喂给 --cron 的漂移告警门槛；写文件层仍走文本比对以把磁盘归一化成规范格式。
+    """
+    try:
+        return _canonical(json.loads(old_text)) == _canonical(json.loads(new_text))
+    except (ValueError, TypeError):
+        return old_text.strip() == new_text.strip()
+
+
 # ========================= 写文件层 =========================
-def write_if_changed(path, new_text, apply, secret=False):
-    old = ""
-    if os.path.exists(path):
-        with open(path) as f:
-            old = f.read()
+def write_if_changed(path, new_text, apply, secret=False, old=None):
+    if old is None:                              # 允许调用方传入已读内容，避免二次读盘
+        old = ""
+        if os.path.exists(path):
+            with open(path) as f:
+                old = f.read()
     if old.strip() == new_text.strip():
         print(f"  [=] {path} 无变化")
         return False
@@ -298,29 +321,39 @@ def main():
 
     print("[4] 生成三文件" + ("（--apply 写回）" if apply else "（dry-run，不写）"))
     pwd_text, sd_text = render_files(entries)
-    changed_paths = []
+    changed_paths = []      # 文本层面会被改写的（驱动 --apply 归一化 + dry-run 报告）
+    drift_paths = []        # 语义层面真的不同的（只喂给 --cron 漂移告警，忽略顺序/排版）
     for path, text, secret in ((PASSWORD_FILE, pwd_text, True),
                                (EXPORTER_TARGETS, sd_text, False),
                                (PROMETHEUS_TARGETS, sd_text, False)):
-        if write_if_changed(path, text, apply, secret=secret):
+        old = ""
+        if os.path.exists(path):
+            with open(path) as f:
+                old = f.read()
+        semantically_diff = not content_equivalent(old, text)
+        if semantically_diff:
+            drift_paths.append(path)
+        if write_if_changed(path, text, apply, secret=secret, old=old):
             changed_paths.append(path)
+            if not semantically_diff:           # 文本变了但内容等价 = 纯归一化，非漂移
+                print("      （仅顺序/排版差异，内容等价——写回只是归一化，不算漂移）")
 
     if args.cron:
-        # 漂移判据直接来自 write_if_changed 的返回值 + db_only，不再 grep 输出字符串。
-        drift = bool(changed_paths) or bool(db_only)
+        # 漂移判据 = 语义比对(忽略顺序/排版)的 drift_paths + db_only，不再 grep 输出字符串。
+        drift = bool(drift_paths) or bool(db_only)
         if drift:
             lines = []
             if db_only:
                 lines.append("硬问题——DB 在营但 AWS 无对应 RG（改名/非 ElastiCache?）：")
                 lines += [f"  - {hp}" for hp in db_only]
-            if changed_paths:
+            if drift_paths:
                 lines.append("现网三文件与 AWS+ozono 不同步，待 --apply 更新：")
-                lines += [f"  - {p}" for p in changed_paths]
+                lines += [f"  - {p}" for p in drift_paths]
             if aws_only:
                 lines.append("AWS 有 RG 但 CMDB 未登记在营（仅提示，未纳管?）：")
                 lines += [f"  - {rid}" for rid in aws_only]
             subject = (f"[LKUS] AWS Redis 监控漂移待处理 "
-                       f"(files={len(changed_paths)}, db_only={len(db_only)})")
+                       f"(files={len(drift_paths)}, db_only={len(db_only)})")
             send_alert(subject, "\n".join(lines), args.webhook,
                        os.environ.get("FEISHU_SIGN_SECRET", ""))
         else:

@@ -274,5 +274,47 @@ class TestFeishuPayload(unittest.TestCase):
         self.assertNotEqual(m.feishu_sign("mysecret", "1700000001"), sig)
 
 
+class TestContentEquivalent(unittest.TestCase):
+    """--cron 漂移门槛：语义比对，忽略 targets 顺序/键序/缩进；解析失败退回文本比。"""
+
+    def test_identical_is_equivalent(self):
+        t = '[{"targets": ["redis://b:6379", "rediss://a:6379"], "labels": {}}]'
+        self.assertTrue(m.content_equivalent(t, t))
+
+    def test_reordered_targets_is_equivalent(self):
+        a = '[{"targets": ["redis://b:6379", "rediss://a:6379"], "labels": {}}]'
+        b = '[{"targets": ["rediss://a:6379", "redis://b:6379"], "labels": {}}]'
+        self.assertTrue(m.content_equivalent(a, b))   # 顺序颠倒 → 不算漂移
+
+    def test_reordered_password_keys_is_equivalent(self):
+        a = '{"rediss://a:6379": "x", "redis://b:6379": ""}'
+        b = '{"redis://b:6379": "", "rediss://a:6379": "x"}'
+        self.assertTrue(m.content_equivalent(a, b))   # 键序不同 → 不算漂移
+
+    def test_different_indent_is_equivalent(self):
+        obj = [{"targets": ["rediss://a:6379"], "labels": {}}]
+        import json
+        self.assertTrue(m.content_equivalent(
+            json.dumps(obj, indent=2), json.dumps(obj, indent=4)))
+
+    def test_real_content_change_is_drift(self):
+        a = '[{"targets": ["rediss://a:6379"], "labels": {}}]'
+        b = '[{"targets": ["rediss://a:6379", "rediss://c:6379"], "labels": {}}]'
+        self.assertFalse(m.content_equivalent(a, b))  # 多一个 target → 真漂移
+
+    def test_changed_password_value_is_drift(self):
+        a = '{"rediss://a:6379": "old"}'
+        b = '{"rediss://a:6379": "new"}'
+        self.assertFalse(m.content_equivalent(a, b))
+
+    def test_missing_file_empty_old_is_drift(self):
+        # 现网文件不存在（old=""）→ 解析失败退回文本比 → 与非空新内容不等价 → 漂移
+        self.assertFalse(m.content_equivalent("", '[{"targets": [], "labels": {}}]'))
+
+    def test_unparseable_falls_back_to_text_compare(self):
+        self.assertTrue(m.content_equivalent("not json  ", "  not json"))   # strip 后相同
+        self.assertFalse(m.content_equivalent("not json", "also not json"))
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

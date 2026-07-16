@@ -83,7 +83,7 @@ kill "$(pgrep -f 'redis_exporter .*-web.listen-address=\":9321\"')"; ./start.sh
 - **告警发飞书**：`--webhook` 传飞书自定义机器人 URL，脚本发 **interactive 交互式卡片**（红色标题栏 = 告警），中文正文不转义（`ensure_ascii=False`）。**没配 webhook 就只打印**（不发邮件、不依赖 cron `MAILTO`）——cron 那行已把输出重定向进日志文件，直接看日志即可。飞书即使 HTTP 200 也可能业务失败，脚本会检查返回体 `code`，非 0 时打 `[WARN]` 并把原文一起打印。
 - **签名校验**：若机器人开了"签名校验"，把密钥放环境变量 **`FEISHU_SIGN_SECRET`**，脚本自动叠加 `timestamp`+`sign`（`base64(HMAC-SHA256(key="{ts}\n{secret}", msg=""))`）。不开签名则无需设置。
 - **恒退出 0**：告警走飞书/日志，退出码不用于告警，避免上层包装脚本因退出码误判。
-- 漂移判据直接来自内部返回值（`write_if_changed` 结果 + `db_only`），**不再 grep 输出字符串**。
+- **漂移判据 = 语义比对**：文件内容按 JSON 解析后**忽略 targets 顺序 / 键序 / 缩进**再比（`content_equivalent`）——只在集合/取值**真的不同**时才告警。纯排版/顺序差异不告警。`--apply` 仍会把磁盘归一化成规范格式（dry-run 日志里标 `（仅顺序/排版差异…归一化，不算漂移）`）。判据不再 grep 输出字符串。
 
 真正 `--apply` + 重启 exporter 仍由人确认后执行（避免无人值守时 exporter 重启造成指标缺口）。
 
