@@ -1,0 +1,12 @@
+# ldas.conf.example — ldas CMDB 只读连接配置模板
+# 用法：复制为 ldas.conf，填好 password，并锁权限：
+#     cp ldas.conf.example ldas.conf && chmod 600 ldas.conf
+# sync_redis_monitoring.py 只从这一个文件读 ldas 连接信息
+# （endpoint / port / user / password / database 放在一起，不再有裸密码文件）。
+# password 一项也可留空、改由环境变量 LDAS_PASSWORD 注入（密管/CI 场景）。
+[ldas]
+host     = aws-luckyus-ldas-rw.cxwu08m2qypw.us-east-1.rds.amazonaws.com
+port     = 3306
+user     = luckyozono_A_o
+password = CHANGME
+database = luckyus_ozono

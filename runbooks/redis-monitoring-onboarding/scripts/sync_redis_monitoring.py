@@ -1,0 +1,340 @@
+#!/usr/bin/env python3
+"""
+sync_redis_monitoring.py — 全自动维护 AWS Redis 监控的三个文件（零手工）。
+
+替代旧的 aws-redis.py / diff.py / target_diff.py，并且**连密码都不用手工维护**。
+
+数据源（两个，都是权威）：
+  · AWS ElastiCache  describe-replication-groups  → 每集群 endpoint + TransitEncryptionEnabled + AuthTokenEnabled
+  · ldas CMDB        luckyus_ozono.cache_cloud_app(app_status=1) → 每实例 host_info(host:port) + password
+
+join 键：DB 的 host_info  ==  AWS 的 PrimaryEndpoint.Address + ":" + Port
+
+派生规则（每集群）：
+  · prefix = "rediss://" if TransitEncryptionEnabled else "redis://"    ← 真实 TLS
+  · token  = DB password if AuthTokenEnabled else ""                    ← 非 AUTH 一律空
+    （DB 对非 AUTH 实例也存了密码，但那种密码塞给 exporter 反而会被 Redis 拒，故置空）
+
+生成三个文件，**同一集群三处前缀一致**：
+  · redis-password.file            {  "<prefix><host>:<port>": "<token>"  }   (0600 权限)
+  · exporter aws-redis-targets.json   [ { "targets": ["<prefix><host>:<port>", ...], "labels": {} } ]
+  · prometheus aws-redis-targets.json 同上
+
+用法：
+  python3 sync_redis_monitoring.py                       # dry-run：拉数据、join、报告差异，不写（默认）
+  python3 sync_redis_monitoring.py --apply               # 备份后写回三个文件
+  python3 sync_redis_monitoring.py --cron [--webhook 飞书URL]  # 定时对账：只读，仅漂移/硬问题时告警(发飞书)，恒退出 0
+
+ldas 连接信息统一放在一个 0600 配置文件里（endpoint/port/user/password/database 在一起，
+不再有裸密码文件），默认 <EXPORTER_DIR>/ldas.conf，可用 --ldas-conf / 环境变量 LDAS_CONF 指定；
+password 一项允许被环境变量 LDAS_PASSWORD 覆盖（密管注入场景）。AWS 走本机 aws cli 凭证。
+参考模板见同目录 ldas.conf.example。
+
+写完后：Prometheus file_sd 热加载 targets（无需 reload）；
+       若 redis-password.file 有变化，重启 exporter（密码启动时才读）：
+       kill "$(pgrep -f 'redis_exporter .*-web.listen-address=\":9321\"')" ; ./start.sh
+
+告警走飞书自定义机器人（interactive 卡片，红色标题）：--webhook 传机器人 URL；
+若机器人开了"签名校验"，把密钥放环境变量 FEISHU_SIGN_SECRET，脚本自动叠加 timestamp+sign。
+
+crontab（无需 shell 包装，直接调本脚本的 --cron 模式）：
+  */30 * * * * cd <EXPORTER_DIR> && python3 sync_redis_monitoring.py --cron --webhook https://open.feishu.cn/open-apis/bot/v2/hook/xxxx
+"""
+
+import argparse
+import configparser
+import json
+import os
+import subprocess
+import sys
+import datetime
+
+# ----- 路径（按主机实际情况调整）-----------------------------------------
+EXPORTER_DIR       = "/data/redis-exporter/redis_exporter-v1.74.0.linux-amd64"
+PASSWORD_FILE      = os.path.join(EXPORTER_DIR, "redis-password.file")
+EXPORTER_TARGETS   = os.path.join(EXPORTER_DIR, "aws-redis-targets.json")
+PROMETHEUS_TARGETS = "/data/prometheus-2.43.0.linux-amd64/aws-redis-targets.json"
+REGION             = "us-east-1"
+DEFAULT_LDAS_CONF  = os.path.join(EXPORTER_DIR, "ldas.conf")
+
+
+# ----- ldas CMDB 连接配置（单文件，endpoint/port/user/password/database 在一起）-----
+def load_ldas_conf(path: str) -> dict:
+    """从 INI 配置读 ldas 连接信息。缺文件/缺段/缺字段一律 FATAL，绝不半路裸奔。
+
+    password 允许被环境变量 LDAS_PASSWORD 覆盖（用于密管/CI 注入，不落盘）。
+    """
+    cp = configparser.ConfigParser()
+    if not cp.read(path):
+        sys.exit(f"[FATAL] 读不到 ldas 配置文件: {path}"
+                 f"（复制 ldas.conf.example 为 {os.path.basename(path)} 并填好，chmod 600）")
+    if not cp.has_section("ldas"):
+        sys.exit(f"[FATAL] {path} 缺少 [ldas] 段（见 ldas.conf.example）")
+    s = cp["ldas"]
+    conf = {
+        "host": s.get("host", "").strip(),
+        "port": s.getint("port", 3306),
+        "user": s.get("user", "").strip(),
+        "password": os.environ.get("LDAS_PASSWORD", s.get("password", "")).strip(),
+        "database": s.get("database", "").strip(),
+    }
+    missing = [k for k in ("host", "user", "password", "database") if not conf[k]]
+    if missing:
+        sys.exit(f"[FATAL] ldas 配置缺字段: {', '.join(missing)}（见 {path}）")
+    return conf
+
+
+# ========================= 数据采集层 =========================
+def fetch_aws_rgs(region=REGION) -> dict:
+    """返回 { "<ep>:<port>": {"id":.., "tls":bool, "auth":bool} }。走本机 aws cli。"""
+    q = ("ReplicationGroups[].{id:ReplicationGroupId,"
+         "tls:TransitEncryptionEnabled,auth:AuthTokenEnabled,"
+         "ep:NodeGroups[0].PrimaryEndpoint.Address,"
+         "port:NodeGroups[0].PrimaryEndpoint.Port}")
+    out = subprocess.check_output(
+        ["aws", "elasticache", "describe-replication-groups",
+         "--region", region, "--query", q, "--output", "json"])
+    rgs = json.loads(out)
+    amap = {}
+    for r in rgs:
+        if not r.get("ep"):
+            continue
+        amap[f"{r['ep']}:{r['port']}"] = {
+            "id": r["id"], "tls": bool(r["tls"]), "auth": bool(r["auth"])}
+    return amap
+
+
+def fetch_db_instances(ldas_conf: dict) -> list:
+    """返回 [ {"app": app_name, "hostport": host_info, "password": pwd}, ... ]（app_status=1）。"""
+    import pymysql
+    conn = pymysql.connect(**ldas_conf)
+    try:
+        with conn.cursor() as cur:
+            cur.execute("SELECT app_name, host_info, password "
+                        "FROM cache_cloud_app WHERE app_status=1")
+            return [{"app": a, "hostport": h, "password": p or ""}
+                    for (a, h, p) in cur.fetchall()]
+    finally:
+        conn.close()
+
+
+# ========================= 纯逻辑层（可单测）=========================
+def build_plan(db_rows: list, aws_map: dict):
+    """
+    join DB 实例与 AWS RG，产出：
+      entries: [ {"hostport":.., "prefix":.., "uri":.., "token":.., "id":.., "tls":..} ]  已 join 上的
+      db_only:  [hostport, ...]  DB 在营但 AWS 找不到（改名/非 ElastiCache?）
+      aws_only: [id, ...]        AWS 有 RG 但 DB 未登记为在营（未纳管?）
+    """
+    matched = {}          # hostport -> entry；同端点被多 app 共用时只留一条，避免重复 target
+    db_only = set()       # 用 set 去重，多条 ghost 行指向同一 endpoint 只报一次
+    for row in db_rows:
+        hp = row["hostport"]
+        rg = aws_map.get(hp)
+        if rg is None:
+            db_only.add(hp)
+            continue
+        prefix = "rediss://" if rg["tls"] else "redis://"
+        token = row["password"] if rg["auth"] else ""
+        existing = matched.get(hp)
+        if existing is None:
+            matched[hp] = {
+                "hostport": hp, "prefix": prefix, "uri": prefix + hp,
+                "token": token, "id": rg["id"], "tls": rg["tls"]}
+        elif rg["auth"] and not existing["token"] and token:
+            # 共用端点：某 app 行没存密码、另一行存了 → 保留非空的那个
+            existing["token"] = token
+    aws_only = sorted(v["id"] for k, v in aws_map.items() if k not in matched)
+    entries = sorted(matched.values(), key=lambda e: e["uri"])
+    return entries, sorted(db_only), aws_only
+
+
+def render_files(entries: list):
+    """从 entries 渲染三个文件的目标内容（字符串）。"""
+    pwd_obj = {e["uri"]: e["token"] for e in entries}
+    targets = [e["uri"] for e in entries]
+    sd_obj = [{"targets": targets, "labels": {}}]
+    return (json.dumps(pwd_obj, indent=2),
+            json.dumps(sd_obj, indent=2))
+
+
+# ========================= 写文件层 =========================
+def write_if_changed(path, new_text, apply, secret=False):
+    old = ""
+    if os.path.exists(path):
+        with open(path) as f:
+            old = f.read()
+    if old.strip() == new_text.strip():
+        print(f"  [=] {path} 无变化")
+        return False
+    print(f"  [~] {path} 将更新")
+    if apply:
+        if old:
+            bak = f"{path}.bak.{datetime.datetime.now():%Y%m%d-%H%M%S}"
+            with open(bak, "w") as f:
+                f.write(old)
+            print(f"      备份 → {bak}")
+        with open(path, "w") as f:
+            f.write(new_text)
+        if secret:
+            os.chmod(path, 0o600)
+        print("      已写入" + ("（0600）" if secret else ""))
+    return True
+
+
+def build_feishu_payload(subject: str, body: str) -> dict:
+    """构造飞书自定义机器人消息体（interactive 交互式卡片，红色标题）。
+
+    纯函数、不碰网络/时间，便于单测。签名（开启"签名校验"的机器人才需要）
+    由 feishu_sign() 单独在发送时叠加，不放进这里以保持可测。
+    """
+    content = body.strip() if body.strip() else "（无详情）"
+    return {
+        "msg_type": "interactive",
+        "card": {
+            "config": {"wide_screen_mode": True},
+            "header": {
+                "template": "red",                       # 告警用红色标题栏
+                "title": {"tag": "plain_text", "content": subject},
+            },
+            "elements": [
+                {"tag": "div",
+                 "text": {"tag": "lark_md", "content": content}},
+            ],
+        },
+    }
+
+
+def feishu_sign(secret: str, timestamp: str) -> str:
+    """飞书机器人"签名校验"算法：base64(HMAC-SHA256(key=f"{ts}\\n{secret}", msg=""))。
+
+    timestamp 由调用方传入（而非内部取 now）以便单测其确定性。
+    """
+    import base64
+    import hashlib
+    import hmac
+    string_to_sign = f"{timestamp}\n{secret}"
+    digest = hmac.new(string_to_sign.encode("utf-8"),
+                      msg=b"", digestmod=hashlib.sha256).digest()
+    return base64.b64encode(digest).decode("utf-8")
+
+
+def send_alert(subject: str, body: str, webhook: str = "", secret: str = ""):
+    """漂移告警：有飞书 webhook 就 POST 卡片；没配就只打印（cron 已把输出重定向进日志文件）。
+
+    不发邮件、不依赖 cron MAILTO：无 webhook / 发送失败一律打印到 stdout，让它落进日志即可。
+    secret 非空（环境变量 FEISHU_SIGN_SECRET）时叠加 timestamp+sign（机器人开了签名校验）。
+    飞书即使 HTTP 200 也可能业务失败（返回体 code!=0），故要检查返回码。
+    """
+    if not webhook:
+        print("[ALERT] 未配置飞书 webhook，仅打印（cron 输出已写入日志）：")
+        print(subject)
+        print(body)
+        return
+
+    import urllib.request
+    payload = build_feishu_payload(subject, body)
+    if secret:
+        import time
+        ts = str(int(time.time()))
+        payload["timestamp"] = ts
+        payload["sign"] = feishu_sign(secret, ts)
+    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    req = urllib.request.Request(
+        webhook, data=data, headers={"Content-Type": "application/json"})
+    try:
+        resp = urllib.request.urlopen(req, timeout=10).read()
+    except Exception as e:                       # 网络/端点问题不该让 cron 崩，打印即可
+        print(f"      [WARN] 飞书 webhook 发送失败: {e}")
+        print(subject)
+        print(body)
+        return
+    try:
+        code = json.loads(resp.decode("utf-8")).get("code", 0)
+    except Exception:
+        code = 0                                 # 返回体解析不了就当发出去了
+    if code:                                     # code!=0 = 飞书侧拒绝（签名错/机器人停用等）
+        print(f"      [WARN] 飞书返回错误码 code={code}: {resp!r}")
+        print(subject)
+        print(body)
+    else:
+        print(f"      告警已发送到飞书 → {webhook}")
+
+
+def main():
+    ap = argparse.ArgumentParser(description="全自动维护 AWS Redis 监控三文件")
+    ap.add_argument("--apply", action="store_true",
+                    help="真正写回三个文件（默认 dry-run 只报告）")
+    ap.add_argument("--cron", action="store_true",
+                    help="定时对账模式：只读，仅漂移/硬问题时告警，恒退出 0（不写文件）")
+    ap.add_argument("--webhook", default=os.environ.get("REDIS_SYNC_WEBHOOK", ""),
+                    help="--cron 告警的飞书机器人 webhook（发 interactive 卡片）；"
+                         "缺省则只打印（cron 输出已重定向进日志，不发邮件）。签名校验密钥用环境变量 FEISHU_SIGN_SECRET")
+    ap.add_argument("--ldas-conf", default=os.environ.get("LDAS_CONF", DEFAULT_LDAS_CONF),
+                    help=f"ldas 连接配置文件（默认 {DEFAULT_LDAS_CONF}）")
+    args = ap.parse_args()
+
+    # --cron 恒为只读对账；--apply 只在非 cron 时生效
+    apply = args.apply and not args.cron
+    ldas_conf = load_ldas_conf(args.ldas_conf)
+
+    print("[1] 拉取 AWS ElastiCache 加密/AUTH 状态 ...")
+    aws_map = fetch_aws_rgs()
+    tls_n = sum(1 for v in aws_map.values() if v["tls"])
+    print(f"    AWS RG {len(aws_map)}：TLS {tls_n} / 非TLS {len(aws_map)-tls_n}")
+
+    print("[2] 拉取 ldas cache_cloud_app 在营实例 ...")
+    db_rows = fetch_db_instances(ldas_conf)
+    print(f"    在营实例 {len(db_rows)}")
+
+    print("[3] join + 派生 ...")
+    entries, db_only, aws_only = build_plan(db_rows, aws_map)
+    non_tls = [e["id"] for e in entries if not e["tls"]]
+    print(f"    已匹配 {len(entries)}；其中非TLS(redis://) {len(non_tls)}: {non_tls}")
+    for hp in db_only:
+        print(f"  [!] DB 在营但 AWS 无对应 RG（改名/非ElastiCache?）: {hp}")
+    for rid in aws_only:
+        print(f"  [?] AWS 有 RG 但 DB 未登记在营（未纳管?）: {rid}")
+
+    print("[4] 生成三文件" + ("（--apply 写回）" if apply else "（dry-run，不写）"))
+    pwd_text, sd_text = render_files(entries)
+    changed_paths = []
+    for path, text, secret in ((PASSWORD_FILE, pwd_text, True),
+                               (EXPORTER_TARGETS, sd_text, False),
+                               (PROMETHEUS_TARGETS, sd_text, False)):
+        if write_if_changed(path, text, apply, secret=secret):
+            changed_paths.append(path)
+
+    if args.cron:
+        # 漂移判据直接来自 write_if_changed 的返回值 + db_only，不再 grep 输出字符串。
+        drift = bool(changed_paths) or bool(db_only)
+        if drift:
+            lines = []
+            if db_only:
+                lines.append("硬问题——DB 在营但 AWS 无对应 RG（改名/非 ElastiCache?）：")
+                lines += [f"  - {hp}" for hp in db_only]
+            if changed_paths:
+                lines.append("现网三文件与 AWS+ozono 不同步，待 --apply 更新：")
+                lines += [f"  - {p}" for p in changed_paths]
+            if aws_only:
+                lines.append("AWS 有 RG 但 CMDB 未登记在营（仅提示，未纳管?）：")
+                lines += [f"  - {rid}" for rid in aws_only]
+            subject = (f"[LKUS] AWS Redis 监控漂移待处理 "
+                       f"(files={len(changed_paths)}, db_only={len(db_only)})")
+            send_alert(subject, "\n".join(lines), args.webhook,
+                       os.environ.get("FEISHU_SIGN_SECRET", ""))
+        else:
+            print("\n[cron] 无漂移、无硬问题，静默。")
+        sys.exit(0)   # cron 恒 0：告警走飞书/日志，退出码不用于告警，避免包装脚本误判
+
+    if not apply:
+        print("\n这是 dry-run。确认无误后加 --apply 写回。")
+    else:
+        print("\n完成。Prometheus file_sd 会热加载 targets。")
+        print("redis-password.file 若有变化，请重启 exporter 使新密码生效。")
+    # db_only 是需要人工关注的硬问题 → 非零退出码
+    sys.exit(1 if db_only else 0)
+
+
+if __name__ == "__main__":
+    main()
