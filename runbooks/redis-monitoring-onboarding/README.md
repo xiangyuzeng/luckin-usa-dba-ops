@@ -74,6 +74,16 @@ kill "$(pgrep -f 'redis_exporter .*-web.listen-address=\":9321\"')"; ./start.sh
 - `[?] AWS 有 RG 但 DB 未登记在营` — AWS 有集群但 ozono 未纳管，视情况处理。
 - `[~] … 将更新` / `[=] … 无变化` — 每个文件是否需要写。对已纳管集群，`redis-password.file` 应恒为 `[=]`（token 沿用现有值，幂等）。
 - 「非TLS(redis://) N: [...]」— 本次识别到的非加密集群。
+- `[!] 应监控但未生效（<reason>）` — 步骤 [6] 查 Prometheus 现状发现"应监控却没监控上"的实例（硬问题，**退出码 1**）：
+  - `not_scraped` — 计划里该有、但 Prometheus 根本没这个 target（漏纳管 / 漂移未 `--apply` / 名字带空格等）。
+  - `scrape_down` — 有 target 但 `up=0`（DNS/网络，exporter 抓不到）。
+  - `auth_down` — `up=1` 但 `redis_up=0`（连上但认证/连接失败，通常是缺/错 token）。
+
+### 步骤 [6]：对现有监控状态的检查
+每次运行（含 `--cron`）都会查 Prometheus `up{job="aws-redis-job"}` 和 `redis_up{...}`，把"应监控"（本次派生出的 entries）与实际抓取状态比对，挑出上面三类未生效实例并计入告警/退出码。
+- Prometheus 地址默认 `http://10.238.3.136:9090`，可用环境变量 **`PROMETHEUS_URL`** 覆盖（脚本顶部亦有常量）。
+- **尽力而为**：Prometheus 不可达时只打 `[WARN]` 跳过，不让脚本失败、也不误报。
+- `--skip-monitoring-check` 可完全关闭这一步。
 
 ---
 
@@ -82,7 +92,7 @@ kill "$(pgrep -f 'redis_exporter .*-web.listen-address=\":9321\"')"; ./start.sh
 `--cron` 是脚本内建的定时对账模式，**无需任何 shell 包装**：
 
 - **只读**：恒不写文件（即使同时传了 `--apply` 也忽略），只拉 AWS+ozono、join、比对现网三文件。
-- **只在异常时告警**：现网三文件与 AWS+ozono 不同步（有文件"将更新"）、或有硬问题（`db_only`：在营却在 AWS 找不到）时才发；否则静默。
+- **只在异常时告警**：任一硬问题时才发，否则静默。硬问题 = 三文件与 AWS+ozono 语义不同步（`drift_paths`）/ `db_only`（在营却在 AWS 找不到）/ `token_missing`（AUTH 缺 token）/ **`not_monitored`（应监控却未有效监控，来自步骤 [6] 查 Prometheus）**。飞书标题会带各类计数 `(files=, db_only=, token_missing=, not_monitored=)`。
 - **告警发飞书**：`--webhook` 传飞书自定义机器人 URL，脚本发 **interactive 交互式卡片**（红色标题栏 = 告警），中文正文不转义（`ensure_ascii=False`）。**没配 webhook 就只打印**（不发邮件、不依赖 cron `MAILTO`）——cron 那行已把输出重定向进日志文件，直接看日志即可。飞书即使 HTTP 200 也可能业务失败，脚本会检查返回体 `code`，非 0 时打 `[WARN]` 并把原文一起打印。
 - **签名校验**：若机器人开了"签名校验"，把密钥放环境变量 **`FEISHU_SIGN_SECRET`**，脚本自动叠加 `timestamp`+`sign`（`base64(HMAC-SHA256(key="{ts}\n{secret}", msg=""))`）。不开签名则无需设置。
 - **恒退出 0**：告警走飞书/日志，退出码不用于告警，避免上层包装脚本因退出码误判。

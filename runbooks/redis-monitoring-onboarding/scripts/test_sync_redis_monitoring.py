@@ -256,6 +256,52 @@ class TestParseExistingTokens(unittest.TestCase):
         self.assertEqual(m.parse_existing_tokens("not json"), {})
 
 
+class TestCheckMonitoring(unittest.TestCase):
+    """把"应监控"(entries) 和 Prometheus up/redis_up 现状比对，挑未有效监控的实例。"""
+
+    def _entries(self):
+        return [{"id": "luckyus-a", "uri": "rediss://ep-a:6379"},
+                {"id": "luckyus-b", "uri": "redis://ep-b:6379"},
+                {"id": "luckyus-c", "uri": "rediss://ep-c:6379"}]
+
+    def test_all_healthy_returns_empty(self):
+        up = {"rediss://ep-a:6379": 1, "redis://ep-b:6379": 1, "rediss://ep-c:6379": 1}
+        ru = dict(up)
+        self.assertEqual(m.check_monitoring(self._entries(), up, ru), [])
+
+    def test_not_scraped_when_absent_from_prometheus(self):
+        # ep-c 应监控但 Prometheus 里根本没有 → not_scraped（漏纳管/漂移未 apply）
+        up = {"rediss://ep-a:6379": 1, "redis://ep-b:6379": 1}
+        ru = dict(up)
+        got = m.check_monitoring(self._entries(), up, ru)
+        self.assertEqual(got, [{"id": "luckyus-c", "uri": "rediss://ep-c:6379",
+                                "reason": "not_scraped"}])
+
+    def test_scrape_down_when_up_zero(self):
+        up = {"rediss://ep-a:6379": 1, "redis://ep-b:6379": 0, "rediss://ep-c:6379": 1}
+        ru = {"rediss://ep-a:6379": 1, "redis://ep-b:6379": 0, "rediss://ep-c:6379": 1}
+        got = m.check_monitoring(self._entries(), up, ru)
+        self.assertEqual([(p["id"], p["reason"]) for p in got],
+                         [("luckyus-b", "scrape_down")])
+
+    def test_auth_down_when_up1_but_redis_up0(self):
+        # 经典缺/错 token：抓到了(up=1)但连不上(redis_up=0)
+        up = {"rediss://ep-a:6379": 1, "redis://ep-b:6379": 1, "rediss://ep-c:6379": 1}
+        ru = {"rediss://ep-a:6379": 0, "redis://ep-b:6379": 1, "rediss://ep-c:6379": 1}
+        got = m.check_monitoring(self._entries(), up, ru)
+        self.assertEqual([(p["id"], p["reason"]) for p in got],
+                         [("luckyus-a", "auth_down")])
+
+    def test_results_sorted_by_uri(self):
+        up, ru = {}, {}                     # 全缺 → 全 not_scraped，应按 uri 排序
+        got = m.check_monitoring(self._entries(), up, ru)
+        self.assertEqual([p["uri"] for p in got],
+                         ["redis://ep-b:6379", "rediss://ep-a:6379", "rediss://ep-c:6379"])
+
+    def test_empty_plan_returns_empty(self):
+        self.assertEqual(m.check_monitoring([], {"x": 1}, {"x": 1}), [])
+
+
 class TestFeishuPayload(unittest.TestCase):
     """飞书消息体 + 签名：都是纯函数，不碰网络。"""
 

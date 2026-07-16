@@ -29,6 +29,8 @@ join 键：DB 的 host_info  ==  AWS 的 PrimaryEndpoint.Address + ":" + Port
   python3 sync_redis_monitoring.py                       # dry-run：拉数据、join、报告差异，不写（默认）
   python3 sync_redis_monitoring.py --apply               # 备份后写回三个文件
   python3 sync_redis_monitoring.py --cron [--webhook 飞书URL]  # 定时对账：只读，仅漂移/硬问题时告警(发飞书)，恒退出 0
+  （每次都会额外查 Prometheus，找"应监控却未有效监控"的实例；--skip-monitoring-check 可关；
+   Prometheus 地址默认 http://10.238.3.136:9090，可用环境变量 PROMETHEUS_URL 覆盖）
 
 ldas 连接信息统一放在一个 0600 配置文件里（endpoint/port/user/password/database 在一起，
 不再有裸密码文件），默认 <EXPORTER_DIR>/ldas.conf，可用 --ldas-conf / 环境变量 LDAS_CONF 指定；
@@ -61,6 +63,8 @@ EXPORTER_TARGETS   = os.path.join(EXPORTER_DIR, "aws-redis-targets.json")
 PROMETHEUS_TARGETS = "/data/prometheus-2.43.0.linux-amd64/aws-redis-targets.json"
 REGION             = "us-east-1"
 DEFAULT_LDAS_CONF  = os.path.join(EXPORTER_DIR, "ldas.conf")
+PROM_JOB           = "aws-redis-job"                                    # Prometheus 里 Redis 的 job 标签
+PROMETHEUS_URL     = os.environ.get("PROMETHEUS_URL", "http://10.238.3.136:9090")  # 监控状态检查用
 
 
 # ----- ldas CMDB 连接配置（单文件，endpoint/port/user/password/database 在一起）-----
@@ -125,6 +129,27 @@ def fetch_db_instances(ldas_conf: dict) -> list:
             return [{"app": a, "hostport": h} for (a, h) in cur.fetchall()]
     finally:
         conn.close()
+
+
+def fetch_monitoring_state(prom_url: str = PROMETHEUS_URL, job: str = PROM_JOB):
+    """查 Prometheus 现状，返回 (up_map, redis_up_map)：{instance -> 0/1}。
+
+    instance 标签 = targets 文件里的 URI（prefix+host:port），与 build_plan 的 entry["uri"] 对齐。
+    查询失败抛异常，由调用方兜底（监控状态检查是尽力而为，Prometheus 不可达不该让脚本崩）。
+    """
+    import urllib.parse
+    import urllib.request
+
+    def q(expr):
+        url = prom_url.rstrip("/") + "/api/v1/query?query=" + urllib.parse.quote(expr)
+        with urllib.request.urlopen(url, timeout=10) as r:
+            data = json.loads(r.read())
+        if data.get("status") != "success":
+            raise RuntimeError(f"Prometheus 查询未成功: {expr} -> {data.get('status')}")
+        return {it["metric"].get("instance", ""): float(it["value"][1])
+                for it in data["data"]["result"]}
+
+    return q(f'up{{job="{job}"}}'), q(f'redis_up{{job="{job}"}}')
 
 
 # ========================= 纯逻辑层（可单测）=========================
@@ -207,6 +232,30 @@ def content_equivalent(old_text: str, new_text: str) -> bool:
         return _canonical(json.loads(old_text)) == _canonical(json.loads(new_text))
     except (ValueError, TypeError):
         return old_text.strip() == new_text.strip()
+
+
+def check_monitoring(entries: list, up_map: dict, redis_up_map: dict) -> list:
+    """比对"应监控"(entries) 与 Prometheus 现状，挑出**未有效监控**的实例（纯函数，可单测）。
+
+    up_map / redis_up_map: {instance -> 0/1}，来自 Prometheus up{} / redis_up{}。
+    返回 [ {"id":.., "uri":.., "reason":..} ]，按 uri 排序；健康(up==1 且 redis_up==1)的不返回。reason：
+      not_scraped  应监控但 Prometheus 里根本没有这个 target（漏纳管 / 漂移未 apply / 名字带空格等）
+      scrape_down  有 target 但 up==0（DNS/网络，exporter 抓不到）
+      auth_down    up==1 但 redis_up==0（连上但认证/连接失败，如缺/错 token）
+    """
+    problems = []
+    for e in entries:
+        uri = e["uri"]
+        if uri not in up_map:
+            reason = "not_scraped"
+        elif up_map.get(uri, 0) != 1:
+            reason = "scrape_down"
+        elif redis_up_map.get(uri, 0) != 1:
+            reason = "auth_down"
+        else:
+            continue                      # up==1 且 redis_up==1 → 健康，跳过
+        problems.append({"id": e["id"], "uri": uri, "reason": reason})
+    return sorted(problems, key=lambda p: p["uri"])
 
 
 # ========================= 写文件层 =========================
@@ -324,6 +373,8 @@ def main():
                          "缺省则只打印（cron 输出已重定向进日志，不发邮件）。签名校验密钥用环境变量 FEISHU_SIGN_SECRET")
     ap.add_argument("--ldas-conf", default=os.environ.get("LDAS_CONF", DEFAULT_LDAS_CONF),
                     help=f"ldas 连接配置文件（默认 {DEFAULT_LDAS_CONF}）")
+    ap.add_argument("--skip-monitoring-check", action="store_true",
+                    help="跳过对 Prometheus 现状的检查（默认会查 up/redis_up 找应监控但未生效的实例）")
     args = ap.parse_args()
 
     # --cron 恒为只读对账；--apply 只在非 cron 时生效
@@ -378,9 +429,26 @@ def main():
             if not semantically_diff:           # 文本变了但内容等价 = 纯归一化，非漂移
                 print("      （仅顺序/排版差异，内容等价——写回只是归一化，不算漂移）")
 
+    print("[6] 检查现有监控状态（应监控但未有效监控的实例）...")
+    not_monitored = []
+    if args.skip_monitoring_check:
+        print("    （--skip-monitoring-check，跳过）")
+    else:
+        try:
+            up_map, redis_up_map = fetch_monitoring_state()
+            not_monitored = check_monitoring(entries, up_map, redis_up_map)
+            if not_monitored:
+                for p in not_monitored:
+                    print(f"  [!] 应监控但未生效（{p['reason']}）: {p['id']}  {p['uri']}")
+            else:
+                print(f"    计划 {len(entries)} 个集群均在监控且健康（up=1, redis_up=1）")
+        except Exception as e:  # Prometheus 不可达等：尽力而为，不让脚本崩
+            print(f"    [WARN] 查询 Prometheus 失败，跳过监控状态检查: {e}")
+
     if args.cron:
-        # 漂移判据 = 语义比对(忽略顺序/排版)的 drift_paths + db_only + token_missing，不再 grep 输出字符串。
-        drift = bool(drift_paths) or bool(db_only) or bool(token_missing)
+        # 漂移判据 = drift_paths + db_only + token_missing + not_monitored（应监控却未生效）。
+        drift = (bool(drift_paths) or bool(db_only) or bool(token_missing)
+                 or bool(not_monitored))
         if drift:
             lines = []
             if db_only:
@@ -389,6 +457,9 @@ def main():
             if token_missing:
                 lines.append("硬问题——AUTH 集群缺 token（现有密码文件里没有，需人工补，绝不从 ozono 猜）：")
                 lines += [f"  - {hp}" for hp in token_missing]
+            if not_monitored:
+                lines.append("硬问题——应监控但未有效监控（Prometheus 现状）：")
+                lines += [f"  - {p['reason']}: {p['id']}  {p['uri']}" for p in not_monitored]
             if drift_paths:
                 lines.append("现网三文件与 AWS+ozono 不同步，待 --apply 更新：")
                 lines += [f"  - {p}" for p in drift_paths]
@@ -397,7 +468,7 @@ def main():
                 lines += [f"  - {rid}" for rid in aws_only]
             subject = (f"[LKUS] AWS Redis 监控漂移待处理 "
                        f"(files={len(drift_paths)}, db_only={len(db_only)}, "
-                       f"token_missing={len(token_missing)})")
+                       f"token_missing={len(token_missing)}, not_monitored={len(not_monitored)})")
             send_alert(subject, "\n".join(lines), args.webhook,
                        os.environ.get("FEISHU_SIGN_SECRET", ""))
         else:
@@ -409,8 +480,8 @@ def main():
     else:
         print("\n完成。Prometheus file_sd 会热加载 targets。")
         print("redis-password.file 若有变化，请重启 exporter 使新密码生效。")
-    # db_only / token_missing 是需要人工关注的硬问题 → 非零退出码
-    sys.exit(1 if db_only or token_missing else 0)
+    # db_only / token_missing / not_monitored 是需要人工关注的硬问题 → 非零退出码
+    sys.exit(1 if db_only or token_missing or not_monitored else 0)
 
 
 if __name__ == "__main__":
