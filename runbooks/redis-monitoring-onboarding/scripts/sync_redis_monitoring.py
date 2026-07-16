@@ -4,16 +4,21 @@ sync_redis_monitoring.py — 全自动维护 AWS Redis 监控的三个文件（�
 
 替代旧的 aws-redis.py / diff.py / target_diff.py，并且**连密码都不用手工维护**。
 
-数据源（两个，都是权威）：
+数据源（三个）：
   · AWS ElastiCache  describe-replication-groups  → 每集群 endpoint + TransitEncryptionEnabled + AuthTokenEnabled
-  · ldas CMDB        luckyus_ozono.cache_cloud_app(app_status=1) → 每实例 host_info(host:port) + password
+  · ldas CMDB        luckyus_ozono.cache_cloud_app(app_status=1) → 每在营实例 host_info(host:port)
+                     （只用于发现集群 + 与 AWS 对账，**不再取 password**）
+  · 现有 redis-password.file → 每集群 token 的**权威来源**（见下方 token 规则）
 
 join 键：DB 的 host_info  ==  AWS 的 PrimaryEndpoint.Address + ":" + Port
 
 派生规则（每集群）：
-  · prefix = "rediss://" if TransitEncryptionEnabled else "redis://"    ← 真实 TLS
-  · token  = DB password if AuthTokenEnabled else ""                    ← 非 AUTH 一律空
-    （DB 对非 AUTH 实例也存了密码，但那种密码塞给 exporter 反而会被 Redis 拒，故置空）
+  · prefix = "rediss://" if TransitEncryptionEnabled else "redis://"    ← 真实 TLS，取自 AWS
+  · token  = 现有 redis-password.file 里该集群的 token（按 host:port 查，前缀无关）
+             非 AUTH 集群一律空；AUTH 集群但文件里没有 → 标 token_missing，人工补，先写空、绝不猜值
+    ⚠️ token 绝不取自 ozono：ozono.cache_cloud_app.password 对 AUTH 集群与真实 AUTH token 不符，
+       2026-07-16 曾因 --apply 用 ozono 密码覆盖，导致 71 个 AUTH 集群认证失败 redis_up=0，已回滚。
+       现有密码文件才是 token 的唯一权威来源；脚本只增删 key/前缀、绝不改动已有 token。
 
 生成三个文件，**同一集群三处前缀一致**：
   · redis-password.file            {  "<prefix><host>:<port>": "<token>"  }   (0600 权限)
@@ -105,48 +110,72 @@ def fetch_aws_rgs(region=REGION) -> dict:
 
 
 def fetch_db_instances(ldas_conf: dict) -> list:
-    """返回 [ {"app": app_name, "hostport": host_info, "password": pwd}, ... ]（app_status=1）。"""
+    """返回 [ {"app": app_name, "hostport": host_info}, ... ]（app_status=1）。
+
+    只取 host_info：用于发现在营集群 + 与 AWS 对账。**token 不再从 ozono 取**——
+    其 password 列对 AUTH 集群与真实 token 不符（2026-07-16 曾因此 --apply 打挂 71 个 AUTH）。
+    token 的权威来源是现有 redis-password.file，见 parse_existing_tokens / build_plan。
+    """
     import pymysql
     conn = pymysql.connect(**ldas_conf)
     try:
         with conn.cursor() as cur:
-            cur.execute("SELECT app_name, host_info, password "
+            cur.execute("SELECT app_name, host_info "
                         "FROM cache_cloud_app WHERE app_status=1")
-            return [{"app": a, "hostport": h, "password": p or ""}
-                    for (a, h, p) in cur.fetchall()]
+            return [{"app": a, "hostport": h} for (a, h) in cur.fetchall()]
     finally:
         conn.close()
 
 
 # ========================= 纯逻辑层（可单测）=========================
-def build_plan(db_rows: list, aws_map: dict):
+def parse_existing_tokens(pwd_text: str) -> dict:
+    """把现有 redis-password.file 文本解析成 { "host:port" -> token }。
+
+    去掉 scheme 前缀按 host:port 归键，使前缀变化（rediss://<->redis://）仍能按集群命中 token。
+    空/损坏文本 => {}。**这是 token 的权威来源**：脚本以现有密码文件里的 token 为准，绝不从 ozono 覆盖。
     """
-    join DB 实例与 AWS RG，产出：
-      entries: [ {"hostport":.., "prefix":.., "uri":.., "token":.., "id":.., "tls":..} ]  已 join 上的
+    if not pwd_text.strip():
+        return {}
+    try:
+        raw = json.loads(pwd_text)
+    except ValueError:
+        return {}
+    return {uri.split("://", 1)[-1]: token for uri, token in raw.items()}
+
+
+def build_plan(db_rows: list, aws_map: dict, existing_tokens: dict):
+    """
+    join 在营实例与 AWS RG；prefix 取自 AWS TLS，**token 取自现有密码文件**（existing_tokens: host:port -> token）。
+    ⚠️ token 绝不取自 ozono（其 password 对 AUTH 集群不可信）。脚本只增删 key/前缀，绝不改动已有 token。产出：
+      entries:  [ {"hostport":.., "prefix":.., "uri":.., "token":.., "id":.., "tls":..} ]  已 join 上的
       db_only:  [hostport, ...]  DB 在营但 AWS 找不到（改名/非 ElastiCache?）
       aws_only: [id, ...]        AWS 有 RG 但 DB 未登记为在营（未纳管?）
+      token_missing: [hostport, ...]  AUTH 集群但现有密码文件里没有 token（新集群/未纳管）→ 先写空，需人工补，不猜值
     """
     matched = {}          # hostport -> entry；同端点被多 app 共用时只留一条，避免重复 target
     db_only = set()       # 用 set 去重，多条 ghost 行指向同一 endpoint 只报一次
+    token_missing = set()
     for row in db_rows:
         hp = row["hostport"]
+        if hp in matched:
+            continue      # 同端点被多 app 共用，只留一条；token 按 host:port 查，与哪条 app 行无关
         rg = aws_map.get(hp)
         if rg is None:
             db_only.add(hp)
             continue
         prefix = "rediss://" if rg["tls"] else "redis://"
-        token = row["password"] if rg["auth"] else ""
-        existing = matched.get(hp)
-        if existing is None:
-            matched[hp] = {
-                "hostport": hp, "prefix": prefix, "uri": prefix + hp,
-                "token": token, "id": rg["id"], "tls": rg["tls"]}
-        elif rg["auth"] and not existing["token"] and token:
-            # 共用端点：某 app 行没存密码、另一行存了 → 保留非空的那个
-            existing["token"] = token
+        if rg["auth"]:
+            token = existing_tokens.get(hp, "")
+            if hp not in existing_tokens:
+                token_missing.add(hp)     # AUTH 但文件里没有 → 不猜，标出来
+        else:
+            token = ""                    # 非 AUTH 一律空（塞 token 会被 redis:// 拒）
+        matched[hp] = {
+            "hostport": hp, "prefix": prefix, "uri": prefix + hp,
+            "token": token, "id": rg["id"], "tls": rg["tls"]}
     aws_only = sorted(v["id"] for k, v in aws_map.items() if k not in matched)
     entries = sorted(matched.values(), key=lambda e: e["uri"])
-    return entries, sorted(db_only), aws_only
+    return entries, sorted(db_only), aws_only, sorted(token_missing)
 
 
 def render_files(entries: list):
@@ -310,16 +339,27 @@ def main():
     db_rows = fetch_db_instances(ldas_conf)
     print(f"    在营实例 {len(db_rows)}")
 
-    print("[3] join + 派生 ...")
-    entries, db_only, aws_only = build_plan(db_rows, aws_map)
+    print("[3] 读现有 redis-password.file 里的 token（token 的权威来源，不取自 ozono）...")
+    existing_pwd_text = ""
+    if os.path.exists(PASSWORD_FILE):
+        with open(PASSWORD_FILE) as f:
+            existing_pwd_text = f.read()
+    existing_tokens = parse_existing_tokens(existing_pwd_text)
+    print(f"    现有密码文件已知 token 集群 {len(existing_tokens)}")
+
+    print("[4] join + 派生 ...")
+    entries, db_only, aws_only, token_missing = build_plan(
+        db_rows, aws_map, existing_tokens)
     non_tls = [e["id"] for e in entries if not e["tls"]]
     print(f"    已匹配 {len(entries)}；其中非TLS(redis://) {len(non_tls)}: {non_tls}")
     for hp in db_only:
         print(f"  [!] DB 在营但 AWS 无对应 RG（改名/非ElastiCache?）: {hp}")
+    for hp in token_missing:
+        print(f"  [!] AUTH 集群但现有密码文件缺 token（需人工补，先写空 → redis_up 会为0）: {hp}")
     for rid in aws_only:
         print(f"  [?] AWS 有 RG 但 DB 未登记在营（未纳管?）: {rid}")
 
-    print("[4] 生成三文件" + ("（--apply 写回）" if apply else "（dry-run，不写）"))
+    print("[5] 生成三文件" + ("（--apply 写回）" if apply else "（dry-run，不写）"))
     pwd_text, sd_text = render_files(entries)
     changed_paths = []      # 文本层面会被改写的（驱动 --apply 归一化 + dry-run 报告）
     drift_paths = []        # 语义层面真的不同的（只喂给 --cron 漂移告警，忽略顺序/排版）
@@ -339,13 +379,16 @@ def main():
                 print("      （仅顺序/排版差异，内容等价——写回只是归一化，不算漂移）")
 
     if args.cron:
-        # 漂移判据 = 语义比对(忽略顺序/排版)的 drift_paths + db_only，不再 grep 输出字符串。
-        drift = bool(drift_paths) or bool(db_only)
+        # 漂移判据 = 语义比对(忽略顺序/排版)的 drift_paths + db_only + token_missing，不再 grep 输出字符串。
+        drift = bool(drift_paths) or bool(db_only) or bool(token_missing)
         if drift:
             lines = []
             if db_only:
                 lines.append("硬问题——DB 在营但 AWS 无对应 RG（改名/非 ElastiCache?）：")
                 lines += [f"  - {hp}" for hp in db_only]
+            if token_missing:
+                lines.append("硬问题——AUTH 集群缺 token（现有密码文件里没有，需人工补，绝不从 ozono 猜）：")
+                lines += [f"  - {hp}" for hp in token_missing]
             if drift_paths:
                 lines.append("现网三文件与 AWS+ozono 不同步，待 --apply 更新：")
                 lines += [f"  - {p}" for p in drift_paths]
@@ -353,7 +396,8 @@ def main():
                 lines.append("AWS 有 RG 但 CMDB 未登记在营（仅提示，未纳管?）：")
                 lines += [f"  - {rid}" for rid in aws_only]
             subject = (f"[LKUS] AWS Redis 监控漂移待处理 "
-                       f"(files={len(drift_paths)}, db_only={len(db_only)})")
+                       f"(files={len(drift_paths)}, db_only={len(db_only)}, "
+                       f"token_missing={len(token_missing)})")
             send_alert(subject, "\n".join(lines), args.webhook,
                        os.environ.get("FEISHU_SIGN_SECRET", ""))
         else:
@@ -365,8 +409,8 @@ def main():
     else:
         print("\n完成。Prometheus file_sd 会热加载 targets。")
         print("redis-password.file 若有变化，请重启 exporter 使新密码生效。")
-    # db_only 是需要人工关注的硬问题 → 非零退出码
-    sys.exit(1 if db_only else 0)
+    # db_only / token_missing 是需要人工关注的硬问题 → 非零退出码
+    sys.exit(1 if db_only or token_missing else 0)
 
 
 if __name__ == "__main__":

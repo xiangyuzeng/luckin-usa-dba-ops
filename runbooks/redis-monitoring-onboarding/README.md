@@ -12,17 +12,19 @@
 
 ## 1. 这个脚本做什么
 
-从两个**权威数据源** join 生成 AWS Redis 监控的三个文件，无需手工维护：
+从**三个数据源** join 生成 AWS Redis 监控的三个文件，无需手工维护 targets/前缀：
 
 | 数据源 | 提供 | 取法 |
 |--------|------|------|
 | **AWS ElastiCache** | 每集群 endpoint + 是否 TLS（`TransitEncryptionEnabled`）+ 是否 AUTH（`AuthTokenEnabled`） | `describe-replication-groups`（`databasecheck` 有读权限） |
-| **ozono CMDB** `luckyus_ozono.cache_cloud_app` | 每在营实例 `host_info`(host:port) + `password` | `WHERE app_status=1` |
+| **ozono CMDB** `luckyus_ozono.cache_cloud_app` | 每在营实例 `host_info`(host:port)，**仅用于发现集群 + 与 AWS 对账** | `WHERE app_status=1` |
+| **现有 `redis-password.file`** | 每集群 **token 的唯一权威来源** | 脚本启动时读取 |
 
 - **join 键**：`host_info == PrimaryEndpoint.Address + ":" + Port`（现网 78 个 1:1 对齐）。
 - **派生规则（每集群）**：
   - 前缀 = `rediss://`（TLS）/ `redis://`（非 TLS）——真实 TLS，取自 AWS。
-  - 密码 = `AuthTokenEnabled ? ozono里的password : ""`（非 AUTH 实例即使 ozono 存了密码也丢弃，否则用 `redis://` 连会被 Redis 拒）。
+  - **token = 现有 `redis-password.file` 里该集群的 token**（按 `host:port` 查，前缀无关）。非 AUTH 集群一律空；AUTH 集群但文件里没有 → 标 `token_missing`、先写空、**人工补，绝不猜值**。
+  - > ⚠️ **token 绝不取自 ozono**。ozono `cache_cloud_app.password` 对 AUTH 集群与真实 AUTH token **不一致**；2026-07-16 曾因 `--apply` 用 ozono 密码覆盖，导致 **71 个 AUTH 集群 `redis_up=0`**（已回滚）。现在脚本只增删 key/前缀、**绝不改动已有 token**，`--apply` 对已纳管集群幂等。
 
 ### 生成的三个文件（同一集群前缀一致）
 | 文件 | 位置 | 内容 |
@@ -68,8 +70,9 @@ kill "$(pgrep -f 'redis_exporter .*-web.listen-address=\":9321\"')"; ./start.sh
 
 ### 输出语义
 - `[!] DB 在营但 AWS 无对应 RG` — 硬问题（`host_info` 与 AWS endpoint 不符：改名/拼写/尾随空格）。脚本**退出码 1**。
+- `[!] AUTH 集群但现有密码文件缺 token` — 硬问题（`token_missing`）。**退出码 1**。这是**接入新 AUTH 集群**要做的事：先手工把该集群的真实 AUTH token 写进 `redis-password.file`（key = 集群的目标 URI，如 `rediss://master.<endpoint>:6379`），再 `--apply`+重启 exporter。脚本不会、也不该替你猜这个 token。
 - `[?] AWS 有 RG 但 DB 未登记在营` — AWS 有集群但 ozono 未纳管，视情况处理。
-- `[~] … 将更新` / `[=] … 无变化` — 每个文件是否需要写。
+- `[~] … 将更新` / `[=] … 无变化` — 每个文件是否需要写。对已纳管集群，`redis-password.file` 应恒为 `[=]`（token 沿用现有值，幂等）。
 - 「非TLS(redis://) N: [...]」— 本次识别到的非加密集群。
 
 ---

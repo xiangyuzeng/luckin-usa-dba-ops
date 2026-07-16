@@ -28,66 +28,85 @@ def _aws(id, tls, auth):
 
 
 class TestBuildPlan(unittest.TestCase):
-    def test_tls_auth_keeps_password_and_rediss_prefix(self):
+    # 注意：build_plan(db_rows, aws_map, existing_tokens) → 4-tuple。
+    # token 只来自 existing_tokens（现有密码文件），绝不来自 ozono/db_rows。
+
+    def test_auth_token_from_existing_file_rediss_prefix(self):
         aws = {"ep-a:6379": _aws("luckyus-isales-coupon", True, True)}
         db = [{"app": "luckyus_isales_coupondata",   # app_name 故意与 RG 名不符
-               "hostport": "ep-a:6379", "password": "secretA"}]
-        entries, db_only, aws_only = m.build_plan(db, aws)
-        self.assertEqual(db_only, [])
-        self.assertEqual(aws_only, [])
+               "hostport": "ep-a:6379"}]
+        entries, db_only, aws_only, missing = m.build_plan(
+            db, aws, {"ep-a:6379": "realA"})
+        self.assertEqual((db_only, aws_only, missing), ([], [], []))
         self.assertEqual(len(entries), 1)
         e = entries[0]
         self.assertEqual(e["prefix"], "rediss://")
         self.assertEqual(e["uri"], "rediss://ep-a:6379")
-        self.assertEqual(e["token"], "secretA")     # AUTH → 保留
+        self.assertEqual(e["token"], "realA")       # 来自现有密码文件
         self.assertTrue(e["tls"])
         self.assertEqual(e["id"], "luckyus-isales-coupon")  # id 来自 AWS，不是 app_name
 
-    def test_non_auth_drops_password_and_redis_prefix(self):
-        # 非 TLS / 非 AUTH：即使 CMDB 存了密码，也必须丢空，否则 redis:// 连接会被 Redis 拒。
+    def test_token_NEVER_from_ozono_regression_20260716(self):
+        # 事故回归测试：即使 db_row 里带了 ozono 的（错）密码，token 也只认现有密码文件。
+        # 这是 71 个 AUTH 集群被 --apply 打挂 redis_up=0 的直接防线。
+        aws = {"ep-a:6379": _aws("luckyus-a", True, True)}
+        db = [{"app": "a", "hostport": "ep-a:6379", "password": "OZONO-WRONG"}]
+        entries, *_ = m.build_plan(db, aws, {"ep-a:6379": "real-good"})
+        self.assertEqual(entries[0]["token"], "real-good")   # 绝不是 OZONO-WRONG
+
+    def test_non_auth_always_empty_even_if_file_has_junk(self):
+        # 非 AUTH：一律空，即使现有文件里意外存了东西（塞 token 会被 redis:// 拒）。
         aws = {"ep-b:6379": _aws("luckyus-web", False, False)}
-        db = [{"app": "luckyus_web", "hostport": "ep-b:6379", "password": "junkB"}]
-        entries, _, _ = m.build_plan(db, aws)
+        db = [{"app": "luckyus_web", "hostport": "ep-b:6379"}]
+        entries, _, _, missing = m.build_plan(db, aws, {"ep-b:6379": "junk"})
         self.assertEqual(entries[0]["prefix"], "redis://")
         self.assertEqual(entries[0]["uri"], "redis://ep-b:6379")
-        self.assertEqual(entries[0]["token"], "")   # 丢空
+        self.assertEqual(entries[0]["token"], "")   # 强制空
         self.assertFalse(entries[0]["tls"])
+        self.assertEqual(missing, [])               # 非 AUTH 不缺 token
+
+    def test_auth_missing_token_flagged_not_guessed(self):
+        # AUTH 但现有文件没有该集群 → token_missing，先写空，绝不猜值。
+        aws = {"ep-a:6379": _aws("luckyus-a", True, True)}
+        db = [{"app": "a", "hostport": "ep-a:6379"}]
+        entries, db_only, aws_only, missing = m.build_plan(db, aws, {})
+        self.assertEqual(entries[0]["token"], "")
+        self.assertEqual(missing, ["ep-a:6379"])
+        self.assertEqual((db_only, aws_only), ([], []))
+
+    def test_auth_present_but_blank_token_respected_not_missing(self):
+        # 文件里 key 在、值为空 = 已纳管（尊重文件），不算 token_missing。
+        aws = {"ep-a:6379": _aws("luckyus-a", True, True)}
+        db = [{"app": "a", "hostport": "ep-a:6379"}]
+        entries, _, _, missing = m.build_plan(db, aws, {"ep-a:6379": ""})
+        self.assertEqual(entries[0]["token"], "")
+        self.assertEqual(missing, [])
 
     def test_db_only_flagged_as_hard_problem(self):
-        # 在营实例在 AWS 找不到对应 endpoint（改名 / 尾随空格 / 非 ElastiCache）。
         aws = {"ep-a:6379": _aws("luckyus-a", True, True)}
-        db = [
-            {"app": "a", "hostport": "ep-a:6379", "password": "x"},
-            {"app": "ghost", "hostport": "ep-z:6379", "password": "z"},
-        ]
-        entries, db_only, aws_only = m.build_plan(db, aws)
+        db = [{"app": "a", "hostport": "ep-a:6379"},
+              {"app": "ghost", "hostport": "ep-z:6379"}]
+        entries, db_only, aws_only, _ = m.build_plan(db, aws, {"ep-a:6379": "x"})
         self.assertEqual([e["hostport"] for e in entries], ["ep-a:6379"])
         self.assertEqual(db_only, ["ep-z:6379"])
         self.assertEqual(aws_only, [])
 
     def test_aws_only_flagged_as_unmanaged(self):
-        # AWS 有 RG 但 CMDB 未登记在营（未纳管）。
-        aws = {
-            "ep-a:6379": _aws("luckyus-a", True, True),
-            "ep-x:6379": _aws("luckyus-orphan", True, True),
-        }
-        db = [{"app": "a", "hostport": "ep-a:6379", "password": "x"}]
-        entries, db_only, aws_only = m.build_plan(db, aws)
+        aws = {"ep-a:6379": _aws("luckyus-a", True, True),
+               "ep-x:6379": _aws("luckyus-orphan", True, True)}
+        db = [{"app": "a", "hostport": "ep-a:6379"}]
+        _, db_only, aws_only, _ = m.build_plan(db, aws, {"ep-a:6379": "x"})
         self.assertEqual(db_only, [])
         self.assertEqual(aws_only, ["luckyus-orphan"])
 
     def test_entries_sorted_by_uri(self):
-        aws = {
-            "z-ep:6379": _aws("z", True, True),
-            "a-ep:6379": _aws("a", True, True),
-            "m-ep:6379": _aws("m", False, False),
-        }
-        db = [
-            {"app": "z", "hostport": "z-ep:6379", "password": "1"},
-            {"app": "a", "hostport": "a-ep:6379", "password": "2"},
-            {"app": "m", "hostport": "m-ep:6379", "password": "3"},
-        ]
-        entries, _, _ = m.build_plan(db, aws)
+        aws = {"z-ep:6379": _aws("z", True, True),
+               "a-ep:6379": _aws("a", True, True),
+               "m-ep:6379": _aws("m", False, False)}
+        db = [{"app": "z", "hostport": "z-ep:6379"},
+              {"app": "a", "hostport": "a-ep:6379"},
+              {"app": "m", "hostport": "m-ep:6379"}]
+        entries, _, _, _ = m.build_plan(db, aws, {"z-ep:6379": "1", "a-ep:6379": "2"})
         uris = [e["uri"] for e in entries]
         self.assertEqual(uris, sorted(uris))
         # rediss:// 排在 redis:// 之后（字典序 rediss > redis），确保确定性
@@ -96,65 +115,42 @@ class TestBuildPlan(unittest.TestCase):
                                 "rediss://z-ep:6379"])
 
     def test_db_only_and_aws_only_are_sorted(self):
-        aws = {
-            "b-x:6379": _aws("bbb", True, True),
-            "a-x:6379": _aws("aaa", True, True),
-        }
-        db = [
-            {"app": "g2", "hostport": "z2:6379", "password": ""},
-            {"app": "g1", "hostport": "y1:6379", "password": ""},
-        ]
-        _, db_only, aws_only = m.build_plan(db, aws)
+        aws = {"b-x:6379": _aws("bbb", True, True),
+               "a-x:6379": _aws("aaa", True, True)}
+        db = [{"app": "g2", "hostport": "z2:6379"},
+              {"app": "g1", "hostport": "y1:6379"}]
+        _, db_only, aws_only, _ = m.build_plan(db, aws, {})
         self.assertEqual(db_only, ["y1:6379", "z2:6379"])
         self.assertEqual(aws_only, ["aaa", "bbb"])
 
     def test_shared_endpoint_deduped_to_single_entry(self):
-        # 同一 Redis 端点被多个 app 登记（共用集群）→ 只应产出一条 entry，
-        # 否则 file_sd targets 会重复、Prometheus 对同一实例双抓。
+        # 同一端点被多 app 登记 → 只产出一条；token 按 host:port 查，与哪条 app 行无关。
         aws = {"ep-a:6379": _aws("luckyus-shared", True, True)}
-        db = [
-            {"app": "app_one", "hostport": "ep-a:6379", "password": ""},
-            {"app": "app_two", "hostport": "ep-a:6379", "password": "secretA"},
-        ]
-        entries, db_only, aws_only = m.build_plan(db, aws)
+        db = [{"app": "app_one", "hostport": "ep-a:6379"},
+              {"app": "app_two", "hostport": "ep-a:6379"}]
+        entries, db_only, aws_only, missing = m.build_plan(
+            db, aws, {"ep-a:6379": "tok"})
         self.assertEqual(len(entries), 1)
-        # AUTH 集群：两行里保留非空密码那条
-        self.assertEqual(entries[0]["token"], "secretA")
-        self.assertEqual(db_only, [])
-        self.assertEqual(aws_only, [])
+        self.assertEqual(entries[0]["token"], "tok")
+        self.assertEqual((db_only, aws_only, missing), ([], [], []))
 
     def test_duplicate_db_only_reported_once(self):
-        aws = {}
-        db = [
-            {"app": "g1", "hostport": "z:6379", "password": ""},
-            {"app": "g2", "hostport": "z:6379", "password": ""},
-        ]
-        _, db_only, _ = m.build_plan(db, aws)
+        db = [{"app": "g1", "hostport": "z:6379"},
+              {"app": "g2", "hostport": "z:6379"}]
+        _, db_only, _, _ = m.build_plan(db, {}, {})
         self.assertEqual(db_only, ["z:6379"])
 
     def test_empty_inputs(self):
-        entries, db_only, aws_only = m.build_plan([], {})
-        self.assertEqual((entries, db_only, aws_only), ([], [], []))
-
-    def test_missing_password_field_treated_as_empty(self):
-        # fetch_db_instances 用 `p or ""`，但 build_plan 也不该因缺 password 崩。
-        aws = {"ep-a:6379": _aws("luckyus-a", True, True)}
-        db = [{"app": "a", "hostport": "ep-a:6379", "password": ""}]
-        entries, _, _ = m.build_plan(db, aws)
-        self.assertEqual(entries[0]["token"], "")   # AUTH 但密码为空 → 仍是空
+        self.assertEqual(m.build_plan([], {}, {}), ([], [], [], []))
 
 
 class TestRenderFiles(unittest.TestCase):
     def _entries(self):
-        aws = {
-            "ep-a:6379": _aws("luckyus-a", True, True),
-            "ep-b:6379": _aws("luckyus-b", False, False),
-        }
-        db = [
-            {"app": "a", "hostport": "ep-a:6379", "password": "secretA"},
-            {"app": "b", "hostport": "ep-b:6379", "password": "junkB"},
-        ]
-        entries, _, _ = m.build_plan(db, aws)
+        aws = {"ep-a:6379": _aws("luckyus-a", True, True),
+               "ep-b:6379": _aws("luckyus-b", False, False)}
+        db = [{"app": "a", "hostport": "ep-a:6379"},
+              {"app": "b", "hostport": "ep-b:6379"}]
+        entries, _, _, _ = m.build_plan(db, aws, {"ep-a:6379": "secretA"})
         return entries
 
     def test_render_shapes_and_prefix_consistency(self):
@@ -237,6 +233,27 @@ class TestLoadLdasConf(unittest.TestCase):
     def test_missing_file_is_fatal(self):
         with self.assertRaises(SystemExit):
             m.load_ldas_conf("/nonexistent/path/ldas.conf")
+
+
+class TestParseExistingTokens(unittest.TestCase):
+    """现有密码文件 = token 权威来源；解析成 host:port -> token，前缀无关。"""
+
+    def test_strips_scheme_to_hostport(self):
+        t = '{"rediss://ep-a:6379": "x", "redis://ep-b:6379": ""}'
+        self.assertEqual(m.parse_existing_tokens(t),
+                         {"ep-a:6379": "x", "ep-b:6379": ""})
+
+    def test_lookup_survives_prefix_flip(self):
+        # 文件记成 rediss://，即使集群后来被判为非 TLS，也应按 host:port 命中 token
+        tokens = m.parse_existing_tokens('{"rediss://ep-a:6379": "tok"}')
+        self.assertEqual(tokens.get("ep-a:6379"), "tok")
+
+    def test_blank_or_empty_is_empty_dict(self):
+        self.assertEqual(m.parse_existing_tokens(""), {})
+        self.assertEqual(m.parse_existing_tokens("   "), {})
+
+    def test_unparseable_is_empty_dict(self):
+        self.assertEqual(m.parse_existing_tokens("not json"), {})
 
 
 class TestFeishuPayload(unittest.TestCase):
