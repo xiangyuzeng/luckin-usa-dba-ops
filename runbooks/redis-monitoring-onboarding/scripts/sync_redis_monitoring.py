@@ -32,10 +32,20 @@ join 键：DB 的 host_info  ==  AWS 的 PrimaryEndpoint.Address + ":" + Port
   （每次都会额外查 Prometheus，找"应监控却未有效监控"的实例；--skip-monitoring-check 可关；
    Prometheus 地址默认 http://10.238.3.136:9090，可用环境变量 PROMETHEUS_URL 覆盖）
 
+AWS 不可达时的行为（权限/凭证/网络/缺 aws CLI，如 cron 主机身份无
+elasticache:DescribeReplicationGroups）：
+  · --cron：不崩溃、不吐 traceback。降级为"仅监控状态检查"——用现网 targets 文件当
+            应监控集合去查 Prometheus，并把"AWS 不可达"当硬问题告警，恒退出 0。
+  · --apply / dry-run：缺 TLS/AUTH 真值绝不写文件，干净退出非 0（不吐 traceback）。
+
 ldas 连接信息统一放在一个 0600 配置文件里（endpoint/port/user/password/database 在一起，
 不再有裸密码文件），默认 <EXPORTER_DIR>/ldas.conf，可用 --ldas-conf / 环境变量 LDAS_CONF 指定；
-password 一项允许被环境变量 LDAS_PASSWORD 覆盖（密管注入场景）。AWS 走本机 aws cli 凭证。
-参考模板见同目录 ldas.conf.example。
+password 一项允许被环境变量 LDAS_PASSWORD 覆盖（密管注入场景）。参考模板见同目录 ldas.conf.example。
+
+AWS 凭证：默认走本机 aws cli 凭证链（instance profile / ~/.aws / 环境变量）。若 cron 主机
+默认身份没有 elasticache:DescribeReplicationGroups，可在**同一个 ldas.conf 里加可选的 [aws] 段**
+（见 load_aws_conf）指定 profile 或 access_key_id/secret_access_key（+可选 region）——密钥只经
+环境变量传给子进程、绝不进命令行（防 ps 泄露）。不写 [aws] 段则保持现状（默认链）。
 
 写完后：Prometheus file_sd 热加载 targets（无需 reload）；
        若 redis-password.file 有变化，重启 exporter（密码启动时才读）：
@@ -93,16 +103,99 @@ def load_ldas_conf(path: str) -> dict:
     return conf
 
 
+def load_aws_conf(path: str) -> dict:
+    """读同一 ldas.conf 里**可选的 [aws] 段** → AWS 凭证/Profile（全部可选）。
+
+    缺文件 / 缺 [aws] 段 → 返回 {}（退回 aws CLI 默认凭证链，即现状行为，不 FATAL），
+    因此完全向后兼容：不写 [aws] 段的老配置照跑。二选一（优先 profile）：
+      profile          = <~/.aws/credentials 里的 profile 名>  ← 推荐，密钥由 aws CLI 托管
+      access_key_id    = ...        ┐ 明文落盘，仅在这个 0600 文件里用；
+      secret_access_key= ...        ┘ 两者必须同时给（只给一个 = 配置错，FATAL）
+      region           = us-east-1  （可选，覆盖默认 REGION）
+    profile 与 access_key 同时给 = 歧义 → FATAL，让用户明确二选一。
+    这里只读文件、不碰 env：既然选了"写进配置文件"，就以文件为准（env 覆盖场景请留空
+    [aws] 段、改用 crontab 的 AWS_PROFILE= 前缀，aws CLI 原生认）。
+    """
+    cp = configparser.ConfigParser()
+    if not cp.read(path) or not cp.has_section("aws"):
+        return {}
+    s = cp["aws"]
+    profile = s.get("profile", "").strip()
+    ak = s.get("access_key_id", "").strip()
+    sk = s.get("secret_access_key", "").strip()
+    if bool(ak) != bool(sk):
+        sys.exit("[FATAL] [aws] 段 access_key_id 与 secret_access_key 必须同时提供"
+                 "（或都留空、改用 profile）")
+    if profile and (ak or sk):
+        sys.exit("[FATAL] [aws] 段 profile 与 access_key_id/secret_access_key 只能二选一")
+    return {"profile": profile, "access_key_id": ak,
+            "secret_access_key": sk, "region": s.get("region", "").strip()}
+
+
+def build_aws_invocation(query, region, aws_conf, base_env):
+    """构造 aws describe-replication-groups 的 (argv, env)。纯函数、可单测、不碰网络。
+
+    凭证注入规则（安全关键）：
+      · access_key_id/secret_access_key 走 **env**（AWS_ACCESS_KEY_ID/SECRET），
+        **绝不进 argv**——命令行参数会出现在 ps/进程列表里，等于泄密。同时 pop 掉
+        env 里可能残留的 AWS_PROFILE/SESSION_TOKEN，避免与显式密钥冲突。
+      · profile 走 `--profile <名>`（profile 名不敏感），并 pop 掉 env 里可能继承来的
+        静态 AWS_ACCESS_KEY_ID/SECRET/SESSION_TOKEN（否则主机默认 env 身份会盖过 profile）
+        + 同时设 AWS_PROFILE 双保险。
+      · 两者都没给 → 原样继承 base_env，退回 aws 默认凭证链（现状行为）。
+    """
+    aws_conf = aws_conf or {}
+    argv = ["aws"]
+    env = dict(base_env)
+    ak = aws_conf.get("access_key_id", "")
+    sk = aws_conf.get("secret_access_key", "")
+    if ak and sk:
+        env["AWS_ACCESS_KEY_ID"] = ak
+        env["AWS_SECRET_ACCESS_KEY"] = sk
+        for k in ("AWS_PROFILE", "AWS_SESSION_TOKEN"):
+            env.pop(k, None)
+    elif aws_conf.get("profile"):
+        argv += ["--profile", aws_conf["profile"]]
+        env["AWS_PROFILE"] = aws_conf["profile"]
+        for k in ("AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_SESSION_TOKEN"):
+            env.pop(k, None)
+    argv += ["elasticache", "describe-replication-groups",
+             "--region", region, "--query", query, "--output", "json"]
+    return argv, env
+
+
 # ========================= 数据采集层 =========================
-def fetch_aws_rgs(region=REGION) -> dict:
-    """返回 { "<ep>:<port>": {"id":.., "tls":bool, "auth":bool} }。走本机 aws cli。"""
+class AwsUnavailable(Exception):
+    """AWS ElastiCache 拉取失败（权限/凭证/网络/aws CLI 缺失）。
+
+    调用方应据此降级：--cron 降为"仅监控状态检查"并告警，绝不崩溃；
+    --apply/dry-run 缺真值时干净退出非 0，绝不用残缺数据写文件。
+    2026-07-17 事故：cron 主机身份 dba-downloaddblog-api 无
+    elasticache:DescribeReplicationGroups → check_output 抛 CalledProcessError
+    直接把整个 cron 打崩（连 Prometheus 监控检查都没跑）。此异常即为兜底。
+    """
+
+
+def fetch_aws_rgs(region=REGION, aws_conf=None) -> dict:
+    """返回 { "<ep>:<port>": {"id":.., "tls":bool, "auth":bool} }。走本机 aws cli。
+
+    aws_conf（来自 ldas.conf 的 [aws] 段，见 load_aws_conf）可选，指定 profile 或密钥；
+    缺省则用主机默认凭证链。argv/env 由纯函数 build_aws_invocation 构造（密钥只走 env）。
+    aws CLI 非零退出（权限/凭证/网络）或不在 PATH 上 → 抛 AwsUnavailable（带原因），
+    由调用方降级处理，不让异常冒泡成 traceback 把 cron 打崩。
+    """
     q = ("ReplicationGroups[].{id:ReplicationGroupId,"
          "tls:TransitEncryptionEnabled,auth:AuthTokenEnabled,"
          "ep:NodeGroups[0].PrimaryEndpoint.Address,"
          "port:NodeGroups[0].PrimaryEndpoint.Port}")
-    out = subprocess.check_output(
-        ["aws", "elasticache", "describe-replication-groups",
-         "--region", region, "--query", q, "--output", "json"])
+    argv, env = build_aws_invocation(q, region, aws_conf, os.environ)
+    try:
+        out = subprocess.check_output(argv, stderr=subprocess.PIPE, env=env)
+    except FileNotFoundError as e:                      # aws CLI 不在 PATH
+        raise AwsUnavailable("aws CLI 不在 PATH 上") from e
+    except subprocess.CalledProcessError as e:          # 权限/凭证/网络：非零退出
+        err = (e.stderr or b"").decode("utf-8", "replace").strip()
+        raise AwsUnavailable(err or f"aws 退出码 {e.returncode}") from e
     rgs = json.loads(out)
     amap = {}
     for r in rgs:
@@ -166,6 +259,27 @@ def parse_existing_tokens(pwd_text: str) -> dict:
     except ValueError:
         return {}
     return {uri.split("://", 1)[-1]: token for uri, token in raw.items()}
+
+
+def entries_from_targets(sd_text: str) -> list:
+    """AWS 不可达时的降级基准：把现网 exporter/prometheus targets 文件当作"应监控集合"，
+    重建最小 entries（只含 id/uri）供 check_monitoring 用。
+
+    没有 AWS 就拿不到真实 RG 名 → id 用剥掉 scheme 的 host:port 占位（告警可读即可）。
+    去重 + 按 uri 稳定排序；空/损坏文本 => []。这样 AWS 挂了 cron 仍能查
+    "现网该被抓的实例，Prometheus 里是不是真在抓且健康"。
+    """
+    if not sd_text.strip():
+        return []
+    try:
+        groups = json.loads(sd_text)
+    except ValueError:
+        return []
+    uris = set()
+    for g in groups:
+        for t in g.get("targets", []):
+            uris.add(t)
+    return [{"id": uri.split("://", 1)[-1], "uri": uri} for uri in sorted(uris)]
 
 
 def build_plan(db_rows: list, aws_map: dict, existing_tokens: dict):
@@ -362,6 +476,52 @@ def send_alert(subject: str, body: str, webhook: str = "", secret: str = ""):
         print(f"      告警已发送到飞书 → {webhook}")
 
 
+def cron_degraded_no_aws(aws_err: str, webhook: str):
+    """--cron 且 AWS 不可达：跳过文件对账（缺 TLS/AUTH 真值，绝不猜/绝不写），
+    但仍用现网 exporter targets 当"应监控集合"跑 Prometheus 监控状态检查，
+    并把"AWS 不可达"本身当作硬问题告警。恒退出 0（cron 不靠退出码告警）。
+
+    这样即便 cron 主机凭证无 elasticache 权限，"应监控却没在监控/认证挂了"这类
+    最有价值的巡检仍照跑，不会因为拉不到 AWS 就整轮瞎掉。
+    """
+    print(f"    [WARN] AWS ElastiCache 不可达，降级为仅监控状态检查"
+          f"（不做文件对账，不写任何文件）: {aws_err}")
+    sd_text = ""
+    if os.path.exists(EXPORTER_TARGETS):
+        with open(EXPORTER_TARGETS) as f:
+            sd_text = f.read()
+    entries = entries_from_targets(sd_text)
+    print(f"    以现网 targets 为降级基准，应监控实例 {len(entries)}")
+
+    not_monitored = []
+    print("[6] 检查现有监控状态（应监控但未有效监控的实例）...")
+    try:
+        up_map, redis_up_map = fetch_monitoring_state()
+        not_monitored = check_monitoring(entries, up_map, redis_up_map)
+        if not_monitored:
+            for p in not_monitored:
+                print(f"  [!] 应监控但未生效（{p['reason']}）: {p['id']}  {p['uri']}")
+        else:
+            print(f"    现网 {len(entries)} 个实例均在监控且健康（up=1, redis_up=1）")
+    except Exception as e:                    # Prometheus 也不可达：尽力而为，不再崩
+        print(f"    [WARN] 查询 Prometheus 失败，跳过监控状态检查: {e}")
+
+    lines = [
+        "硬问题——AWS ElastiCache 不可达，本轮无法做文件对账（TLS/AUTH 真值缺失）：",
+        f"  - {aws_err}",
+        "  修复方向：给 cron 的 AWS 身份补 elasticache:DescribeReplicationGroups 权限，",
+        "  或让脚本用有该权限的凭证/Profile 运行（本轮已降级为仅 Prometheus 监控检查）。",
+    ]
+    if not_monitored:
+        lines.append("硬问题——应监控但未有效监控（Prometheus 现状，基于现网 targets）：")
+        lines += [f"  - {p['reason']}: {p['id']}  {p['uri']}" for p in not_monitored]
+    subject = (f"[LKUS] AWS Redis 监控降级：ElastiCache 不可达 "
+               f"(not_monitored={len(not_monitored)})")
+    send_alert(subject, "\n".join(lines), webhook,
+               os.environ.get("FEISHU_SIGN_SECRET", ""))
+    sys.exit(0)
+
+
 def main():
     ap = argparse.ArgumentParser(description="全自动维护 AWS Redis 监控三文件")
     ap.add_argument("--apply", action="store_true",
@@ -380,9 +540,18 @@ def main():
     # --cron 恒为只读对账；--apply 只在非 cron 时生效
     apply = args.apply and not args.cron
     ldas_conf = load_ldas_conf(args.ldas_conf)
+    aws_conf = load_aws_conf(args.ldas_conf)          # 可选 [aws] 段，同一个 0600 文件
+    region = aws_conf.get("region") or REGION
 
     print("[1] 拉取 AWS ElastiCache 加密/AUTH 状态 ...")
-    aws_map = fetch_aws_rgs()
+    try:
+        aws_map = fetch_aws_rgs(region, aws_conf)
+    except AwsUnavailable as e:
+        if args.cron:
+            cron_degraded_no_aws(str(e), args.webhook)   # 降级 + 告警，恒退出 0
+        # 非 cron（dry-run / --apply）：缺真值绝不写文件，干净退出非 0（不吐 traceback）
+        sys.exit(f"[FATAL] AWS ElastiCache 不可达，无法生成/对账监控文件"
+                 f"（需 elasticache:DescribeReplicationGroups 权限）：{e}")
     tls_n = sum(1 for v in aws_map.values() if v["tls"])
     print(f"    AWS RG {len(aws_map)}：TLS {tls_n} / 非TLS {len(aws_map)-tls_n}")
 

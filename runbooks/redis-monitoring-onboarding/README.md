@@ -37,7 +37,10 @@
 
 ## 2. 运行前提
 
-- 主机装了 `python3` + `pymysql`，`aws` cli 且已配置 `databasecheck` 凭证（region us-east-1）。
+- 主机装了 `python3` + `pymysql`，`aws` cli 且配了一个**有 `elasticache:DescribeReplicationGroups` 权限**的身份（如 `databasecheck`，region us-east-1）。
+  - ⚠️ **cron 陷阱**：cron 以 root 跑、`HOME=/root`，读的是 `/root/.aws/credentials` 的 `[default]`；而你 `sudo -s` 手动跑时 `HOME` 可能仍是 `/home/xxx`，读的是**另一份**凭证——两者身份不同会导致"手动能跑、cron 报 AccessDenied"。
+  - 最稳做法：在 `ldas.conf` 里加**可选的 `[aws]` 段**（路径固定、与 HOME 无关，见 §2 下方），指定 `profile` 或 `access_key_id`/`secret_access_key`，脚本会把身份注入 `aws` 子进程（密钥只走 env、绝不进命令行）。不写 `[aws]` 段则用主机默认凭证链（现状）。
+  - AWS 不可达时（权限/凭证/网络）脚本**不崩溃**：`--cron` 降级为"仅 Prometheus 监控状态检查"并告警、恒退出 0；`--apply`/dry-run 干净退出非 0、绝不用残缺数据写文件。
 - **ldas 连接配置文件** `ldas.conf`（单文件，`endpoint/port/user/password/database` 放在一起，**0600**）。
   从模板生成，不再有裸密码文件、也不再靠环境变量传密码：
   ```bash
@@ -48,6 +51,20 @@
   ```
   - 默认读 `<EXPORTER_DIR>/ldas.conf`，可用 `--ldas-conf <path>` 或环境变量 `LDAS_CONF` 指定别的路径。
   - 若走密管/CI 注入、不想把密码落进 `ldas.conf`：把 `password` 留空，改由环境变量 **`LDAS_PASSWORD`** 覆盖。
+- **可选 `[aws]` 段**（同一个 `ldas.conf`，解决上面的 cron/HOME 凭证陷阱）。二选一，优先 `profile`：
+  ```ini
+  [aws]
+  profile = databasecheck        # ~/.aws/credentials 里的 profile 名（密钥由 aws CLI 托管）
+  region  = us-east-1            # 可选
+  ```
+  或直接写密钥（明文落盘，仅限本 0600 文件；两者必须同时给）：
+  ```ini
+  [aws]
+  access_key_id     = AKIA....
+  secret_access_key = ....
+  region            = us-east-1
+  ```
+  - 校验：只给一个 key、或 `profile` 与密钥同时给 = FATAL。用 `env -i HOME=/root PATH=/usr/bin:/bin python3 sync_redis_monitoring.py` 复刻 cron 环境验证（期望 `AWS RG 78`）。
   - 缺文件 / 缺 `[ldas]` 段 / 缺任一字段 → 脚本直接 FATAL 退出，绝不半路裸奔连库。
 - 脚本顶部 4 个路径常量（`EXPORTER_DIR` / `PASSWORD_FILE` / `EXPORTER_TARGETS` / `PROMETHEUS_TARGETS`）与 `REGION` 按主机实际核对。
 

@@ -235,6 +235,100 @@ class TestLoadLdasConf(unittest.TestCase):
             m.load_ldas_conf("/nonexistent/path/ldas.conf")
 
 
+class TestLoadAwsConf(unittest.TestCase):
+    """可选 [aws] 段：缺段向后兼容返回 {}；profile / key-pair / 校验。只碰临时文件。"""
+
+    def _write(self, text):
+        fd, path = tempfile.mkstemp(suffix=".conf")
+        with os.fdopen(fd, "w") as f:
+            f.write(text)
+        self.addCleanup(os.unlink, path)
+        return path
+
+    _LDAS = ("[ldas]\nhost=h\nport=3306\nuser=u\npassword=pw\ndatabase=db\n")
+
+    def test_no_aws_section_returns_empty(self):
+        # 老配置（只有 [ldas]）→ {}，退回默认凭证链，完全向后兼容
+        self.assertEqual(m.load_aws_conf(self._write(self._LDAS)), {})
+
+    def test_missing_file_returns_empty(self):
+        self.assertEqual(m.load_aws_conf("/nonexistent/ldas.conf"), {})
+
+    def test_profile_only(self):
+        conf = m.load_aws_conf(self._write(
+            self._LDAS + "[aws]\nprofile = databasecheck\nregion = us-east-1\n"))
+        self.assertEqual(conf, {"profile": "databasecheck", "access_key_id": "",
+                                "secret_access_key": "", "region": "us-east-1"})
+
+    def test_key_pair(self):
+        conf = m.load_aws_conf(self._write(
+            self._LDAS + "[aws]\naccess_key_id = AKIA1\nsecret_access_key = s3cr3t\n"))
+        self.assertEqual(conf["access_key_id"], "AKIA1")
+        self.assertEqual(conf["secret_access_key"], "s3cr3t")
+        self.assertEqual(conf["profile"], "")
+
+    def test_only_one_key_is_fatal(self):
+        with self.assertRaises(SystemExit):
+            m.load_aws_conf(self._write(self._LDAS + "[aws]\naccess_key_id = AKIA1\n"))
+
+    def test_profile_and_key_together_is_fatal(self):
+        with self.assertRaises(SystemExit):
+            m.load_aws_conf(self._write(
+                self._LDAS + "[aws]\nprofile = p\naccess_key_id = a\nsecret_access_key = s\n"))
+
+
+class TestBuildAwsInvocation(unittest.TestCase):
+    """argv/env 构造：密钥只走 env 绝不进 argv（防 ps 泄露）；profile 清冲突 env。"""
+
+    _Q = "ReplicationGroups[]"
+
+    def test_no_conf_inherits_env_default_chain(self):
+        base = {"PATH": "/bin", "AWS_PROFILE": "host-default"}
+        argv, env = m.build_aws_invocation(self._Q, "us-east-1", None, base)
+        self.assertEqual(argv[0], "aws")
+        self.assertNotIn("--profile", argv)
+        self.assertEqual(env, base)                     # 原样继承，退回默认链
+
+    def test_profile_goes_to_argv_and_clears_static_env_keys(self):
+        base = {"PATH": "/bin", "AWS_ACCESS_KEY_ID": "HOSTKEY",
+                "AWS_SECRET_ACCESS_KEY": "HOSTSEC", "AWS_SESSION_TOKEN": "t"}
+        argv, env = m.build_aws_invocation(
+            self._Q, "us-east-1", {"profile": "databasecheck"}, base)
+        self.assertIn("--profile", argv)
+        self.assertEqual(argv[argv.index("--profile") + 1], "databasecheck")
+        self.assertEqual(env["AWS_PROFILE"], "databasecheck")
+        # 主机默认静态密钥被清掉，确保 profile 权威
+        self.assertNotIn("AWS_ACCESS_KEY_ID", env)
+        self.assertNotIn("AWS_SECRET_ACCESS_KEY", env)
+        self.assertNotIn("AWS_SESSION_TOKEN", env)
+
+    def test_keys_go_to_env_NEVER_argv(self):
+        base = {"PATH": "/bin", "AWS_PROFILE": "host-default"}
+        conf = {"access_key_id": "AKIASECRET", "secret_access_key": "TOPSECRET"}
+        argv, env = m.build_aws_invocation(self._Q, "us-east-1", conf, base)
+        # 密钥绝不出现在命令行（否则 ps 泄露）
+        self.assertNotIn("AKIASECRET", argv)
+        self.assertNotIn("TOPSECRET", argv)
+        self.assertNotIn("--profile", argv)
+        # 走 env，且清掉可能冲突的 AWS_PROFILE
+        self.assertEqual(env["AWS_ACCESS_KEY_ID"], "AKIASECRET")
+        self.assertEqual(env["AWS_SECRET_ACCESS_KEY"], "TOPSECRET")
+        self.assertNotIn("AWS_PROFILE", env)
+
+    def test_region_and_query_reach_argv(self):
+        argv, _ = m.build_aws_invocation(self._Q, "eu-west-1", None, {"PATH": "/bin"})
+        self.assertIn("--region", argv)
+        self.assertEqual(argv[argv.index("--region") + 1], "eu-west-1")
+        self.assertIn(self._Q, argv)
+        self.assertEqual(argv[-2:], ["--output", "json"])
+
+    def test_does_not_mutate_base_env(self):
+        base = {"PATH": "/bin"}
+        m.build_aws_invocation(self._Q, "us-east-1",
+                               {"profile": "p"}, base)
+        self.assertEqual(base, {"PATH": "/bin"})        # base_env 不被就地改动
+
+
 class TestParseExistingTokens(unittest.TestCase):
     """现有密码文件 = token 权威来源；解析成 host:port -> token，前缀无关。"""
 
@@ -254,6 +348,81 @@ class TestParseExistingTokens(unittest.TestCase):
 
     def test_unparseable_is_empty_dict(self):
         self.assertEqual(m.parse_existing_tokens("not json"), {})
+
+
+class TestEntriesFromTargets(unittest.TestCase):
+    """AWS 不可达降级：把现网 targets 文件重建成 check_monitoring 能用的 entries。"""
+
+    def test_reconstructs_id_and_uri(self):
+        sd = ('[{"targets": ["rediss://ep-a:6379", "redis://ep-b:6379"], '
+              '"labels": {}}]')
+        self.assertEqual(m.entries_from_targets(sd), [
+            {"id": "ep-b:6379", "uri": "redis://ep-b:6379"},    # 按 uri 排序
+            {"id": "ep-a:6379", "uri": "rediss://ep-a:6379"},
+        ])
+
+    def test_dedupes_and_sorts_by_uri(self):
+        sd = ('[{"targets": ["redis://b:1", "rediss://a:1", "redis://b:1"], '
+              '"labels": {}}]')
+        self.assertEqual([e["uri"] for e in m.entries_from_targets(sd)],
+                         ["redis://b:1", "rediss://a:1"])
+
+    def test_merges_multiple_target_groups(self):
+        sd = ('[{"targets": ["redis://a:1"], "labels": {}},'
+              ' {"targets": ["rediss://b:1"], "labels": {}}]')
+        self.assertEqual([e["uri"] for e in m.entries_from_targets(sd)],
+                         ["redis://a:1", "rediss://b:1"])
+
+    def test_empty_or_broken_is_empty(self):
+        self.assertEqual(m.entries_from_targets(""), [])
+        self.assertEqual(m.entries_from_targets("   "), [])
+        self.assertEqual(m.entries_from_targets("not json"), [])
+
+    def test_output_feeds_check_monitoring(self):
+        # 降级链路端到端：现网 targets → entries → check_monitoring 能挑出 not_scraped
+        sd = '[{"targets": ["rediss://ep-a:6379"], "labels": {}}]'
+        entries = m.entries_from_targets(sd)
+        got = m.check_monitoring(entries, {}, {})     # Prometheus 里啥都没有
+        self.assertEqual(got, [{"id": "ep-a:6379", "uri": "rediss://ep-a:6379",
+                                "reason": "not_scraped"}])
+
+
+class TestFetchAwsRgsDegrade(unittest.TestCase):
+    """fetch_aws_rgs 遇权限/凭证/缺 CLI → 抛 AwsUnavailable（带原因），不冒泡成 traceback。"""
+
+    def _patch(self, fn):
+        orig = m.subprocess.check_output
+        m.subprocess.check_output = fn
+        self.addCleanup(setattr, m.subprocess, "check_output", orig)
+
+    def test_access_denied_raises_AwsUnavailable_with_reason(self):
+        import subprocess as sp
+
+        def boom(*a, **k):
+            raise sp.CalledProcessError(
+                255, a[0], output=b"",
+                stderr=b"An error occurred (AccessDenied) ... DescribeReplicationGroups")
+        self._patch(boom)
+        with self.assertRaises(m.AwsUnavailable) as ctx:
+            m.fetch_aws_rgs()
+        self.assertIn("AccessDenied", str(ctx.exception))     # 原因带进异常，供告警展示
+
+    def test_missing_cli_raises_AwsUnavailable(self):
+        def boom(*a, **k):
+            raise FileNotFoundError("aws")
+        self._patch(boom)
+        with self.assertRaises(m.AwsUnavailable):
+            m.fetch_aws_rgs()
+
+    def test_nonzero_without_stderr_still_raises(self):
+        import subprocess as sp
+
+        def boom(*a, **k):
+            raise sp.CalledProcessError(1, a[0], output=b"", stderr=None)
+        self._patch(boom)
+        with self.assertRaises(m.AwsUnavailable) as ctx:
+            m.fetch_aws_rgs()
+        self.assertIn("1", str(ctx.exception))                # 退出码兜底进消息
 
 
 class TestCheckMonitoring(unittest.TestCase):
