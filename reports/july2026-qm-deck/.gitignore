@@ -1,0 +1,11 @@
+qmvenv/
+raw_20260803_snapshot/
+
+# pulled data — regenerate with `python3 pull_qm.py` + `verify_vs_xlsx.py`.
+# Kept out of git: it carries reporter names, and the build needs the QA datapack
+# (/app/reports/july2026-qa-inspection/) which is not in this repo either, so
+# committing it would not make the build reproducible anyway.
+raw/
+
+# deliverable is published at reports/QM Monthly Report- 2026 Jul.pptx
+output/
