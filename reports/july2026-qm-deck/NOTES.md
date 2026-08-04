@@ -134,6 +134,31 @@ v1 出片时（8/3 15:5x 拉数）13 起 Cream-O-Land 脱脂奶变质工单仍�
 - 店均 S/M/G/L 以当月主巡检门店数为分母（6 月 18 家 / 7 月 21 家），
   与 6 月 PPT（按 QA 覆盖 16 家）分母不同，已在页内标注。
 
+## 🔴 v5（2026-08-04）：修复 PowerPoint 打不开的问题
+
+**症状**：Microsoft PowerPoint 打开报「发现内容有问题」，提示修复；python-pptx、
+预览工具、网页查看器都能正常打开——所以本地看不出来。
+
+**根因**：`tb()` 里用
+`rPr.set('{...drawingml/2006/main}eastAsianTypeface', ...)`
+把东亚字体写成了 `<a:rPr>` 的**属性**。这在 DrawingML schema 里不存在——
+XML 依然是 well-formed（所以任何 XML 校验都过），但**schema 非法**，
+PowerPoint 严格校验会拒绝。6 月那份能打开的文件用的是子元素
+`<a:ea typeface="..."/>`（618 处），**零个** `eastAsianTypeface` 属性。
+
+**影响范围**：这行代码来自 2026-08-03 的初版，**此前每一版 July deck
+（b3fd778 / ffd342a / 45eb271 / 6e7e100 / 07cbf8a）都打不开**，各 618 处。
+
+**修法**：`set_font(run)` 统一设置 latin + `<a:ea>` 子元素，且必须插在
+`<a:latin>` 之后（schema 顺序 `... latin, ea, cs ...`）。
+
+**回归校验**（`build_deck.py` 后跑一遍）：
+```
+unzip -p out.pptx ppt/slides/slide1.xml | grep -c eastAsianTypeface   # 必须为 0
+unzip -p out.pptx ppt/slides/slide1.xml | grep -c '<a:ea '            # 应 > 0
+```
+并与 6 月文件对比 `<a:rPr>` 的属性集合——7 月不应出现 6 月没有的属性。
+
 ## 视觉规范：对齐 6 月（v3 / 2026-08-04）
 
 v1/v2 用的是我自拟的一套色板（`2A78D6 / EB6834 / 1BAF7A / EDA100`，经 dataviz 校验器验证），

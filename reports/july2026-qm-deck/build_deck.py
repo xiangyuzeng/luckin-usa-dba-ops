@@ -30,6 +30,7 @@ from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.enum.shapes import MSO_SHAPE
 from pptx.chart.data import CategoryChartData
 from pptx.enum.chart import XL_CHART_TYPE, XL_LEGEND_POSITION, XL_LABEL_POSITION
+from pptx.oxml.ns import qn
 
 HERE = Path(__file__).resolve().parent
 RAW  = HERE / "raw"
@@ -60,6 +61,27 @@ INFO = "005EB8"
 GOOD, WARN, SERIOUS, CRIT = "288C5A", "EB9119", "C0531C", "C82D2D"
 
 def rgb(h): return RGBColor.from_string(h)
+
+
+def set_font(run, name=FONT):
+    """Set the latin AND east-Asian typeface on a run.
+
+    The east-Asian face must be a child element <a:ea typeface="..."/> placed
+    directly after <a:latin>. Writing it as an `eastAsianTypeface` ATTRIBUTE on
+    <a:rPr> produces well-formed but schema-invalid XML: PowerPoint refuses the
+    file with "found a problem with content" while python-pptx and most viewers
+    accept it silently. Verified against the June deck, which uses <a:ea>.
+    """
+    run.font.name = name                       # writes <a:latin typeface="..."/>
+    rPr = run.font._rPr
+    latin = rPr.find(qn("a:latin"))
+    if latin is None:                          # nothing to anchor to; latin alone suffices
+        return
+    ea = rPr.find(qn("a:ea"))
+    if ea is None:
+        ea = rPr.makeelement(qn("a:ea"), {})
+        latin.addnext(ea)                      # schema order: ... latin, ea, cs ...
+    ea.set("typeface", name)
 
 # ---------------------------------------------------------------- data
 def L(p): return json.loads(Path(p).read_text(encoding="utf-8"))
@@ -175,9 +197,7 @@ def tb(sl, x, y, w, h, text, size=11, bold=False, color=INK, align=PP_ALIGN.LEFT
         p.alignment = align; p.line_spacing = spacing
         r = p.add_run(); r.text = ln
         r.font.size = Pt(size); r.font.bold = bold; r.font.color.rgb = rgb(color)
-        r.font.name = FONT
-        try: r.font._rPr.set('{http://schemas.openxmlformats.org/drawingml/2006/main}eastAsianTypeface', "Microsoft YaHei")
-        except Exception: pass
+        set_font(r)
     return box
 
 def rect(sl, x, y, w, h, fill=None, line=None, shape=MSO_SHAPE.RECTANGLE, lw=0.75):
@@ -224,7 +244,7 @@ def table(sl, x, y, w, h, headers, rows, widths=None, fsize=9, hsize=9,
         c.vertical_anchor = MSO_ANCHOR.MIDDLE
         p = c.text_frame.paragraphs[0]; p.alignment = PP_ALIGN.CENTER
         r = p.add_run(); r.text = str(hd); r.font.size = Pt(hsize); r.font.bold = True
-        r.font.color.rgb = rgb(WHITE); r.font.name = FONT
+        r.font.color.rgb = rgb(WHITE); set_font(r)
     for i, row in enumerate(rows):
         for j, v in enumerate(row):
             c = t.cell(i+1, j)
@@ -237,7 +257,7 @@ def table(sl, x, y, w, h, headers, rows, widths=None, fsize=9, hsize=9,
             txt, opt = (v if isinstance(v, tuple) else (v, {}))
             r = p.add_run(); r.text = str(txt)
             r.font.size = Pt(opt.get("size", fsize)); r.font.bold = opt.get("bold", False)
-            r.font.color.rgb = rgb(opt.get("color", INK)); r.font.name = FONT
+            r.font.color.rgb = rgb(opt.get("color", INK)); set_font(r)
     return t
 
 def style_chart(ch, colors, labels=True, legend=True, num_fmt="0", lsize=8, gap=60):
