@@ -74,6 +74,9 @@ def store(r):  return ENR.get(r["pqnc_no"], {}).get("store", "—")
 def goods(r):  return ENR.get(r["pqnc_no"], {}).get("goods", "—")
 
 PACK = L(QA/"july2026_qa_datapack.json")
+# Orkin per-store pest service reports -> ../july2026-pest-service/build_pest_pack.py
+PEST = L(Path("/app/reports/july2026-pest-service/july2026_pest_datapack.json"))
+PD   = PEST["derived"]
 DER  = L(QA/"derived.json")
 def load_csv(p):
     with open(p, encoding="utf-8-sig") as f: return list(csv.DictReader(f))
@@ -321,8 +324,9 @@ AG = [("01", "Supplier & Materials Performance 供应链", 0.9, 1.35, WARN,
        f"仓储·共担 {WH_JUL} 起（6 月 {WH_JUN} 起，{(WH_JUL-WH_JUN)/WH_JUN*100:+.0f}%）· 含奶类变质集群 {len(JOINT)} 起"),
       ("03", "Store Audit Performance 门店稽核", 0.9, 3.0, WARN,
        "QA 稽核 19 次 / 18 家 · 均分 92.1"),
-      ("04", "Customer Complaint 客户投诉", 6.85, 3.0, MUTED, "待客服团队提供"),
-      ("05", "EHS 环境健康安全", 0.9, 4.65, MUTED, "待 EHS 团队提供")]
+      ("04", "Customer Complaint 客户投诉", 6.85, 3.0, WARN,
+       "食安类客诉 1 起（异物）· YTD 4 起"),
+      ("05", "EHS 环境健康安全", 0.9, 4.65, GOOD, "工伤 0 起 · 连续两月零工伤")]
 for num, txt, x, y, col, note in AG:
     rect(s, x, y, 5.45, 1.35, fill=FILL_L)
     rect(s, x, y, 0.06, 1.35, fill=col)
@@ -342,30 +346,45 @@ section_head(s, "01 / 02", "Supplier & Materials\n& Warehouse\n供应链仓配�
 
 # ================================================================= 4 SUPPLIER ADMISSION (placeholder)
 s = S(); title_bar(s, "01  Supplier & Materials Performance", "1. Suppliers admission / 供应商准入", page())
-placeholder(s, 0.55, 1.5, 12.2, 2.5, "供应商准入数据待供应链 / 采购团队提供",
-    "系统内 t_mdm_supplier 7 月新增 15 条主数据记录，但该表记录的是主数据建档，"
-    "与 6 月 PPT「准入申请 4 家 / 通过 4 家」的口径不一致，无法直接换算为准入审批结果。",
-    "6 月基线（供参考）：申请 4 家 / 通过 4 家 —— 原料 1、其他非食品 3。\n"
-    "请供应链或采购团队提供 7 月准入申请与通过家数（按 原料 / 轻食 / 食品接触材料 / 化学品 / 其他非食品 分类）。")
-table(s, 0.55, 4.3, 12.2, 1.9,
-      ["Supplier Category", "Approved #", "Total applied #"],
-      [["Raw material 原料", "待填", "待填"], ["Light food 轻食", "待填", "待填"],
-       ["Food contact material 食品接触", "待填", "待填"], ["Chemicals 化学品", "待填", "待填"],
-       ["Other none-food 其他", "待填", "待填"]],
-      widths=[5,2,2], align_center=[1,2])
+kpi(s, 0.55, 1.45, 2.9, 1.15, "2", "本月准入通过 / Approved", "6 月 4 家", INFO)
+kpi(s, 3.65, 1.45, 2.9, 1.15, "1", "食品类 / Food", "经 QA 审批", INFO)
+kpi(s, 6.75, 1.45, 2.9, 1.15, "1", "其他非食品 / Other", "经 QA 审批", INFO)
+kpi(s, 9.85, 1.45, 2.9, 1.15, "0", "现场稽核 / On-site audit", "本月无准入/年度/飞行审核", MUTED)
+table(s, 0.55, 2.95, 6.4, 1.6,
+      ["Supplier Category", "Approved #"],
+      [["Food 食品类", 1], ["Other none-food 其他非食品", 1],
+       [("Total / 合计", {"bold": True}), (2, {"bold": True})]],
+      widths=[5, 2], align_center=[1])
+band(s, 7.15, 2.95, 5.6, "口径说明 / Scope")
+body(s, 7.15, 3.29, 5.6, 1.26,
+     "本页为「经 QA 审批」的准入家数。\n"
+     "部分营建类供应商不经 QA 审批即可在系统建档，\n"
+     "因此系统家数会高于本页。", size=9.5)
+band(s, 0.55, 4.75, 12.2, "与系统主数据的差异（已核实）")
+body(s, 0.55, 5.09, 12.2, 1.6,
+     "系统 `t_mdm_supplier` 7 月新增 15 条供应商主数据记录，而经 QA 审批的准入仅 2 家——两者不矛盾：\n"
+     "「营建 / 工程类供应商不走 QA 准入审批流程，但仍会在系统内建档」，这部分计入主数据、不计入本页。\n"
+     "因此「主数据新增家数」不能直接当作「准入通过家数」使用；v1 版据此提出的数据缺口已由业务侧澄清并关闭。\n\n"
+     "※ 本月仅提供通过家数；申请家数（含被否决）未单独统计，故不列「Total applied」列。", size=9.5)
 
 # ================================================================= 5 MATERIAL ADMISSION (placeholder)
 s = S(); title_bar(s, "01  Supplier & Materials Performance", "2. Materials admission / 原料准入", page())
-placeholder(s, 0.55, 1.5, 12.2, 2.2, "原料准入数据待供应链团队提供",
-    "原料准入审批流程不在 luckyus_scm_srm PQNC 相关表内，本次数据拉取未覆盖。",
-    "6 月基线（供参考）：本月无新原料准入（申请 0 / 通过 0）。\n"
-    "请提供 7 月各类别申请与通过数量。")
-table(s, 0.55, 4.0, 12.2, 2.2,
-      ["Material Category", "Approved #", "Total applied #"],
-      [["Raw material 原料", "待填", "待填"], ["Light food 轻食", "待填", "待填"],
-       ["Food contact material 食品接触", "待填", "待填"], ["Promotional items 营销物料", "待填", "待填"],
-       ["Chemicals 化学品", "待填", "待填"], ["Other none-food 其他", "待填", "待填"]],
-      widths=[5,2,2], align_center=[1,2])
+kpi(s, 0.55, 1.5, 3.9, 1.3, "0", "本月原料准入 / Materials admitted", "6 月同为 0", INFO)
+kpi(s, 4.65, 1.5, 3.9, 1.3, "0", "新增申请 / Applications", "无在途审批", INFO)
+kpi(s, 8.75, 1.5, 4.0, 1.3, "连续 2 月", "无新原料引入", "6 月 0 / 7 月 0", GOOD)
+table(s, 0.55, 3.1, 6.4, 2.3,
+      ["Material Category", "Approved #"],
+      [["Raw material 原料", 0], ["Light food 轻食", 0], ["Food contact material 食品接触", 0],
+       ["Promotional items 营销物料", 0], ["Chemicals 化学品", 0], ["Other none-food 其他", 0],
+       [("Total / 合计", {"bold": True}), (0, {"bold": True})]],
+      widths=[5, 2], align_center=[1])
+band(s, 7.15, 3.1, 5.6, "说明 / Note")
+body(s, 7.15, 3.44, 5.6, 1.96,
+     "7 月无新原料准入（申请 0 / 通过 0），与 6 月一致。\n\n"
+     "现有原料池保持不变，本月供应商责任 PQNC 全部\n"
+     "发生在既有 SKU 上，非新引入原料导致。\n\n"
+     "※ 原料准入审批不在 luckyus_scm_srm 内，\n"
+     "本页数据由供应链团队提供。", size=9.5)
 
 # ================================================================= 6 PQNC SUMMARY
 s = S(); title_bar(s, "Supplier & Warehouse Quality Performance",
@@ -957,6 +976,10 @@ body(s, 6.75, 3.69, 6.0, 2.9,
      "④ 15th & 3rd 立即启动灭治并于 7 日内复检；全店排查虫控服务报告归档完整性"
      "（23rd & 8th 6 月服务报告缺失）。", size=9.5)
 
+# stores where Orkin logged any activity — needed one page early for the cross-ref
+p_by_store_pre = {o["store_name"] for o in PEST["observations"]
+                  if "Activity" in o["observation"] and "No Activity" not in o["observation"]}
+
 # ================================================================= 28 PEST (NEW)
 s = S(); title_bar(s, "新增风险面 — 虫害防控（Pest Control）",
                    "本月首次进入主巡检 · 6 月主巡检 0 项 → 7 月 4 项 / 3 家门店", page())
@@ -976,14 +999,70 @@ body(s, 0.55, 5.34, 6.0, 1.55,
      "三家门店问题互不相同但同指虫控体系薄弱：\n"
      "实体虫害（活蟑螂 / 蝇）、物理屏障失效（风幕机停用）、\n"
      "以及服务记录缺失（6 月虫控报告未归档）。\n"
-     "该模块 6 月主巡检为 0，属新出现风险面，需即时干预。", size=9.5)
+     "该模块 6 月主巡检为 0，属新出现风险面，需即时干预。\n\n"
+     f"⚠ 但主巡检并非全貌：第三方服务商 Orkin 7 月在 {len(p_by_store_pre)} 家门店\n"
+     "发现虫害痕迹，与本页仅重合 1 家 —— 详见下页。", size=9.5)
 band(s, 6.75, 5.0, 6.0, "整改建议（P1）")
 body(s, 6.75, 5.34, 6.0, 1.55,
      "① 15th & 3rd 立即启动灭治并 7 日内复检，捕虫器更换周期改为每周。\n"
      "② 21st & 3rd 风幕机立即报修；排水系统清理消杀。\n"
-     "③ 全店排查虫控服务报告归档完整性，服务改为月度双向签认。", size=9.5)
+     "③ 全店排查虫控服务报告归档完整性，服务改为月度双向签认——\n"
+     "   7 月 21 家门店服务报告已全部到齐（见下页），归档缺口已补上。", size=9.5)
 
-# ================================================================= 29 FACILITY ATTRIBUTION
+# ================================================== 29 PEST — VENDOR SERVICE VIEW (NEW)
+s = S(); title_bar(s, "虫害防控 — 第三方服务商视角（Orkin）",
+                   f"21 家门店月度例行消杀 · {PD['date_range'][0]} ~ {PD['date_range'][1]} · "
+                   f"数据源：July Service Report（逐店 PDF 服务报告）", page())
+p_act = [o for o in PEST["observations"]
+         if "Activity" in o["observation"] and "No Activity" not in o["observation"]]
+p_live = [o for o in p_act if "Live" in o["observation"]]
+p_by_store = defaultdict(list)
+for o in p_act:
+    p_by_store[o["store_name"]].append(o)
+QA_PEST = {"15th & 3rd", "21st & 3rd", "23rd & 8th"}   # 主巡检点名门店（见上页）
+both = QA_PEST & set(p_by_store)
+union = QA_PEST | set(p_by_store)
+
+kpi(s, 0.55, 1.45, 2.9, 1.1, str(PD["visits"]), "服务门店 / 覆盖", "每店 1 次月度例行", GOOD)
+kpi(s, 3.65, 1.45, 2.9, 1.1, str(PD["live"]), "活体发现 / Live activity",
+    f"{PD['stores_with_live']} 家门店", CRIT)
+kpi(s, 6.75, 1.45, 2.9, 1.1, str(len(p_by_store)), "有虫害痕迹门店",
+    "活体 + 死体，主巡检仅点名 3 家", CRIT)
+kpi(s, 9.85, 1.45, 2.9, 1.1, f"${PD['spend_total']:,.0f}", "本月服务费", "21 次 × $97.99", INFO)
+band(s, 0.55, 2.72, 7.4, "虫害痕迹明细 / Activity found by Orkin")
+# the 108th & Broadway report repeats one block verbatim — collapse for display,
+# the raw duplicate stays in the data pack (flagged in july2026_pest_validation.txt)
+p_rows, _seen = [], set()
+for o in sorted(p_act, key=lambda o: (0 if "Live" in o["observation"] else 1, o["store_name"])):
+    key = (o["store_name"], o["observation"], o["pest_type"], o["location"])
+    if key in _seen:
+        continue
+    _seen.add(key)
+    p_rows.append([o["store_name"], "活体" if "Live" in o["observation"] else "死体",
+                   o["pest_type"] or "—", (o["location"] or "—")[:26]])
+table(s, 0.55, 3.09, 7.4, 2.35, ["门店", "活体/死体", "虫种", "位置"], p_rows,
+      widths=[2.0,1.1,1.9,2.6], align_center=[1], fsize=8.5)
+band(s, 8.2, 2.72, 4.55, "与主巡检的交叉核对")
+body(s, 8.2, 3.09, 4.55, 2.35,
+     f"主巡检点名 {len(QA_PEST)} 家（上页）：{'、'.join(sorted(QA_PEST))}\n\n"
+     f"Orkin 发现痕迹 {len(p_by_store)} 家。\n\n"
+     f"「两者仅重合 {len(both)} 家（{'、'.join(sorted(both)) or '无'}）」，"
+     f"合并口径下本月有虫害信号的门店为 「{len(union)} 家」——\n"
+     f"是主巡检单一视角的 {len(union)/len(QA_PEST):.1f} 倍。", size=9)
+band(s, 0.55, 5.58, 6.0, "问题分析")
+body(s, 0.55, 5.92, 6.0, 1.0,
+     f"· 活体 {PD['live']} 起中 2 起在地漏/排水（33rd & 10th、52nd & Madison），\n"
+     f"  与主巡检 21st & 3rd「蝇集中于排水系统」同源；\n"
+     f"· 死体以地下室/储藏区美洲蟑螂为主（102 Fulton、108th & Broadway、15th & 3rd）；\n"
+     f"· 6 月遗留 {PD['open_actions_unresolved']} 项预防处理仍未闭环（含 21st & 3rd）。", size=8.5)
+band(s, 6.75, 5.58, 6.0, "整改建议（P1）")
+body(s, 6.75, 5.92, 6.0, 1.0,
+     "① 排水/地漏专项：清理消杀 + 加装防虫网，按周复检至连续两次无蝇。\n"
+     "② 地下室/储藏区：美洲蟑螂重点布控，捕虫器改周更换并记录数量趋势。\n"
+     "③ 将 Orkin 服务报告纳入月度稽核输入，避免「主巡检没发现 = 没问题」\n"
+     "  的盲区。", size=8.5)
+
+# ================================================================= 30 FACILITY ATTRIBUTION
 s = S(); title_bar(s, "设施（BD / 营建）扣分归因分析",
                    "综合 QA、门店自检、区经三类巡检", page())
 fac_all = [it for it in ITEM if it["module"] == "设施"]
@@ -1005,7 +1084,7 @@ body(s, 0.55, 5.44, 12.2, 1.45,
      f"② 对 {len(REPEAT['repeat'])} 家连续两月复现门店（{'、'.join(sn(c) for c in REPEAT['repeat'][:6])} 等）优先排期。\n"
      f"③ 申诉获批与整改工单双向绑定：以「整改后复核」为由获批的，须留存完工验收单与整改前后照片。", size=9.5)
 
-# ================================================================= 30 EQUIPMENT
+# ================================================================= 31 EQUIPMENT
 s = S(); title_bar(s, "设备（Equipment）扣分项分析", "综合 QA、门店自检、区经三类巡检", page())
 eq = [it for it in PITEMS if it["module"] == "设备维护"]
 eq_all = [it for it in ITEM if it["module"] == "设备维护"]
@@ -1030,49 +1109,67 @@ body(s, 8.4, 3.09, 4.35, 3.6,
      f"建议：① 冷藏 / 冷冻设备加装温度记录仪并纳入日检；② 建立设备故障与 PQNC 损失的关联台账，"
      f"避免设备问题分散在两套系统中而低估真实风险。", size=9.5)
 
-# ================================================================= 31 DIVIDER 04
+# ================================================================= 32 DIVIDER 04
 s = S()
 pic(s, "divider04", 0, 0.01, 8.83, 7.49)
 section_head(s, "04", "Customer\nComplaint\n客户投诉", 9.89, 2.69, 2.92, 2.4)
 
-# ================================================================= 32 COMPLAINT (placeholder)
+# ================================================================= 33 COMPLAINT
 s = S(); title_bar(s, "04  Customer Complaint / 客户投诉", None, page())
-placeholder(s, 0.55, 1.4, 12.2, 2.55, "客诉数据待客服 / 运营团队提供",
-    "食品安全类客诉未落在本次可访问的数据库中（salescrm / isalescdp 等库均无投诉工单表），"
-    "6 月 PPT 的客诉数据为人工统计口径，无法由系统自动生成。",
-    "6 月基线（供参考）：食安类客诉 1 起（2026-06-20，Store 901 8th Ave，2 杯 Iced Kyoto Matcha Latte，"
-    "疑似食源性疾病，已退款，监控未见异常，判定为个案）；1–6 月 YTD 累计 3 起。\n\n"
-    "请提供 7 月：① 食安类客诉起数；② 事件描述 / 可能原因 / 纠正措施；③ YTD 累计。")
-band(s, 0.55, 4.15, 12.2, "2026 年客诉分析（YTD） / Customer Complaint Analysis (2026 YTD)")
-body(s, 0.55, 4.52, 12.2, 2.15,
-     "· 累计 / YTD：2026 年 1–6 月累计食品安全类客诉 3 起（7 月数据待补充）。\n\n"
-     "· 7 月客诉简要总结 / July Complaint Summary\n"
-     "  事件描述 / Event：待填\n"
-     "  可能原因 / Possible Cause：待填\n"
-     "  纠正措施 / Corrective Action：待填", size=10)
+kpi(s, 0.55, 1.4, 2.9, 1.15, "1", "7 月食安类客诉", "6 月 1 起，持平", WARN)
+kpi(s, 3.65, 1.4, 2.9, 1.15, "4", "2026 YTD 累计", "1–6 月 3 起 + 7 月 1 起", INFO)
+kpi(s, 6.75, 1.4, 2.9, 1.15, "异物", "本月投诉性质", "食品中发现塑料碎片", CRIT, vsize=22)
+kpi(s, 9.85, 1.4, 2.9, 1.15, "221 Grand", "涉及门店", "2026-07-27 12:46", CRIT, vsize=16)
+band(s, 0.55, 2.75, 12.2, "事件详情 / Complaint Detail")
+table(s, 0.55, 3.12, 12.2, 0.8,
+      ["日期时间", "门店", "产品", "客诉原文", "性质"],
+      [["07/27/2026 12:46pm", "221 Grand", "Sausage Egg & Cheese Croissant",
+        "\"There was a piece of plastic in my food\"", "异物 · 食安"]],
+      widths=[2.1,1.5,3.0,4.4,1.4], align_center=[0,4], fsize=9)
+band(s, 0.55, 4.15, 6.0, "分析 / Analysis")
+body(s, 0.55, 4.49, 6.0, 2.2,
+     "本月唯一食安类客诉，为「成品中发现塑料异物」，风险等级高于\n"
+     "6 月（疑似食源性疾病、监控未见异常、判定个案）。\n\n"
+     "涉事产品为轻食类（可颂），非门店现制饮品——异物可能\n"
+     "来自供应商包装、解冻/加热环节或门店操作，需三段排查。\n\n"
+     "⚠ 同月同店：221 Grand 亦有 1 起 PQNC（Cream-O-Land 脱脂奶\n"
+     "变质集群，见 Case B），该店本月出现两类独立食安信号。", size=9.5)
+band(s, 6.75, 4.15, 6.0, "纠正措施 / Corrective Action（P1）")
+body(s, 6.75, 4.49, 6.0, 2.2,
+     "① 追溯该批次可颂供应商与生产日期，要求书面回函说明\n"
+     "   异物来源与包装完整性控制。\n\n"
+     "② 门店端复核轻食解冻 / 加热 / 出餐流程，检查操作台\n"
+     "   周边塑料件（包材、铲勺、封膜）是否有破损脱落。\n\n"
+     "③ 保留客诉实物与照片；若供应商无法排除，则将该 SKU\n"
+     "   纳入到货加严抽检。\n\n"
+     "④ 建议将客诉纳入 PQNC 体系联动，避免客诉与 PQNC 两套\n"
+     "   记录各自独立、无法交叉验证。", size=9.5)
 
-# ================================================================= 33 DIVIDER 05
+# ================================================================= 34 DIVIDER 05
 s = S()
 pic(s, "divider05", 0, 0.09, 5.72, 7.41)
 section_head(s, "05", "EHS\n环境健康安全", 7.68, 3.05, 4.6, 1.5)
 
-# ================================================================= 34 EHS INCIDENTS (placeholder)
+# ================================================================= 35 EHS INCIDENTS
 s = S(); title_bar(s, "2026 EHS 安全事故月度分析 / Monthly Safety Incident Analysis",
                    "工伤事故 Workplace Injury · YTD（截至 2026 年 7 月 / through July）", page())
-placeholder(s, 0.55, 1.4, 12.2, 1.9, "EHS 事故数据待 EHS 团队提供",
-    "工伤事故记录不在本次可访问的数据库范围内（无对应业务表）。",
-    "6 月基线（供参考）：2026 YTD 事故 1 起（5 月），6 月 0 起。请提供 7 月事故起数与事件说明。")
-tb(s, 0.55, 3.55, 6.5, 0.25, "月度事故趋势（起）· 7 月待补充", size=9, bold=True, color=INK2)
-chart(s, XL_CHART_TYPE.COLUMN_CLUSTERED, 0.5, 3.8, 7.4, 2.9,
+kpi(s, 0.55, 1.4, 3.9, 1.2, "0", "7 月工伤事故 / Injuries", "无工伤", GOOD)
+kpi(s, 4.65, 1.4, 3.9, 1.2, "1", "2026 YTD 累计", "仅 5 月 1 起", INFO)
+kpi(s, 8.75, 1.4, 4.0, 1.2, "连续 2 月", "零工伤", "6 月 0 / 7 月 0", GOOD)
+tb(s, 0.55, 2.95, 6.5, 0.25, "月度事故趋势（起）", size=9, bold=True, color=INK2)
+chart(s, XL_CHART_TYPE.COLUMN_CLUSTERED, 0.5, 3.2, 7.4, 3.0,
       ["Jan 1月","Feb 2月","Mar 3月","Apr 4月","May 5月","Jun 6月","Jul 7月"],
       [("事故起数 Incidents", [0, 0, 0, 0, 1, 0, 0])], [C1], legend=False, lsize=9)
-band(s, 8.2, 3.8, 4.55, "说明")
-body(s, 8.2, 4.14, 4.55, 2.56,
-     "图中 7 月数值暂以 0 占位，须由 EHS 团队确认后更新。\n\n"
-     "2026 YTD（1–6 月）累计工伤事故 1 起，发生于 5 月。\n\n"
-     "建议在月报中固化「事故起数 / 损工日数 / 高危作业检查次数」三项指标，便于跨月比较。", size=9.5)
+band(s, 8.2, 3.2, 4.55, "说明")
+body(s, 8.2, 3.54, 4.55, 2.66,
+     "7 月无工伤事故（0 起），6 月同为 0，连续两月保持零工伤。\n\n"
+     "2026 YTD 累计 1 起，发生于 5 月。\n\n"
+     "本月门店数由 18 家增至 21 家、巡检 94 次为历史最高，"
+     "在业务扩张的同时保持零工伤。\n\n"
+     "建议在月报中固化「事故起数 / 损工日数 / 高危作业检查次数」"
+     "三项指标，便于跨月比较。", size=9.5)
 
-# ================================================================= 35 EHS PROGRESS (placeholder)
+# ================================================================= 36 EHS PROGRESS (placeholder)
 s = S(); title_bar(s, "EHS 体系目前进程 / Current EHS System Progress", None, page())
 placeholder(s, 0.55, 1.4, 12.2, 1.6, "EHS 体系进度待 EHS 团队更新",
     "以下为 6 月 PPT 的进度状态，7 月进展需 EHS 团队确认。",
@@ -1091,7 +1188,7 @@ body(s, 6.75, 3.62, 6.0, 3.05,
      "· 整体安全手册升级 Upgrade of the overall Safety Manual\n\n"
      "· 7 月新增进展：待填", size=10)
 
-# ================================================================= 36 THANK YOU
+# ================================================================= 37 THANK YOU
 s = S()
 pic(s, "thanks", 0, 0, 8.75, 7.43)
 tb(s, 9.30, 2.75, 3.60, 1.5, "Thank You！\n谢谢！", size=32, bold=True, color="223263", spacing=1.2)

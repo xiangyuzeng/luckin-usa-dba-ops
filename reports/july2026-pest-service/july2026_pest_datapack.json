@@ -1,0 +1,1471 @@
+{
+ "source": "reports/July Service Report.zip (Orkin per-store PDFs)",
+ "period": "2026-07",
+ "derived": {
+  "visits": 21,
+  "stores_identified": 21,
+  "date_range": [
+   "07/08/2026",
+   "07/30/2026"
+  ],
+  "observations": 23,
+  "live": 3,
+  "dead": 6,
+  "no_activity": 8,
+  "preventative": 3,
+  "facility": 3,
+  "stores_with_live": 3,
+  "by_observation": [
+   [
+    "Activity - Dead",
+    6
+   ],
+   [
+    "No Activity",
+    4
+   ],
+   [
+    "No Activity / Inspection Provided",
+    4
+   ],
+   [
+    "Preventative",
+    3
+   ],
+   [
+    "Activity - Live",
+    3
+   ],
+   [
+    "Drain Issue",
+    1
+   ],
+   [
+    "Gaps",
+    1
+   ],
+   [
+    "Moisture Accumulation",
+    1
+   ]
+  ],
+  "by_pest_type": [
+   [
+    "American Cockroaches",
+    4
+   ],
+   [
+    "Occasional Invaders",
+    1
+   ],
+   [
+    "Flies",
+    1
+   ],
+   [
+    "House Flies",
+    1
+   ],
+   [
+    "Fruit Flies",
+    1
+   ],
+   [
+    "Centipedes",
+    1
+   ]
+  ],
+  "by_location": [
+   [
+    "Common Area(s)",
+    11
+   ],
+   [
+    "Storage Room",
+    6
+   ],
+   [
+    "Dishwashing Area(s)",
+    3
+   ],
+   [
+    "Basement Level",
+    3
+   ],
+   [
+    "Drains",
+    3
+   ],
+   [
+    "Restrooms",
+    2
+   ],
+   [
+    "Bar Area(s)",
+    2
+   ],
+   [
+    "Back",
+    2
+   ],
+   [
+    "Dining Room",
+    1
+   ],
+   [
+    "Maintenance Room",
+    1
+   ],
+   [
+    "Kitchen Area(s)",
+    1
+   ],
+   [
+    "Check-Out Counters",
+    1
+   ],
+   [
+    "Compactor Area(s)",
+    1
+   ]
+  ],
+  "live_by_store": [
+   [
+    "33rd & 10th",
+    1
+   ],
+   [
+    "52nd & Madison",
+    1
+   ],
+   [
+    "48th & 3rd",
+    1
+   ]
+  ],
+  "unresolved": [
+   {
+    "file_label": "108",
+    "store_code": "US00007",
+    "store_name": "108th & Broadway",
+    "svc_date": "7/13/2026",
+    "location": "Basement Level",
+    "observation": "Activity - Dead",
+    "pest_type": "American Cockroaches",
+    "recommendation": "Treatment Rendered",
+    "responsibility": "Technician",
+    "status": "Pending (Technician resolution needed)"
+   },
+   {
+    "file_label": "108",
+    "store_code": "US00007",
+    "store_name": "108th & Broadway",
+    "svc_date": "7/13/2026",
+    "location": "Basement Level",
+    "observation": "Activity - Dead",
+    "pest_type": "American Cockroaches",
+    "recommendation": "Treatment Rendered",
+    "responsibility": "Technician",
+    "status": "Pending (Technician resolution needed)"
+   },
+   {
+    "file_label": "1375",
+    "store_code": "US00004",
+    "store_name": "37th & Broadway",
+    "svc_date": "7/23/2026",
+    "location": "Drains",
+    "observation": "Drain Issue",
+    "pest_type": "",
+    "recommendation": "Check Drain Lines",
+    "responsibility": "Customer",
+    "status": "Pending (Customer resolution needed)"
+   },
+   {
+    "file_label": "244",
+    "store_code": "US00022",
+    "store_name": "23rd & 8th",
+    "svc_date": "7/20/2026",
+    "location": "Common Area(s)",
+    "observation": "Preventative",
+    "pest_type": "",
+    "recommendation": "Treatment Rendered",
+    "responsibility": "Technician",
+    "status": "Pending (Technician resolution needed)"
+   },
+   {
+    "file_label": "555",
+    "store_code": "US00012",
+    "store_name": "16th & 6th",
+    "svc_date": "7/21/2026",
+    "location": "Bar Area(s), Common Area(s), Back",
+    "observation": "Preventative",
+    "pest_type": "",
+    "recommendation": "Treatment Rendered",
+    "responsibility": "Technician",
+    "status": "Pending (Technician resolution needed)"
+   },
+   {
+    "file_label": "800",
+    "store_code": "US00002",
+    "store_name": "28th & 6th",
+    "svc_date": "7/20/2026",
+    "location": "Back",
+    "observation": "Moisture Accumulation",
+    "pest_type": "",
+    "recommendation": "Remove Spillage",
+    "responsibility": "Customer",
+    "status": "Pending (Customer resolution needed)"
+   }
+  ],
+  "spend_total": 2558.62,
+  "products_used": [
+   [
+    "ALPINE WSG INSECTICIDE",
+    12
+   ],
+   [
+    "GT 180 Glueboards",
+    4
+   ],
+   [
+    "ACTIZYME AEROSOL FOAM",
+    3
+   ],
+   [
+    "Glue Board Mouse",
+    2
+   ],
+   [
+    "NYGUARD IGR CONCENTRATE",
+    2
+   ],
+   [
+    "Trapper Glueboard/Insect Monitor",
+    2
+   ],
+   [
+    "Glue Board Replacement",
+    1
+   ],
+   [
+    "MAXFORCE COMPLETE GRANULAR",
+    1
+   ],
+   [
+    "Protecta Pest Monitors",
+    1
+   ],
+   [
+    "GT150 Glueboard",
+    1
+   ]
+  ],
+  "technicians": [
+   [
+    "FANOR RAMIREZ",
+    5
+   ],
+   [
+    "JOHN COLON",
+    4
+   ],
+   [
+    "CHRIS DELGADO",
+    3
+   ],
+   [
+    "SIMON LI",
+    3
+   ],
+   [
+    "RICHARD FLORES",
+    2
+   ],
+   [
+    "JESUS JUAREZ",
+    2
+   ],
+   [
+    "ZAHID SHAMID",
+    1
+   ],
+   [
+    "IVAN HRUSHOVENKO",
+    1
+   ]
+  ],
+  "open_actions": 9,
+  "open_actions_unresolved": 4,
+  "open_actions_by_type": [
+   [
+    "Preventative",
+    8
+   ],
+   [
+    "Gaps",
+    1
+   ]
+  ]
+ },
+ "visits": [
+  {
+   "address": "52 Vanderbilt Ave",
+   "program_id": "16613726",
+   "account": "39994740",
+   "tech": "JOHN COLON",
+   "license": "C2900397",
+   "svc_date": "7/25/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "9:30 AM",
+   "time_out": "9:57 AM",
+   "invoice": "304635218",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "052",
+   "house_no": "52",
+   "store_code": "US00013",
+   "store_name": "Grand Central Terminal",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "Spoke to Manager Aiden no concerns. What I saw: is not activity found in all common areas, coffee production areas ,service counter, storage room . What I did: I inspect all common areas and treated all.common areas , coffee production areas ,service counter, storage room . Inspected tin cats. What I expect: not activities In all common areas What I recommend: clean and keep organize all common areas, , coffee production areas ,service counter, storage room to prevent activity. Thanks for your Cooperation and stay safe.",
+   "open_actions": 0
+  },
+  {
+   "address": "100 MAIDEN LN",
+   "program_id": "16595863",
+   "account": "39994740",
+   "tech": "JOHN COLON",
+   "license": "C2900397",
+   "svc_date": "7/9/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "8:02 AM",
+   "time_out": "11:22 AM",
+   "invoice": "304500656",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "100",
+   "house_no": "100",
+   "store_code": "US00003",
+   "store_name": "100 Maiden Ln",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "Spoke to manager domo no concerns. What I saw: is not activity found in all common areas, dining area,service counter ,coffee production areas,dishwashing area,break room, storage room bathrooms. What I did: I inspect all common areas and treated all.common areas, dining area,service counter ,coffee production areas,dishwashing area,break room, storage room bathrooms. Inspected tin cats and pest monitors. What I expect: not activities In all common areas What I recommend: clean and keep organize all common areas, dining area,service counter ,coffee production areas,dishwashing area,break room, storage room bathrooms to prevent activity. Thanks for your Cooperation and stay safe.",
+   "open_actions": 0
+  },
+  {
+   "address": "102 Fulton St",
+   "program_id": "16595874",
+   "account": "39994740",
+   "tech": "JOHN COLON",
+   "license": "C2900397",
+   "svc_date": "7/9/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "8:17 AM",
+   "time_out": "8:52 AM",
+   "invoice": "304500744",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "102",
+   "house_no": "102",
+   "store_code": "US00006",
+   "store_name": "102 Fulton",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "American Cockroaches",
+   "comments": "Spoke to manager venesill no concerns. What I saw: is dead activity 1 American roach on floor in basement. What I did: I inspect all common areas and treated all.common areas , basement, break room, coffee production areas,service counter,storage room bathrooms. Treated all areas listed cracks and crevices with alpine wsg and inspected tin cats and replaced damaged glue boards. What I expect : not activities In all common areas What I recommend: clean and keep organize all common areas, basement, break room, coffee production areas,service counter,storage room bathrooms to prevent activity. Thanks for your Cooperation and stay safe.",
+   "open_actions": 0
+  },
+  {
+   "address": "2799 Broadway",
+   "program_id": "16596184",
+   "account": "39994740",
+   "tech": "ZAHID SHAMID",
+   "license": "C2822969",
+   "svc_date": "7/13/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "8:42 AM",
+   "time_out": "9:09 AM",
+   "invoice": "304503223",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "108",
+   "house_no": "2799",
+   "store_code": "US00007",
+   "store_name": "108th & Broadway",
+   "observations": 2,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "American Cockroaches",
+   "comments": "I arrived and spoke with Naiome What I did complete inspection And treated for roaches and rodents I changed monitors and scattered max force insects baits inside basement What I recommend to Naiome keep clean Thank you",
+   "open_actions": 0
+  },
+  {
+   "address": "128 W 32nd St",
+   "program_id": "16644720",
+   "account": "39994740",
+   "tech": "CHRIS DELGADO",
+   "license": "",
+   "svc_date": "7/20/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC 1st Service, Equipment - 1 Time",
+   "time_in": "9:25 AM",
+   "time_out": "3:58 PM",
+   "invoice": "304852127",
+   "amount": "275.00",
+   "tax": "24.41",
+   "total_due": "299.41",
+   "file_label": "128",
+   "house_no": "128",
+   "store_code": "US00021",
+   "store_name": "128 W 32nd St",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "What I saw: no live activity . What I did: inspected all common areas, restroom, kitchen, preparation area, electrical room, storage area, treated all drains with Actiyme foam, place two tincats in kitchen and counter area What I recommend: keep all kitchen and drain areas clean to prevent future activity thank you",
+   "open_actions": 0
+  },
+  {
+   "address": "1375 Broadway",
+   "program_id": "16596162",
+   "account": "39994740",
+   "tech": "CHRIS DELGADO",
+   "license": "",
+   "svc_date": "7/23/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "12:59 PM",
+   "time_out": "1:26 PM",
+   "invoice": "304503054",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "1375",
+   "house_no": "1375",
+   "store_code": "US00004",
+   "store_name": "37th & Broadway",
+   "observations": 2,
+   "distinct_observations": 2,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "What I saw: no live activity . What I did: inspected all common areas, tincats, restrooms, cafe, kitchen, preparation area, electrical room, storage area, treated all drains with Actiyme foam What I recommend: keep all kitchen and drain areas clean to prevent future activity thank you",
+   "open_actions": 0
+  },
+  {
+   "address": "147 3rd Ave",
+   "program_id": "16595881",
+   "account": "39994740",
+   "tech": "FANOR RAMIREZ",
+   "license": "",
+   "svc_date": "7/22/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "8:18 AM",
+   "time_out": "11:22 AM",
+   "invoice": "304500816",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "147",
+   "house_no": "147",
+   "store_code": "US00024",
+   "store_name": "15th & 3rd",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "American Cockroaches",
+   "comments": "Ive arrived at location and checked in with Vita no recent activity was mentioned other than a centipede that was spotted under the checkout counter. I then inspected all areas of the basement and first floor, inspecting all tin cats, and glue board monitors replacing all glue boards. I also treated all areas on the first floor in the basement with WSG mixed with IGR. What I recommend. To keep all areas, clean and organized at all times to avoid future activity. Thank you.",
+   "open_actions": 0
+  },
+  {
+   "address": "154 Bleecker St",
+   "program_id": "16595909",
+   "account": "39994740",
+   "tech": "JOHN COLON",
+   "license": "C2900397",
+   "svc_date": "7/20/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "10:57 AM",
+   "time_out": "11:22 AM",
+   "invoice": "304501004",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "154",
+   "house_no": "154",
+   "store_code": "US00010",
+   "store_name": "154 Bleecker",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "Spoke to Alex no concerns. What I saw: is not activity found in all common areas, coffee service counter areas,dish washing area,water heater room,storage room bathrooms. What I did: I inspect all common areas and treated all.common areas, , coffee service counter areas,dish washing area,water heater room,storage room bathrooms. Inspected tin cats and pest monitors. What I expect: not activities In all common areas What I recommend: clean and keep organize all common areas, , coffee service counter areas,dish washing area,water heater room,storage room bathrooms to prevent activity. Thanks for your Cooperation and stay safe.",
+   "open_actions": 1
+  },
+  {
+   "address": "221 Grand St",
+   "program_id": "16595890",
+   "account": "39994740",
+   "tech": "FANOR RAMIREZ",
+   "license": "",
+   "svc_date": "7/14/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "10:22 AM",
+   "time_out": "10:50 AM",
+   "invoice": "304500883",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "221",
+   "house_no": "221",
+   "store_code": "US00025",
+   "store_name": "221 Grand",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "Occasional Invaders",
+   "comments": "Arrived at location checked in with YONG no recent activity was mentioned I then treated all areas, including dishwashing areas, storage spaces, restroom, office, employee break areas, and all appliances in the front inspecting oil, tin cats, replacing all boards and treating all areas with WSG mixed with IGR. What I recommend. To keep all areas, clean and organized at all times to avoid future activity. Thank you.",
+   "open_actions": 0
+  },
+  {
+   "address": "244 8th Ave",
+   "program_id": "16595901",
+   "account": "39994740",
+   "tech": "SIMON LI",
+   "license": "C2906519",
+   "svc_date": "7/20/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "8:11 AM",
+   "time_out": "12:57 PM",
+   "invoice": "304500943",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "244",
+   "house_no": "244",
+   "store_code": "US00022",
+   "store_name": "23rd & 8th",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "What was seen: Spoke to Andrew about issues or concerns. No signs of issues or concerns regarding pest activity. What was done: common areas, service counters, seating areas, beverage dispensers, ice machine, dishwashing areas, storage areas, maintenance areas, office areas, break rooms, and restrooms were inspected and treated for pest activity. Inspected and treated drains, cracks and crevices with alpine Wsg solution. Inspected and replaced glue boards. Recommend: Please organize and keep all areas, especially beneath kitchen equipment, clear of clutter, food debris, and spills. Thank you for your understanding and cooperation.",
+   "open_actions": 1
+  },
+  {
+   "address": "261 3rd Ave",
+   "program_id": "16595918",
+   "account": "39994740",
+   "tech": "RICHARD FLORES",
+   "license": "C2901532",
+   "svc_date": "7/25/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "12:17 PM",
+   "time_out": "12:40 PM",
+   "invoice": "304501080",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "261",
+   "house_no": "261",
+   "store_code": "US00020",
+   "store_name": "21st & 3rd",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "What I saw no activity any place in the store, what o did Im inspected and sprayed alpine gsw liquid drains floor and drains sink, back storage area, restroom garbage area,front counter and dining room also Im replaced glue traps no activity found thank you for your consideration",
+   "open_actions": 1
+  },
+  {
+   "address": "369 Lexington Ave",
+   "program_id": "16595925",
+   "account": "39994740",
+   "tech": "JESUS JUAREZ",
+   "license": "C2904403",
+   "svc_date": "7/9/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "10:54 AM",
+   "time_out": "11:42 AM",
+   "invoice": "304501160",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "369",
+   "house_no": "369",
+   "store_code": "US00015",
+   "store_name": "41st & Lexington",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "Upon arrival, I checked in with the store manager, who reported seeing a mouse running around in the back of the store. I immediately performed a thorough inspection of the designated back area, paying close attention to corners, baseboards, and behind equipment. During this inspection, I found no active signs of rodent activity, such as fresh droppings, nesting materials, or rub marks. To prevent any future entry, I identified several potential access points and sealed them completely using steel wool. Specifically, I sealed a small hole in the tile flooring surrounding a white electrical cable penetration. I also packed a gap leading into an open section of a floor drain grate to prevent pests from traveling up through the line. Additionally, I sealed a tight gap found behind a structural junction against the wall paneling, and securely stuffed the open space surrounding a black utility pipe where it penetrates through the textured wall. As a proactive monitoring and trapping measure, I successfully installed two Tin Cat multi-catch mouse traps in strategic locations throughout the back area. I will check these devices during our next scheduled service to monitor for any activity and ensure the perimeter remains secure.",
+   "open_actions": 1
+  },
+  {
+   "address": "401 3rd Ave",
+   "program_id": "16595937",
+   "account": "39994740",
+   "tech": "RICHARD FLORES",
+   "license": "C2901532",
+   "svc_date": "7/25/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "11:35 AM",
+   "time_out": "11:57 AM",
+   "invoice": "304501256",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "401",
+   "house_no": "401",
+   "store_code": "US00019",
+   "store_name": "29th & 3rd",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "What I saw no activity, what I did Im inspected and sprayed alpine gsw liquid back storage, drains floor and drains sink, restroom, front counter, garbage room and replaced glue traps thank you for your cooperation",
+   "open_actions": 1
+  },
+  {
+   "address": "410 10th Ave",
+   "program_id": "16595949",
+   "account": "39994740",
+   "tech": "CHRIS DELGADO",
+   "license": "",
+   "svc_date": "7/30/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "10:45 AM",
+   "time_out": "11:29 AM",
+   "invoice": "304501360",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "410",
+   "house_no": "410",
+   "store_code": "US00008",
+   "store_name": "33rd & 10th",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": true,
+   "pest_types": "Flies",
+   "comments": "What I saw: live fruit flies inside cafe drain . What I did: fly knockdown, inspected all common areas, tincats, restroom, cafe, kitchen, preparation area, , storage area, treated all drains with Actiyme foam What I recommend: keep all kitchen and drain areas clean to prevent future activity thank you",
+   "open_actions": 0
+  },
+  {
+   "address": "488 Madison Ave",
+   "program_id": "16595960",
+   "account": "39994740",
+   "tech": "FANOR RAMIREZ",
+   "license": "",
+   "svc_date": "7/18/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "10:53 AM",
+   "time_out": "1:22 PM",
+   "invoice": "304501460",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "488",
+   "house_no": "488",
+   "store_code": "US00027",
+   "store_name": "52nd & Madison",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": true,
+   "pest_types": "House Flies",
+   "comments": "Checked in with yeilin. She mentioned flies have been seen under the check out counters close to the drain. I then treated under all appliances with wsg mixed with igr, and also added glueboard monitors. I also inspected all tincats, replacing all glueboards. What I recommend. To keep all areas clean and organized . Thank you.",
+   "open_actions": 0
+  },
+  {
+   "address": "550 10th Ave",
+   "program_id": "16596071",
+   "account": "39994740",
+   "tech": "IVAN HRUSHOVENKO",
+   "license": "",
+   "svc_date": "7/27/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "11:57 AM",
+   "time_out": "12:37 PM",
+   "invoice": "304502278",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "550",
+   "house_no": "550",
+   "store_code": "US00018",
+   "store_name": "40th & 10th",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "I spoke with Barnie he had fly concerns in the production area by the counter so l inspected and treated perimeter with ecopco. I conducted a thorough inspection of the kitchen perimeter, office area, storage area, break room,common areas, closet area, boiler area, and counter area. No signs of pest activity were observed at this time.Alpine WSG was applied to the kitchen perimeter, storage area, break room,common areas, office area, restrooms, and counter area. All glue boards, including tin cats, were replaced.",
+   "open_actions": 0
+  },
+  {
+   "address": "555 Avenue Of The Americas",
+   "program_id": "16596090",
+   "account": "39994740",
+   "tech": "SIMON LI",
+   "license": "C2906519",
+   "svc_date": "7/21/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "9:19 AM",
+   "time_out": "9:48 AM",
+   "invoice": "304502403",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "555",
+   "house_no": "555",
+   "store_code": "US00012",
+   "store_name": "16th & 6th",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "Spoke to Nell about issues or concerns. What was seen: No signs of issues, concerns, or pest activity were present. What was done: common areas, service counters, beverage dispensers, ice machine, storage areas, mechanical rooms, office areas, break rooms, and restrooms were inspected and treated for pest activity. Inspected and treated drains, cracks and crevices with alpine Wsg solution. Inspected and replaced glue boards. Recommend: Please organize and keep all areas, especially beneath kitchen equipment, clear of clutter, food debris, and spills. Thank you for your understanding and cooperation.",
+   "open_actions": 1
+  },
+  {
+   "address": "755 Broadway",
+   "program_id": "16596111",
+   "account": "39994740",
+   "tech": "FANOR RAMIREZ",
+   "license": "",
+   "svc_date": "7/8/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "2:31 PM",
+   "time_out": "2:52 PM",
+   "invoice": "304502596",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "755",
+   "house_no": "755",
+   "store_code": "US00001",
+   "store_name": "8th & Broadway",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "All areas inspected. All tincats, inspected and all glueboards replaced . Treated under dish washing areas with wsg , what I recommend. To keep all areas clean and organized. Thank you.",
+   "open_actions": 1
+  },
+  {
+   "address": "770 3rd Ave",
+   "program_id": "16613760",
+   "account": "39994740",
+   "tech": "JESUS JUAREZ",
+   "license": "C2904403",
+   "svc_date": "7/11/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "1:30 PM",
+   "time_out": "1:56 PM",
+   "invoice": "304635521",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "397.40",
+   "file_label": "770",
+   "house_no": "770",
+   "store_code": "US00009",
+   "store_name": "48th & 3rd",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": true,
+   "pest_types": "Fruit Flies",
+   "comments": "Upon arrival, I checked in with store manager Juliana, who reported recent sightings of flying insects throughout the retail space. I initiated a comprehensive inspection of the facility, beginning with all rodent monitoring stations. A thorough check of all \"Tin Cat\" live-catch traps revealed zero activity, indicating that current rodent exclusion and baiting measures remain fully effective. Shifting focus to the flying insect issue, my inspection of the trash room revealed a localized population of small flies breeding near the waste receptacles. To address this and prevent further spread, I treated the entire trash room with Alpine WSG, a highly effective residual insecticide. As a proactive preventative measure, I also applied Alpine WSG along all baseboards throughout the back area of the store to create a protective barrier. Given the seasonal pressure and the presence of these flying pests, the current control measures need reinforcement. I highly recommend the immediate installation of at least two additional insect light traps (fly lights) in key transition zones to effectively intercept and monitor fly activity moving forward",
+   "open_actions": 0
+  },
+  {
+   "address": "800 Avenue Of The Americas",
+   "program_id": "16596128",
+   "account": "39994740",
+   "tech": "SIMON LI",
+   "license": "C2906519",
+   "svc_date": "7/20/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "9:12 AM",
+   "time_out": "9:51 AM",
+   "invoice": "304502755",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "800",
+   "house_no": "800",
+   "store_code": "US00002",
+   "store_name": "28th & 6th",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "",
+   "comments": "What was seen: Spoke to Yuki about issues concerns. Moisture issues were found in dishwasher areas, and under sinks. What was done: Cafe areas, common areas, service counters, seating areas, beverage dispensers, ice machine, dishwashing areas, storage areas, maintenance areas, office areas, break rooms, kitchen areas, and restrooms were inspected and treated for pest activity. Inspected and treated drains, cracks and crevices with alpine Wsg solution. Recommend: Please organize and keep all areas, especially beneath kitchen equipment, clear of clutter, food debris, and spills. Thank you for your understanding and cooperation.",
+   "open_actions": 2
+  },
+  {
+   "address": "901 8th Ave",
+   "program_id": "16596147",
+   "account": "39994740",
+   "tech": "FANOR RAMIREZ",
+   "license": "",
+   "svc_date": "7/18/2026",
+   "svc_type": "PC Standard - Monthly",
+   "event_type": "PC Standard",
+   "time_in": "2:48 PM",
+   "time_out": "3:12 PM",
+   "invoice": "304502922",
+   "amount": "90.00",
+   "tax": "7.99",
+   "total_due": "97.99",
+   "file_label": "901",
+   "house_no": "901",
+   "store_code": "US00005",
+   "store_name": "54th & 8th",
+   "observations": 1,
+   "distinct_observations": 1,
+   "has_live_activity": false,
+   "pest_types": "Centipedes",
+   "comments": "Arrived at location and checked in with ruyin no recent activity mentioned i then inspected all 10 cats spread throughout the back dishwashing and storage areas as well as replacing all glue board monitors and treating areas with WSG. What I recommend. To keep all areas, clean and organize. Thank you.",
+   "open_actions": 0
+  }
+ ],
+ "observations": [
+  {
+   "file_label": "052",
+   "store_code": "US00013",
+   "store_name": "Grand Central Terminal",
+   "svc_date": "7/25/2026",
+   "location": "Common Area(s), Storage Room",
+   "observation": "No Activity",
+   "pest_type": "",
+   "recommendation": "Inspection Provided",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "100",
+   "store_code": "US00003",
+   "store_name": "100 Maiden Ln",
+   "svc_date": "7/9/2026",
+   "location": "Common Area(s), Dishwashing Area(s), Restrooms, Dining Room, Storage Room",
+   "observation": "No Activity",
+   "pest_type": "",
+   "recommendation": "Inspection Provided",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "102",
+   "store_code": "US00006",
+   "store_name": "102 Fulton",
+   "svc_date": "7/9/2026",
+   "location": "Basement Level, Storage Room",
+   "observation": "Activity - Dead",
+   "pest_type": "American Cockroaches",
+   "recommendation": "Treatment Rendered",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "108",
+   "store_code": "US00007",
+   "store_name": "108th & Broadway",
+   "svc_date": "7/13/2026",
+   "location": "Basement Level",
+   "observation": "Activity - Dead",
+   "pest_type": "American Cockroaches",
+   "recommendation": "Treatment Rendered",
+   "responsibility": "Technician",
+   "status": "Pending (Technician resolution needed)"
+  },
+  {
+   "file_label": "108",
+   "store_code": "US00007",
+   "store_name": "108th & Broadway",
+   "svc_date": "7/13/2026",
+   "location": "Basement Level",
+   "observation": "Activity - Dead",
+   "pest_type": "American Cockroaches",
+   "recommendation": "Treatment Rendered",
+   "responsibility": "Technician",
+   "status": "Pending (Technician resolution needed)"
+  },
+  {
+   "file_label": "128",
+   "store_code": "US00021",
+   "store_name": "128 W 32nd St",
+   "svc_date": "7/20/2026",
+   "location": "Common Area(s)",
+   "observation": "No Activity / Inspection Provided",
+   "pest_type": "",
+   "recommendation": "No Activity Found - Inspected",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "1375",
+   "store_code": "US00004",
+   "store_name": "37th & Broadway",
+   "svc_date": "7/23/2026",
+   "location": "Drains",
+   "observation": "Drain Issue",
+   "pest_type": "",
+   "recommendation": "Check Drain Lines",
+   "responsibility": "Customer",
+   "status": "Pending (Customer resolution needed)"
+  },
+  {
+   "file_label": "1375",
+   "store_code": "US00004",
+   "store_name": "37th & Broadway",
+   "svc_date": "7/23/2026",
+   "location": "Common Area(s)",
+   "observation": "No Activity / Inspection Provided",
+   "pest_type": "",
+   "recommendation": "No Activity Found - Inspected",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "147",
+   "store_code": "US00024",
+   "store_name": "15th & 3rd",
+   "svc_date": "7/22/2026",
+   "location": "",
+   "observation": "Activity - Dead",
+   "pest_type": "American Cockroaches",
+   "recommendation": "Replaced Glue Board",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "154",
+   "store_code": "US00010",
+   "store_name": "154 Bleecker",
+   "svc_date": "7/20/2026",
+   "location": "Bar Area(s), Common Area(s), Dishwashing Area(s), Storage Room, Maintenance Room",
+   "observation": "No Activity",
+   "pest_type": "",
+   "recommendation": "Inspection Provided",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "221",
+   "store_code": "US00025",
+   "store_name": "221 Grand",
+   "svc_date": "7/14/2026",
+   "location": "Common Area(s)",
+   "observation": "Activity - Dead",
+   "pest_type": "Occasional Invaders",
+   "recommendation": "Replaced Glue Board",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "244",
+   "store_code": "US00022",
+   "store_name": "23rd & 8th",
+   "svc_date": "7/20/2026",
+   "location": "Common Area(s)",
+   "observation": "Preventative",
+   "pest_type": "",
+   "recommendation": "Treatment Rendered",
+   "responsibility": "Technician",
+   "status": "Pending (Technician resolution needed)"
+  },
+  {
+   "file_label": "261",
+   "store_code": "US00020",
+   "store_name": "21st & 3rd",
+   "svc_date": "7/25/2026",
+   "location": "Storage Room",
+   "observation": "No Activity / Inspection Provided",
+   "pest_type": "",
+   "recommendation": "Replaced Glue Board",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "369",
+   "store_code": "US00015",
+   "store_name": "41st & Lexington",
+   "svc_date": "7/9/2026",
+   "location": "Kitchen Area(s)",
+   "observation": "Gaps",
+   "pest_type": "",
+   "recommendation": "Seal Openings and Gaps",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "401",
+   "store_code": "US00019",
+   "store_name": "29th & 3rd",
+   "svc_date": "7/25/2026",
+   "location": "Check-Out Counters, Compactor Area(s), Restrooms, Storage Room",
+   "observation": "No Activity / Inspection Provided",
+   "pest_type": "",
+   "recommendation": "No Activity Found - Inspected",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "410",
+   "store_code": "US00008",
+   "store_name": "33rd & 10th",
+   "svc_date": "7/30/2026",
+   "location": "Drains",
+   "observation": "Activity - Live",
+   "pest_type": "Flies",
+   "recommendation": "Activity Found/Treatment Req",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "488",
+   "store_code": "US00027",
+   "store_name": "52nd & Madison",
+   "svc_date": "7/18/2026",
+   "location": "Drains",
+   "observation": "Activity - Live",
+   "pest_type": "House Flies",
+   "recommendation": "Corrective Action",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "550",
+   "store_code": "US00018",
+   "store_name": "40th & 10th",
+   "svc_date": "7/27/2026",
+   "location": "Common Area(s)",
+   "observation": "No Activity",
+   "pest_type": "",
+   "recommendation": "Inspection Provided",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "555",
+   "store_code": "US00012",
+   "store_name": "16th & 6th",
+   "svc_date": "7/21/2026",
+   "location": "Bar Area(s), Common Area(s), Back",
+   "observation": "Preventative",
+   "pest_type": "",
+   "recommendation": "Treatment Rendered",
+   "responsibility": "Technician",
+   "status": "Pending (Technician resolution needed)"
+  },
+  {
+   "file_label": "755",
+   "store_code": "US00001",
+   "store_name": "8th & Broadway",
+   "svc_date": "7/8/2026",
+   "location": "Common Area(s)",
+   "observation": "Preventative",
+   "pest_type": "",
+   "recommendation": "Treatment Rendered",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "770",
+   "store_code": "US00009",
+   "store_name": "48th & 3rd",
+   "svc_date": "7/11/2026",
+   "location": "Common Area(s)",
+   "observation": "Activity - Live",
+   "pest_type": "Fruit Flies",
+   "recommendation": "Activity Found/Treatment Req",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  },
+  {
+   "file_label": "800",
+   "store_code": "US00002",
+   "store_name": "28th & 6th",
+   "svc_date": "7/20/2026",
+   "location": "Back",
+   "observation": "Moisture Accumulation",
+   "pest_type": "",
+   "recommendation": "Remove Spillage",
+   "responsibility": "Customer",
+   "status": "Pending (Customer resolution needed)"
+  },
+  {
+   "file_label": "901",
+   "store_code": "US00005",
+   "store_name": "54th & 8th",
+   "svc_date": "7/18/2026",
+   "location": "Dishwashing Area(s)",
+   "observation": "Activity - Dead",
+   "pest_type": "Centipedes",
+   "recommendation": "Replaced Glue Board",
+   "responsibility": "Technician",
+   "status": "Resolved"
+  }
+ ],
+ "products": [
+  {
+   "file_label": "102",
+   "store_code": "US00006",
+   "store_name": "102 Fulton",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "1 GALLON(S)",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "102",
+   "store_code": "US00006",
+   "store_name": "102 Fulton",
+   "product": "Glue Board Replacement",
+   "quantity": "3",
+   "target_pests": "American Cockroaches"
+  },
+  {
+   "file_label": "108",
+   "store_code": "US00007",
+   "store_name": "108th & Broadway",
+   "product": "Glue Board Mouse",
+   "quantity": "12",
+   "target_pests": "American Cockroaches, German"
+  },
+  {
+   "file_label": "108",
+   "store_code": "US00007",
+   "store_name": "108th & Broadway",
+   "product": "MAXFORCE COMPLETE GRANULAR",
+   "quantity": "5 OUNCE(S)",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "128",
+   "store_code": "US00021",
+   "store_name": "128 W 32nd St",
+   "product": "ACTIZYME AEROSOL FOAM",
+   "quantity": "10 OUNCE (S)",
+   "target_pests": "Cleaner"
+  },
+  {
+   "file_label": "128",
+   "store_code": "US00021",
+   "store_name": "128 W 32nd St",
+   "product": "Protecta Pest Monitors",
+   "quantity": "5",
+   "target_pests": "Occasional Invaders"
+  },
+  {
+   "file_label": "1375",
+   "store_code": "US00004",
+   "store_name": "37th & Broadway",
+   "product": "ACTIZYME AEROSOL FOAM",
+   "quantity": "10 OUNCE (S)",
+   "target_pests": "Cleaner"
+  },
+  {
+   "file_label": "147",
+   "store_code": "US00024",
+   "store_name": "15th & 3rd",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "0.5 GALLON(S)",
+   "target_pests": "Ants, Cockroaches, Centipedes"
+  },
+  {
+   "file_label": "147",
+   "store_code": "US00024",
+   "store_name": "15th & 3rd",
+   "product": "GT 180 Glueboards",
+   "quantity": "9",
+   "target_pests": "American Cockroaches, Occasional"
+  },
+  {
+   "file_label": "147",
+   "store_code": "US00024",
+   "store_name": "15th & 3rd",
+   "product": "NYGUARD IGR CONCENTRATE",
+   "quantity": "0.5 GALLON(S)",
+   "target_pests": "Ants, Cockroaches, Flies"
+  },
+  {
+   "file_label": "221",
+   "store_code": "US00025",
+   "store_name": "221 Grand",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "18 OUNCE(S)",
+   "target_pests": "Ants, Cockroaches, Centipedes"
+  },
+  {
+   "file_label": "221",
+   "store_code": "US00025",
+   "store_name": "221 Grand",
+   "product": "GT150 Glueboard",
+   "quantity": "5",
+   "target_pests": "Occasional Invaders"
+  },
+  {
+   "file_label": "244",
+   "store_code": "US00022",
+   "store_name": "23rd & 8th",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "10 OUNCE(S)",
+   "target_pests": "Cockroaches, House Flies"
+  },
+  {
+   "file_label": "244",
+   "store_code": "US00022",
+   "store_name": "23rd & 8th",
+   "product": "Glue Board Mouse",
+   "quantity": "10",
+   "target_pests": "Occasional Invaders"
+  },
+  {
+   "file_label": "261",
+   "store_code": "US00020",
+   "store_name": "21st & 3rd",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "30 OUNCE(S)",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "261",
+   "store_code": "US00020",
+   "store_name": "21st & 3rd",
+   "product": "Trapper Glueboard/Insect Monitor",
+   "quantity": "4",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "401",
+   "store_code": "US00019",
+   "store_name": "29th & 3rd",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "30 OUNCE(S)",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "401",
+   "store_code": "US00019",
+   "store_name": "29th & 3rd",
+   "product": "Trapper Glueboard/Insect Monitor",
+   "quantity": "3",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "410",
+   "store_code": "US00008",
+   "store_name": "33rd & 10th",
+   "product": "ACTIZYME AEROSOL FOAM",
+   "quantity": "14 OUNCE (S)",
+   "target_pests": "Cleaner"
+  },
+  {
+   "file_label": "488",
+   "store_code": "US00027",
+   "store_name": "52nd & Madison",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "0.5 GALLON(S)",
+   "target_pests": "Ants, Cockroaches, House Flies,"
+  },
+  {
+   "file_label": "488",
+   "store_code": "US00027",
+   "store_name": "52nd & Madison",
+   "product": "GT 180 Glueboards",
+   "quantity": "5",
+   "target_pests": "American Cockroaches, Occasional"
+  },
+  {
+   "file_label": "488",
+   "store_code": "US00027",
+   "store_name": "52nd & Madison",
+   "product": "NYGUARD IGR CONCENTRATE",
+   "quantity": "0.5 GALLON(S)",
+   "target_pests": "Ants, Cockroaches, Flies"
+  },
+  {
+   "file_label": "550",
+   "store_code": "US00018",
+   "store_name": "40th & 10th",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "1 GALLON(S)",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "755",
+   "store_code": "US00001",
+   "store_name": "8th & Broadway",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "18 OUNCE(S)",
+   "target_pests": "Ants, Centipedes, Cockroaches"
+  },
+  {
+   "file_label": "755",
+   "store_code": "US00001",
+   "store_name": "8th & Broadway",
+   "product": "GT 180 Glueboards",
+   "quantity": "2",
+   "target_pests": "Occasional Invaders"
+  },
+  {
+   "file_label": "770",
+   "store_code": "US00009",
+   "store_name": "48th & 3rd",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "2 OUNCE(S)",
+   "target_pests": "Cockroaches"
+  },
+  {
+   "file_label": "800",
+   "store_code": "US00002",
+   "store_name": "28th & 6th",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "10 OUNCE(S)",
+   "target_pests": "Cockroaches, House Flies"
+  },
+  {
+   "file_label": "901",
+   "store_code": "US00005",
+   "store_name": "54th & 8th",
+   "product": "ALPINE WSG INSECTICIDE",
+   "quantity": "0.5 GALLON(S)",
+   "target_pests": "Ants, Cockroaches, House Flies,"
+  },
+  {
+   "file_label": "901",
+   "store_code": "US00005",
+   "store_name": "54th & 8th",
+   "product": "GT 180 Glueboards",
+   "quantity": "5",
+   "target_pests": "Occasional Invaders"
+  }
+ ],
+ "open_actions": [
+  {
+   "file_label": "154",
+   "store_code": "US00010",
+   "store_name": "154 Bleecker",
+   "svc_date": "7/20/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/25/2026",
+   "status": "Pending",
+   "responsibility": "Technician"
+  },
+  {
+   "file_label": "244",
+   "store_code": "US00022",
+   "store_name": "23rd & 8th",
+   "svc_date": "7/20/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/26/2026",
+   "status": "Resolved",
+   "responsibility": "Technician"
+  },
+  {
+   "file_label": "261",
+   "store_code": "US00020",
+   "store_name": "21st & 3rd",
+   "svc_date": "7/25/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/25/2026",
+   "status": "Pending",
+   "responsibility": "Technician"
+  },
+  {
+   "file_label": "369",
+   "store_code": "US00015",
+   "store_name": "41st & Lexington",
+   "svc_date": "7/9/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/26/2026",
+   "status": "Pending",
+   "responsibility": "Technician"
+  },
+  {
+   "file_label": "401",
+   "store_code": "US00019",
+   "store_name": "29th & 3rd",
+   "svc_date": "7/25/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/26/2026",
+   "status": "Pending",
+   "responsibility": "Technician"
+  },
+  {
+   "file_label": "555",
+   "store_code": "US00012",
+   "store_name": "16th & 6th",
+   "svc_date": "7/21/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/25/2026",
+   "status": "Resolved",
+   "responsibility": "Technician"
+  },
+  {
+   "file_label": "755",
+   "store_code": "US00001",
+   "store_name": "8th & Broadway",
+   "svc_date": "7/8/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/25/2026",
+   "status": "Resolved",
+   "responsibility": "Technician"
+  },
+  {
+   "file_label": "800",
+   "store_code": "US00002",
+   "store_name": "28th & 6th",
+   "svc_date": "7/20/2026",
+   "observation": "Gaps",
+   "recommendation": "Seal Openings and Gaps",
+   "date_entered": "06/26/2026",
+   "status": "Resolved",
+   "responsibility": "Customer"
+  },
+  {
+   "file_label": "800",
+   "store_code": "US00002",
+   "store_name": "28th & 6th",
+   "svc_date": "7/20/2026",
+   "observation": "Preventative",
+   "recommendation": "Treatment Rendered",
+   "date_entered": "06/26/2026",
+   "status": "Resolved",
+   "responsibility": "Technician"
+  }
+ ]
+}

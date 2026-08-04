@@ -1,0 +1,10 @@
+parsed 21/21 PDFs
+observations parsed: 23
+products parsed: 29
+stores identified by address: 21/21
+visits with no observation block: 0
+July observations not marked Resolved: 6
+carry-over (open) actions from June: 9, still unresolved 4
+
+WARNINGS:
+  - 108: source PDF repeats 1 identical observation block(s) — kept as-is, see distinct_observations

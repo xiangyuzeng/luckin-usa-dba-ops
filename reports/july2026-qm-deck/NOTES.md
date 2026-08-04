@@ -1,6 +1,26 @@
 # QM Monthly Report — 2026 Jul (PPTX) · 构建说明
 
-产物：`output/QM Monthly Report- 2026 Jul.pptx`（**v2 / 36 页**，对标 6 月 36 页版）
+产物：`output/QM Monthly Report- 2026 Jul.pptx`（**v4 / 37 页**，对标 6 月 36 页版）
+
+## v4（2026-08-04）：补齐业务侧数据，占位页清零（EHS 体系进度除外）
+
+| 板块 | 数据 | 来源 |
+|---|---|---|
+| 供应商准入 | 通过 2 家：食品类 1 + 其他非食品 1 | 业务侧 |
+| 原料准入 | 0 / 0（与 6 月一致） | 业务侧 |
+| 客户投诉 | 1 起食安类：221 Grand，07/27 12:46pm，Sausage Egg & Cheese Croissant，"There was a piece of plastic in my food" | 业务侧 |
+| EHS | 7 月工伤 0 起（YTD 1 起，5 月） | 业务侧 |
+| 虫害·服务商 | 新增第 29 页，见下 | Orkin PDF |
+
+**⚠ 供应商准入的口径已澄清**：系统 `t_mdm_supplier` 7 月新增 15 条，而 QA 审批准入仅 2 家——
+**营建/工程类供应商不走 QA 审批但仍会在系统建档**。故「主数据新增家数 ≠ 准入通过家数」，
+v1 据此提的数据缺口就此关闭。本月仅拿到通过家数，申请家数未单独统计，表里不列 applied 列。
+
+### 新增第 29 页：虫害防控 — 第三方服务商视角
+
+数据包在 `/app/reports/july2026-pest-service/`（`build_pest_pack.py` 解析 21 份 Orkin PDF）。
+最有价值的是**交叉核对**：主巡检点名 3 家、Orkin 发现痕迹 8 家、**两者只重合 1 家**
+（15th & 3rd），合并口径 10 家 —— 主巡检单一视角低估到约 1/3。
 参考：`/app/reports/QM Monthly Report- 2026 Jun.pptx`
 
 ## 流水线
@@ -20,12 +40,14 @@ qmvenv/bin/python build_deck.py       # output/QM Monthly Report- 2026 Jul.pptx
 
 | 板块 | 页 | 数据源 | 状态 |
 |---|---|---|---|
-| 01 供应商准入 | 4 | — | ⚠ 占位，待供应链/采购提供 |
-| 01 原料准入 | 5 | — | ⚠ 占位，待供应链提供 |
+| 01 供应商准入 | 4 | 业务侧提供（QA 审批口径） | ✅ 实数 |
+| 01 原料准入 | 5 | 业务侧提供 | ✅ 实数（0/0） |
 | 01/02 PQNC | 6–12 | `aws-luckyus-scmsrm-rw` / `luckyus_scm_srm.t_pqnc` + `t_pqnc_operate_detail`，并与 `reports/PQNC 2026-07.xlsx` 逐单核对 | ✅ 实数 |
-| 03 门店稽核 | 14–30 | `/app/reports/july2026-qa-inspection/`（opqualitycontrol） | ✅ 实数 |
-| 04 客户投诉 | 32 | 无系统记录（salescrm / isalescdp 均无投诉工单表） | ⚠ 占位 |
-| 05 EHS | 34–35 | 无系统记录 | ⚠ 占位 |
+| 03 门店稽核 | 14–28、30–31 | `/app/reports/july2026-qa-inspection/`（opqualitycontrol） | ✅ 实数 |
+| 03 虫害·服务商 | 29 | `/app/reports/july2026-pest-service/`（Orkin 逐店 PDF） | ✅ 实数 |
+| 04 客户投诉 | 33 | 业务侧提供（无系统工单表） | ✅ 实数 |
+| 05 EHS 工伤 | 35 | 业务侧提供 | ✅ 实数（0 起） |
+| 05 EHS 体系进度 | 36 | — | ⚠ 仍为占位，待 EHS 团队更新 |
 
 6 月 PPT 中的照片类页（S24/S26/S27 关键项实拍图）本次未复刻——附件图片存于对象存储，
 `t_pqnc_operate_detail.attachment_url` 仅存路径，未纳入本次拉取。
