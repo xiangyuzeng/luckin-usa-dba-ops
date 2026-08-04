@@ -298,10 +298,14 @@ def section_head(sl, num, title, x, y, w, h, size=32, color=None):
 ATTACH_NOTE = ("※ 本页对应的现场实拍附件存于对象存储（工单 attachment_url 仅存路径），"
                "未纳入本次数据拉取；如需配图请从 SRM / 稽核系统导出后插入。")
 def attach_note(sl, x=0.55, w=12.2):
-    """Drop the note just under the lowest block on the slide (June had photos here)."""
+    """Drop the note just under the lowest block on the slide (June had photos here).
+    If the slide is already full, fall back to the footer row beside the org name."""
     bot = max((sh.top + sh.height) / 914400 for sh in sl.shapes
               if (sh.top + sh.height) / 914400 < 6.95)
-    tb(sl, x, min(bot + 0.06, 6.74), w, 0.22, ATTACH_NOTE, size=8, color=MUTED)
+    if bot + 0.06 <= 6.74:
+        tb(sl, x, bot + 0.06, w, 0.22, ATTACH_NOTE, size=8, color=MUTED)
+    else:
+        tb(sl, x, 7.03, 8.6, 0.22, ATTACH_NOTE, size=7.5, color=MUTED)
 
 PG = [0]
 def page(): PG[0] += 1; return PG[0]
@@ -324,8 +328,8 @@ AG = [("01", "Supplier & Materials Performance 供应链", 0.9, 1.35, WARN,
        f"仓储·共担 {WH_JUL} 起（6 月 {WH_JUN} 起，{(WH_JUL-WH_JUN)/WH_JUN*100:+.0f}%）· 含奶类变质集群 {len(JOINT)} 起"),
       ("03", "Store Audit Performance 门店稽核", 0.9, 3.0, WARN,
        "QA 稽核 19 次 / 18 家 · 均分 92.1"),
-      ("04", "Customer Complaint 客户投诉", 6.85, 3.0, WARN,
-       "食安类客诉 1 起（异物）· YTD 4 起"),
+      ("04", "Customer Complaint 客户投诉", 6.85, 3.0, CRIT,
+       "食安类客诉 7 起 / 6 家门店 · 4 起指向奶变质"),
       ("05", "EHS 环境健康安全", 0.9, 4.65, GOOD, "工伤 0 起 · 连续两月零工伤")]
 for num, txt, x, y, col, note in AG:
     rect(s, x, y, 5.45, 1.35, fill=FILL_L)
@@ -594,15 +598,16 @@ body(s, 6.75, 2.99, 6.0, 2.21,
 band(s, 0.55, 5.35, 6.0, "判责与分析 / Judgment & Root Cause")
 body(s, 0.55, 5.69, 6.0, 1.32,
      "系统判责意见（2026-08-03）：多店反馈奶变酸，供应商与仓库双方自查\n"
-     "均未发现异常 → 判为「供应商·仓储共担」。\n"
-     "即根因未定位到单一环节：灌装/原奶质量与入库后冷链执行均未排除，\n"
-     "现有留样与温度记录不足以判定，冷链链路仍是开放风险。", size=9)
+     "均未发现异常 → 判为「供应商·仓储共担」，根因未落到单一环节。\n"
+     "⚠ 检出滞后：客诉 7/8 起已连续反馈奶变质酸败（见第 33 页），\n"
+     "内部首张变质 PQNC 为 7/19、集群 7/22——客户比工单早约两周。", size=9)
 band(s, 6.75, 5.35, 6.0, "纠正措施 / Corrective Action（P1）")
 body(s, 6.75, 5.69, 6.0, 1.32,
      "① 要求 SYSCO / Cream-O-Land 追溯上述批次原奶与灌装记录并书面回函。\n"
      "② 补齐链路温度证据：仓库出库温度、配送车温度记录、门店收货温度必检并留证。\n"
      "③ 涉事批次全量下架复检；8 月同 SKU 到货加严抽检（开瓶感官 + 效期）。\n"
-     "④ 建立「同 SKU 跨店 3 起以上」自动预警，避免集群靠人工汇总才被发现。", size=9)
+     "④ 建立「同 SKU 跨店 3 起以上」自动预警，并把客诉纳入触发条件——\n"
+     "   本月客诉信号早于 PQNC 约两周，可据此提前锁定批次。", size=9)
 
 attach_note(s)   # CASE B: June carried on-site photos here
 
@@ -1115,35 +1120,51 @@ pic(s, "divider04", 0, 0.01, 8.83, 7.49)
 section_head(s, "04", "Customer\nComplaint\n客户投诉", 9.89, 2.69, 2.92, 2.4)
 
 # ================================================================= 33 COMPLAINT
-s = S(); title_bar(s, "04  Customer Complaint / 客户投诉", None, page())
-kpi(s, 0.55, 1.4, 2.9, 1.15, "1", "7 月食安类客诉", "6 月 1 起，持平", WARN)
-kpi(s, 3.65, 1.4, 2.9, 1.15, "4", "2026 YTD 累计", "1–6 月 3 起 + 7 月 1 起", INFO)
-kpi(s, 6.75, 1.4, 2.9, 1.15, "异物", "本月投诉性质", "食品中发现塑料碎片", CRIT, vsize=22)
-kpi(s, 9.85, 1.4, 2.9, 1.15, "221 Grand", "涉及门店", "2026-07-27 12:46", CRIT, vsize=16)
-band(s, 0.55, 2.75, 12.2, "事件详情 / Complaint Detail")
-table(s, 0.55, 3.12, 12.2, 0.8,
-      ["日期时间", "门店", "产品", "客诉原文", "性质"],
-      [["07/27/2026 12:46pm", "221 Grand", "Sausage Egg & Cheese Croissant",
-        "\"There was a piece of plastic in my food\"", "异物 · 食安"]],
-      widths=[2.1,1.5,3.0,4.4,1.4], align_center=[0,4], fsize=9)
-band(s, 0.55, 4.15, 6.0, "分析 / Analysis")
-body(s, 0.55, 4.49, 6.0, 2.2,
-     "本月唯一食安类客诉，为「成品中发现塑料异物」，风险等级高于\n"
-     "6 月（疑似食源性疾病、监控未见异常、判定个案）。\n\n"
-     "涉事产品为轻食类（可颂），非门店现制饮品——异物可能\n"
-     "来自供应商包装、解冻/加热环节或门店操作，需三段排查。\n\n"
-     "⚠ 同月同店：221 Grand 亦有 1 起 PQNC（Cream-O-Land 脱脂奶\n"
-     "变质集群，见 Case B），该店本月出现两类独立食安信号。", size=9.5)
-band(s, 6.75, 4.15, 6.0, "纠正措施 / Corrective Action（P1）")
-body(s, 6.75, 4.49, 6.0, 2.2,
-     "① 追溯该批次可颂供应商与生产日期，要求书面回函说明\n"
-     "   异物来源与包装完整性控制。\n\n"
-     "② 门店端复核轻食解冻 / 加热 / 出餐流程，检查操作台\n"
-     "   周边塑料件（包材、铲勺、封膜）是否有破损脱落。\n\n"
-     "③ 保留客诉实物与照片；若供应商无法排除，则将该 SKU\n"
-     "   纳入到货加严抽检。\n\n"
-     "④ 建议将客诉纳入 PQNC 体系联动，避免客诉与 PQNC 两套\n"
-     "   记录各自独立、无法交叉验证。", size=9.5)
+s = S(); title_bar(s, "04  Customer Complaint / 客户投诉",
+                   "2026 年 7 月 · 7 起 ※ 6 月 PPT 口径下 1–6 月累计仅 3 起（约 0.5 起/月），"
+                   "与本月导出口径是否一致待客服确认，故本页不做 YTD 同比", page())
+COMPLAINTS = [
+    ("Jul 8, 11:06 AM",  "41st & Lexington", "The coconut milk has most definitely gone bad. "
+                                             "The drink tastes sour and spoiled", "变质酸败"),
+    ("Jul 12, 1:52 PM",  "28th & 6th",       "Tastes sour like the coconut milk is bad", "变质酸败"),
+    ("Jul 14, 1:02 PM",  "37th & Broadway",  "The milk had curdled at the top where the orange "
+                                             "flavor was added.", "变质酸败"),
+    ("Jul 17, 2:42 PM",  "100 Maiden Ln",    "Strange chemical taste", "异味"),
+    ("Jul 17, 8:33 PM",  "37th & Broadway",  "It taste so bad, i felt like i was drinking "
+                                             "expired milk", "变质酸败"),
+    ("Jul 24, 8:00 AM",  "15th & 3rd",       "Hair in food", "异物"),
+    ("Jul 27, 12:42 PM", "221 Grand",        "There was a piece of plastic in my food", "异物"),
+]
+c_stores = {c[1] for c in COMPLAINTS}
+c_spoil  = [c for c in COMPLAINTS if c[3] == "变质酸败"]
+c_object = [c for c in COMPLAINTS if c[3] == "异物"]
+cluster_stores = {ENR[r["pqnc_no"]]["store"] for r in JOINT}
+kpi(s, 0.55, 1.4, 2.9, 1.15, str(len(COMPLAINTS)), "7 月食安类客诉",
+    f"涉及 {len(c_stores)} 家门店", CRIT)
+kpi(s, 3.65, 1.4, 2.9, 1.15, str(len(c_spoil)), "变质 / 酸败类", "全部指向奶类", CRIT)
+kpi(s, 6.75, 1.4, 2.9, 1.15, str(len(c_object)), "异物类", "毛发 1 · 塑料 1", CRIT)
+kpi(s, 9.85, 1.4, 2.9, 1.15, "11 天", "客诉早于内部工单", "7/8 首诉 → 7/19 首张变质 PQNC", CRIT, vsize=22)
+band(s, 0.55, 2.72, 12.2, "事件明细 / Complaint Detail")
+table(s, 0.55, 3.09, 12.2, 2.0,
+      ["日期时间", "门店", "客诉原文 / Customer comment", "分类"],
+      [[d, st, f"“{tx}”", cat] for d, st, tx, cat in COMPLAINTS],
+      widths=[1.9,1.9,7.0,1.4], align_center=[0,3], fsize=8.5)
+band(s, 0.55, 5.25, 6.0, "分析 / Analysis")
+body(s, 0.55, 5.59, 6.0, 1.36,
+     f"{len(COMPLAINTS)} 起中 {len(c_spoil)} 起为奶类变质酸败、1 起异味，{len(c_object)} 起异物（毛发、塑料）。\n"
+     f"⚠ 检出滞后：客诉 7/8 即报椰奶变质，内部首张变质 PQNC 为 7/19、\n"
+     f"集群 7/22 才爆发——「客户比工单早约两周发现同一问题」。\n"
+     f"37th & Broadway 7/14、7/17 两次客诉，同店 7/21 才开 PQNC（滞后 7 天）。\n"
+     f"41st & Lexington（7/8 首诉）与 15th & 3rd 全月「无」对应 PQNC，客诉未回流质量工单。\n"
+     f"客诉 {len(c_stores)} 家中仅 {len(c_stores & cluster_stores)} 家落在 Case B 集群内。", size=8.5)
+band(s, 6.75, 5.25, 6.0, "纠正措施 / Corrective Action（P1）")
+body(s, 6.75, 5.59, 6.0, 1.36,
+     "① 客诉与 PQNC 打通：奶类变质客诉自动触发同店同 SKU 留样 + 建单。\n"
+     "② 以客诉为「早期指标」：同 SKU 跨店 2 起变质客诉即启动批次追溯\n"
+     "   ——按本月时间线可提前约两周锁定 Cream-O-Land 批次。\n"
+     "③ 41st & Lexington、15th & 3rd 补开工单并追溯对应批次。\n"
+     "④ 异物类单独排查：15th & 3rd 员工毛发管控（发网/工帽）；\n"
+     "   221 Grand 可颂供应商包装与门店加热出餐环节。", size=8.5)
 
 # ================================================================= 34 DIVIDER 05
 s = S()
