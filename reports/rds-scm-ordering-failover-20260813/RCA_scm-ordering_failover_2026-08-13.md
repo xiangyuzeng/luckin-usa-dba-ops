@@ -2,7 +2,26 @@
 
 **Alert**: 【DB告警】AWS RDS 发生重启或者主从切换_语音 — P0 (legacy policy id=93)
 **Instance**: `aws-luckyus-scm-ordering-rw` | **Verdict**: ✅ **TRUE POSITIVE**
-**Investigated**: 2026-08-13 ~22:00–22:45 UTC | **DBA**: 曾翔宇 (David Zeng)
+**Investigated**: 2026-08-13 ~22:00–23:15 UTC | **DBA**: 曾翔宇 (David Zeng)
+**Version**: v2 (revised 2026-08-13 23:15 UTC)
+
+---
+
+## ⚠️ v2 revision notice (corrections to v1)
+
+Two v1 conclusions were **wrong** and are corrected here:
+
+| Item | v1 claim (❌ wrong) | v2 measured (✅ correct) |
+|------|--------------------|--------------------------|
+| Recurrence | "credits will exhaust again 06:00–07:00 UTC tonight" | **No recurrence.** The abnormal workload stopped; `EBSByteBalance%` has recovered to 99% |
+| Working set | "~800 MB working set, 6× the buffer pool" | **Hot set is only ~114 MB** — the 128 MB pool is not even full. 800 MB is *total schema size*, not the working set |
+
+**Cause of the error**: v1 read the 21:56–22:00 ReadIOPS rise (74→134) as the abnormal workload
+resuming. It was **buffer pool warm-up after the restart**. v1 also conflated total schema size
+with working set.
+
+**Impact on conclusions**: this is **no longer an emergency change**; the recommended class drops
+from db.t4g.medium to db.t4g.small (and is now optional). The failure mechanism itself is unchanged.
 
 ---
 
@@ -11,26 +30,17 @@
 The instance genuinely restarted via a Multi-AZ failover. AWS's own reason was
 **"The RDS Multi-AZ primary instance is busy and unresponsive."**
 
-Root cause: **EBS throughput credit (`EBSByteBalance%`) exhaustion on an undersized
-db.t4g.micro.** The instance's 128 MB InnoDB buffer pool cannot hold a ~800 MB working
-set, so nearly every read becomes a physical EBS read. A workload step-change at
-~13:00 UTC pushed sustained physical reads above the t4g.micro's baseline EBS throughput
-allowance; credits drained linearly to zero over 8.5 hours, EBS I/O was throttled to
-baseline, the primary stopped servicing I/O, and RDS failed it over.
+Direct cause: **EBS throughput credit (`EBSByteBalance%`) exhaustion.** From 13:00 UTC an
+**abnormal read workload** ran on the instance (ReadIOPS 5–25 → 70–130, sustained), draining
+`EBSByteBalance%` from 99% to 0% over 8.5 hours. At zero, EBS I/O was throttled to baseline, the
+primary stopped servicing I/O, and RDS failed it over.
 
-This is **not** a CPU, memory, connection, or lock event — all of those were flat and normal.
+CPU (6–11%), memory and connections (13–18) were flat throughout — unrelated to business volume
+or lock contention.
 
-**This is the second instance to fail this exact way today** (`aws-luckyus-iopocp-rw`
-failed over earlier on 2026-08-13 with the same signature). Same instance class, same
-mechanism.
-
-### ⚠️ Recurrence risk — the workload is still running
-
-Post-failover the credit bucket reset to 99%, but read load resumed immediately
-(ReadIOPS 74 → 151) and the balance is **already declining (99% → 98%)**. At the
-observed drain rate (~11.6 %/hour) credits exhaust again around
-**06:00–07:00 UTC 2026-08-14 (02:00–03:00 EDT)** — another failover overnight unless
-action is taken.
+**That workload ended at the failover** (most likely interrupted by the restart), credits have
+recovered to 99%, and there is **no imminent recurrence risk**. What actually needs solving is
+**what the 13:00 UTC workload was**, and **the missing credit alarm**.
 
 ---
 
@@ -39,15 +49,17 @@ action is taken.
 | Time | Event |
 |------|-------|
 | 03:36–03:39 | Routine automated backup (unrelated) |
-| ~13:00 | **Workload step-change.** ReadIOPS 5–25 → 70–130; ReadThroughput 30–150 KB/s → 400–970 KB/s; slow-query rate 10 → ~90 per 30 min. `EBSByteBalance%` begins monotonic decline from 99% |
-| 16:00:24–16:00:52 | Burst of 33 × `MAX(dt)` scans on `t_shop_order_calendar_warehouse_history`, each examining ~150–160K rows. Read peak 3.37 MB/s; 297 slow queries in that 30-min bin |
+| ~13:00 | **Abnormal read workload starts.** ReadIOPS 5–25 → 70–130; ReadThroughput 30–150 KB/s → 400–970 KB/s; slow-query rate 10 → ~90 per 30 min. `EBSByteBalance%` begins monotonic decline from 99% |
+| 16:00:24–16:00:52 | 33 × `MAX(dt)` scans on `t_shop_order_calendar_warehouse_history` in 28 seconds, each examining ~150–160K rows. Read peak 3.37 MB/s; 297 slow queries in that 30-min bin |
 | 21:30–21:35 | `EBSByteBalance%` reaches **0%** → EBS I/O throttled to baseline |
-| 21:39–21:54 | **Metric hole** — instance stops reporting (evidence of unresponsiveness). 1,111 slow queries logged in the 21:30 bin as all I/O stalls |
+| 21:39–21:54 | **Metric hole** — instance stops reporting (evidence of unresponsiveness). 1,111 slow queries in the 21:30 bin as all I/O stalls |
 | 21:55:26 | Multi-AZ instance failover **started** |
 | 21:55:55 | DB instance restarted |
 | 21:56:21 | "Primary instance is busy and unresponsive" + **failover completed** |
 | 21:57 | Zeus P0 alert fired |
-| 22:00+ | Credits reset to 99%; **ReadIOPS back to 151 — drain restarting** |
+| 21:56–22:05 | Buffer pool warm-up; ReadIOPS briefly rises to 134 (**note: this is NOT the workload resuming**) |
+| 22:10 onward | Warm-up ends. **ReadIOPS falls back to 7–20 (the pre-13:00 baseline) — abnormal workload confirmed ended** |
+| 22:50 | `EBSByteBalance%` **back to 99%**, fully recovered |
 
 **Unavailability: ~55 seconds** (21:55:26 → 21:56:21).
 
@@ -62,33 +74,63 @@ action is taken.
 | `EBSIOBalance%` | flat ~74–75% ← never at risk |
 | `BurstBalance` | no datapoints (gp3 volume — not applicable) |
 | `CPUUtilization` | 6–11%, flat |
-| `FreeableMemory` | ~90–108 MB, stable (no leak/drop) |
+| `FreeableMemory` | ~90–108 MB, stable |
 | `DatabaseConnections` | 13–18, stable |
 | `ReadLatency` | ~0.7 ms, stable until throttle |
 
-CPU, memory and connections rule out the usual failover causes. The only metric that
-moved to a limit was the EBS byte credit.
+### 3.2 Self-recovered after the failover (new in v2)
 
-### 3.2 The instance is memory-starved
-| Fact | Value |
+| Time (UTC) | 21:55 | 22:00 | 22:10 | 22:25 | 22:40 | 22:50 |
+|---|---|---|---|---|---|---|
+| `EBSByteBalance%` | 99 | 98 | 97 | 98 | 98 | **99** |
+| ReadIOPS | 74 | 134 | 27 | 45 | 18 | **7** |
+| ReadThroughput | 467 KB/s | 887 | 154 | 259 | 104 | **41 KB/s** |
+
+Credits dipped to 97% then **recovered to 99%**; ReadIOPS returned to 7–20, the pre-13:00 baseline.
+Confirmed internally: only **308 InnoDB physical reads in the 52 minutes** after the failover
+(~0.1/sec).
+
+### 3.3 Instance sizing assessment (major v2 correction)
+
+| Item | Value |
 |------|-------|
 | Instance class | `db.t4g.micro` (1 GB RAM, 2 vCPU) |
-| `innodb_buffer_pool_size` | **128 MB** |
-| Schema size (`luckyus_scm_ordering`) | ~800 MB |
-| Largest table `t_auto_order_small_log` | **243.6 MB** (1.69M rows; 144 MB of that is index) |
-| Buffer pool hit ratio (since restart) | **92.9%** (healthy is >99%) |
+| `innodb_buffer_pool_size` | 128 MB (8,192 pages × 16 KB) |
+| **Steady-state data pages** | **7,123 pages ≈ 114 MB** |
+| **Free pages** | **1,068 — the pool is not even full** |
+| Steady-state hit ratio | **98.3%** |
+| Total schema size | ~800 MB (includes cold data; *not* the working set) |
+| Largest table `t_auto_order_small_log` | 243.6 MB (1.69M rows) |
 
-The single largest table is ~2× the entire buffer pool. Caching is impossible, so read
-traffic goes to EBS continuously.
+**Conclusion: there is no memory bottleneck in steady state.** The ~114 MB hot set fits in the
+128 MB pool with room to spare.
 
-**Note on the 128 MB pool:** this is *not* a parameter-group defect. `luckyus-prod-84`
-leaves `innodb_buffer_pool_size` at the engine default, and MySQL auto-sizes it from
-detected RAM (verified: `aws-luckyus-salesmarketing-rw`, db.t4g.xlarge on the *same*
-parameter group, runs an 11,520 MB pool). A t4g.micro falls into MySQL's ≤1 GB tier,
-which pins the pool at 128 MB. **Therefore scaling the instance class automatically
-fixes the buffer pool** — no parameter change needed.
+> v1 recorded a 92.9% hit ratio — that was sampled 385 s after the restart with a cold cache and
+> is not representative of steady state.
 
-### 3.3 Query-level offenders
+**On the 128 MB pool:** this is *not* a parameter-group defect. `luckyus-prod-84` leaves
+`innodb_buffer_pool_size` unset and MySQL auto-sizes it from detected RAM (verified by
+counter-example: `aws-luckyus-salesmarketing-rw`, db.t4g.xlarge on the *same* group, runs an
+11,520 MB pool).
+
+### 3.4 EBS bandwidth arithmetic (new in v2)
+
+Verified against AWS published specs:
+
+| Class | EBS baseline bandwidth | Baseline throughput | Burst max |
+|-------|------------------------|---------------------|-----------|
+| t4g.micro (current) | 87 Mbps | **10.88 MB/s** | 260.62 MB/s |
+| t4g.small | 174 Mbps | ~21.7 MB/s | 260.62 MB/s |
+| t4g.medium | 347 Mbps | 43.38 MB/s | 260.62 MB/s |
+
+**Measured during the incident: 0.4–0.97 MB/s average, 1-minute peak only 3.37 MB/s** — under
+one third of the micro baseline (10.88 MB/s).
+
+**Therefore the exhaustion cannot be explained by minute-averaged throughput exceeding baseline.**
+It must come from **sub-minute bursts** that minute-level averaging hides. That mechanism is not
+fully explained, so **"we need more baseline bandwidth" is not a sound justification for scaling up.**
+
+### 3.5 Query-level offenders (still valid)
 
 **(a) Missing composite index — `t_shop_order_calendar_warehouse_history` (260K rows)**
 
@@ -97,10 +139,9 @@ SELECT max(dt) FROM t_shop_order_calendar_warehouse_history
 WHERE shop_dept_id = ? AND wh_dept_id = ? AND tenant = 'LKUS';
 -- Rows_examined: 152,951–160,384   Rows_sent: 1
 ```
-Existing indexes are all **single-column**: `idx_shop`(card 24), `idx_warehouse`(card 4),
-`idx_dt`(card 113), `idx_operated_time`. With no composite index the optimizer walks
-`idx_dt` descending and filters, examining ~60% of the table to return one value. Run in
-a per-store loop (33 executions in 28 seconds at 16:00).
+All indexes are **single-column**: `idx_shop`(card 24), `idx_warehouse`(card 4), `idx_dt`(card 113),
+`idx_operated_time`. With no composite index the optimizer walks `idx_dt` descending and filters,
+examining ~60% of the table to return one value. Called in a per-store loop.
 
 **(b) Unusable index prefix — `t_auto_order_small_log` (1.69M rows, 243.6 MB)**
 
@@ -110,61 +151,52 @@ WHERE shop_dept_id = ? AND order_date = ? AND tenant = ?;
 -- 143 ms average per execution, ~214 rows returned
 ```
 The only secondary index is `uniq_shop_small_order_date` =
-`(shop_dept_id, small_class_mid, order_date, tenant)`. The query does **not** filter on
-`small_class_mid` (position 2), so only the `shop_dept_id` prefix is usable; MySQL then
-scans every entry for that shop. This is the **top table by reads** (14,133 reads since
-restart — more than all other tables combined).
+`(shop_dept_id, small_class_mid, order_date, tenant)`. The query does not filter `small_class_mid`
+(position 2), so only the `shop_dept_id` prefix is usable.
 
-### 3.4 Honest limitation
+### 3.6 What remains unexplained (stated honestly)
 
-I could not attribute the full sustained 80–150 ReadIOPS to a single statement.
-`performance_schema` was reset by the 21:55 restart (only ~20 min of history survives),
-and `long_query_time = 0.1` means the slow log cannot see the many sub-100 ms statements
-that make up the bulk of the I/O. The dominant *table* is unambiguous
-(`t_auto_order_small_log`), and the two queries above are confirmed offenders, but the
-precise trigger for the 13:00 UTC step-change is not pinned down.
+1. **The source of the 13:00 UTC workload is not identified.** `performance_schema` was wiped by
+   the 21:55 restart (~20 min of history survives) and `long_query_time = 0.1` hides the sub-100 ms
+   statements doing the bulk of the I/O. **This is the largest open item.**
+2. **The precise sub-minute burst mechanism that drained the credits** (see 3.4).
 
-**→ Action for Ops team:** was anything deployed, or did any batch/job schedule change,
-around **13:00 UTC (09:00 EDT) on 2026-08-13**?
+**→ Action for Ops:** was anything deployed, or did any batch/job schedule change, around
+**13:00 UTC (09:00 EDT) on 2026-08-13**? The workload ran ~9 hours and ended with the restart.
 
-### 3.5 Fleet check — no other instance at risk right now
+### 3.7 Fleet check — no instance at risk
 
-Swept `EBSByteBalance%` across all RDS instances (lowest 15). `scm-ordering` is the sole
-outlier at 0–5%; **every other instance sits at 99–100%**, including `iopocp` (recovered).
-61 instances share parameter group `luckyus-prod-84`, of which **32 are db.t4g.micro** —
-the same class that has now caused two failovers in one day.
+Swept `EBSByteBalance%` across all RDS instances. `scm-ordering` was the sole outlier (now
+recovered to 99%); **every other instance sits at 99–100%**, including `iopocp`, which failed the
+same way earlier today. 61 instances share `luckyus-prod-84`, of which **32 are db.t4g.micro**.
 
 ---
 
-## 4. Recommendations
+## 4. Recommendations (re-prioritised in v2)
 
 | Pri | Action | Owner | When |
 |-----|--------|-------|------|
-| **P0** | **Scale `aws-luckyus-scm-ordering-rw` → `db.t4g.medium`.** 4 GB RAM lifts the buffer pool to ~2 GB (caches the whole ~800 MB working set → physical reads collapse) *and* raises the EBS baseline throughput. Multi-AZ, so apply as a rolling modify (~1 min interruption). `db.t4g.small` is the bare minimum; medium gives headroom. | DBA + Michael | **Before 02:00 EDT tonight** |
-| **P1** | Add composite index — turns the 160K-row scan into a single seek:<br>`ALTER TABLE t_shop_order_calendar_warehouse_history ADD INDEX idx_shop_wh_tenant_dt (shop_dept_id, wh_dept_id, tenant, dt);` | DBA | After scale-up, low-traffic window |
-| **P1** | Add covering index — makes the hot query index-only:<br>`ALTER TABLE t_auto_order_small_log ADD INDEX idx_shop_date_tenant_class (shop_dept_id, order_date, tenant, small_class_mid);` | DBA | After scale-up, low-traffic window |
-| **P1** | Confirm the 13:00 UTC workload change with Ops (deploy? job schedule?) | Ops | 24 h |
-| **P2** | Retention/archival for `t_auto_order_small_log` (243.6 MB of log data, 144 MB of it index). Trimming it shrinks the working set more than any other single change. | DBA + SCM dev | 1 week |
-| **P2** | **Add CloudWatch alarm `EBSByteBalance% < 30%` on all burstable RDS instances.** Today's drain gave ~5 hours of warning that nobody saw, and this one metric predicted *both* of today's failovers. Highest-value monitoring gap. | DBA | 1 week |
-| **P2** | Review the other 31 `db.t4g.micro` instances for any carrying >1 GB working sets | DBA | 2 weeks |
-
-> Do the DDL **after** the scale-up: both `ALTER`s are online (`ALGORITHM=INPLACE`) but
-> I/O-heavy, and running them on the current t4g.micro would burn the very credits we are
-> trying to protect.
+| **P1** | **Identify the 13:00 UTC workload** (deploy? batch job? data backfill?). This is the real problem — if the same workload runs again it will repeat | Ops + DBA | 24–48 h |
+| **P1** | **Add `EBSByteBalance% < 30%` alarm on all burstable RDS instances.** There was an **8.5-hour** window between the start of the decline and the failover with zero alarm coverage — same for `iopocp` today. An alarm allows intervention before a failover | DBA | 1 week |
+| **P2** | Add the two indexes (online DDL, low-traffic window):<br>`ALTER TABLE t_shop_order_calendar_warehouse_history ADD INDEX idx_shop_wh_tenant_dt (shop_dept_id, wh_dept_id, tenant, dt);`<br>`ALTER TABLE t_auto_order_small_log ADD INDEX idx_shop_date_tenant_class (shop_dept_id, order_date, tenant, small_class_mid);` | DBA | 1–2 weeks |
+| **P3** | **(Optional)** Scale to `db.t4g.small` for headroom. **Not required** — no steady-state memory bottleneck. Re-evaluate after P1/P2 | DBA + Michael | After evaluation |
+| **P3** | Review the other 31 db.t4g.micro instances for any whose *hot set* genuinely exceeds 128 MB | DBA | 2–4 weeks |
 
 ---
 
-## 5. Key diagnostic lessons
+## 5. Diagnostic lessons
 
-1. **A metric hole is evidence, not missing data.** The 21:39–21:54 gap in every
-   CloudWatch series *is* the unresponsiveness.
-2. **Slow-query count can be a symptom, not a cause.** With `long_query_time = 0.1`,
-   trivial statements (`SELECT 1`, `SELECT @@session.transaction_read_only`) flood the log
-   once I/O stalls. The 1,111-query spike at 21:30 was the throttle, not the trigger.
-3. **On burstable instances, check the credit metrics before CPU.** Both failovers today
-   showed normal CPU/memory; only `EBSByteBalance%` moved.
-4. **Small instance class → small buffer pool → amplified physical I/O.** On t4g.micro the
-   128 MB pool turns an ordinary query mix into a sustained EBS load.
+1. **A metric hole is evidence, not missing data.** The 21:39–21:54 gap *is* the unresponsiveness.
+2. **A post-restart metric rise is cache warm-up, not resumed load.** This caused the v1 error —
+   when judging whether risk persists after a failover, **wait until warm-up completes (~15–30 min)**
+   before concluding.
+3. **Total schema size ≠ working set.** Judge memory pressure from
+   `Innodb_buffer_pool_pages_data` / `pages_free` / steady-state hit ratio, not from
+   `information_schema.tables` totals. **Free pages in the pool = memory is not the bottleneck.**
+4. **Slow-query count can be a symptom, not a cause.** With `long_query_time = 0.1`, trivial
+   statements flood the log once I/O stalls. The 1,111 spike at 21:30 was the throttle, not the trigger.
+5. **On burstable instances, check credit metrics before CPU.** Both of today's failovers showed
+   entirely normal CPU and memory.
 
 ---
-*Investigation completed 2026-08-13 22:45 UTC. Skill: RDS Alert Investigation SOP v2.0.*
+*v1 completed 2026-08-13 22:45 UTC; v2 revised 2026-08-13 23:15 UTC.*
