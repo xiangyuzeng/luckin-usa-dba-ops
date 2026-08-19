@@ -1,0 +1,75 @@
+May 2026 Inspection Export — Schema Notes (built 2026-06-01, full closed month 05-01..05-31)
+
+DISCOVERY
+=========
+- Database server (mcp-db-gateway): aws-luckyus-opqualitycontrol-rw
+- Database (MySQL):                  luckyus_opqualitycontrol
+- Tables used:
+    t_shopcheck_data            inspection header
+    t_shopcheck_opportunity     deduction items (with appeal_detail JSON)
+    t_shopcheck_report          per-inspection scoring summary
+    t_shopcheck_item_config     canonical clause text + score_config / deduction_type
+    t_shopcheck_category_config module hierarchy
+- Store master:                      aws-luckyus-opshop-rw / luckyus_opshop.t_shop_info
+
+NEW IN MAY BUNDLE (vs April v2)
+===============================
+- Summary CSV adds is_appealed (0|1), original_total_score, adjusted_total_score,
+  original_total_deduction, adjusted_total_deduction.
+- Items CSV adds is_appealed_finding (0|1).
+- Store master uses 'open_date' (was 'opening_date') for the YYYY-MM-DD set_up_time.
+- April summary is RE-EXPORTED with the same enhanced column set
+  (april2026_inspection_summary.csv inside this bundle).
+
+INSPECTION-TYPE MAPPING (large_category_id)
+===========================================
+   1084 'Store food safety self-check'   -> 门店自检
+   1134 'Store food safety audit'        -> QA审计
+   1184 'Area food safety Check'         -> 区经检查
+   (other ids — IQA2Test categories — are excluded from this bundle)
+
+SEVERITY MAPPING (S / M / G / L)
+================================
+   deduction_type 1 -> S   2 -> G   3 -> M   4 -> L
+
+SUBMITTED VIEW
+==============
+Published CSVs use status=1 (submitted) only. Drafts (status=0) are excluded.
+
+MISUBMISSION FILTER (post-query)
+================================
+Drop any inspection where score=100 AND item_count=0 AND there exists another
+inspection by the same inspector / store / date with item_count>0. Underlying
+DB is not modified — exclusion is applied at the report layer only.
+
+APPEAL SEMANTICS
+================
+- Per-item: 'is_appealed_finding' = 1 if t_shopcheck_opportunity.first_appeal_detail
+  or second_appeal_detail is non-empty (an appeal has been filed regardless of
+  outcome).
+- Per-inspection: 'is_appealed' = 1 if any of its findings has is_appealed_finding=1.
+- Approved appeal -> opportunity.status flips 1->0 AND that item's contribution
+  to t_shopcheck_report.opportunity_desc.deductionScore is zeroed. The
+  t_shopcheck_opportunity row itself remains, so item_id is still in items.csv
+  with severity=S/M/G/L and deduction_points = canonical score_config.
+- Denied / pending appeal -> status stays 1; deductionScore unchanged.
+
+SCORE COMPUTATION (validated against report.score for production inspections)
+============================================================================
+  adjusted_total_deduction = SUM(deductionScore) over deductionTypes in opportunity_desc
+  adjusted_total_score     = report.score
+  S_penalty(x)             = -20 if any type=1 deductionScore < 0 in x else 0
+                             (appears only on production inspections)
+  original_total_deduction = SUM(opportunity.score_config) over non-deleted rows
+                             (regardless of opp.status, i.e. before appeal)
+  original_total_score     = 100 + original_total_deduction + S_penalty(original)
+For inspections with no appeal, original == adjusted.
+
+KEY JOIN GRAPH
+==============
+  t_shopcheck_data.id  ===  t_shopcheck_opportunity.shopcheck_data_id
+  t_shopcheck_data.id  ===  t_shopcheck_report.shopcheck_data_id
+  t_shopcheck_opportunity.check_item_id  ==  t_shopcheck_item_config.id
+  t_shopcheck_item_config.category_config_id  ==  t_shopcheck_category_config.id (leaf)
+  t_shopcheck_category_config.parent_id        ==  t_shopcheck_category_config.id (module)
+  t_shopcheck_data.dept_id  ==  t_shop_info.dept_id        (store master)

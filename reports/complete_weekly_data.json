@@ -1,0 +1,38 @@
+{
+  "week_info": {
+    "start": "2026-04-13T00:00:00",
+    "end": "2026-04-19T23:59:59",
+    "iso_year": 2026,
+    "iso_week": 16
+  },
+  "overview": [
+    {
+      "total_orders": 27438,
+      "completed_orders": 26533,
+      "cancelled_orders": 905,
+      "total_revenue": 132618.92,
+      "avg_ticket": 4.998
+    }
+  ],
+  "daily_breakdown": [
+    {"order_date": "2026-04-13", "dow": 2, "orders": 3664, "revenue": 17989.77, "avg_ticket": 4.91},
+    {"order_date": "2026-04-14", "dow": 3, "orders": 4752, "revenue": 23365.38, "avg_ticket": 4.92},
+    {"order_date": "2026-04-15", "dow": 4, "orders": 4654, "revenue": 22994.71, "avg_ticket": 4.94},
+    {"order_date": "2026-04-16", "dow": 5, "orders": 4637, "revenue": 23084.35, "avg_ticket": 4.98},
+    {"order_date": "2026-04-17", "dow": 6, "orders": 3782, "revenue": 19150.41, "avg_ticket": 5.06},
+    {"order_date": "2026-04-18", "dow": 7, "orders": 3022, "revenue": 15395.30, "avg_ticket": 5.09},
+    {"order_date": "2026-04-19", "dow": 1, "orders": 2022, "revenue": 10639.00, "avg_ticket": 5.26}
+  ],
+  "store_performance": [
+    {"shop_id": 1127, "shop_name": "8th & Broadway", "total_orders": 4482, "completed": 4336, "revenue": 20711.69, "avg_ticket": 4.78},
+    {"shop_id": 20011, "shop_name": "37th & Broadway", "total_orders": 3402, "completed": 3298, "revenue": 17079.05, "avg_ticket": 5.18},
+    {"shop_id": 20035, "shop_name": "52nd & Madison", "total_orders": 2740, "completed": 2643, "revenue": 13260.28, "avg_ticket": 5.02},
+    {"shop_id": 20010, "shop_name": "102 Fulton", "total_orders": 2696, "completed": 2612, "revenue": 12886.55, "avg_ticket": 4.93},
+    {"shop_id": 1141, "shop_name": "54th & 8th", "total_orders": 2317, "completed": 2253, "revenue": 11732.91, "avg_ticket": 5.21},
+    {"shop_id": 20008, "shop_name": "33rd & 10th", "total_orders": 2243, "completed": 2190, "revenue": 10807.16, "avg_ticket": 4.93},
+    {"shop_id": 1128, "shop_name": "28th & 6th", "total_orders": 2019, "completed": 1977, "revenue": 10104.67, "avg_ticket": 5.11},
+    {"shop_id": 20027, "shop_name": "21st & 3rd", "total_orders": 1814, "completed": 1766, "revenue": 8783.01, "avg_ticket": 4.97},
+    {"shop_id": 1140, "shop_name": "100 Maiden Ln", "total_orders": 1548, "completed": 1512, "revenue": 7808.12, "avg_ticket": 5.16},
+    {"shop_id": 20031, "shop_name": "15th & 3rd", "total_orders": 1489, "completed": 1444, "revenue": 7066.43, "avg_ticket": 4.89}
+  ]
+}

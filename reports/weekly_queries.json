@@ -1,0 +1,13 @@
+{
+  "week_info": {
+    "start": "2026-04-13T00:00:00",
+    "end": "2026-04-19T23:59:59",
+    "iso_year": 2026,
+    "iso_week": 16
+  },
+  "queries": {
+    "overview_this_week": "\n            SELECT\n                COUNT(*) AS total_orders,\n                SUM(CASE WHEN status IN (20,90) THEN 1 ELSE 0 END) AS completed_orders,\n                SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) AS cancelled_orders,\n                SUM(CASE WHEN status IN (20,90) THEN pay_money ELSE 0 END) AS total_revenue,\n                AVG(CASE WHEN status IN (20,90) THEN pay_money END) AS avg_ticket\n            FROM t_order\n            WHERE CONVERT_TZ(create_time, 'UTC', 'America/New_York') >= '2026-04-13 00:00:00'\n              AND CONVERT_TZ(create_time, 'UTC', 'America/New_York') < '2026-04-20 00:00:00'\n        ",
+    "daily_breakdown": "\n            SELECT\n                DATE(CONVERT_TZ(create_time, 'UTC', 'America/New_York')) AS order_date,\n                DAYOFWEEK(CONVERT_TZ(create_time, 'UTC', 'America/New_York')) AS dow,\n                COUNT(*) AS orders,\n                SUM(pay_money) AS revenue,\n                AVG(pay_money) AS avg_ticket\n            FROM t_order\n            WHERE status IN (20, 90)\n              AND CONVERT_TZ(create_time, 'UTC', 'America/New_York') >= '2026-04-13 00:00:00'\n              AND CONVERT_TZ(create_time, 'UTC', 'America/New_York') < '2026-04-20 00:00:00'\n            GROUP BY DATE(CONVERT_TZ(create_time, 'UTC', 'America/New_York'))\n            ORDER BY order_date\n        ",
+    "store_performance": "\n            SELECT\n                o.shop_id,\n                o.shop_name,\n                COUNT(*) AS total_orders,\n                SUM(CASE WHEN o.status IN (20,90) THEN 1 ELSE 0 END) AS completed,\n                SUM(CASE WHEN o.status IN (20,90) THEN o.pay_money ELSE 0 END) AS revenue,\n                AVG(CASE WHEN o.status IN (20,90) THEN o.pay_money END) AS avg_ticket\n            FROM t_order o\n            WHERE CONVERT_TZ(o.create_time, 'UTC', 'America/New_York') >= '2026-04-13 00:00:00'\n              AND CONVERT_TZ(o.create_time, 'UTC', 'America/New_York') < '2026-04-20 00:00:00'\n            GROUP BY o.shop_id, o.shop_name\n            ORDER BY revenue DESC\n        "
+  }
+}

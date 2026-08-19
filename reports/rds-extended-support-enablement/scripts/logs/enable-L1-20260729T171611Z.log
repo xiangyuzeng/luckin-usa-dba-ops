@@ -1,0 +1,43 @@
+=== RDS Extended Support enablement — L1 — mode=DRY-RUN region=us-east-1 @ 2026-07-29T17:16:11Z ===
+operator=arn:aws:iam::257394478466:user/xiangyu.zeng
+targets=36
+
+  [PLAN ] aws-luckyus-devops-rw                         open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-framework01-rw                    open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-framework02-rw                    open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iadmin-rw                         open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ibehr-rw                          open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ibillingcentersrv-rw              open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ibizconfigcenter-rw               open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-icyberdata-rw                     open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iehr-rw                           open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-igers-rw                          open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ijumpserver-jumpserver-rw         open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iluckyauthapi-rw                  open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iluckymedia-rw                    open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iopenadmin-rw                     open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iopenlinker-rw                    open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iopenservice-rw                   open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iopshopexpand-rw                  open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iotplatform-rw                    open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ireplenishment-rw                 open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-isalesdatamarketing-rw            open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-isalesmembermarketing-rw          open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iunifiedreconcile-rw              open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iworkflowmidlayer-rw              open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ldas-rw                           open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ldas01-rw                         open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-mfranchise-rw                     open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-opempefficiency-rw                open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-pubdm-rw                          open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scm-asset-rw                      open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scm-openapi-rw                    open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scm-ordering-rw                   open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scm-plan-rw                       open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scm-purchase-rw                   open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scm-wds-rw                        open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scmsrm-rw                         open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-upush-rw                          open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+
+=== summary L1 (DRY-RUN) : planned/done=36 already=0 skipped=0 failed=0 ===
+log: /home/op/claude-code/app/reports/rds-extended-support-enablement/scripts/logs/enable-L1-20260729T171611Z.log

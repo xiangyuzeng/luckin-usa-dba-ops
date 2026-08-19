@@ -1,0 +1,34 @@
+store_code,store_name,address,city,area,store_level,open_date,status
+US00000,NJ Test Kitchen,"1 County Rd Unit B9, Secaucus, NJ 07094",Secaucus,LKUS00000041,SL12,2025-05-09,active (test/internal)
+US00001,8th & Broadway,"755 Broadway, New York , NY 10003",New York,LKUS00000041,SL02,2025-06-30,active
+US00002,28th & 6th,"800 6th Ave, New York, NY 10001",New York,LKUS00000041,SL02,2025-06-30,active
+US00003,100 Maiden Ln,"100 Maiden Ln, New York, NY 10038",New York,LKUS00000041,SL02,2025-09-09,active
+US00004,37th & Broadway,"1375 Broadway, New York, NY 10018",New York,LKUS00000041,SL02,2025-11-20,active
+US00005,54th & 8th,"901 8th Ave, New York, NY 10019",New York,LKUS00000041,SL02,2025-08-24,active
+US00006,102 Fulton,"102 Fulton St, New York, NY 10038",New York,LKUS00000041,SL02,2025-08-28,active
+US00007,108th & Broadway,"2799 Broadway, New York, NY 10025",New York,LKUS00000041,SL02,2026-04-30,active
+US00008,33rd & 10th,"410 10th Ave, New York, NY 10001",New York,LKUS00000041,SL02,2025-12-01,active
+US00009,48th & 3rd,"770 3rd Ave, New York, NY 10017",New York,LKUS00000041,SL02,2026-06-30,active
+US00010,154 Bleecker,"154 Bleecker St, New York, NY 10012",New York,LKUS00000041,SL02,2026-04-28,active
+US00011,180 Varick,"180 Varick St, New York, NY 10014",New York,LKUS00000041,SL02,,inactive
+US00012,16th & 6th,"555 6th Ave, New York, NY 10011",New York,LKUS00000041,SL02,2026-03-23,active
+US00013,Grand Central Terminal,"52 Vanderbilt Ave, Lower Level, New York, NY 10017",New York,LKUS00000041,SL02,2026-06-30,active
+US00014,25 Park Row,"146 Chambers St, New York, NY 10007",New York,LKUS00000041,SL02,,closed
+US00015,41st & Lexington,"369 Lexington Ave, New York, NY 10017",New York,LKUS00000041,SL02,2026-04-30,active
+US00016,Reade & Broadway,"291 Broadway, New York, NY 10007",New York,LKUS00000041,SL02,,closed
+US00017,63rd & 3rd,"219 9th Ave, New York, NY 10011",New York,LKUS00000041,SL02,,closed
+US00018,40th & 10th,"550 10th Ave, New York, NY 10018",New York,LKUS00000041,SL02,2026-05-20,active
+US00019,29th & 3rd,"401 3rd Ave, New York, NY 10016",New York,LKUS00000041,SL02,2026-04-11,active
+US00020,21st & 3rd,"261 3rd Avenue, New York, NY 10010",New York,LKUS00000041,SL02,2026-02-06,active
+US00021,128 W 32nd St,"128 W 32nd St, New York, NY 10001",New York,LKUS00000041,SL02,,inactive
+US00022,23rd & 8th,"244 8th Ave, New York, NY 10011",New York,LKUS00000041,SL02,2026-05-20,active
+US00023,23rd & 1st,"352 E 23rd St, New York, NY 10010",New York,LKUS00000041,SL02,,inactive
+US00024,15th & 3rd,"147 3rd Ave, New York, NY 10003",New York,LKUS00000041,SL02,2025-12-14,active
+US00025,221 Grand,"221 Grand St, New York, NY 10013",New York,LKUS00000041,SL02,2025-12-15,active
+US00026,211 Schermerhorn,"211 Schermerhorn St, Brooklyn, NY 11201",Brooklyn,LKUS00000041,SL02,,inactive
+US00027,52nd & Madison,"488 Madison Ave, New York, NY 10022",New York,LKUS00000041,SL02,2026-02-26,active
+US00028,Jackson Ave - LIC,"27-01 Jackson Ave, Long Island City, NY 11101",Long Island City,LKUS00000041,SL02,,closed
+US00029,148 Chambers,"148 Chambers St, New York, NY 10007",New York,LKUS00000041,SL02,,closed
+US00035,35th & 5th,"366 5th Avenue, New York, NY 10001",New York,LKUS00000041,SL02,,inactive
+US99998,Shanghai Test Kitchen,"Unit 802, 15 W 38th St, New York, NY 10018",New York,LKUS00000041,SL12,2025-11-14,active (test/internal)
+US99999,NJ Test Kitchen 2,"1 County Rd, unit b9, Secaucus, NJ 07094",Secaucus,LKUS00000041,SL12,2025-06-26,active (test/internal)

@@ -1,0 +1,95 @@
+inspection_id,store_code,store_name,store_level,inspection_date,inspection_type,inspector_name,inspector_position,status,total_score,total_deduction,original_total_score,adjusted_total_score,original_total_deduction,adjusted_total_deduction,is_appealed,appeal_status,S_count,M_count,G_count,L_count
+2243,US00001,8th & Broadway,SL02,2026-07-03,门店自检,Andrew Hu,Assistant Store Manager,1,90,-10,90,90,-10,-10,0,none,0,0,5,0
+2249,US00001,8th & Broadway,SL02,2026-07-08,门店自检,Andrew Hu,Assistant Store Manager,1,93,-7,93,93,-7,-7,0,none,0,0,3,1
+2276,US00001,8th & Broadway,SL02,2026-07-16,门店自检,Huichen Jiang,Store Manager,1,80,-20,80,80,-20,-20,0,none,0,1,7,1
+2302,US00001,8th & Broadway,SL02,2026-07-24,QA审计,Eamonn Caballar,Senior QA Manager,1,94,-6,92,94,-8,-6,1,approved,0,0,4,0
+2313,US00001,8th & Broadway,SL02,2026-07-25,门店自检,Huichen Jiang,Store Manager,1,95,-5,95,95,-5,-5,0,none,0,0,2,1
+2325,US00001,8th & Broadway,SL02,2026-07-29,区经检查,Jung Han Liang,Area Operations Manager,1,94,-6,94,94,-6,-6,0,none,0,0,2,2
+2248,US00002,28th & 6th,SL02,2026-07-08,区经检查,Jung Han Liang,Area Operations Manager,1,57,-23,57,57,-23,-23,0,none,1,3,1,1
+2268,US00002,28th & 6th,SL02,2026-07-14,门店自检,Qianxin Lu,Assistant Store Manager,1,96,-4,96,96,-4,-4,0,none,0,0,1,2
+2273,US00002,28th & 6th,SL02,2026-07-16,QA审计,Eamonn Caballar,Senior QA Manager,1,94,-6,92,94,-8,-6,1,approved,0,0,4,0
+2343,US00002,28th & 6th,SL02,2026-07-31,门店自检,Brionna Jiles,Store Manager,1,92,-8,92,92,-8,-8,0,none,0,1,1,1
+2254,US00003,100 Maiden Ln,SL02,2026-07-09,门店自检,Dominique Meadows,Store Manager,1,93,-7,93,93,-7,-7,0,none,0,0,3,1
+2266,US00003,100 Maiden Ln,SL02,2026-07-14,QA审计,Eamonn Caballar,Senior QA Manager,1,85,-15,85,85,-15,-15,0,none,0,1,5,0
+2338,US00003,100 Maiden Ln,SL02,2026-07-31,区经检查,Jung Han Liang,Area Operations Manager,1,81,-19,79,81,-21,-19,1,approved,0,3,2,2
+2242,US00004,37th & Broadway,SL02,2026-07-02,门店自检,Derson Liang,Assistant Store Manager,1,81,-19,81,81,-19,-19,0,none,0,0,8,3
+2257,US00004,37th & Broadway,SL02,2026-07-09,门店自检,Derson Liang,Assistant Store Manager,1,80,-20,80,80,-20,-20,0,none,0,1,6,3
+2274,US00004,37th & Broadway,SL02,2026-07-16,门店自检,Derson Liang,Assistant Store Manager,1,94,-6,94,94,-6,-6,0,none,0,0,3,0
+2291,US00004,37th & Broadway,SL02,2026-07-22,区经检查,Jung Han Liang,Area Operations Manager,1,84,-16,84,84,-16,-16,0,none,0,1,4,3
+2294,US00004,37th & Broadway,SL02,2026-07-22,QA审计,Eamonn Caballar,Senior QA Manager,1,100,0,100,100,0,0,0,none,0,0,0,0
+2304,US00004,37th & Broadway,SL02,2026-07-24,QA审计,Eamonn Caballar,Senior QA Manager,1,93,-7,93,93,-7,-7,0,none,0,0,3,1
+2305,US00004,37th & Broadway,SL02,2026-07-24,门店自检,Derson Liang,Assistant Store Manager,1,90,-10,90,90,-10,-10,0,none,0,0,4,2
+2331,US00004,37th & Broadway,SL02,2026-07-30,门店自检,Derson Liang,Assistant Store Manager,1,91,-9,91,91,-9,-9,0,none,0,0,4,1
+2253,US00005,54th & 8th,SL02,2026-07-08,区经检查,Jung Han Liang,Area Operations Manager,1,82,-18,82,82,-18,-18,0,none,0,0,7,4
+2255,US00005,54th & 8th,SL02,2026-07-09,QA审计,Eamonn Caballar,Senior QA Manager,1,84,-16,59,84,-21,-16,1,approved,1,2,3,0
+2265,US00005,54th & 8th,SL02,2026-07-13,门店自检,Eric Park,Store Manager,1,89,-11,89,89,-11,-11,0,none,0,1,3,0
+2321,US00005,54th & 8th,SL02,2026-07-29,门店自检,Eric Park,Store Manager,1,86,-14,86,86,-14,-14,0,none,0,1,4,1
+2267,US00006,102 Fulton,SL02,2026-07-14,QA审计,Eamonn Caballar,Senior QA Manager,1,91,-9,64,91,-16,-9,1,approved,1,1,3,0
+2280,US00006,102 Fulton,SL02,2026-07-18,门店自检,Shangxian Piao,Store Manager,1,75,-25,75,75,-25,-25,0,none,0,1,8,4
+2339,US00006,102 Fulton,SL02,2026-07-31,区经检查,Jung Han Liang,Area Operations Manager,1,66,-14,66,66,-14,-14,0,none,1,1,1,2
+2239,US00007,108th & Broadway,SL02,2026-07-01,门店自检,Austin Gebhardt,Assistant Store Manager,1,79,-21,79,79,-21,-21,0,none,0,1,8,0
+2245,US00007,108th & Broadway,SL02,2026-07-07,QA审计,Eamonn Caballar,Senior QA Manager,1,89,-11,89,89,-11,-11,0,none,0,0,5,1
+2272,US00007,108th & Broadway,SL02,2026-07-16,门店自检,Austin Gebhardt,Store Manager,1,87,-13,87,87,-13,-13,0,none,0,1,4,0
+2322,US00007,108th & Broadway,SL02,2026-07-29,门店自检,Austin Gebhardt,Store Manager,1,70,-10,70,70,-10,-10,0,none,1,1,0,0
+2335,US00007,108th & Broadway,SL02,2026-07-31,区经检查,Jung Han Liang,Area Operations Manager,1,75,-25,75,75,-25,-25,0,none,0,3,3,4
+2244,US00008,33rd & 10th,SL02,2026-07-06,门店自检,Yaqing Zuo,Store Manager,1,68,-12,68,68,-12,-12,0,none,1,0,3,1
+2251,US00008,33rd & 10th,SL02,2026-07-08,QA审计,Eamonn Caballar,Senior QA Manager,1,92,-8,67,92,-13,-8,1,approved,1,0,3,2
+2278,US00008,33rd & 10th,SL02,2026-07-16,门店自检,Yaqing Zuo,Store Manager,1,81,-19,81,81,-19,-19,0,none,0,1,6,2
+2283,US00008,33rd & 10th,SL02,2026-07-20,门店自检,Yaqing Zuo,Store Manager,1,92,-8,92,92,-8,-8,0,none,0,1,1,1
+2300,US00008,33rd & 10th,SL02,2026-07-24,区经检查,Jung Han Liang,Area Operations Manager,1,89,-11,89,89,-11,-11,0,none,0,0,4,3
+2261,US00009,48th & 3rd,SL02,2026-07-11,门店自检,Juliana Li,Store Manager,1,82,-18,82,82,-18,-18,0,none,0,0,7,4
+2295,US00009,48th & 3rd,SL02,2026-07-23,区经检查,Jung Han Liang,Area Operations Manager,1,60,-20,60,60,-20,-20,0,none,2,0,4,2
+2328,US00009,48th & 3rd,SL02,2026-07-30,门店自检,Juliana Li,Store Manager,1,83,-17,83,83,-17,-17,0,none,0,0,6,5
+2330,US00009,48th & 3rd,SL02,2026-07-30,门店自检,Juliana Li,Store Manager,1,92,-8,92,92,-8,-8,0,none,0,0,2,4
+2262,US00010,154 Bleecker,SL02,2026-07-12,门店自检,Alexander G Harry,Store Manager,1,71,-9,71,71,-9,-9,0,none,1,0,1,2
+2299,US00010,154 Bleecker,SL02,2026-07-23,QA审计,Eamonn Caballar,Senior QA Manager,1,95,-5,68,95,-12,-5,1,approved,1,0,3,1
+2319,US00010,154 Bleecker,SL02,2026-07-29,门店自检,Alexander G Harry,Store Manager,1,70,-10,70,70,-10,-10,0,none,1,0,2,1
+2327,US00010,154 Bleecker,SL02,2026-07-29,区经检查,Jung Han Liang,Area Operations Manager,1,62,-18,62,62,-18,-18,0,none,1,1,2,4
+2259,US00012,16th & 6th,SL02,2026-07-09,门店自检,Laurel Vorhies,Store Manager,1,59,-21,59,59,-21,-21,0,none,1,0,7,2
+2277,US00012,16th & 6th,SL02,2026-07-16,QA审计,Eamonn Caballar,Senior QA Manager,1,93,-7,93,93,-7,-7,0,none,0,1,1,0
+2282,US00012,16th & 6th,SL02,2026-07-19,门店自检,Laurel Vorhies,Store Manager,1,94,-6,94,94,-6,-6,0,none,0,0,2,2
+2292,US00012,16th & 6th,SL02,2026-07-22,区经检查,Jung Han Liang,Area Operations Manager,1,93,-7,93,93,-7,-7,1,pending,0,0,3,1
+2329,US00012,16th & 6th,SL02,2026-07-30,门店自检,Laurel Vorhies,Store Manager,1,93,-7,93,93,-7,-7,0,none,0,0,3,1
+2269,US00013,Grand Central Terminal,SL02,2026-07-15,门店自检,Joselyn Pacheco Trejo,Store Manager,1,75,-25,75,75,-25,-25,0,none,0,1,9,2
+2297,US00013,Grand Central Terminal,SL02,2026-07-23,区经检查,Jung Han Liang,Area Operations Manager,1,96,-4,96,96,-4,-4,1,pending,0,0,1,2
+2320,US00013,Grand Central Terminal,SL02,2026-07-29,门店自检,Joselyn Pacheco Trejo,Store Manager,1,93,-7,93,93,-7,-7,0,none,0,0,3,1
+2240,US00015,41st & Lexington,SL02,2026-07-02,门店自检,Carina Medrano,Assistant Store Manager,1,92,-8,92,92,-8,-8,0,none,0,0,3,2
+2247,US00015,41st & Lexington,SL02,2026-07-07,QA审计,Eamonn Caballar,Senior QA Manager,1,94,-6,88,94,-12,-6,1,approved,0,0,6,0
+2263,US00015,41st & Lexington,SL02,2026-07-12,门店自检,Afsana Gu,Store Manager,1,29,-51,29,29,-51,-51,0,none,2,1,14,8
+2296,US00015,41st & Lexington,SL02,2026-07-23,门店自检,Afsana Gu,Store Manager,1,37,-43,37,37,-43,-43,0,none,3,0,11,6
+2316,US00015,41st & Lexington,SL02,2026-07-28,区经检查,Jung Han Liang,Area Operations Manager,1,88,-12,88,88,-12,-12,0,none,0,0,4,4
+2326,US00015,41st & Lexington,SL02,2026-07-29,门店自检,Afsana Gu,Store Manager,1,58,-42,58,58,-42,-42,0,none,0,1,15,7
+2241,US00018,40th & 10th,SL02,2026-07-02,门店自检,Jian Ming Juo,Store Manager,1,89,-11,89,89,-11,-11,0,none,0,0,5,1
+2252,US00018,40th & 10th,SL02,2026-07-08,门店自检,Jian Ming Juo,Store Manager,1,77,-23,77,77,-23,-23,0,none,0,2,5,3
+2279,US00018,40th & 10th,SL02,2026-07-17,门店自检,Jian Ming Juo,Store Manager,1,73,-27,73,73,-27,-27,0,none,0,3,5,2
+2301,US00018,40th & 10th,SL02,2026-07-24,区经检查,Jung Han Liang,Area Operations Manager,1,69,-11,69,69,-11,-11,1,pending,1,0,2,2
+2303,US00018,40th & 10th,SL02,2026-07-24,QA审计,Eamonn Caballar,Senior QA Manager,1,94,-6,67,94,-13,-6,1,approved,1,0,4,0
+2311,US00018,40th & 10th,SL02,2026-07-25,门店自检,Jian Ming Juo,Store Manager,1,70,-10,70,70,-10,-10,0,none,1,0,2,1
+2264,US00019,29th & 3rd,SL02,2026-07-12,门店自检,Betty Xu,Assistant Store Manager,1,62,-18,62,62,-18,-18,0,none,1,1,3,2
+2290,US00019,29th & 3rd,SL02,2026-07-21,QA审计,Eamonn Caballar,Senior QA Manager,1,98,-2,73,98,-7,-2,1,approved,1,0,1,0
+2324,US00019,29th & 3rd,SL02,2026-07-29,区经检查,Jung Han Liang,Area Operations Manager,1,79,-21,79,79,-21,-21,0,none,0,2,4,3
+2337,US00019,29th & 3rd,SL02,2026-07-31,门店自检,Eva Moustafa,Store Manager,1,83,-17,83,83,-17,-17,0,none,0,1,5,2
+2260,US00020,21st & 3rd,SL02,2026-07-10,门店自检,Javier Cruz,Store Manager,1,78,-22,78,78,-22,-22,0,none,0,1,8,1
+2284,US00020,21st & 3rd,SL02,2026-07-20,门店自检,Javier Cruz,Store Manager,1,64,-16,64,64,-16,-16,0,none,1,0,5,1
+2287,US00020,21st & 3rd,SL02,2026-07-21,QA审计,Eamonn Caballar,Senior QA Manager,1,94,-6,67,94,-13,-6,1,approved,1,0,4,0
+2323,US00020,21st & 3rd,SL02,2026-07-29,区经检查,Jung Han Liang,Area Operations Manager,1,76,-24,76,76,-24,-24,0,none,0,2,5,4
+2315,US00021,128 W 32nd St,SL02,2026-07-28,区经检查,Jung Han Liang,Area Operations Manager,1,64,-16,64,64,-16,-16,0,none,1,1,2,2
+2344,US00021,128 W 32nd St,SL02,2026-07-31,门店自检,Darwin Coronel,Store Manager,1,94,-6,94,94,-6,-6,0,none,0,0,2,2
+2250,US00022,23rd & 8th,SL02,2026-07-08,门店自检,Andrew Chen,Store Manager,1,89,-11,89,89,-11,-11,0,none,0,1,2,2
+2275,US00022,23rd & 8th,SL02,2026-07-16,QA审计,Eamonn Caballar,Senior QA Manager,1,92,-8,92,92,-8,-8,0,none,0,0,4,0
+2288,US00022,23rd & 8th,SL02,2026-07-21,门店自检,Andrew Chen,Store Manager,1,94,-6,94,94,-6,-6,0,none,0,0,2,2
+2293,US00022,23rd & 8th,SL02,2026-07-22,区经检查,Jung Han Liang,Area Operations Manager,1,92,-8,92,92,-8,-8,0,none,0,0,2,4
+2271,US00024,15th & 3rd,SL02,2026-07-15,门店自检,Vita Magnier,Assistant Store Manager,1,65,-15,65,65,-15,-15,0,none,2,0,2,1
+2286,US00024,15th & 3rd,SL02,2026-07-21,QA审计,Eamonn Caballar,Senior QA Manager,1,91,-9,66,91,-14,-9,1,approved,1,1,2,0
+2314,US00024,15th & 3rd,SL02,2026-07-26,门店自检,Clara Mae Venturina,Store Manager,1,81,-19,81,81,-19,-19,0,none,0,1,6,2
+2336,US00024,15th & 3rd,SL02,2026-07-31,门店自检,Andrew Hu,Assistant Store Manager,1,82,-18,82,82,-18,-18,0,none,0,1,6,1
+2342,US00024,15th & 3rd,SL02,2026-07-31,区经检查,Jung Han Liang,Area Operations Manager,1,85,-15,83,85,-17,-15,1,approved,0,2,2,3
+2258,US00025,221 Grand,SL02,2026-07-09,门店自检,Kayen Wu He,Store Manager,1,88,-12,88,88,-12,-12,0,none,0,1,2,3
+2281,US00025,221 Grand,SL02,2026-07-18,门店自检,Jonathan Soto,Assistant Store Manager,1,88,-12,88,88,-12,-12,0,none,0,0,4,4
+2298,US00025,221 Grand,SL02,2026-07-23,QA审计,Eamonn Caballar,Senior QA Manager,1,94,-6,63,94,-17,-6,1,approved,1,0,5,2
+2341,US00025,221 Grand,SL02,2026-07-31,区经检查,Jung Han Liang,Area Operations Manager,1,84,-16,59,84,-21,-16,1,approved,1,3,0,1
+2246,US00027,52nd & Madison,SL02,2026-07-07,门店自检,Wenny Lin,Store Manager,1,76,-24,76,76,-24,-24,0,none,0,1,9,1
+2256,US00027,52nd & Madison,SL02,2026-07-09,QA审计,Eamonn Caballar,Senior QA Manager,1,90,-10,63,90,-17,-10,1,approved,1,0,5,2
+2270,US00027,52nd & Madison,SL02,2026-07-15,门店自检,Wenny Lin,Store Manager,1,84,-16,84,84,-16,-16,0,none,0,2,3,0
+2312,US00027,52nd & Madison,SL02,2026-07-25,门店自检,Wenny Lin,Store Manager,1,82,-18,82,82,-18,-18,0,none,0,1,6,1
+2318,US00027,52nd & Madison,SL02,2026-07-28,区经检查,Jung Han Liang,Area Operations Manager,1,80,-20,80,80,-20,-20,0,none,0,1,6,3

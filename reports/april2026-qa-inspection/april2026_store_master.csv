@@ -1,5 +1,5 @@
 store_id,store_code,store_name,address,status,opening_date,region,inspected_in_april
-628,US00000,NJ Test Kitchen,"1 County Rd Unit B9, Secaucus, NJ 07094",active,2025-05-09,LKUS00000041,Yes
+628,US00000,NJ Test Kitchen,"1 County Rd Unit B9, Secaucus, NJ 07094",active,2025-05-09,LKUS00000041,No
 626,US00001,8th & Broadway,"755 Broadway, New York , NY 10003",active,2025-06-30,LKUS00000041,Yes
 627,US00002,28th & 6th,"800 6th Ave, New York, NY 10001",active,2025-06-30,LKUS00000041,Yes
 630,US00003,100 Maiden Ln,"100 Maiden Ln, New York, NY 10038",active,2025-09-09,LKUS00000052,Yes

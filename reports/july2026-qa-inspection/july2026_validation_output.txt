@@ -1,0 +1,15 @@
+======================================================================
+JULY 2026 QA — CORE BUILD
+======================================================================
+CSV rows: summary=94 items=638 store_master=33 trend_summary=21 inspector_trend=130
+misfiled dropped: [] (0)
+UNMAPPED modules: NONE
+全月 counts: 自检=54 QA=19 区经=21 total=94
+全月 severity: {'G': 377, 'L': 169, 'M': 59, 'S': 33}  total=638
+主巡检 stores=21  composition=Counter({'QA审计': 18, '区经检查': 3})
+主巡检 avg adjusted = 89.4
+主巡检 severity: {'S': 13, 'M': 7, 'G': 72, 'L': 15}  total=107
+主巡检 <80: [(60, 'US00009'), (64, 'US00021')]
+appeals: 19  Counter({'approved': 16, 'pending': 3})
+operational stores=21  opened-not-inspected=[]
+score-formula sanity: checked=94 mismatches=0 PASS

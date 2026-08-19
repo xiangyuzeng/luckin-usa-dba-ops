@@ -1,0 +1,862 @@
+[
+ {
+  "shopcheck_data_id": 2145,
+  "score": 91,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20032,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2146,
+  "score": 86,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20025,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2147,
+  "score": 83,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20011,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2148,
+  "score": 90,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 1141,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2149,
+  "score": 61,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20008,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2151,
+  "score": 88,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20022,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2152,
+  "score": 79,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":7,\"deductionScore\":-14},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 1128,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2153,
+  "score": 82,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20035,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2154,
+  "score": 78,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20022,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2155,
+  "score": 63,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":6,\"deductionScore\":-12}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20026,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2157,
+  "score": 88,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20010,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2158,
+  "score": 71,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":2,\"deductionScore\":-4}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20009,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2159,
+  "score": 80,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20019,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2160,
+  "score": 84,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 1140,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2161,
+  "score": 86,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20026,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2162,
+  "score": 86,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20008,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2163,
+  "score": 86,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 1128,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2164,
+  "score": 89,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20011,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2165,
+  "score": 87,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20009,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2166,
+  "score": 98,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20019,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2167,
+  "score": 66,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 1127,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2168,
+  "score": 77,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20035,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2169,
+  "score": 60,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20025,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2170,
+  "score": 58,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20016,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2171,
+  "score": 94,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 1127,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2172,
+  "score": 66,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20027,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2173,
+  "score": 92,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":4,\"count\":4,\"deductionScore\":-4}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 1128,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2174,
+  "score": 70,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20019,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2175,
+  "score": 100,
+  "score_desc": "0",
+  "opportunity_desc": "[]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20011,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2176,
+  "score": 62,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":5,\"deductionScore\":-5}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 1141,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2177,
+  "score": 98,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20011,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2178,
+  "score": 61,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":2,\"deductionScore\":-10},{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20035,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2179,
+  "score": 81,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":3,\"count\":3,\"deductionScore\":-15},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20010,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2181,
+  "score": 92,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20029,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2182,
+  "score": 93,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":0},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20010,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2183,
+  "score": 86,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 1140,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2184,
+  "score": 90,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20027,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2185,
+  "score": 91,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20008,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2186,
+  "score": 94,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":4,\"count\":2,\"deductionScore\":-2},{\"deductionType\":1,\"count\":1,\"deductionScore\":0},{\"deductionType\":2,\"count\":3,\"deductionScore\":-4}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20032,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2187,
+  "score": 92,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":1,\"count\":1,\"deductionScore\":0}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20016,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2188,
+  "score": 88,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20031,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2190,
+  "score": 94,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20026,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2191,
+  "score": 89,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20022,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2192,
+  "score": 80,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":7,\"deductionScore\":-14},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20031,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2193,
+  "score": 64,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20016,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2194,
+  "score": 88,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20031,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2195,
+  "score": 91,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20019,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2196,
+  "score": 97,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1},{\"deductionType\":1,\"count\":1,\"deductionScore\":0}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20027,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2197,
+  "score": 94,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-6},{\"deductionType\":1,\"count\":1,\"deductionScore\":0}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20026,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2198,
+  "score": 94,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":1,\"count\":1,\"deductionScore\":0}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20008,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2199,
+  "score": 95,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-4},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20022,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2200,
+  "score": 64,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20035,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2201,
+  "score": 71,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":1,\"count\":1,\"deductionScore\":-5}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 1141,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2202,
+  "score": 96,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 1127,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2203,
+  "score": 91,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20011,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2204,
+  "score": 87,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 1127,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2205,
+  "score": 68,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":9,\"deductionScore\":-18},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":4,\"deductionScore\":-4}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20031,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2206,
+  "score": 91,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000223",
+  "shop_level": "SL02",
+  "dept_id": 20009,
+  "large_category_id": 1134
+ },
+ {
+  "shopcheck_data_id": 2208,
+  "score": 95,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20010,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2209,
+  "score": 86,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20010,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2210,
+  "score": 85,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":4,\"deductionScore\":-4}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20032,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2211,
+  "score": 87,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20025,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2212,
+  "score": 93,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 1140,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2213,
+  "score": 88,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20019,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2214,
+  "score": 96,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20011,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2216,
+  "score": 93,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20029,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2217,
+  "score": 86,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20010,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2218,
+  "score": 89,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20029,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2219,
+  "score": 88,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 1140,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2220,
+  "score": 87,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20035,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2221,
+  "score": 85,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20022,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2222,
+  "score": 95,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20011,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2223,
+  "score": 96,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20025,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2224,
+  "score": 75,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":5,\"deductionScore\":-5}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20008,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2226,
+  "score": 94,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 1141,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2227,
+  "score": 80,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":7,\"deductionScore\":-14},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 1127,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2229,
+  "score": 66,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20032,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2230,
+  "score": 93,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20016,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2231,
+  "score": 56,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000082",
+  "shop_level": "SL02",
+  "dept_id": 20035,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2232,
+  "score": 95,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 1128,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2233,
+  "score": 94,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20027,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2234,
+  "score": 90,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20026,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2235,
+  "score": 69,
+  "score_desc": "1",
+  "opportunity_desc": "[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6}]",
+  "checker_post_code": "LKUS00000083",
+  "shop_level": "SL02",
+  "dept_id": 20031,
+  "large_category_id": 1084
+ },
+ {
+  "shopcheck_data_id": 2236,
+  "score": 91,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20025,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2237,
+  "score": 91,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20008,
+  "large_category_id": 1184
+ },
+ {
+  "shopcheck_data_id": 2238,
+  "score": 87,
+  "score_desc": "0",
+  "opportunity_desc": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]",
+  "checker_post_code": "LKUS00000076",
+  "shop_level": "SL02",
+  "dept_id": 20032,
+  "large_category_id": 1184
+ }
+]

@@ -1,0 +1,25 @@
+﻿employee_no,full_name,email,hire_date,lso_acquired_date,days_to_cert,store_id,dept_name,current_position_code,current_position_name,employee_status,data_anomaly,cert_level
+US202505130009,Ya Xin Chen,yaxin.chen@luckincoffee.us,2025-05-12,2025-06-14 03:06:45,33,,Store Operations Department,LKUS00000094,OPS Support,Active,N,LSO400
+US202505130001,Conan Yim,conyim5858@gmail.com,2025-05-12,2025-06-17 02:48:34,36,,8th & Broadway,LKUS00000082,Store Manager,Separated,N,LSO400
+US202505130002,Jay Gregory,jayrgregory99@gmail.com,2025-05-12,2025-06-17 04:28:28,36,,100 Maiden Ln,LKUS00000082,Store Manager,Separated,N,LSO400
+US202505130007,Jin Song Guan,jinsguan96@gmail.com,2025-05-12,2025-06-29 00:53:16,48,,8th & Broadway,LKUS00000098,Store Manager Trainee,Separated,N,LSO400
+US202505130008,Lin Yao Weng,lin.weng@luckincoffee.us,2025-05-12,2025-07-02 06:04:07,51,,Training Department,LKUS00000094,OPS Support,Active,N,LSO400
+US202505280001,Huanchun Xu,eunice.xu@luckincoffee.us,2025-05-27,2025-08-19 00:27:48,84,,Store Operations Department,LKUS00000094,OPS Support,Active,N,LSO400
+US202505280006,Dominique Meadows,dominiquemeadows@yahoo.com,2025-05-27,2025-08-29 10:31:16,94,,100 Maiden Ln,LKUS00000082,Store Manager,Active,N,LSO400
+US202505130005,Yaqing Zuo,maggiezuo1998@gmail.com,2025-05-12,2025-09-17 09:30:03,128,,33rd & 10th,LKUS00000082,Store Manager,Active,N,LSO400
+US202506160006,Clara Mae Venturina,cmventurina@gmail.com,2025-06-16,2025-10-11 23:38:38,117,,15th & 3rd,LKUS00000082,Store Manager,Active,N,LSO400
+US202507090003,Juan Ortiz-Fontanez,j.ortiz-fontanez@outlook.com,2025-07-09,2025-10-12 01:45:09,95,,108th & Broadway,LKUS00000082,Store Manager,Active,N,LSO400
+US202506160009,Jian Ming Juo,neoisleo@gmail.com,2025-06-16,2025-10-12 02:36:37,118,,40th & 10th,LKUS00000082,Store Manager,Active,N,LSO400
+US202506160003,Tunisia Hayward,tunisiarenee@yahoo.com,2025-06-16,2025-10-14 03:30:42,120,,37th & Broadway,LKUS00000082,Store Manager,Active,N,LSO400
+US202508120003,Afsana Gu,afsanagu25@gmail.com,2025-08-12,2025-10-14 07:53:48,63,,41st & Lexington,LKUS00000082,Store Manager,Active,N,LSO400
+US202506160001,Wenny Lin,wennylin07@gmail.com,2025-06-16,2025-12-12 06:46:45,179,,52nd & Madison,LKUS00000082,Store Manager,Active,N,LSO400
+US202506160005,Darwin Coronel,darwinc321@gmail.com,2025-06-16,2025-12-12 07:21:46,179,,29th & 3rd,LKUS00000082,Store Manager,Active,N,LSO400
+US202506160007,Juliana Li,juulih00@gmail.com,2025-06-16,2025-12-12 08:48:41,179,,154 Bleecker,LKUS00000082,Store Manager,Active,N,LSO400
+US202510060002,Daniel Chu,daniel.chu@luckincoffee.us,2026-05-04,2025-12-16 10:03:44,-139,,Store Operations Department,LKUS00000076,Operation Manager,Separated,Y,LSO400
+US202509090009,Kayen Wu He,kayenkwh@gmail.com,2025-09-09,2026-01-28 17:49:47,141,,221 Grand,LKUS00000082,Store Manager,Active,N,LSO400
+US202507280004,Shangxian Piao,piaoshangxian3@gmail.com,2025-07-28,2026-02-03 05:29:23,190,,102 Fulton,LKUS00000082,Store Manager,Active,N,LSO400
+US202507170003,Eric Park,ericseungwonpark@gmail.com,2025-07-17,2026-02-24 09:16:03,222,,54th & 8th,LKUS00000082,Store Manager,Active,N,LSO400
+US202510070002,Joselyn Pacheco Trejo,joselyn34pacheco@gmail.com,2025-10-07,2026-03-13 05:14:50,157,,16th & 6th,LKUS00000082,Store Manager,Active,N,LSO400
+US202506260003,Huichen Jiang,chenhuij96@gmail.com,2025-06-26,2026-04-02 02:05:20,280,,23rd & 8th,LKUS00000082,Store Manager,Active,N,LSO400
+US202508050006,Brionna Jiles,brionnajiles95@gmail.com,2025-08-05,2026-04-26 01:08:40,264,,28th & 6th,LKUS00000082,Store Manager,Active,N,LSO400
+US202510210001,Javier Cruz,javiercruz52495@gmail.com,2025-10-21,2026-05-01 20:17:54,192,,21st & 3rd,LKUS00000082,Store Manager,Active,N,LSO400

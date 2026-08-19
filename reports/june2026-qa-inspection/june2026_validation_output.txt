@@ -1,0 +1,63 @@
+==========================================================================
+JUNE 2026 QA INSPECTION — VALIDATION OUTPUT  (LCNA-QA-2026-006)
+Source: aws-luckyus-opqualitycontrol-rw / luckyus_opqualitycontrol
+Window: 2026-06-01 .. 2026-06-30 (30d, closed month)   Built: 2026-07-01
+==========================================================================
+
+[1] ROW COUNTS
+  summary=85  items=498  store_master=33  trend_summary=18  inspector_trend=101
+  [PASS] summary rows == 85  got 85
+  [PASS] items rows == 498  got 498
+
+[2] STATUS / DRAFT EXCLUSION
+  [PASS] summary status!=1 == 0  got 0
+
+[3] MISFILED-DUPLICATE DROP
+  dropped 1: iid=2175 (Tunisia Hayward @ US00004 2026-06-12, siblings [2177])
+  [PASS] misfiled dropped == 1 (iid 2175)
+
+[4] 主巡检 DEDUCTION RECONCILIATION  (§1.2 nominal == §2.2 == §4.1)
+  Σ主巡检 item deductions = -202
+  Σ§2.2 module deductions = -202
+  Σ§4.1 store 合计        = -202
+  Σ§1.2 扣分 column       = -202
+  [PASS] Σ主巡检 items == Σ§2.2 == Σ§4.1 == Σ§1.2  -202/-202/-202/-202
+
+[5] SEVERITY RECONCILIATION (主巡检)
+  主巡检 items S/M/G/L = 8/6/58/16 = 88
+  §3.1 counts          = 8/6/58/16
+  Σ§2.2 sev columns    = 8/6/58/16
+  [PASS] 主巡检 items sev == §3.1 == Σ§2.2 sev
+  [PASS] summary S/M/G/L (primary rows) == items  summary={'S': 8, 'M': 6, 'G': 58, 'L': 16} items={'M': 6, 'G': 58, 'L': 16, 'S': 8}
+
+[6] FULL-MONTH SEVERITY (全月)
+  全月 items S/M/G/L = 23/44/301/130 = 498
+  [PASS] 全月 S total == §3.3 S total  23 vs 23
+  [PASS] 全月 items total == §3.3 total
+  [PASS] Σ summary S/M/G/L == 全月 items  summary={'S': 23, 'M': 44, 'G': 301, 'L': 130} items={'S': 23, 'G': 301, 'L': 130, 'M': 44}
+
+[7] APPEALS RECONCILE (§4.3 vs summary)
+  summary is_appealed=1 : 10   {'pending': 3, 'approved': 7}
+  §4.3 total            : 10  (approved 7 / denied 0 / pending 3)
+  [PASS] appeals count summary == §4.3
+  [PASS] approved+denied+pending == total
+  appealed FINDINGS in items (is_appealed_finding=1) = 13
+
+[8] UNMAPPED CHECKS (should all be none)
+  [PASS] no UNMAPPED modules  []
+  [PASS] no unmapped inspection_type  []
+  [PASS] no unmapped severity  []
+  (resolution applied: raw 'Site Security' -> 职业安全, user-confirmed 2026-07-01)
+
+[9] COVERAGE / 主巡检
+  主巡检 stores = 18 ; composition = {'QA审计': 16, '区经检查': 2}
+  主巡检 avg (adjusted) = 88.7  (May 85.8)
+  opened-not-inspected (6/30): US00009 48th & 3rd, US00013 Grand Central Terminal
+  [PASS] 主巡检 coverage == 18/18
+
+[10] SCORE-FORMULA SANITY  (100 + adj_ded + S_penalty == report.score)
+  [PASS] score-formula (checked 85)  mismatches=0
+
+==========================================================================
+OVERALL: ALL CHECKS PASS
+==========================================================================

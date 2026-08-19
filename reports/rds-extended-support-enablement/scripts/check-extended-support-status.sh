@@ -32,14 +32,19 @@ done
 echo "=== RDS Extended Support status — region=${REGION} — $(date -u +%FT%TZ) ==="
 
 # DB instances: id, engine, version, EngineLifecycleSupport, class, status
+# rows="$(aws rds describe-db-instances --region "$REGION" \
+#   --query 'DBInstances[].[DBInstanceIdentifier,Engine,EngineVersion,EngineLifecycleSupport,DBInstanceClass,DBInstanceStatus]' \
+#   --output text | sort)"
+
 rows="$(aws rds describe-db-instances --region "$REGION" \
-  --query 'DBInstances[].[DBInstanceIdentifier,Engine,EngineVersion,EngineLifecycleSupport,DBInstanceClass,DBInstanceStatus]' \
+  --query "DBInstances[?contains(Engine, 'mysql')].[DBInstanceIdentifier, Engine, EngineVersion, EngineLifecycleSupport, DBInstanceClass, DBInstanceStatus]" \
   --output text | sort)"
 
 # Aurora / DB clusters also carry EngineLifecycleSupport
-crows="$(aws rds describe-db-clusters --region "$REGION" \
-  --query 'DBClusters[].[DBClusterIdentifier,Engine,EngineVersion,EngineLifecycleSupport,DBClusterInstanceClass,Status]' \
-  --output text 2>/dev/null | sort || true)"
+# crows="$(aws rds describe-db-clusters --region "$REGION" \
+#   --query 'DBClusters[].[DBClusterIdentifier,Engine,EngineVersion,EngineLifecycleSupport,DBClusterInstanceClass,Status]' \
+#   --output text 2>/dev/null | sort || true)"
+crows=""
 
 printf '\n%-46s %-10s %-9s %-14s %-16s %s\n' "IDENTIFIER" "ENGINE" "VERSION" "EXT-SUPPORT" "CLASS" "STATUS"
 printf '%s\n' "----------------------------------------------------------------------------------------------------------------"

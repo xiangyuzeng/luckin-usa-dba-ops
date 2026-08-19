@@ -1,0 +1,2306 @@
+{
+ "cover": {
+  "doc_id": "LCNA-QA-2026-006",
+  "report_period": "2026年6月",
+  "date_range": "2026-06-01 .. 2026-06-30",
+  "days": 30,
+  "active_stores_operational": 18,
+  "active_stores_total": 20,
+  "opened_not_inspected": [
+   {
+    "store_code": "US00009",
+    "store_name": "48th & 3rd",
+    "open_date": "2026-06-30"
+   },
+   {
+    "store_code": "US00013",
+    "store_name": "Grand Central Terminal",
+    "open_date": "2026-06-30"
+   }
+  ],
+  "type_counts": {
+   "门店自检": 51,
+   "QA审计": 16,
+   "区经检查": 18,
+   "total": 85
+  },
+  "findings_full_month": {
+   "S": 23,
+   "M": 44,
+   "G": 301,
+   "L": 130,
+   "total": 498
+  },
+  "findings_primary": {
+   "S": 8,
+   "M": 6,
+   "G": 58,
+   "L": 16,
+   "total": 88
+  },
+  "appeals": {
+   "total": 10,
+   "approved": 7,
+   "denied": 0,
+   "pending": 3
+  },
+  "qa_staffing": {
+   "Eamonn Caballar": 16
+  },
+  "area_staffing": {
+   "Jung Han Liang": 18
+  },
+  "primary_avg": 88.7,
+  "coverage": "18/18"
+ },
+ "mgmt_summary": {
+  "primary_avg": 88.7,
+  "coverage": "18/18=100%",
+  "may_primary_avg": 85.8,
+  "may_baseline_n": 18,
+  "total_findings_full_month": 498,
+  "callout_a": "巡检量 85（5月86，−1.2%），主巡检均分 88.7（5月85.8，+2.9），覆盖 18/18=100%；三类均分 自检/QA/区经 见 §7.5",
+  "callout_b": {
+   "sub_item": "Sinks and Pipes",
+   "count": 13,
+   "stores": 10
+  },
+  "callout_c": {
+   "divergences_ge20": [
+    {
+     "store": "US00010",
+     "scores": {
+      "区经检查": 58,
+      "QA审计": 92,
+      "门店自检_avg": 78.5
+     },
+     "gap": 34
+    },
+    {
+     "store": "US00005",
+     "scores": {
+      "区经检查": 62,
+      "QA审计": 71,
+      "门店自检_avg": 92.0
+     },
+     "gap": 30.0
+    },
+    {
+     "store": "US00012",
+     "scores": {
+      "区经检查": 70,
+      "QA审计": 91,
+      "门店自检_avg": 88.7
+     },
+     "gap": 21
+    },
+    {
+     "store": "US00007",
+     "scores": {
+      "区经检查": 87,
+      "QA审计": 91,
+      "门店自检_avg": 71.0
+     },
+     "gap": 20.0
+    }
+   ]
+  },
+  "biggest_improver": [
+   "US00007",
+   65,
+   91,
+   26
+  ],
+  "biggest_decliner": [
+   "US00027",
+   84,
+   64,
+   -20
+  ]
+ },
+ "s1_1": {
+  "highest": {
+   "store": "US00020",
+   "score": 97
+  },
+  "lowest": {
+   "store": "US00027",
+   "score": 64
+  },
+  "stores_with_S": [
+   "US00005",
+   "US00006",
+   "US00008",
+   "US00010",
+   "US00019",
+   "US00020",
+   "US00025",
+   "US00027"
+  ],
+  "n_stores_with_S": 8,
+  "stores_below_80": [
+   [
+    "US00027",
+    64
+   ],
+   [
+    "US00005",
+    71
+   ]
+  ],
+  "coverage": "18/18=100%",
+  "may_coverage": "18/18=100%"
+ },
+ "s1_2": [
+  {
+   "rank": 1,
+   "store": "US00020",
+   "name": "21st & 3rd",
+   "score": 97,
+   "type": "QA审计",
+   "deduction": -8,
+   "S": 1,
+   "M": 0,
+   "G": 1,
+   "L": 1,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": true
+  },
+  {
+   "rank": 2,
+   "store": "US00015",
+   "name": "41st & Lexington",
+   "score": 95,
+   "type": "QA审计",
+   "deduction": -7,
+   "S": 0,
+   "M": 0,
+   "G": 3,
+   "L": 1,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": true
+  },
+  {
+   "rank": 3,
+   "store": "US00008",
+   "name": "33rd & 10th",
+   "score": 94,
+   "type": "QA审计",
+   "deduction": -11,
+   "S": 1,
+   "M": 0,
+   "G": 3,
+   "L": 0,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": true
+  },
+  {
+   "rank": 4,
+   "store": "US00019",
+   "name": "29th & 3rd",
+   "score": 94,
+   "type": "QA审计",
+   "deduction": -15,
+   "S": 1,
+   "M": 0,
+   "G": 5,
+   "L": 0,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": true
+  },
+  {
+   "rank": 5,
+   "store": "US00025",
+   "name": "221 Grand",
+   "score": 94,
+   "type": "QA审计",
+   "deduction": -13,
+   "S": 1,
+   "M": 0,
+   "G": 3,
+   "L": 2,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": true
+  },
+  {
+   "rank": 6,
+   "store": "US00006",
+   "name": "102 Fulton",
+   "score": 93,
+   "type": "QA审计",
+   "deduction": -12,
+   "S": 1,
+   "M": 0,
+   "G": 3,
+   "L": 1,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": true
+  },
+  {
+   "rank": 7,
+   "store": "US00022",
+   "name": "23rd & 8th",
+   "score": 93,
+   "type": "区经检查",
+   "deduction": -7,
+   "S": 0,
+   "M": 1,
+   "G": 1,
+   "L": 0,
+   "inspector": "Jung Han Liang",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 8,
+   "store": "US00010",
+   "name": "154 Bleecker",
+   "score": 92,
+   "type": "QA审计",
+   "deduction": -13,
+   "S": 1,
+   "M": 0,
+   "G": 4,
+   "L": 0,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": true
+  },
+  {
+   "rank": 9,
+   "store": "US00007",
+   "name": "108th & Broadway",
+   "score": 91,
+   "type": "QA审计",
+   "deduction": -9,
+   "S": 0,
+   "M": 0,
+   "G": 4,
+   "L": 1,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 10,
+   "store": "US00012",
+   "name": "16th & 6th",
+   "score": 91,
+   "type": "QA审计",
+   "deduction": -9,
+   "S": 0,
+   "M": 0,
+   "G": 4,
+   "L": 1,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 11,
+   "store": "US00018",
+   "name": "40th & 10th",
+   "score": 91,
+   "type": "区经检查",
+   "deduction": -9,
+   "S": 0,
+   "M": 0,
+   "G": 4,
+   "L": 1,
+   "inspector": "Jung Han Liang",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 12,
+   "store": "US00004",
+   "name": "37th & Broadway",
+   "score": 89,
+   "type": "QA审计",
+   "deduction": -11,
+   "S": 0,
+   "M": 1,
+   "G": 2,
+   "L": 2,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 13,
+   "store": "US00024",
+   "name": "15th & 3rd",
+   "score": 88,
+   "type": "QA审计",
+   "deduction": -12,
+   "S": 0,
+   "M": 0,
+   "G": 5,
+   "L": 2,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 14,
+   "store": "US00001",
+   "name": "8th & Broadway",
+   "score": 87,
+   "type": "QA审计",
+   "deduction": -13,
+   "S": 0,
+   "M": 1,
+   "G": 3,
+   "L": 2,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 15,
+   "store": "US00002",
+   "name": "28th & 6th",
+   "score": 86,
+   "type": "QA审计",
+   "deduction": -14,
+   "S": 0,
+   "M": 2,
+   "G": 2,
+   "L": 0,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 16,
+   "store": "US00003",
+   "name": "100 Maiden Ln",
+   "score": 86,
+   "type": "QA审计",
+   "deduction": -14,
+   "S": 0,
+   "M": 1,
+   "G": 4,
+   "L": 1,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 17,
+   "store": "US00005",
+   "name": "54th & 8th",
+   "score": 71,
+   "type": "QA审计",
+   "deduction": -9,
+   "S": 1,
+   "M": 0,
+   "G": 2,
+   "L": 0,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  },
+  {
+   "rank": 18,
+   "store": "US00027",
+   "name": "52nd & Madison",
+   "score": 64,
+   "type": "QA审计",
+   "deduction": -16,
+   "S": 1,
+   "M": 0,
+   "G": 5,
+   "L": 1,
+   "inspector": "Eamonn Caballar",
+   "appeal_adjusted": false
+  }
+ ],
+ "s1_3": {
+  "bands": {
+   "≥85": 16,
+   "80-84": 0,
+   "<80": 2
+  },
+  "s_distribution": {
+   "n_stores_with_S_primary": 8
+  },
+  "improvers": [
+   {
+    "store": "US00007",
+    "may": 65,
+    "jun": 91,
+    "delta": 26
+   },
+   {
+    "store": "US00006",
+    "may": 77,
+    "jun": 93,
+    "delta": 16
+   },
+   {
+    "store": "US00008",
+    "may": 83,
+    "jun": 94,
+    "delta": 11
+   },
+   {
+    "store": "US00020",
+    "may": 89,
+    "jun": 97,
+    "delta": 8
+   },
+   {
+    "store": "US00015",
+    "may": 90,
+    "jun": 95,
+    "delta": 5
+   },
+   {
+    "store": "US00025",
+    "may": 89,
+    "jun": 94,
+    "delta": 5
+   },
+   {
+    "store": "US00005",
+    "may": 67,
+    "jun": 71,
+    "delta": 4
+   },
+   {
+    "store": "US00022",
+    "may": 91,
+    "jun": 93,
+    "delta": 2
+   },
+   {
+    "store": "US00024",
+    "may": 86,
+    "jun": 88,
+    "delta": 2
+   },
+   {
+    "store": "US00004",
+    "may": 88,
+    "jun": 89,
+    "delta": 1
+   },
+   {
+    "store": "US00019",
+    "may": 93,
+    "jun": 94,
+    "delta": 1
+   }
+  ],
+  "decliners": [
+   {
+    "store": "US00027",
+    "may": 84,
+    "jun": 64,
+    "delta": -20
+   },
+   {
+    "store": "US00003",
+    "may": 91,
+    "jun": 86,
+    "delta": -5
+   },
+   {
+    "store": "US00001",
+    "may": 89,
+    "jun": 87,
+    "delta": -2
+   },
+   {
+    "store": "US00012",
+    "may": 93,
+    "jun": 91,
+    "delta": -2
+   },
+   {
+    "store": "US00018",
+    "may": 92,
+    "jun": 91,
+    "delta": -1
+   }
+  ],
+  "biggest_mover": {
+   "improver": "US00007",
+   "decliner": "US00027"
+  },
+  "appeal_adjusted_stores": [
+   "US00006",
+   "US00008",
+   "US00010",
+   "US00015",
+   "US00019",
+   "US00020",
+   "US00025"
+  ],
+  "cross_type_divergence": [
+   {
+    "store": "US00010",
+    "scores": {
+     "区经检查": 58,
+     "QA审计": 92,
+     "门店自检_avg": 78.5
+    },
+    "gap": 34
+   },
+   {
+    "store": "US00005",
+    "scores": {
+     "区经检查": 62,
+     "QA审计": 71,
+     "门店自检_avg": 92.0
+    },
+    "gap": 30.0
+   },
+   {
+    "store": "US00012",
+    "scores": {
+     "区经检查": 70,
+     "QA审计": 91,
+     "门店自检_avg": 88.7
+    },
+    "gap": 21
+   },
+   {
+    "store": "US00007",
+    "scores": {
+     "区经检查": 87,
+     "QA审计": 91,
+     "门店自检_avg": 71.0
+    },
+    "gap": 20.0
+   }
+  ],
+  "selfcheck_S_discoveries": [
+   {
+    "store": "US00001",
+    "sub_item": "Cross-Contamination",
+    "desc": "Tongs are dirty (cross contamination)",
+    "inspector": "Huichen Jiang",
+    "date": "2026-06-11"
+   },
+   {
+    "store": "US00007",
+    "sub_item": "Cross-Contamination",
+    "desc": "",
+    "inspector": "Juan Ortiz-Fontanez",
+    "date": "2026-06-06"
+   },
+   {
+    "store": "US00008",
+    "sub_item": "Site Security",
+    "desc": "No employee only indicator on BOH doors",
+    "inspector": "Yaqing Zuo",
+    "date": "2026-06-03"
+   },
+   {
+    "store": "US00010",
+    "sub_item": "Handwashing Standards",
+    "desc": "No trash near handwashing sink",
+    "inspector": "Juliana Li",
+    "date": "2026-06-15"
+   },
+   {
+    "store": "US00018",
+    "sub_item": "Cross-Contamination",
+    "desc": "",
+    "inspector": "Jian Ming Juo",
+    "date": "2026-06-11"
+   },
+   {
+    "store": "US00019",
+    "sub_item": "Personal certificate",
+    "desc": "",
+    "inspector": "Darwin Coronel",
+    "date": "2026-06-05"
+   },
+   {
+    "store": "US00020",
+    "sub_item": "Handwashing Standards",
+    "desc": "A paper towel dispenser was low on paper towl",
+    "inspector": "Javier Cruz",
+    "date": "2026-06-12"
+   },
+   {
+    "store": "US00024",
+    "sub_item": "Sinks and Pipes",
+    "desc": "",
+    "inspector": "Vita Magnier",
+    "date": "2026-06-30"
+   },
+   {
+    "store": "US00025",
+    "sub_item": "Product Storage Conditions",
+    "desc": "Missing standing thermometer",
+    "inspector": "Kayen Wu He",
+    "date": "2026-06-27"
+   },
+   {
+    "store": "US00027",
+    "sub_item": "Expiration Date",
+    "desc": "No expiration date",
+    "inspector": "Wenny Lin",
+    "date": "2026-06-29"
+   }
+  ]
+ },
+ "module_agg_primary": {
+  "清洁卫生": {
+   "problems": 59,
+   "deduction": -108,
+   "stores": 18,
+   "coverage": 100.0,
+   "S": 0,
+   "M": 2,
+   "G": 41,
+   "L": 16,
+   "risk": "🔴",
+   "store_set": [
+    "US00001",
+    "US00002",
+    "US00003",
+    "US00004",
+    "US00005",
+    "US00006",
+    "US00007",
+    "US00008",
+    "US00010",
+    "US00012",
+    "US00015",
+    "US00018",
+    "US00019",
+    "US00020",
+    "US00022",
+    "US00024",
+    "US00025",
+    "US00027"
+   ]
+  },
+  "过程控制": {
+   "problems": 9,
+   "deduction": -18,
+   "stores": 8,
+   "coverage": 44.4,
+   "S": 0,
+   "M": 0,
+   "G": 9,
+   "L": 0,
+   "risk": "🟡",
+   "store_set": [
+    "US00001",
+    "US00003",
+    "US00006",
+    "US00007",
+    "US00010",
+    "US00012",
+    "US00024",
+    "US00027"
+   ]
+  },
+  "设施": {
+   "problems": 13,
+   "deduction": -53,
+   "stores": 11,
+   "coverage": 61.1,
+   "S": 8,
+   "M": 1,
+   "G": 4,
+   "L": 0,
+   "risk": "🔴",
+   "store_set": [
+    "US00001",
+    "US00005",
+    "US00006",
+    "US00008",
+    "US00010",
+    "US00015",
+    "US00019",
+    "US00020",
+    "US00024",
+    "US00025",
+    "US00027"
+   ]
+  },
+  "证照": {
+   "problems": 1,
+   "deduction": -5,
+   "stores": 1,
+   "coverage": 5.6,
+   "S": 0,
+   "M": 1,
+   "G": 0,
+   "L": 0,
+   "risk": "🟢",
+   "store_set": [
+    "US00022"
+   ]
+  },
+  "职业安全": {
+   "problems": 1,
+   "deduction": -2,
+   "stores": 1,
+   "coverage": 5.6,
+   "S": 0,
+   "M": 0,
+   "G": 1,
+   "L": 0,
+   "risk": "🟢",
+   "store_set": [
+    "US00007"
+   ]
+  },
+  "虫害防控": {
+   "problems": 0,
+   "deduction": 0,
+   "stores": 0,
+   "coverage": 0.0,
+   "S": 0,
+   "M": 0,
+   "G": 0,
+   "L": 0,
+   "risk": "🟢",
+   "store_set": []
+  },
+  "温控有效期": {
+   "problems": 2,
+   "deduction": -10,
+   "stores": 2,
+   "coverage": 11.1,
+   "S": 0,
+   "M": 2,
+   "G": 0,
+   "L": 0,
+   "risk": "🟢",
+   "store_set": [
+    "US00002",
+    "US00003"
+   ]
+  },
+  "员工健康卫生": {
+   "problems": 3,
+   "deduction": -6,
+   "stores": 3,
+   "coverage": 16.7,
+   "S": 0,
+   "M": 0,
+   "G": 3,
+   "L": 0,
+   "risk": "🟢",
+   "store_set": [
+    "US00006",
+    "US00018",
+    "US00027"
+   ]
+  },
+  "设备维护": {
+   "problems": 0,
+   "deduction": 0,
+   "stores": 0,
+   "coverage": 0.0,
+   "S": 0,
+   "M": 0,
+   "G": 0,
+   "L": 0,
+   "risk": "🟢",
+   "store_set": []
+  },
+  "供应链": {
+   "problems": 0,
+   "deduction": 0,
+   "stores": 0,
+   "coverage": 0.0,
+   "S": 0,
+   "M": 0,
+   "G": 0,
+   "L": 0,
+   "risk": "🟢",
+   "store_set": []
+  }
+ },
+ "s2_3": {
+  "清洁卫生": {
+   "problems": 59,
+   "deduction": -108,
+   "skipped_empty": 1,
+   "omitted": 38,
+   "findings": [
+    {
+     "store": "US00002",
+     "sub_item": "Clean & Sanitize",
+     "severity": "M",
+     "deduction": -5,
+     "description": "Multiple noncompliant reading of PPM taken from food processing sani buckets."
+    },
+    {
+     "store": "US00004",
+     "sub_item": "Clean & Sanitize",
+     "severity": "M",
+     "deduction": -5,
+     "description": "Sanitizer stains on ice machine."
+    },
+    {
+     "store": "US00001",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust on refrigerator tops."
+    },
+    {
+     "store": "US00002",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust found on refrigerator doors."
+    },
+    {
+     "store": "US00002",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Coffee grounds found on grinder.\n\nMatcha staining found on rubber mat of blender."
+    },
+    {
+     "store": "US00003",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust found on tops of fridges."
+    },
+    {
+     "store": "US00003",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Sanitizer residue found on ice machine. \n\nSignificant amount of dust on top of Ice machine"
+    },
+    {
+     "store": "US00003",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Food residue found in warming station utensils."
+    },
+    {
+     "store": "US00004",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust found on refrigerator tops."
+    },
+    {
+     "store": "US00004",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Matcha stains on dispensers. \nMatcha stains on blender pads."
+    },
+    {
+     "store": "US00005",
+     "sub_item": "Clean & Sanitize",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Tasks out of grace period."
+    },
+    {
+     "store": "US00005",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Sanitizer Residue found in Ice machine \n\nPlastic found in warming oven vent."
+    },
+    {
+     "store": "US00006",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust on tops of fridges. \n\nStaining on inside of fridges."
+    },
+    {
+     "store": "US00007",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust located on tops of refrigerators."
+    },
+    {
+     "store": "US00007",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Utensils with food residue."
+    },
+    {
+     "store": "US00008",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust located on refrigerator door hinges."
+    },
+    {
+     "store": "US00008",
+     "sub_item": "Clean & Sanitize",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Tasks outside 15 min window."
+    },
+    {
+     "store": "US00008",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Sanitizer residue found in ice machine. \n\nFood residue on blenders."
+    },
+    {
+     "store": "US00010",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust on refrigerators."
+    },
+    {
+     "store": "US00010",
+     "sub_item": "Equipment and utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Dust found on top of lock box, Ice machine, drip machine, light food display."
+    }
+   ]
+  },
+  "设施": {
+   "problems": 13,
+   "deduction": -53,
+   "skipped_empty": 0,
+   "omitted": 0,
+   "findings": [
+    {
+     "store": "US00005",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Airgap issue found behind milk machine.\n\nSignificant leak behind dish washer."
+    },
+    {
+     "store": "US00006",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Ice machine pipe not properly connected. Causing flow issues. \n\nAirgap under three compartment sink not compliant. (outlet distance.)"
+    },
+    {
+     "store": "US00008",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Airgap is non compliant. (Outlet Pipe)"
+    },
+    {
+     "store": "US00010",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Piping for 3 compartment sink not in compliance."
+    },
+    {
+     "store": "US00019",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Pipe under rinsing sink not properly wrapped.\n\nFaucet not properly connected."
+    },
+    {
+     "store": "US00020",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Non compliant outlet pipe. Less than one inch."
+    },
+    {
+     "store": "US00025",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Airgap out of compliance."
+    },
+    {
+     "store": "US00027",
+     "sub_item": "Sinks and Pipes",
+     "severity": "S",
+     "deduction": -5,
+     "description": "Air gap non compliant."
+    },
+    {
+     "store": "US00001",
+     "sub_item": "Good condition",
+     "severity": "M",
+     "deduction": -5,
+     "description": "Lights in storage area are inoperable."
+    },
+    {
+     "store": "US00015",
+     "sub_item": "Good condition",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Floors with unclean-able stains."
+    },
+    {
+     "store": "US00019",
+     "sub_item": "Good condition",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Hole in wall found in boiler room."
+    },
+    {
+     "store": "US00019",
+     "sub_item": "Sinks and Pipes",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Backflow located on water dispenser (Location: Milk Machine)"
+    },
+    {
+     "store": "US00024",
+     "sub_item": "Sinks and Pipes",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Leak sighted under rinsing sink."
+    }
+   ]
+  },
+  "过程控制": {
+   "problems": 9,
+   "deduction": -18,
+   "skipped_empty": 0,
+   "omitted": 0,
+   "findings": [
+    {
+     "store": "US00001",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "2 Pitchers found uncovered and exposed to air in storage."
+    },
+    {
+     "store": "US00001",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Cloud Beverage clumping. Signs of moisture."
+    },
+    {
+     "store": "US00003",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Clumping food material found in 9th pan."
+    },
+    {
+     "store": "US00006",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Pitcher exposed after use."
+    },
+    {
+     "store": "US00007",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Signs of moisture in 9th pans."
+    },
+    {
+     "store": "US00010",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Pitcher found exposed to open air."
+    },
+    {
+     "store": "US00012",
+     "sub_item": "Storage/Maintenance of Utensils",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Utensils sitting on standing water. (Location: Milk Station Pad)"
+    },
+    {
+     "store": "US00024",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Clumping sighted in cloud powder."
+    },
+    {
+     "store": "US00027",
+     "sub_item": "Cross-Contamination",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Signs of moisture found in cloud powder."
+    }
+   ]
+  },
+  "温控有效期": {
+   "problems": 2,
+   "deduction": -10,
+   "skipped_empty": 0,
+   "omitted": 0,
+   "findings": [
+    {
+     "store": "US00002",
+     "sub_item": "Expiration Date",
+     "severity": "M",
+     "deduction": -5,
+     "description": "Missing expiration date label on syrup bottle."
+    },
+    {
+     "store": "US00003",
+     "sub_item": "Expiration Date",
+     "severity": "M",
+     "deduction": -5,
+     "description": "Missing expiration date on product."
+    }
+   ]
+  },
+  "员工健康卫生": {
+   "problems": 3,
+   "deduction": -6,
+   "skipped_empty": 0,
+   "omitted": 0,
+   "findings": [
+    {
+     "store": "US00006",
+     "sub_item": "Personal Hygiene",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Personal item found on work floor."
+    },
+    {
+     "store": "US00018",
+     "sub_item": "Personal Hygiene",
+     "severity": "G",
+     "deduction": -2,
+     "description": "One of female partners nail is not trimmed"
+    },
+    {
+     "store": "US00027",
+     "sub_item": "Personal Hygiene",
+     "severity": "G",
+     "deduction": -2,
+     "description": "Employee wearing hat backwards."
+    }
+   ]
+  }
+ },
+ "s3_1": {
+  "S": {
+   "count": 8,
+   "pct": 9.1,
+   "sla": "2 天",
+   "main_modules": {
+    "设施": 8
+   }
+  },
+  "M": {
+   "count": 6,
+   "pct": 6.8,
+   "sla": "7 天",
+   "main_modules": {
+    "温控有效期": 2,
+    "清洁卫生": 2,
+    "设施": 1
+   }
+  },
+  "G": {
+   "count": 58,
+   "pct": 65.9,
+   "sla": "14 天",
+   "main_modules": {
+    "清洁卫生": 41,
+    "过程控制": 9,
+    "设施": 4
+   }
+  },
+  "L": {
+   "count": 16,
+   "pct": 18.2,
+   "sla": "14 天",
+   "main_modules": {
+    "清洁卫生": 16
+   }
+  }
+ },
+ "s3_2": [
+  {
+   "store": "US00005",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Airgap issue found behind milk machine.\n\nSignificant leak behind dish washer.",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 1,
+   "opp_status": 1
+  },
+  {
+   "store": "US00006",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Ice machine pipe not properly connected. Causing flow issues. \n\nAirgap under three compartment sink not compliant. (outlet distance.)",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 1,
+   "opp_status": 0
+  },
+  {
+   "store": "US00008",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Airgap is non compliant. (Outlet Pipe)",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 1,
+   "opp_status": 0
+  },
+  {
+   "store": "US00010",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Piping for 3 compartment sink not in compliance.",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 1,
+   "opp_status": 0
+  },
+  {
+   "store": "US00019",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Pipe under rinsing sink not properly wrapped.\n\nFaucet not properly connected.",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 1,
+   "opp_status": 0
+  },
+  {
+   "store": "US00020",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Non compliant outlet pipe. Less than one inch.",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 1,
+   "opp_status": 0
+  },
+  {
+   "store": "US00025",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Airgap out of compliance.",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 1,
+   "opp_status": 0
+  },
+  {
+   "store": "US00027",
+   "module": "设施",
+   "sub_item": "Sinks and Pipes",
+   "description": "Air gap non compliant.",
+   "deduction": -5,
+   "type": "QA审计",
+   "inspector": "Eamonn Caballar",
+   "is_appealed_finding": 0,
+   "opp_status": 1
+  }
+ ],
+ "s3_3": {
+  "by_sub_item": [
+   {
+    "sub_item": "Sinks and Pipes",
+    "module": "设施",
+    "S_count": 13,
+    "stores": 10,
+    "typical": "Two pipe issues"
+   },
+   {
+    "sub_item": "Cross-Contamination",
+    "module": "过程控制",
+    "S_count": 3,
+    "stores": 3,
+    "typical": "Tongs are dirty (cross contamination)"
+   },
+   {
+    "sub_item": "Handwashing Standards",
+    "module": "员工健康卫生",
+    "S_count": 3,
+    "stores": 3,
+    "typical": "No trash near handwashing sink"
+   },
+   {
+    "sub_item": "Site Security",
+    "module": "职业安全",
+    "S_count": 1,
+    "stores": 1,
+    "typical": "No employee only indicator on BOH doors"
+   },
+   {
+    "sub_item": "Personal certificate",
+    "module": "证照",
+    "S_count": 1,
+    "stores": 1,
+    "typical": ""
+   },
+   {
+    "sub_item": "Product Storage Conditions",
+    "module": "温控有效期",
+    "S_count": 1,
+    "stores": 1,
+    "typical": "Missing standing thermometer"
+   },
+   {
+    "sub_item": "Expiration Date",
+    "module": "温控有效期",
+    "S_count": 1,
+    "stores": 1,
+    "typical": "No expiration date"
+   }
+  ],
+  "full_month_sev": {
+   "S": 23,
+   "M": 44,
+   "G": 301,
+   "L": 130
+  },
+  "full_month_total": 498,
+  "primary_total": 88
+ },
+ "s3_4": [
+  {
+   "store": "US00001",
+   "module": "设施",
+   "sub_item": "Good condition",
+   "description": "Lights in storage area are inoperable.",
+   "deduction": -5
+  },
+  {
+   "store": "US00002",
+   "module": "温控有效期",
+   "sub_item": "Expiration Date",
+   "description": "Missing expiration date label on syrup bottle.",
+   "deduction": -5
+  },
+  {
+   "store": "US00002",
+   "module": "清洁卫生",
+   "sub_item": "Clean & Sanitize",
+   "description": "Multiple noncompliant reading of PPM taken from food processing sani buckets.",
+   "deduction": -5
+  },
+  {
+   "store": "US00003",
+   "module": "温控有效期",
+   "sub_item": "Expiration Date",
+   "description": "Missing expiration date on product.",
+   "deduction": -5
+  },
+  {
+   "store": "US00004",
+   "module": "清洁卫生",
+   "sub_item": "Clean & Sanitize",
+   "description": "Sanitizer stains on ice machine.",
+   "deduction": -5
+  },
+  {
+   "store": "US00022",
+   "module": "证照",
+   "sub_item": "Licenses and certificates",
+   "description": "Missing handwashing sign",
+   "deduction": -5
+  }
+ ],
+ "s3_5": {
+  "G_by_module": {
+   "清洁卫生": 41,
+   "过程控制": 9,
+   "员工健康卫生": 3,
+   "职业安全": 1,
+   "设施": 4
+  },
+  "L_by_module": {
+   "清洁卫生": 16
+  }
+ },
+ "s4_1": {
+  "matrix": {
+   "US00001": {
+    "清洁卫生": -4,
+    "过程控制": -4,
+    "设施": -5
+   },
+   "US00002": {
+    "清洁卫生": -9,
+    "温控有效期": -5
+   },
+   "US00003": {
+    "清洁卫生": -7,
+    "过程控制": -2,
+    "温控有效期": -5
+   },
+   "US00004": {
+    "清洁卫生": -11
+   },
+   "US00005": {
+    "清洁卫生": -4,
+    "设施": -5
+   },
+   "US00006": {
+    "清洁卫生": -3,
+    "过程控制": -2,
+    "设施": -5,
+    "员工健康卫生": -2
+   },
+   "US00007": {
+    "清洁卫生": -5,
+    "过程控制": -2,
+    "职业安全": -2
+   },
+   "US00008": {
+    "清洁卫生": -6,
+    "设施": -5
+   },
+   "US00010": {
+    "清洁卫生": -6,
+    "过程控制": -2,
+    "设施": -5
+   },
+   "US00012": {
+    "清洁卫生": -7,
+    "过程控制": -2
+   },
+   "US00015": {
+    "清洁卫生": -5,
+    "设施": -2
+   },
+   "US00018": {
+    "清洁卫生": -7,
+    "员工健康卫生": -2
+   },
+   "US00019": {
+    "清洁卫生": -6,
+    "设施": -9
+   },
+   "US00020": {
+    "清洁卫生": -3,
+    "设施": -5
+   },
+   "US00022": {
+    "清洁卫生": -2,
+    "证照": -5
+   },
+   "US00024": {
+    "清洁卫生": -8,
+    "过程控制": -2,
+    "设施": -2
+   },
+   "US00025": {
+    "清洁卫生": -8,
+    "设施": -5
+   },
+   "US00027": {
+    "清洁卫生": -7,
+    "过程控制": -2,
+    "设施": -5,
+    "员工健康卫生": -2
+   }
+  },
+  "store_total": {
+   "US00001": -13,
+   "US00002": -14,
+   "US00003": -14,
+   "US00004": -11,
+   "US00005": -9,
+   "US00006": -12,
+   "US00007": -9,
+   "US00008": -11,
+   "US00010": -13,
+   "US00012": -9,
+   "US00015": -7,
+   "US00018": -9,
+   "US00019": -15,
+   "US00020": -8,
+   "US00022": -7,
+   "US00024": -12,
+   "US00025": -13,
+   "US00027": -16
+  },
+  "grand_total": -202,
+  "full_coverage_modules": [
+   "清洁卫生"
+  ]
+ },
+ "s4_2": {
+  "store": "US00027",
+  "score": 64,
+  "type": "QA审计",
+  "date": "2026-06-17",
+  "inspector": "Eamonn Caballar",
+  "module_breakdown": {
+   "设施": -5,
+   "清洁卫生": -7,
+   "员工健康卫生": -2,
+   "过程控制": -2
+  },
+  "S_items": [
+   {
+    "sub_item": "Sinks and Pipes",
+    "desc": "Air gap non compliant."
+   }
+  ],
+  "is_new": false,
+  "may_baseline": 84
+ },
+ "s4_3": {
+  "rows": [
+   {
+    "store": "US00006",
+    "type": "QA审计",
+    "result": "approved",
+    "date": "2026-06-15",
+    "orig": 68,
+    "adj": 93,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00008",
+    "type": "QA审计",
+    "result": "approved",
+    "date": "2026-06-17",
+    "orig": 69,
+    "adj": 94,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00010",
+    "type": "QA审计",
+    "result": "approved",
+    "date": "2026-06-15",
+    "orig": 67,
+    "adj": 92,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00015",
+    "type": "QA审计",
+    "result": "approved",
+    "date": "2026-06-17",
+    "orig": 93,
+    "adj": 95,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00019",
+    "type": "QA审计",
+    "result": "approved",
+    "date": "2026-06-16",
+    "orig": 65,
+    "adj": 94,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00020",
+    "type": "QA审计",
+    "result": "approved",
+    "date": "2026-06-16",
+    "orig": 72,
+    "adj": 97,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00025",
+    "type": "QA审计",
+    "result": "approved",
+    "date": "2026-06-15",
+    "orig": 67,
+    "adj": 94,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00001",
+    "type": "QA审计",
+    "result": "pending",
+    "date": "2026-06-18",
+    "orig": 87,
+    "adj": 87,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00005",
+    "type": "QA审计",
+    "result": "pending",
+    "date": "2026-06-17",
+    "orig": 71,
+    "adj": 71,
+    "inspector": "Eamonn Caballar"
+   },
+   {
+    "store": "US00024",
+    "type": "QA审计",
+    "result": "pending",
+    "date": "2026-06-16",
+    "orig": 88,
+    "adj": 88,
+    "inspector": "Eamonn Caballar"
+   }
+  ],
+  "total": 10,
+  "approved": 7,
+  "denied": 0,
+  "pending": 3
+ },
+ "s4_4": [
+  {
+   "store": "US00010",
+   "lower": {
+    "区经检查": 58
+   },
+   "higher": {
+    "QA审计": 92
+   },
+   "gap": 34
+  },
+  {
+   "store": "US00005",
+   "lower": {
+    "区经检查": 62
+   },
+   "higher": {
+    "门店自检_avg": 92.0
+   },
+   "gap": 30.0
+  },
+  {
+   "store": "US00012",
+   "lower": {
+    "区经检查": 70
+   },
+   "higher": {
+    "QA审计": 91
+   },
+   "gap": 21
+  },
+  {
+   "store": "US00007",
+   "lower": {
+    "门店自检_avg": 71.0
+   },
+   "higher": {
+    "QA审计": 91
+   },
+   "gap": 20.0
+  }
+ ],
+ "s4_5": [
+  {
+   "module": "清洁卫生",
+   "stores": 18,
+   "coverage": 100.0,
+   "deduction": -108,
+   "risk": "🔴"
+  },
+  {
+   "module": "设施",
+   "stores": 11,
+   "coverage": 61.1,
+   "deduction": -53,
+   "risk": "🔴"
+  },
+  {
+   "module": "过程控制",
+   "stores": 8,
+   "coverage": 44.4,
+   "deduction": -18,
+   "risk": "🟡"
+  },
+  {
+   "module": "温控有效期",
+   "stores": 2,
+   "coverage": 11.1,
+   "deduction": -10,
+   "risk": "🟢"
+  },
+  {
+   "module": "员工健康卫生",
+   "stores": 3,
+   "coverage": 16.7,
+   "deduction": -6,
+   "risk": "🟢"
+  },
+  {
+   "module": "证照",
+   "stores": 1,
+   "coverage": 5.6,
+   "deduction": -5,
+   "risk": "🟢"
+  },
+  {
+   "module": "职业安全",
+   "stores": 1,
+   "coverage": 5.6,
+   "deduction": -2,
+   "risk": "🟢"
+  }
+ ],
+ "s5_1": {
+  "attribution": {
+   "门店": 258,
+   "未知": 135,
+   "机修+营建": 87,
+   "供应链+行政": 18
+  },
+  "empty_short": 135,
+  "total": 498,
+  "empty_pct": 27.1
+ },
+ "s7_1": {
+  "门店自检": {
+   "count": 51,
+   "stores": 18,
+   "inspectors": 27,
+   "avg": 82.8,
+   "S": 10,
+   "M": 32,
+   "tempo": "全月高频（日常暴露）"
+  },
+  "QA审计": {
+   "count": 16,
+   "stores": 16,
+   "inspectors": 1,
+   "avg": 88.2,
+   "S": 8,
+   "M": 5,
+   "tempo": "月中集中（6/10–18 专业定级）"
+  },
+  "区经检查": {
+   "count": 18,
+   "stores": 18,
+   "inspectors": 1,
+   "avg": 84.3,
+   "S": 5,
+   "M": 7,
+   "tempo": "全月+月末复核"
+  }
+ },
+ "s7_2": [
+  {
+   "store": "US00001",
+   "selfcheck_avg": 80.7,
+   "QA": 87,
+   "area": 94,
+   "QA_minus_self": 6.3
+  },
+  {
+   "store": "US00002",
+   "selfcheck_avg": 87.0,
+   "QA": 86,
+   "area": 92,
+   "QA_minus_self": -1.0
+  },
+  {
+   "store": "US00003",
+   "selfcheck_avg": 88.5,
+   "QA": 86,
+   "area": 88,
+   "QA_minus_self": -2.5
+  },
+  {
+   "store": "US00004",
+   "selfcheck_avg": 91.8,
+   "QA": 89,
+   "area": 96,
+   "QA_minus_self": -2.8
+  },
+  {
+   "store": "US00005",
+   "selfcheck_avg": 92.0,
+   "QA": 71,
+   "area": 62,
+   "QA_minus_self": -21.0
+  },
+  {
+   "store": "US00006",
+   "selfcheck_avg": 87.5,
+   "QA": 93,
+   "area": 86,
+   "QA_minus_self": 5.5
+  },
+  {
+   "store": "US00007",
+   "selfcheck_avg": 71.0,
+   "QA": 91,
+   "area": 87,
+   "QA_minus_self": 20.0
+  },
+  {
+   "store": "US00008",
+   "selfcheck_avg": 78.2,
+   "QA": 94,
+   "area": 91,
+   "QA_minus_self": 15.8
+  },
+  {
+   "store": "US00010",
+   "selfcheck_avg": 78.5,
+   "QA": 92,
+   "area": 58,
+   "QA_minus_self": 13.5
+  },
+  {
+   "store": "US00012",
+   "selfcheck_avg": 88.7,
+   "QA": 91,
+   "area": 70,
+   "QA_minus_self": 2.3
+  },
+  {
+   "store": "US00015",
+   "selfcheck_avg": 83.7,
+   "QA": 95,
+   "area": 89,
+   "QA_minus_self": 11.3
+  },
+  {
+   "store": "US00018",
+   "selfcheck_avg": 82.2,
+   "QA": null,
+   "area": 91,
+   "QA_minus_self": ""
+  },
+  {
+   "store": "US00019",
+   "selfcheck_avg": 79.7,
+   "QA": 94,
+   "area": 94,
+   "QA_minus_self": 14.3
+  },
+  {
+   "store": "US00020",
+   "selfcheck_avg": 80.0,
+   "QA": 97,
+   "area": 90,
+   "QA_minus_self": 17.0
+  },
+  {
+   "store": "US00022",
+   "selfcheck_avg": 90.5,
+   "QA": null,
+   "area": 93,
+   "QA_minus_self": ""
+  },
+  {
+   "store": "US00024",
+   "selfcheck_avg": 72.3,
+   "QA": 88,
+   "area": 88,
+   "QA_minus_self": 15.7
+  },
+  {
+   "store": "US00025",
+   "selfcheck_avg": 80.7,
+   "QA": 94,
+   "area": 87,
+   "QA_minus_self": 13.3
+  },
+  {
+   "store": "US00027",
+   "selfcheck_avg": 75.5,
+   "QA": 64,
+   "area": 61,
+   "QA_minus_self": -11.5
+  }
+ ],
+ "s7_3": [
+  {
+   "inspector": "Jian Ming Juo",
+   "store": "US00018",
+   "n": 4,
+   "scores": [
+    86,
+    60,
+    87,
+    96
+   ],
+   "swing": 36
+  },
+  {
+   "inspector": "Wenny Lin",
+   "store": "US00027",
+   "n": 4,
+   "scores": [
+    82,
+    77,
+    87,
+    56
+   ],
+   "swing": 31
+  },
+  {
+   "inspector": "Huichen Jiang",
+   "store": "US00001",
+   "n": 3,
+   "scores": [
+    66,
+    96,
+    80
+   ],
+   "swing": 30
+  },
+  {
+   "inspector": "Yaqing Zuo",
+   "store": "US00008",
+   "n": 3,
+   "scores": [
+    61,
+    91,
+    75
+   ],
+   "swing": 30
+  },
+  {
+   "inspector": "Darwin Coronel",
+   "store": "US00019",
+   "n": 2,
+   "scores": [
+    63,
+    86
+   ],
+   "swing": 23
+  },
+  {
+   "inspector": "Kayen Wu He",
+   "store": "US00025",
+   "n": 2,
+   "scores": [
+    85,
+    66
+   ],
+   "swing": 19
+  },
+  {
+   "inspector": "Joselyn Pacheco Trejo",
+   "store": "US00012",
+   "n": 2,
+   "scores": [
+    80,
+    98
+   ],
+   "swing": 18
+  },
+  {
+   "inspector": "Tunisia Hayward",
+   "store": "US00004",
+   "n": 2,
+   "scores": [
+    83,
+    98
+   ],
+   "swing": 15
+  },
+  {
+   "inspector": "Shangxian Piao",
+   "store": "US00006",
+   "n": 4,
+   "scores": [
+    88,
+    81,
+    86,
+    95
+   ],
+   "swing": 14
+  },
+  {
+   "inspector": "Clara Mae Venturina",
+   "store": "US00024",
+   "n": 2,
+   "scores": [
+    80,
+    68
+   ],
+   "swing": 12
+  },
+  {
+   "inspector": "Afsana Gu",
+   "store": "US00015",
+   "n": 2,
+   "scores": [
+    88,
+    78
+   ],
+   "swing": 10
+  },
+  {
+   "inspector": "Dominique Meadows",
+   "store": "US00003",
+   "n": 2,
+   "scores": [
+    84,
+    93
+   ],
+   "swing": 9
+  },
+  {
+   "inspector": "Austin Gebhardt",
+   "store": "US00004",
+   "n": 2,
+   "scores": [
+    91,
+    95
+   ],
+   "swing": 4
+  },
+  {
+   "inspector": "Eric Park",
+   "store": "US00005",
+   "n": 2,
+   "scores": [
+    90,
+    94
+   ],
+   "swing": 4
+  },
+  {
+   "inspector": "Andrew Chen",
+   "store": "US00022",
+   "n": 2,
+   "scores": [
+    92,
+    89
+   ],
+   "swing": 3
+  }
+ ],
+ "s7_4": [
+  {
+   "inspector": "Clara Mae Venturina",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 74.0,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Darwin Coronel",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 74.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Kayen Wu He",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 75.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Wenny Lin",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 4,
+   "avg": 75.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Yaqing Zuo",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 3,
+   "avg": 75.7,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Huichen Jiang",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 3,
+   "avg": 80.7,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Jian Ming Juo",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 4,
+   "avg": 82.2,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Afsana Gu",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 83.0,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Jung Han Liang",
+   "role": "Area Operations Manager",
+   "type": "区经检查",
+   "n": 18,
+   "avg": 84.3,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Shangxian Piao",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 4,
+   "avg": 87.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Betty Xu",
+   "role": "Assistant Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 87.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Eamonn Caballar",
+   "role": "Senior QA Manager",
+   "type": "QA审计",
+   "n": 16,
+   "avg": 88.2,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Dominique Meadows",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 88.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Joselyn Pacheco Trejo",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 89.0,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Tunisia Hayward",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 90.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Andrew Chen",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 90.5,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Eric Park",
+   "role": "Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 92.0,
+   "scale": "正常"
+  },
+  {
+   "inspector": "Austin Gebhardt",
+   "role": "Assistant Store Manager",
+   "type": "门店自检",
+   "n": 2,
+   "avg": 93.0,
+   "scale": "偏宽(>92)"
+  }
+ ],
+ "s7_5": [
+  {
+   "month": "2026-01",
+   "self": 7,
+   "QA": 5,
+   "area": 4,
+   "total": 16,
+   "self_avg": "",
+   "QA_avg": "",
+   "area_avg": ""
+  },
+  {
+   "month": "2026-02",
+   "self": 5,
+   "QA": 2,
+   "area": 0,
+   "total": 7,
+   "self_avg": "",
+   "QA_avg": "",
+   "area_avg": ""
+  },
+  {
+   "month": "2026-03",
+   "self": 13,
+   "QA": 1,
+   "area": 0,
+   "total": 14,
+   "self_avg": "",
+   "QA_avg": "",
+   "area_avg": ""
+  },
+  {
+   "month": "2026-04",
+   "self": 32,
+   "QA": 12,
+   "area": 14,
+   "total": 58,
+   "self_avg": 80.2,
+   "QA_avg": 84.6,
+   "area_avg": 80.1
+  },
+  {
+   "month": "2026-05",
+   "self": 49,
+   "QA": 16,
+   "area": 21,
+   "total": 86,
+   "self_avg": 81.3,
+   "QA_avg": 85.1,
+   "area_avg": 82.2
+  },
+  {
+   "month": "2026-06",
+   "self": 51,
+   "QA": 16,
+   "area": 18,
+   "total": 85,
+   "self_avg": 82.8,
+   "QA_avg": 88.2,
+   "area_avg": 84.3
+  }
+ ],
+ "s7_6": [
+  {
+   "type": "门店自检",
+   "S": 10,
+   "M": 32,
+   "value": "高频暴露（日常一线自查）"
+  },
+  {
+   "type": "QA审计",
+   "S": 8,
+   "M": 5,
+   "value": "专业定级 / 结构性 S 项（air gap 等）"
+  },
+  {
+   "type": "区经检查",
+   "S": 5,
+   "M": 7,
+   "value": "全覆盖复核"
+  }
+ ]
+}

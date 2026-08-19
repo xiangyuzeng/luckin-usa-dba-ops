@@ -1,0 +1,27 @@
+=== RDS Extended Support enablement — L2 — mode=APPLY region=us-east-1 @ 2026-07-24T14:42:52Z ===
+operator=arn:aws:iam::257394478466:user/xiangyu.zeng
+targets=10
+
+aws-luckyus-fichargecontrol-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-fichargecontrol-rw                -> open-source-rds-extended-support
+aws-luckyus-ifiaccounting-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ifiaccounting-rw                  -> open-source-rds-extended-support
+aws-luckyus-ilsopdevopsdata-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ilsopdevopsdata-rw                -> open-source-rds-extended-support
+aws-luckyus-iluckyams-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iluckyams-rw                      -> open-source-rds-extended-support
+aws-luckyus-iluckydorisops-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iluckydorisops-rw                 -> open-source-rds-extended-support
+aws-luckyus-iluckyhealth-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iluckyhealth-rw                   -> open-source-rds-extended-support
+aws-luckyus-iopocp-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iopocp-rw                         -> open-source-rds-extended-support
+aws-luckyus-oplog-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-oplog-rw                          -> open-source-rds-extended-support
+aws-luckyus-opqualitycontrol-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-opqualitycontrol-rw               -> open-source-rds-extended-support
+aws-luckyus-scm-wmssimulate-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-wmssimulate-rw                -> open-source-rds-extended-support
+
+=== summary L2 (APPLY) : planned/done=10 already=0 skipped=0 failed=0 ===
+log: /home/op/claude-code/app/reports/rds-extended-support-enablement/scripts/logs/enable-L2-20260724T144252Z.log

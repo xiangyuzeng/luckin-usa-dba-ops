@@ -1,0 +1,93 @@
+[
+ {
+  "iid": 2182,
+  "opp_id": 9924,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"added into BD maintenance list. Informed Aaron and jC. May need more time to make adjustment Cuz the pipe height already at highest position. \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqfopgw7_f3ab1e4a702f_aws_2.jpg\",\"operator\":{\"empName\":\"Shangxian Piao\",\"empNo\":\"US202507280004\",\"empPost\":\"LKUS00000082\",\"deptId\":20010,\"operateTime\":\"2026-06-15T20:49:23.371\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-15T20:50:55.204\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2186,
+  "opp_id": 9941,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"air gap was reported to BD team on 5/12\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqgwz4hf_ba817a88e201_aws_2.jpg\",\"operator\":{\"empName\":\"Kayen Wu He\",\"empNo\":\"US202509090009\",\"empPost\":\"LKUS00000082\",\"deptId\":20032,\"operateTime\":\"2026-06-16T17:26:59.485\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-17T15:26:29.152\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2186,
+  "opp_id": 9942,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Ops support informed me of the compost bin will be arriving 5/21. Therefore, not having the compost bin is out of our control. \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqgwwi47_2b2e2ca7f5ce_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqgwwuid_16b3bb0d6fa5_aws_2.jpg\",\"operator\":{\"empName\":\"Kayen Wu He\",\"empNo\":\"US202509090009\",\"empPost\":\"LKUS00000082\",\"deptId\":20032,\"operateTime\":\"2026-06-16T17:26:59.475\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-17T15:26:29.163\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2187,
+  "opp_id": 9949,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Issue has been notified to BD team. Awaiting resolution. \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqfvf219_2de239388ca1_aws_2.jpg\",\"operator\":{\"empName\":\"Juliana Li\",\"empNo\":\"US202506160007\",\"empPost\":\"LKUS00000082\",\"deptId\":20016,\"operateTime\":\"2026-06-16T00:01:00.975\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-16T00:06:33.698\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2194,
+  "opp_id": 9991,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Has been reported. No resolvement\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mql8dm53_e8d74e4161dd_aws_2.jpg\",\"operator\":{\"empName\":\"Clara Mae Venturina\",\"empNo\":\"US202506160006\",\"empPost\":\"LKUS00000082\",\"deptId\":20031,\"operateTime\":\"2026-06-19T17:57:45.253\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2196,
+  "opp_id": 10002,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"BD issue since we opened , it’s in BD list, already contact bd team\",\"attachment\":\"\",\"operator\":{\"empName\":\"Javier Cruz\",\"empNo\":\"US202510210001\",\"empPost\":\"LKUS00000082\",\"deptId\":20027,\"operateTime\":\"2026-06-18T19:33:58.002\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-18T19:34:16.868\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2197,
+  "opp_id": 10003,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Submitted a request to have it sealed\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqh09lwu_5ac43ae5d6ee_aws_2.jpg\",\"operator\":{\"empName\":\"Darwin Coronel\",\"empNo\":\"US202506160005\",\"empPost\":\"LKUS00000082\",\"deptId\":20026,\"operateTime\":\"2026-06-16T19:00:26.859\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-16T19:41:44.081\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2197,
+  "opp_id": 10006,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Submitted a request to fix\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqh0a9zj_453dcb9141e4_aws_2.jpg\",\"operator\":{\"empName\":\"Darwin Coronel\",\"empNo\":\"US202506160005\",\"empPost\":\"LKUS00000082\",\"deptId\":20026,\"operateTime\":\"2026-06-16T19:00:26.867\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-16T19:41:44.095\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2197,
+  "opp_id": 10008,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Submitted request with BD list to repair\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqh0azsx_48645bf8f5f9_aws_2.jpg\",\"operator\":{\"empName\":\"Darwin Coronel\",\"empNo\":\"US202506160005\",\"empPost\":\"LKUS00000082\",\"deptId\":20026,\"operateTime\":\"2026-06-16T19:00:26.849\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-16T19:41:44.109\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2198,
+  "opp_id": 10012,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Already reported this issue on 4/23/2026\\nWaiting for BD team to fix it \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqia4gyj_2f4be6c64531_aws_2.jpg\",\"operator\":{\"empName\":\"Yaqing Zuo\",\"empNo\":\"US202505130005\",\"empPost\":\"LKUS00000082\",\"deptId\":20008,\"operateTime\":\"2026-06-17T16:23:18.62\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-17T16:28:18.942\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2199,
+  "opp_id": 10017,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Issue has reported since opening launch but BD team claims there is no solution possible \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqibuc4f_9c1c3b8dc77c_aws_2.jpg\",\"operator\":{\"empName\":\"Afsana Gu\",\"empNo\":\"US202508120003\",\"empPost\":\"LKUS00000082\",\"deptId\":20022,\"operateTime\":\"2026-06-17T17:11:11.615\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-06-17T17:17:29.711\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2201,
+  "opp_id": 10026,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Asked BD to Fix pipes causing air gap issue\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mqlkzag5_bc81d3fb418e_aws_2.jpg\",\"operator\":{\"empName\":\"Eric Park\",\"empNo\":\"US202507170003\",\"empPost\":\"LKUS00000082\",\"deptId\":1141,\"operateTime\":\"2026-06-19T23:49:54.62\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2204,
+  "opp_id": 10038,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Already on BD list\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mql8xgk1_35533362779a_aws_2.jpg\",\"operator\":{\"empName\":\"Huichen Jiang\",\"empNo\":\"US202506260003\",\"empPost\":\"LKUS00000082\",\"deptId\":1127,\"operateTime\":\"2026-06-19T18:12:34.928\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ }
+]

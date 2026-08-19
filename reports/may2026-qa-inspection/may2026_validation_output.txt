@@ -1,0 +1,67 @@
+================================================================================
+MAY 2026 INSPECTION DATA — VALIDATION OUTPUT (built 2026-06-01, full closed month)
+Source: aws-luckyus-opqualitycontrol-rw / luckyus_opqualitycontrol
+================================================================================
+
+--- A. May inspection count by type (status=1, misubmission-filtered) ---
+inspection_type    cnt  stores
+门店自检                49      18
+QA审计                16      16
+区经检查                21      18
+TOTAL               86
+
+--- B. May severity distribution ---
+severity     cnt  total_deduction
+S             24             -120
+M             51             -255
+G            332             -664
+L            116             -114
+
+--- C. Appeal coverage ---
+May 2026: 10 of 86 inspections have is_appealed=1
+Apr 2026: 6 of 58 inspections have is_appealed=1
+
+--- D. April inspections where original_total_score != adjusted_total_score ---
+  iid store      date         inspector              orig_score  adj_score   orig_ded    adj_ded is_app
+ 2040 US00005    2026-04-30   Eamonn Caballar                69         94        -11         -6      1
+ 2033 US00024    2026-04-28   Eamonn Caballar                71         96         -9         -4      1
+
+--- E. Score formula sanity check (LKUS production rows) ---
+checked=144  mismatches=0  PASS
+
+========================================================================
+FULL-MONTH MAY 2026 — COMPREHENSIVE VALIDATION (closed month, 2026-06-01)
+Source: aws-luckyus-opqualitycontrol-rw / luckyus_opqualitycontrol
+========================================================================
+
+[1] DATE-RANGE COVERAGE  : 2026-05-01 .. 2026-05-31  (27 distinct days)   target 05-01..05-31 ✓
+
+[2] 全月 TYPE COUNTS (status=1, misubmission-filtered; 87 submitted − 1 误提交 = 86):
+      门店自检    cnt= 49  stores=18
+      QA审计    cnt= 16  stores=16
+      区经检查    cnt= 21  stores=18
+      TOTAL 全月 = 86
+
+[3] DISTINCT-STORE COVERAGE : inspected=18 / active real storefronts=18  = 18/18 = 100%
+      (US00018 & US00022 opened 2026-05-20 → active; US00000/US999xx test kitchens excluded)
+      active-not-inspected: none
+
+[4] 主巡检 SET (1 per inspected active store, QA审计>区经检查>门店自检, tie→latest): 18 stores
+      composition: QA审计=16  区经检查=2  门店自检=0
+      主巡检 avg adjusted score = 85.8
+      主巡检 <80 (red): [(65, 'US00007'), (67, 'US00005'), (77, 'US00006')]
+
+[5] SEVERITY RECONCILE:
+      全月 (523 items)     : S=24 M=51 G=332 L=116  total=523
+      全月 summary s/m/g/l : S=24 M=51 G=332 L=116  → items match: True
+      主巡检 subset        : S=5 M=6 G=86 L=15  total=112
+
+[6] APPEALS DUAL-TRACK (全月):
+      total appealed inspections = 10   approved=7  denied=0  审批中pending=3
+      reconcile approved+denied+pending = 10 == 10 ✓
+      ※ rows (approved & adjusted≠original) = 7: [('US00001', 87, 89), ('US00002', 84, 86), ('US00004', 86, 88), ('US00010', 67, 92), ('US00015', 84, 90), ('US00019', 68, 93), ('US00025', 64, 89)]
+      pending (no score change): [('US00005', 2102), ('US00008', 2066), ('US00022', 2142)]
+      appealed FINDINGS in items (is_appealed_finding=1) = 13
+
+[7] INTEGRITY: items=523 == Σ summary item_count=523 ✓ | score-formula PASS (144/0 mismatches)
+========================================================================

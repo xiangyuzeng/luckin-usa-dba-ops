@@ -1,0 +1,39 @@
+=== RDS Extended Support enablement — L0 — mode=APPLY region=us-east-1 @ 2026-07-29T17:21:02Z ===
+operator=arn:aws:iam::257394478466:user/xiangyu.zeng
+targets=16
+
+aws-luckyus-cdpactivity-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-cdpactivity-rw                    -> open-source-rds-extended-support
+aws-luckyus-fitax-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-fitax-rw                          -> open-source-rds-extended-support
+aws-luckyus-ipermission-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ipermission-rw                    -> open-source-rds-extended-support
+aws-luckyus-iriskcontrolservice-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iriskcontrolservice-rw            -> open-source-rds-extended-support
+aws-luckyus-isalescdp-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-isalescdp-rw                      -> open-source-rds-extended-support
+aws-luckyus-isalescouponservice-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-isalescouponservice-rw            -> open-source-rds-extended-support
+aws-luckyus-isalesprivatedomain-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-isalesprivatedomain-rw            -> open-source-rds-extended-support
+aws-luckyus-opproduction-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-opproduction-rw                   -> open-source-rds-extended-support
+aws-luckyus-opshop-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-opshop-rw                         -> open-source-rds-extended-support
+aws-luckyus-opshopsale-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-opshopsale-rw                     -> open-source-rds-extended-support
+aws-luckyus-salescrm-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-salescrm-rw                       -> open-source-rds-extended-support
+aws-luckyus-salesmarketing-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-salesmarketing-rw                 -> open-source-rds-extended-support
+aws-luckyus-salesorder-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-salesorder-rw                     -> open-source-rds-extended-support
+aws-luckyus-salespayment-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-salespayment-rw                   -> open-source-rds-extended-support
+aws-luckyus-scm-shopstock-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-shopstock-rw                  -> open-source-rds-extended-support
+aws-luckyus-scmcommodity-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scmcommodity-rw                   -> open-source-rds-extended-support
+
+=== summary L0 (APPLY) : planned/done=16 already=0 skipped=0 failed=0 ===
+log: /home/op/claude-code/app/reports/rds-extended-support-enablement/scripts/logs/enable-L0-20260729T172102Z.log

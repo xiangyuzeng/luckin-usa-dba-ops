@@ -1,35 +1,43 @@
 #!/usr/bin/env python3
 """
-Build April 2026 inspection-export CSVs from data pulled via mcp-db-gateway.
+Build April 2026 inspection-export CSVs from LIVE data pulled via mcp-db-gateway.
+
+This is the v2 refresh of the April 2026 QA bundle. Differences from v1:
+  - HEADERS / REPORTS / Q1_DEDUCTIONS / STORES are loaded from raw/*.json
+    (live snapshot pulled via MCP) instead of being embedded in the script body.
+  - Applies a misubmission filter to drop duplicate self-checks where
+    score=100 AND item_count=0 AND another inspection by the same inspector
+    on the same date+store has item_count>0 (Darwin Coronel 4/21 case).
+  - Generates a REFRESH DELTAS section in the validation file by comparing
+    the refreshed CSV state against the prior published CSV.
 
 Source: aws-luckyus-opqualitycontrol-rw / luckyus_opqualitycontrol
 Tables: t_shopcheck_data (header), t_shopcheck_opportunity (deductions),
         t_shopcheck_report (scores), t_shopcheck_item_config, t_shopcheck_category_config
 Store master: aws-luckyus-opshop-rw / luckyus_opshop.t_shop_info
 
-Inspection-type mapping (large_category_id -> inspection_type):
-  1084 'Store food safety self-check' -> 门店自检
-  1134 'Store food safety audit'      -> QA审计
-  1184 'Area food safety Check'       -> 区经检查
+Inspection-type mapping (large_category_id):
+  1084 -> 门店自检 (Store food safety self-check)
+  1134 -> QA审计   (Store food safety audit)
+  1184 -> 区经检查 (Area food safety Check)
 
-Severity mapping (deduction_type -> S/M/G/L), inferred from item content prefix
-('(S)','(M)') and score_config:
-  1 -> S (severe, -5 typical)
-  2 -> G (general, -2 typical)
-  3 -> M (major, -5 typical)
-  4 -> L (light, -1 typical)
+Severity mapping (deduction_type):
+  1 -> S, 2 -> G, 3 -> M, 4 -> L
 """
 
 import csv
 import json
 import os
-import re
 from collections import defaultdict
 from pathlib import Path
 
-OUT = Path("/app/claude-code-output/april2026-inspection-export")
-RAW = OUT / "raw"
-OUT.mkdir(parents=True, exist_ok=True)
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+HERE = Path(__file__).resolve().parent
+OUT = HERE
+RAW = HERE / "raw"
+PRIOR_DIR = Path("/app/reports/april2026-qa-inspection")  # for delta comparison
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -41,7 +49,6 @@ TYPE_MAP = {
 }
 SEV_MAP = {1: "S", 2: "G", 3: "M", 4: "L"}
 
-# Inspector role (post code -> role label). Derived from data.
 POSTCODE_ROLE = {
     "LKUS00000076": "Area Operations Manager",
     "LKUS00000078": "Senior QA Manager",
@@ -50,8 +57,6 @@ POSTCODE_ROLE = {
     "LKUS00000083": "Assistant Store Manager",
     "LKUS00000098": "Shift Supervisor / Trainer",
 }
-
-# Role inferred when post code missing — based on inspection_type
 ROLE_FALLBACK = {
     "门店自检": "Store Manager",
     "QA审计":   "Senior QA Manager",
@@ -59,306 +64,37 @@ ROLE_FALLBACK = {
 }
 
 # ---------------------------------------------------------------------------
-# Embedded data pulled via mcp-db-gateway (verbatim)
+# Load raw inputs
 # ---------------------------------------------------------------------------
+HEADERS    = json.loads((RAW / "headers.json").read_text(encoding="utf-8"))
+REPORTS    = json.loads((RAW / "reports.json").read_text(encoding="utf-8"))
+Q1_DEDS    = json.loads((RAW / "q1_deductions.json").read_text(encoding="utf-8"))
+STORES     = json.loads((RAW / "stores.json").read_text(encoding="utf-8"))
+APR_OPPS   = json.loads((RAW / "april_opportunities.json").read_text(encoding="utf-8"))
 
-# Inspection headers (Jan-Apr 2026, deleted=0, large_category_id IN 1084,1134,1184)
-HEADERS = json.loads(r'''[
-{"id":1898,"dept_id":1140,"large_category_id":1134,"check_date":"2026-01-08","checker_name":"Yu Jiang","checker_id":140,"status":1,"process_status":40},
-{"id":1899,"dept_id":20010,"large_category_id":1134,"check_date":"2026-01-08","checker_name":"Yu Jiang","checker_id":140,"status":1,"process_status":40},
-{"id":1900,"dept_id":20010,"large_category_id":1084,"check_date":"2026-01-10","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":40},
-{"id":1901,"dept_id":20031,"large_category_id":1184,"check_date":"2026-01-11","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":40},
-{"id":1902,"dept_id":1128,"large_category_id":1084,"check_date":"2026-01-11","checker_name":"Afsana Gu","checker_id":10127,"status":1,"process_status":40},
-{"id":1915,"dept_id":20011,"large_category_id":1184,"check_date":"2026-01-16","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":40},
-{"id":1916,"dept_id":1128,"large_category_id":1184,"check_date":"2026-01-16","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":40},
-{"id":1917,"dept_id":20010,"large_category_id":1084,"check_date":"2026-01-17","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":10},
-{"id":1918,"dept_id":20008,"large_category_id":1184,"check_date":"2026-01-18","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":40},
-{"id":1919,"dept_id":1141,"large_category_id":1184,"check_date":"2026-01-18","checker_name":"Jung Han Liang","checker_id":136,"status":0,"process_status":null},
-{"id":1920,"dept_id":1127,"large_category_id":1184,"check_date":"2026-01-18","checker_name":"Jung Han Liang","checker_id":136,"status":0,"process_status":null},
-{"id":1922,"dept_id":20031,"large_category_id":1134,"check_date":"2026-01-22","checker_name":"Yu Jiang","checker_id":140,"status":1,"process_status":40},
-{"id":1923,"dept_id":20010,"large_category_id":1084,"check_date":"2026-01-24","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":10},
-{"id":1924,"dept_id":20010,"large_category_id":1084,"check_date":"2026-01-24","checker_name":"Joselyn Pacheco","checker_id":10254,"status":1,"process_status":10},
-{"id":1925,"dept_id":20010,"large_category_id":1084,"check_date":"2026-01-24","checker_name":"Ya Xin Chen","checker_id":161,"status":0,"process_status":null},
-{"id":1926,"dept_id":20032,"large_category_id":1084,"check_date":"2026-01-24","checker_name":"Juliana Li","checker_id":10033,"status":1,"process_status":40},
-{"id":1928,"dept_id":1128,"large_category_id":1084,"check_date":"2026-01-25","checker_name":"Carina Medrano","checker_id":10085,"status":0,"process_status":null},
-{"id":1931,"dept_id":20008,"large_category_id":1134,"check_date":"2026-01-29","checker_name":"Yu Jiang","checker_id":140,"status":1,"process_status":10},
-{"id":1932,"dept_id":20032,"large_category_id":1134,"check_date":"2026-01-29","checker_name":"Yu Jiang","checker_id":140,"status":1,"process_status":40},
-{"id":1934,"dept_id":20011,"large_category_id":1084,"check_date":"2026-01-29","checker_name":"Tunisia Hayward","checker_id":10029,"status":0,"process_status":null},
-{"id":1933,"dept_id":1140,"large_category_id":1084,"check_date":"2026-01-30","checker_name":"Dominique Meadows","checker_id":187,"status":1,"process_status":40},
-{"id":1935,"dept_id":20008,"large_category_id":1084,"check_date":"2026-02-07","checker_name":"Andrew Hu","checker_id":10041,"status":1,"process_status":10},
-{"id":1936,"dept_id":20010,"large_category_id":1084,"check_date":"2026-02-07","checker_name":"Joselyn Pacheco","checker_id":10254,"status":1,"process_status":10},
-{"id":1939,"dept_id":1128,"large_category_id":1084,"check_date":"2026-02-08","checker_name":"Afsana Gu","checker_id":10127,"status":0,"process_status":null},
-{"id":1940,"dept_id":1128,"large_category_id":1084,"check_date":"2026-02-08","checker_name":"Carina Medrano","checker_id":10085,"status":0,"process_status":null},
-{"id":1943,"dept_id":1127,"large_category_id":1134,"check_date":"2026-02-11","checker_name":"Yu Jiang","checker_id":140,"status":1,"process_status":40},
-{"id":1945,"dept_id":20055,"large_category_id":1134,"check_date":"2026-02-12","checker_name":"Qingfu Hu","checker_id":10335,"status":0,"process_status":null},
-{"id":1946,"dept_id":1128,"large_category_id":1134,"check_date":"2026-02-12","checker_name":"Yu Jiang","checker_id":140,"status":1,"process_status":40},
-{"id":1947,"dept_id":20010,"large_category_id":1084,"check_date":"2026-02-14","checker_name":"Joselyn Pacheco","checker_id":10254,"status":1,"process_status":10},
-{"id":1948,"dept_id":20027,"large_category_id":1084,"check_date":"2026-02-15","checker_name":"Chance Lee","checker_id":10233,"status":0,"process_status":null},
-{"id":1949,"dept_id":20010,"large_category_id":1084,"check_date":"2026-02-15","checker_name":"Joselyn Pacheco","checker_id":10254,"status":0,"process_status":null},
-{"id":1952,"dept_id":20011,"large_category_id":1084,"check_date":"2026-02-19","checker_name":"Tunisia Hayward","checker_id":10029,"status":0,"process_status":null},
-{"id":1954,"dept_id":20010,"large_category_id":1084,"check_date":"2026-02-22","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":10},
-{"id":1955,"dept_id":20010,"large_category_id":1084,"check_date":"2026-02-28","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":10},
-{"id":1956,"dept_id":20032,"large_category_id":1084,"check_date":"2026-03-04","checker_name":"Juliana Li","checker_id":10033,"status":1,"process_status":40},
-{"id":1959,"dept_id":20031,"large_category_id":1084,"check_date":"2026-03-06","checker_name":"Clara Mae Venturina","checker_id":10032,"status":1,"process_status":40},
-{"id":1960,"dept_id":20031,"large_category_id":1084,"check_date":"2026-03-06","checker_name":"Clara Mae Venturina","checker_id":10032,"status":1,"process_status":40},
-{"id":1961,"dept_id":20010,"large_category_id":1084,"check_date":"2026-03-08","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":10},
-{"id":1962,"dept_id":20035,"large_category_id":1084,"check_date":"2026-03-09","checker_name":"Wenny Lin","checker_id":10027,"status":1,"process_status":40},
-{"id":1963,"dept_id":20031,"large_category_id":1084,"check_date":"2026-03-09","checker_name":"Clara Mae Venturina","checker_id":10032,"status":1,"process_status":40},
-{"id":1965,"dept_id":20008,"large_category_id":1084,"check_date":"2026-03-09","checker_name":"Derson Liang","checker_id":10236,"status":1,"process_status":10},
-{"id":1966,"dept_id":1127,"large_category_id":1084,"check_date":"2026-03-09","checker_name":"Jian Ming Juo","checker_id":10035,"status":1,"process_status":40},
-{"id":1969,"dept_id":20027,"large_category_id":1084,"check_date":"2026-03-10","checker_name":"Darwin Coronel","checker_id":10031,"status":1,"process_status":40},
-{"id":1971,"dept_id":20008,"large_category_id":1084,"check_date":"2026-03-10","checker_name":"Yaqing Zuo","checker_id":157,"status":1,"process_status":40},
-{"id":1972,"dept_id":20010,"large_category_id":1084,"check_date":"2026-03-11","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":40},
-{"id":1973,"dept_id":20008,"large_category_id":1084,"check_date":"2026-03-15","checker_name":"Derson Liang","checker_id":10236,"status":1,"process_status":40},
-{"id":1977,"dept_id":20010,"large_category_id":1084,"check_date":"2026-03-27","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":40},
-{"id":1978,"dept_id":20007,"large_category_id":1134,"check_date":"2026-03-31","checker_name":"Yu Jiang","checker_id":140,"status":0,"process_status":null},
-{"id":1979,"dept_id":20035,"large_category_id":1134,"check_date":"2026-03-31","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":40},
-{"id":1980,"dept_id":20007,"large_category_id":1134,"check_date":"2026-03-31","checker_name":"Yu Jiang","checker_id":140,"status":0,"process_status":null},
-{"id":1981,"dept_id":1140,"large_category_id":1134,"check_date":"2026-04-01","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":40},
-{"id":1982,"dept_id":20010,"large_category_id":1134,"check_date":"2026-04-01","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":40},
-{"id":1984,"dept_id":20010,"large_category_id":1084,"check_date":"2026-04-03","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":40},
-{"id":1985,"dept_id":1127,"large_category_id":1084,"check_date":"2026-04-04","checker_name":"Jian Ming Juo","checker_id":10035,"status":1,"process_status":10},
-{"id":1987,"dept_id":1127,"large_category_id":1084,"check_date":"2026-04-06","checker_name":"Jian Ming Juo","checker_id":10035,"status":1,"process_status":10},
-{"id":1989,"dept_id":1127,"large_category_id":1134,"check_date":"2026-04-09","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":40},
-{"id":1990,"dept_id":1140,"large_category_id":1084,"check_date":"2026-04-09","checker_name":"Dominique Meadows","checker_id":187,"status":1,"process_status":40},
-{"id":1991,"dept_id":20008,"large_category_id":1084,"check_date":"2026-04-09","checker_name":"Derson Liang","checker_id":10236,"status":1,"process_status":40},
-{"id":1992,"dept_id":20031,"large_category_id":1084,"check_date":"2026-04-10","checker_name":"Clara Mae Venturina","checker_id":10032,"status":1,"process_status":40},
-{"id":1993,"dept_id":20010,"large_category_id":1084,"check_date":"2026-04-11","checker_name":"Sami Dalao","checker_id":10331,"status":1,"process_status":40},
-{"id":1994,"dept_id":20019,"large_category_id":1084,"check_date":"2026-04-13","checker_name":"Juliana Li","checker_id":10033,"status":0,"process_status":null},
-{"id":1995,"dept_id":20011,"large_category_id":1084,"check_date":"2026-04-13","checker_name":"Austin Gebhardt","checker_id":10186,"status":1,"process_status":40},
-{"id":1996,"dept_id":20032,"large_category_id":1084,"check_date":"2026-04-13","checker_name":"Alexander G Harry","checker_id":10118,"status":1,"process_status":40},
-{"id":1998,"dept_id":20027,"large_category_id":1084,"check_date":"2026-04-14","checker_name":"Javier Cruz","checker_id":10315,"status":1,"process_status":40},
-{"id":1999,"dept_id":20027,"large_category_id":1084,"check_date":"2026-04-14","checker_name":"Javier Cruz","checker_id":10315,"status":1,"process_status":40},
-{"id":2000,"dept_id":1127,"large_category_id":1084,"check_date":"2026-04-14","checker_name":"Jian Ming Juo","checker_id":10035,"status":1,"process_status":10},
-{"id":2001,"dept_id":20019,"large_category_id":1084,"check_date":"2026-04-14","checker_name":"Juliana Li","checker_id":10033,"status":1,"process_status":40},
-{"id":2002,"dept_id":1131,"large_category_id":1134,"check_date":"2026-04-14","checker_name":"Eamonn Caballar","checker_id":10488,"status":0,"process_status":null},
-{"id":2003,"dept_id":20026,"large_category_id":1084,"check_date":"2026-04-14","checker_name":"Juan Ortiz-Fontanez","checker_id":10077,"status":1,"process_status":40},
-{"id":2004,"dept_id":20008,"large_category_id":1084,"check_date":"2026-04-14","checker_name":"Yaqing Zuo","checker_id":157,"status":0,"process_status":null},
-{"id":2005,"dept_id":20008,"large_category_id":1084,"check_date":"2026-04-15","checker_name":"Derson Liang","checker_id":10236,"status":1,"process_status":40},
-{"id":2006,"dept_id":20035,"large_category_id":1084,"check_date":"2026-04-16","checker_name":"Wenny Lin","checker_id":10027,"status":1,"process_status":40},
-{"id":2007,"dept_id":20031,"large_category_id":1084,"check_date":"2026-04-16","checker_name":"Clara Mae Venturina","checker_id":10032,"status":1,"process_status":40},
-{"id":2013,"dept_id":20026,"large_category_id":1184,"check_date":"2026-04-16","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":20},
-{"id":2014,"dept_id":20035,"large_category_id":1184,"check_date":"2026-04-16","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":20},
-{"id":2009,"dept_id":1128,"large_category_id":1084,"check_date":"2026-04-17","checker_name":"Afsana Gu","checker_id":10127,"status":1,"process_status":40},
-{"id":2010,"dept_id":1140,"large_category_id":1084,"check_date":"2026-04-17","checker_name":"Dominique Meadows","checker_id":187,"status":1,"process_status":40},
-{"id":2011,"dept_id":1141,"large_category_id":1084,"check_date":"2026-04-17","checker_name":"Eric Park","checker_id":10084,"status":1,"process_status":40},
-{"id":2012,"dept_id":20019,"large_category_id":1084,"check_date":"2026-04-19","checker_name":"Joselyn Pacheco Trejo","checker_id":10254,"status":1,"process_status":10},
-{"id":2015,"dept_id":20008,"large_category_id":1084,"check_date":"2026-04-21","checker_name":"Derson Liang","checker_id":10236,"status":1,"process_status":40},
-{"id":2016,"dept_id":20027,"large_category_id":1084,"check_date":"2026-04-21","checker_name":"Darwin Coronel","checker_id":10031,"status":1,"process_status":10},
-{"id":2017,"dept_id":20027,"large_category_id":1084,"check_date":"2026-04-21","checker_name":"Darwin Coronel","checker_id":10031,"status":1,"process_status":10},
-{"id":2018,"dept_id":20027,"large_category_id":1084,"check_date":"2026-04-21","checker_name":"Darwin Coronel","checker_id":10031,"status":1,"process_status":40},
-{"id":2045,"dept_id":1127,"large_category_id":1184,"check_date":"2026-04-21","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":20},
-{"id":2019,"dept_id":20035,"large_category_id":1084,"check_date":"2026-04-22","checker_name":"Brionna Jiles","checker_id":10116,"status":1,"process_status":40},
-{"id":2020,"dept_id":20027,"large_category_id":1184,"check_date":"2026-04-23","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":40},
-{"id":2046,"dept_id":1128,"large_category_id":1184,"check_date":"2026-04-23","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":20},
-{"id":2021,"dept_id":20010,"large_category_id":1084,"check_date":"2026-04-24","checker_name":"Shangxian Piao","checker_id":10101,"status":1,"process_status":40},
-{"id":2022,"dept_id":1127,"large_category_id":1084,"check_date":"2026-04-24","checker_name":"Huichen Jiang","checker_id":10053,"status":1,"process_status":10},
-{"id":2023,"dept_id":20008,"large_category_id":1084,"check_date":"2026-04-24","checker_name":"Yaqing Zuo","checker_id":157,"status":1,"process_status":40},
-{"id":2024,"dept_id":1140,"large_category_id":1184,"check_date":"2026-04-24","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":40},
-{"id":2025,"dept_id":20031,"large_category_id":1084,"check_date":"2026-04-25","checker_name":"Clara Mae Venturina","checker_id":10032,"status":1,"process_status":40},
-{"id":2026,"dept_id":20031,"large_category_id":1184,"check_date":"2026-04-25","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":40},
-{"id":2027,"dept_id":20019,"large_category_id":1084,"check_date":"2026-04-25","checker_name":"Joselyn Pacheco Trejo","checker_id":10254,"status":1,"process_status":40},
-{"id":2028,"dept_id":20032,"large_category_id":1084,"check_date":"2026-04-26","checker_name":"Jonathan Soto","checker_id":10177,"status":1,"process_status":40},
-{"id":2029,"dept_id":20019,"large_category_id":1184,"check_date":"2026-04-26","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":40},
-{"id":2047,"dept_id":20011,"large_category_id":1184,"check_date":"2026-04-26","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":20},
-{"id":2048,"dept_id":1141,"large_category_id":1184,"check_date":"2026-04-26","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":20},
-{"id":2030,"dept_id":20008,"large_category_id":1134,"check_date":"2026-04-27","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":40},
-{"id":2031,"dept_id":1128,"large_category_id":1134,"check_date":"2026-04-27","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":30},
-{"id":2032,"dept_id":1141,"large_category_id":1084,"check_date":"2026-04-28","checker_name":"Eric Park","checker_id":10084,"status":0,"process_status":null},
-{"id":2033,"dept_id":20031,"large_category_id":1134,"check_date":"2026-04-28","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":20},
-{"id":2034,"dept_id":20027,"large_category_id":1134,"check_date":"2026-04-28","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":20},
-{"id":2036,"dept_id":20011,"large_category_id":1134,"check_date":"2026-04-29","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":20},
-{"id":2037,"dept_id":20019,"large_category_id":1134,"check_date":"2026-04-29","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":20},
-{"id":2038,"dept_id":20026,"large_category_id":1084,"check_date":"2026-04-29","checker_name":"Darwin Coronel","checker_id":10031,"status":1,"process_status":40},
-{"id":2039,"dept_id":20035,"large_category_id":1134,"check_date":"2026-04-30","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":20},
-{"id":2040,"dept_id":1141,"large_category_id":1134,"check_date":"2026-04-30","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":30},
-{"id":2041,"dept_id":20032,"large_category_id":1134,"check_date":"2026-04-30","checker_name":"Eamonn Caballar","checker_id":10488,"status":1,"process_status":20},
-{"id":2042,"dept_id":20010,"large_category_id":1184,"check_date":"2026-04-30","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":20},
-{"id":2043,"dept_id":20032,"large_category_id":1184,"check_date":"2026-04-30","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":20},
-{"id":2044,"dept_id":20026,"large_category_id":1184,"check_date":"2026-04-30","checker_name":"Daniel Chu","checker_id":10251,"status":1,"process_status":20},
-{"id":2049,"dept_id":20008,"large_category_id":1184,"check_date":"2026-04-30","checker_name":"Jung Han Liang","checker_id":136,"status":1,"process_status":20}
-]'''.replace("null", "null"))
+print(f"[load] {len(HEADERS):>4d} headers (Jan-Apr 2026)")
+print(f"[load] {len(REPORTS):>4d} reports (Jan-Apr 2026)")
+print(f"[load] {len(Q1_DEDS):>4d} q1_deduction summary rows")
+print(f"[load] {len(STORES):>4d} stores")
+print(f"[load] {len(APR_OPPS):>4d} April opportunity items")
 
-# Reports (April 2026 only — full opportunity_desc kept for severity counts/score)
-REPORTS_APR = json.loads(r'''[
-{"shopcheck_data_id":1981,"checker_post_code":"LKUS00000223","score":84,"opportunity_desc":"[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":1982,"checker_post_code":"LKUS00000223","score":86,"opportunity_desc":"[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":1984,"checker_post_code":"LKUS00000082","score":89,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":1985,"checker_post_code":"LKUS00000082","score":66,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":1987,"checker_post_code":"LKUS00000082","score":44,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":11,\"deductionScore\":-18},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":1989,"checker_post_code":"LKUS00000223","score":79,"opportunity_desc":"[{\"deductionType\":4,\"count\":1,\"deductionScore\":-1},{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10}]"},
-{"shopcheck_data_id":1990,"checker_post_code":"LKUS00000082","score":91,"opportunity_desc":"[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":1991,"checker_post_code":"LKUS00000083","score":78,"opportunity_desc":"[{\"deductionType\":2,\"count\":7,\"deductionScore\":-14},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":1992,"checker_post_code":"LKUS00000082","score":98,"opportunity_desc":"[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":1993,"checker_post_code":"LKUS00000098","score":93,"opportunity_desc":"[{\"deductionType\":2,\"count\":2,\"deductionScore\":0},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":1995,"checker_post_code":"LKUS00000083","score":79,"opportunity_desc":"[{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":1996,"checker_post_code":"LKUS00000083","score":72,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":1998,"checker_post_code":"LKUS00000098","score":95,"opportunity_desc":"[{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":1999,"checker_post_code":"LKUS00000098","score":80,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10}]"},
-{"shopcheck_data_id":2000,"checker_post_code":"LKUS00000082","score":83,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":3,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2001,"checker_post_code":"LKUS00000082","score":96,"opportunity_desc":"[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4}]"},
-{"shopcheck_data_id":2003,"checker_post_code":"LKUS00000082","score":66,"opportunity_desc":"[{\"deductionType\":1,\"count\":2,\"deductionScore\":-10},{\"deductionType\":2,\"count\":2,\"deductionScore\":-4}]"},
-{"shopcheck_data_id":2005,"checker_post_code":"LKUS00000083","score":84,"opportunity_desc":"[{\"deductionType\":2,\"count\":7,\"deductionScore\":-14},{\"deductionType\":4,\"count\":4,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":2006,"checker_post_code":"LKUS00000082","score":65,"opportunity_desc":"[{\"deductionType\":2,\"count\":11,\"deductionScore\":-22},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":2007,"checker_post_code":"LKUS00000082","score":82,"opportunity_desc":"[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2009,"checker_post_code":"LKUS00000082","score":71,"opportunity_desc":"[{\"deductionType\":2,\"count\":11,\"deductionScore\":-22},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":2010,"checker_post_code":"LKUS00000082","score":96,"opportunity_desc":"[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4}]"},
-{"shopcheck_data_id":2011,"checker_post_code":"LKUS00000082","score":63,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":2012,"checker_post_code":"LKUS00000082","score":100,"opportunity_desc":"[]"},
-{"shopcheck_data_id":2013,"checker_post_code":"LKUS00000076","score":85,"opportunity_desc":"[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":2014,"checker_post_code":"LKUS00000076","score":67,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":2015,"checker_post_code":"LKUS00000083","score":76,"opportunity_desc":"[{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":2016,"checker_post_code":"LKUS00000082","score":100,"opportunity_desc":"[]"},
-{"shopcheck_data_id":2017,"checker_post_code":"LKUS00000082","score":100,"opportunity_desc":"[]"},
-{"shopcheck_data_id":2018,"checker_post_code":"LKUS00000082","score":64,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":2019,"checker_post_code":"LKUS00000098","score":59,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2020,"checker_post_code":"LKUS00000076","score":94,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6}]"},
-{"shopcheck_data_id":2021,"checker_post_code":"LKUS00000082","score":98,"opportunity_desc":"[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":2,\"deductionScore\":0}]"},
-{"shopcheck_data_id":2022,"checker_post_code":"LKUS00000098","score":91,"opportunity_desc":"[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2023,"checker_post_code":"LKUS00000082","score":81,"opportunity_desc":"[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":2024,"checker_post_code":"LKUS00000076","score":91,"opportunity_desc":"[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2025,"checker_post_code":"LKUS00000082","score":90,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":0}]"},
-{"shopcheck_data_id":2026,"checker_post_code":"LKUS00000076","score":85,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":2027,"checker_post_code":"LKUS00000082","score":94,"opportunity_desc":"[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":2028,"checker_post_code":"LKUS00000083","score":90,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":4,\"deductionScore\":-4}]"},
-{"shopcheck_data_id":2029,"checker_post_code":"LKUS00000076","score":88,"opportunity_desc":"[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12}]"},
-{"shopcheck_data_id":2030,"checker_post_code":"LKUS00000223","score":87,"opportunity_desc":"[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2031,"checker_post_code":"LKUS00000223","score":84,"opportunity_desc":"[{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2033,"checker_post_code":"LKUS00000223","score":71,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]"},
-{"shopcheck_data_id":2034,"checker_post_code":"LKUS00000223","score":82,"opportunity_desc":"[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10}]"},
-{"shopcheck_data_id":2036,"checker_post_code":"LKUS00000223","score":83,"opportunity_desc":"[{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2037,"checker_post_code":"LKUS00000223","score":75,"opportunity_desc":"[{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":1}]"},
-{"shopcheck_data_id":2038,"checker_post_code":"LKUS00000082","score":69,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6}]"},
-{"shopcheck_data_id":2039,"checker_post_code":"LKUS00000223","score":78,"opportunity_desc":"[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10}]"},
-{"shopcheck_data_id":2040,"checker_post_code":"LKUS00000223","score":69,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":1,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":2041,"checker_post_code":"LKUS00000223","score":87,"opportunity_desc":"[{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2042,"checker_post_code":"LKUS00000076","score":68,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2043,"checker_post_code":"LKUS00000076","score":94,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6}]"},
-{"shopcheck_data_id":2044,"checker_post_code":"LKUS00000076","score":75,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":2045,"checker_post_code":"LKUS00000076","score":85,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]"},
-{"shopcheck_data_id":2046,"checker_post_code":"LKUS00000076","score":88,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2047,"checker_post_code":"LKUS00000076","score":89,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]"},
-{"shopcheck_data_id":2048,"checker_post_code":"LKUS00000076","score":66,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]"},
-{"shopcheck_data_id":2049,"checker_post_code":"LKUS00000076","score":47,"opportunity_desc":"[{\"deductionType\":1,\"count\":2,\"deductionScore\":-10},{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":3,\"deductionScore\":-1}]"}
-]''')
-
-# Reports for Jan-Mar (for trend file)
-REPORTS_Q1 = json.loads(r'''[
-{"shopcheck_data_id":1898,"checker_post_code":"LKUS00000078","score":42,"opportunity_desc":"[{\"deductionType\":1,\"count\":2,\"deductionScore\":-10},{\"deductionType\":2,\"count\":11,\"deductionScore\":-22},{\"deductionType\":4,\"count\":6,\"deductionScore\":-6}]","check_date":"2026-01-08","large_category_id":1134,"dept_id":1140,"checker_name":"Yu Jiang"},
-{"shopcheck_data_id":1899,"checker_post_code":"LKUS00000078","score":89,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]","check_date":"2026-01-08","large_category_id":1134,"dept_id":20010,"checker_name":"Yu Jiang"},
-{"shopcheck_data_id":1900,"checker_post_code":"LKUS00000098","score":96,"opportunity_desc":"[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4}]","check_date":"2026-01-10","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1901,"checker_post_code":"LKUS00000076","score":62,"opportunity_desc":"[{\"deductionType\":1,\"count\":2,\"deductionScore\":-10},{\"deductionType\":2,\"count\":4,\"deductionScore\":-8}]","check_date":"2026-01-11","large_category_id":1184,"dept_id":20031,"checker_name":"Daniel Chu"},
-{"shopcheck_data_id":1902,"checker_post_code":"LKUS00000082","score":67,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]","check_date":"2026-01-11","large_category_id":1084,"dept_id":1128,"checker_name":"Afsana Gu"},
-{"shopcheck_data_id":1915,"checker_post_code":"LKUS00000076","score":79,"opportunity_desc":"[{\"deductionType\":2,\"count\":7,\"deductionScore\":-14},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]","check_date":"2026-01-16","large_category_id":1184,"dept_id":20011,"checker_name":"Jung Han Liang"},
-{"shopcheck_data_id":1916,"checker_post_code":"LKUS00000076","score":89,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]","check_date":"2026-01-16","large_category_id":1184,"dept_id":1128,"checker_name":"Jung Han Liang"},
-{"shopcheck_data_id":1917,"checker_post_code":"LKUS00000098","score":100,"opportunity_desc":"[]","check_date":"2026-01-17","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1918,"checker_post_code":"LKUS00000076","score":72,"opportunity_desc":"[{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]","check_date":"2026-01-18","large_category_id":1184,"dept_id":20008,"checker_name":"Jung Han Liang"},
-{"shopcheck_data_id":1922,"checker_post_code":"LKUS00000078","score":43,"opportunity_desc":"[{\"deductionType\":3,\"count\":2,\"deductionScore\":-10},{\"deductionType\":4,\"count\":4,\"deductionScore\":-4},{\"deductionType\":1,\"count\":2,\"deductionScore\":-5},{\"deductionType\":2,\"count\":11,\"deductionScore\":-18}]","check_date":"2026-01-22","large_category_id":1134,"dept_id":20031,"checker_name":"Yu Jiang"},
-{"shopcheck_data_id":1923,"checker_post_code":"LKUS00000098","score":100,"opportunity_desc":"[]","check_date":"2026-01-24","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1924,"checker_post_code":"LKUS00000098","score":100,"opportunity_desc":"[]","check_date":"2026-01-24","large_category_id":1084,"dept_id":20010,"checker_name":"Joselyn Pacheco"},
-{"shopcheck_data_id":1926,"checker_post_code":"LKUS00000082","score":87,"opportunity_desc":"[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]","check_date":"2026-01-24","large_category_id":1084,"dept_id":20032,"checker_name":"Juliana Li"},
-{"shopcheck_data_id":1931,"checker_post_code":"LKUS00000078","score":75,"opportunity_desc":"[{\"deductionType\":2,\"count\":8,\"deductionScore\":-16},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":4,\"deductionScore\":-4}]","check_date":"2026-01-29","large_category_id":1134,"dept_id":20008,"checker_name":"Yu Jiang"},
-{"shopcheck_data_id":1932,"checker_post_code":"LKUS00000078","score":63,"opportunity_desc":"[{\"deductionType\":4,\"count\":1,\"deductionScore\":0},{\"deductionType\":2,\"count\":6,\"deductionScore\":-12},{\"deductionType\":1,\"count\":2,\"deductionScore\":-5}]","check_date":"2026-01-29","large_category_id":1134,"dept_id":20032,"checker_name":"Yu Jiang"},
-{"shopcheck_data_id":1933,"checker_post_code":"LKUS00000082","score":82,"opportunity_desc":"[{\"deductionType\":2,\"count\":9,\"deductionScore\":-18}]","check_date":"2026-01-30","large_category_id":1084,"dept_id":1140,"checker_name":"Dominique Meadows"},
-{"shopcheck_data_id":1935,"checker_post_code":"LKUS00000083","score":100,"opportunity_desc":"[]","check_date":"2026-02-07","large_category_id":1084,"dept_id":20008,"checker_name":"Andrew Hu"},
-{"shopcheck_data_id":1936,"checker_post_code":"LKUS00000098","score":100,"opportunity_desc":"[]","check_date":"2026-02-07","large_category_id":1084,"dept_id":20010,"checker_name":"Joselyn Pacheco"},
-{"shopcheck_data_id":1943,"checker_post_code":"LKUS00000078","score":48,"opportunity_desc":"[{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":4,\"deductionScore\":-4},{\"deductionType\":2,\"count\":9,\"deductionScore\":-18},{\"deductionType\":1,\"count\":1,\"deductionScore\":-5}]","check_date":"2026-02-11","large_category_id":1134,"dept_id":1127,"checker_name":"Yu Jiang"},
-{"shopcheck_data_id":1946,"checker_post_code":"LKUS00000078","score":94,"opportunity_desc":"[{\"deductionType\":4,\"count\":3,\"deductionScore\":-2},{\"deductionType\":1,\"count\":1,\"deductionScore\":0},{\"deductionType\":2,\"count\":2,\"deductionScore\":-4}]","check_date":"2026-02-12","large_category_id":1134,"dept_id":1128,"checker_name":"Yu Jiang"},
-{"shopcheck_data_id":1947,"checker_post_code":"LKUS00000098","score":100,"opportunity_desc":"[]","check_date":"2026-02-14","large_category_id":1084,"dept_id":20010,"checker_name":"Joselyn Pacheco"},
-{"shopcheck_data_id":1954,"checker_post_code":"LKUS00000082","score":100,"opportunity_desc":"[]","check_date":"2026-02-22","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1955,"checker_post_code":"LKUS00000082","score":100,"opportunity_desc":"[]","check_date":"2026-02-28","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1956,"checker_post_code":"LKUS00000082","score":89,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]","check_date":"2026-03-04","large_category_id":1084,"dept_id":20032,"checker_name":"Juliana Li"},
-{"shopcheck_data_id":1959,"checker_post_code":"LKUS00000082","score":70,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]","check_date":"2026-03-06","large_category_id":1084,"dept_id":20031,"checker_name":"Clara Mae Venturina"},
-{"shopcheck_data_id":1960,"checker_post_code":"LKUS00000082","score":46,"opportunity_desc":"[{\"deductionType\":1,\"count\":2,\"deductionScore\":-10},{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":3,\"count\":3,\"deductionScore\":-15},{\"deductionType\":4,\"count\":3,\"deductionScore\":-3}]","check_date":"2026-03-06","large_category_id":1084,"dept_id":20031,"checker_name":"Clara Mae Venturina"},
-{"shopcheck_data_id":1961,"checker_post_code":"LKUS00000082","score":100,"opportunity_desc":"[]","check_date":"2026-03-08","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1962,"checker_post_code":"LKUS00000082","score":81,"opportunity_desc":"[{\"deductionType\":2,\"count\":7,\"deductionScore\":-14},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]","check_date":"2026-03-09","large_category_id":1084,"dept_id":20035,"checker_name":"Wenny Lin"},
-{"shopcheck_data_id":1963,"checker_post_code":"LKUS00000082","score":47,"opportunity_desc":"[{\"deductionType\":1,\"count\":2,\"deductionScore\":-10},{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":3,\"count\":3,\"deductionScore\":-15}]","check_date":"2026-03-09","large_category_id":1084,"dept_id":20031,"checker_name":"Clara Mae Venturina"},
-{"shopcheck_data_id":1965,"checker_post_code":"LKUS00000083","score":100,"opportunity_desc":"[]","check_date":"2026-03-09","large_category_id":1084,"dept_id":20008,"checker_name":"Derson Liang"},
-{"shopcheck_data_id":1966,"checker_post_code":"LKUS00000082","score":95,"opportunity_desc":"[{\"deductionType\":2,\"count\":2,\"deductionScore\":-4},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]","check_date":"2026-03-09","large_category_id":1084,"dept_id":1127,"checker_name":"Jian Ming Juo"},
-{"shopcheck_data_id":1969,"checker_post_code":"LKUS00000082","score":73,"opportunity_desc":"[{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":2,\"count\":1,\"deductionScore\":-2}]","check_date":"2026-03-10","large_category_id":1084,"dept_id":20027,"checker_name":"Darwin Coronel"},
-{"shopcheck_data_id":1971,"checker_post_code":"LKUS00000082","score":55,"opportunity_desc":"[{\"deductionType\":2,\"count\":9,\"deductionScore\":-18},{\"deductionType\":3,\"count\":5,\"deductionScore\":-25},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]","check_date":"2026-03-10","large_category_id":1084,"dept_id":20008,"checker_name":"Yaqing Zuo"},
-{"shopcheck_data_id":1972,"checker_post_code":"LKUS00000082","score":92,"opportunity_desc":"[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8}]","check_date":"2026-03-11","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1973,"checker_post_code":"LKUS00000083","score":84,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]","check_date":"2026-03-15","large_category_id":1084,"dept_id":20008,"checker_name":"Derson Liang"},
-{"shopcheck_data_id":1977,"checker_post_code":"LKUS00000082","score":96,"opportunity_desc":"[{\"deductionType\":2,\"count\":1,\"deductionScore\":-2},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2}]","check_date":"2026-03-27","large_category_id":1084,"dept_id":20010,"checker_name":"Shangxian Piao"},
-{"shopcheck_data_id":1979,"checker_post_code":"LKUS00000223","score":60,"opportunity_desc":"[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":1,\"count\":1,\"deductionScore\":-5},{\"deductionType\":3,\"count\":1,\"deductionScore\":-5}]","check_date":"2026-03-31","large_category_id":1134,"dept_id":20035,"checker_name":"Eamonn Caballar"}
-]''')
-
-# Store master (luckyus_opshop.t_shop_info)
-STORES = json.loads(r'''[
-{"id":626,"dept_id":1127,"shop_no":"US00001","shop_name":"8th & Broadway","status":1,"set_up_time":"2025-06-30T04:00:00","off_time":null,"address":"755 Broadway, New York , NY 10003","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":627,"dept_id":1128,"shop_no":"US00002","shop_name":"28th & 6th","status":1,"set_up_time":"2025-06-30T04:00:00","off_time":null,"address":"800 6th Ave, New York, NY 10001","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":628,"dept_id":1131,"shop_no":"US00000","shop_name":"NJ Test Kitchen","status":1,"set_up_time":"2025-05-09T04:00:00","off_time":null,"address":"1 County Rd Unit B9, Secaucus, NJ 07094","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":630,"dept_id":1140,"shop_no":"US00003","shop_name":"100 Maiden Ln","status":1,"set_up_time":"2025-09-09T04:00:00","off_time":null,"address":"100 Maiden Ln, New York, NY 10038","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":631,"dept_id":1141,"shop_no":"US00005","shop_name":"54th & 8th","status":1,"set_up_time":"2025-08-24T04:00:00","off_time":null,"address":"901 8th Ave, New York, NY 10019","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1132,"dept_id":20007,"shop_no":"US99999","shop_name":"NJ Test Kitchen 2","status":1,"set_up_time":"2025-06-26T04:00:00","off_time":null,"address":"1 County Rd, unit b9, Secaucus, NJ 07094","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1133,"dept_id":20008,"shop_no":"US00008","shop_name":"33rd & 10th","status":1,"set_up_time":"2025-12-01T05:00:00","off_time":null,"address":"410 10th Ave, New York, NY 10001","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1134,"dept_id":20009,"shop_no":"US00007","shop_name":"108th & Broadway","status":1,"set_up_time":"2026-04-30T04:00:00","off_time":null,"address":"2799 Broadway, New York, NY 10025","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1135,"dept_id":20010,"shop_no":"US00006","shop_name":"102 Fulton","status":1,"set_up_time":"2025-08-28T04:00:00","off_time":null,"address":"102 Fulton St, New York, NY 10038","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":1136,"dept_id":20011,"shop_no":"US00004","shop_name":"37th & Broadway","status":1,"set_up_time":"2025-11-20T05:00:00","off_time":null,"address":"1375 Broadway, New York, NY 10018","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1138,"dept_id":20015,"shop_no":"US00009","shop_name":"48th & 3rd","status":2,"set_up_time":null,"off_time":null,"address":"770 3rd Ave, New York, NY 10017","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1139,"dept_id":20016,"shop_no":"US00010","shop_name":"154 Bleecker","status":1,"set_up_time":"2026-04-28T04:00:00","off_time":null,"address":"154 Bleecker St, New York, NY 10012","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":1140,"dept_id":20017,"shop_no":"US00011","shop_name":"180 Varick","status":2,"set_up_time":null,"off_time":null,"address":"180 Varick St, New York, NY 10014","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1141,"dept_id":20018,"shop_no":"CK0008","shop_name":"测试扩容","status":1,"set_up_time":"2025-07-22T10:00:00","off_time":null,"address":"测试扩容","operation_area":"IQA200000001","tenant":"IQA2","test_flag":0},
-{"id":1142,"dept_id":20019,"shop_no":"US00012","shop_name":"16th & 6th","status":1,"set_up_time":"2026-03-23T04:00:00","off_time":null,"address":"555 6th Ave, New York, NY 10011","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":1143,"dept_id":20020,"shop_no":"US00013","shop_name":"Grand Central Terminal","status":2,"set_up_time":null,"off_time":null,"address":"52 Vanderbilt Ave, Lower Level, New York, NY 10017","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1144,"dept_id":20021,"shop_no":"US00014","shop_name":"25 Park Row","status":2,"set_up_time":null,"off_time":null,"address":"146 Chambers St, New York, NY 10007","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1145,"dept_id":20022,"shop_no":"US00015","shop_name":"41st & Lexington","status":1,"set_up_time":"2026-04-30T04:00:00","off_time":null,"address":"369 Lexington Ave, New York, NY 10017","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1146,"dept_id":20023,"shop_no":"US00016","shop_name":"Reade & Broadway","status":2,"set_up_time":null,"off_time":null,"address":"291 Broadway, New York, NY 10007","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1147,"dept_id":20024,"shop_no":"US00017","shop_name":"63rd & 3rd","status":2,"set_up_time":null,"off_time":null,"address":"219 9th Ave, New York, NY 10011","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1148,"dept_id":20025,"shop_no":"US00018","shop_name":"40th & 10th","status":2,"set_up_time":null,"off_time":null,"address":"55010th Ave, New York, NY 10018","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1149,"dept_id":20026,"shop_no":"US00019","shop_name":"29th & 3rd","status":1,"set_up_time":"2026-04-11T04:00:00","off_time":null,"address":"401 3rd Ave, New York, NY 10016","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":1150,"dept_id":20027,"shop_no":"US00020","shop_name":"21st & 3rd","status":1,"set_up_time":"2026-02-06T05:00:00","off_time":null,"address":"261 3rd Avenue, New York, NY 10010","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":1151,"dept_id":20028,"shop_no":"US00021","shop_name":"128 W 32nd St","status":2,"set_up_time":null,"off_time":null,"address":"128 W 32nd St, New York, NY 10001","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1152,"dept_id":20029,"shop_no":"US00022","shop_name":"23rd & 8th","status":2,"set_up_time":null,"off_time":null,"address":"244 8th Ave, New York, NY 10011","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1153,"dept_id":20030,"shop_no":"US00023","shop_name":"23rd & 1st","status":2,"set_up_time":null,"off_time":null,"address":"352 E 23rd St, New York, NY 10010","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1154,"dept_id":20031,"shop_no":"US00024","shop_name":"15th & 3rd","status":1,"set_up_time":"2025-12-14T05:00:00","off_time":null,"address":"147 3rd Ave, New York, NY 10003","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":1155,"dept_id":20032,"shop_no":"US00025","shop_name":"221 Grand","status":1,"set_up_time":"2025-12-15T05:00:00","off_time":null,"address":"221 Grand St, New York, NY 10013","operation_area":"LKUS00000052","tenant":"LKUS","test_flag":0},
-{"id":1156,"dept_id":20034,"shop_no":"US00026","shop_name":"211 Schermerhorn","status":2,"set_up_time":null,"off_time":null,"address":"211 Schermerhorn St, Brooklyn, NY 11201","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1157,"dept_id":20035,"shop_no":"US00027","shop_name":"52nd & Madison","status":1,"set_up_time":"2026-02-26T05:00:00","off_time":null,"address":"488 Madison Ave, New York, NY 10022","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1158,"dept_id":20036,"shop_no":"US00035","shop_name":"35th & 5th","status":2,"set_up_time":null,"off_time":null,"address":"366 5th Avenue, New York, NY 10001","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1159,"dept_id":20046,"shop_no":"US99998","shop_name":"Shanghai Test Kitchen","status":1,"set_up_time":"2025-11-14T05:00:00","off_time":null,"address":"Unit 802, 15 W 38th St, New York, NY 10018","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1162,"dept_id":20054,"shop_no":"US00028","shop_name":"Jackson Ave - LIC","status":2,"set_up_time":null,"off_time":null,"address":"27-01 Jackson Ave, Long Island City, NY 11101","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0},
-{"id":1163,"dept_id":20055,"shop_no":"US00029","shop_name":"148 Chambers","status":2,"set_up_time":null,"off_time":null,"address":"148 Chambers St, New York, NY 10007","operation_area":"LKUS00000041","tenant":"LKUS","test_flag":0}
-]''')
-
-# Q1 deduction-counts-by-inspection (for trend file)
-Q1_DEDUCTIONS = json.loads(r'''[
-{"shopcheck_data_id":1898,"deduction_type":1,"cnt":2},{"shopcheck_data_id":1898,"deduction_type":2,"cnt":11},{"shopcheck_data_id":1898,"deduction_type":4,"cnt":6},
-{"shopcheck_data_id":1899,"deduction_type":2,"cnt":5},{"shopcheck_data_id":1899,"deduction_type":4,"cnt":1},
-{"shopcheck_data_id":1900,"deduction_type":2,"cnt":2},
-{"shopcheck_data_id":1901,"deduction_type":1,"cnt":2},{"shopcheck_data_id":1901,"deduction_type":2,"cnt":4},
-{"shopcheck_data_id":1902,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1902,"deduction_type":2,"cnt":3},{"shopcheck_data_id":1902,"deduction_type":4,"cnt":2},
-{"shopcheck_data_id":1915,"deduction_type":2,"cnt":7},{"shopcheck_data_id":1915,"deduction_type":3,"cnt":1},{"shopcheck_data_id":1915,"deduction_type":4,"cnt":2},
-{"shopcheck_data_id":1916,"deduction_type":2,"cnt":3},{"shopcheck_data_id":1916,"deduction_type":3,"cnt":1},
-{"shopcheck_data_id":1918,"deduction_type":2,"cnt":8},{"shopcheck_data_id":1918,"deduction_type":3,"cnt":2},{"shopcheck_data_id":1918,"deduction_type":4,"cnt":2},
-{"shopcheck_data_id":1922,"deduction_type":1,"cnt":2},{"shopcheck_data_id":1922,"deduction_type":2,"cnt":11},{"shopcheck_data_id":1922,"deduction_type":3,"cnt":2},{"shopcheck_data_id":1922,"deduction_type":4,"cnt":4},
-{"shopcheck_data_id":1926,"deduction_type":2,"cnt":3},{"shopcheck_data_id":1926,"deduction_type":3,"cnt":1},{"shopcheck_data_id":1926,"deduction_type":4,"cnt":2},
-{"shopcheck_data_id":1928,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1928,"deduction_type":2,"cnt":4},{"shopcheck_data_id":1928,"deduction_type":3,"cnt":1},{"shopcheck_data_id":1928,"deduction_type":4,"cnt":2},
-{"shopcheck_data_id":1931,"deduction_type":2,"cnt":8},{"shopcheck_data_id":1931,"deduction_type":3,"cnt":1},{"shopcheck_data_id":1931,"deduction_type":4,"cnt":4},
-{"shopcheck_data_id":1932,"deduction_type":1,"cnt":2},{"shopcheck_data_id":1932,"deduction_type":2,"cnt":6},{"shopcheck_data_id":1932,"deduction_type":4,"cnt":1},
-{"shopcheck_data_id":1933,"deduction_type":2,"cnt":9},
-{"shopcheck_data_id":1940,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1940,"deduction_type":2,"cnt":6},{"shopcheck_data_id":1940,"deduction_type":3,"cnt":2},{"shopcheck_data_id":1940,"deduction_type":4,"cnt":7},
-{"shopcheck_data_id":1943,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1943,"deduction_type":2,"cnt":9},{"shopcheck_data_id":1943,"deduction_type":3,"cnt":1},{"shopcheck_data_id":1943,"deduction_type":4,"cnt":4},
-{"shopcheck_data_id":1946,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1946,"deduction_type":2,"cnt":2},{"shopcheck_data_id":1946,"deduction_type":4,"cnt":3},
-{"shopcheck_data_id":1956,"deduction_type":2,"cnt":5},{"shopcheck_data_id":1956,"deduction_type":4,"cnt":1},
-{"shopcheck_data_id":1959,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1959,"deduction_type":3,"cnt":1},
-{"shopcheck_data_id":1960,"deduction_type":1,"cnt":2},{"shopcheck_data_id":1960,"deduction_type":2,"cnt":3},{"shopcheck_data_id":1960,"deduction_type":3,"cnt":3},{"shopcheck_data_id":1960,"deduction_type":4,"cnt":3},
-{"shopcheck_data_id":1962,"deduction_type":2,"cnt":7},{"shopcheck_data_id":1962,"deduction_type":3,"cnt":1},
-{"shopcheck_data_id":1963,"deduction_type":1,"cnt":2},{"shopcheck_data_id":1963,"deduction_type":2,"cnt":4},{"shopcheck_data_id":1963,"deduction_type":3,"cnt":3},
-{"shopcheck_data_id":1966,"deduction_type":2,"cnt":2},{"shopcheck_data_id":1966,"deduction_type":4,"cnt":1},
-{"shopcheck_data_id":1969,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1969,"deduction_type":2,"cnt":1},
-{"shopcheck_data_id":1971,"deduction_type":2,"cnt":9},{"shopcheck_data_id":1971,"deduction_type":3,"cnt":5},{"shopcheck_data_id":1971,"deduction_type":4,"cnt":2},
-{"shopcheck_data_id":1972,"deduction_type":2,"cnt":4},
-{"shopcheck_data_id":1973,"deduction_type":2,"cnt":5},{"shopcheck_data_id":1973,"deduction_type":3,"cnt":1},{"shopcheck_data_id":1973,"deduction_type":4,"cnt":1},
-{"shopcheck_data_id":1977,"deduction_type":2,"cnt":1},{"shopcheck_data_id":1977,"deduction_type":4,"cnt":2},
-{"shopcheck_data_id":1979,"deduction_type":1,"cnt":1},{"shopcheck_data_id":1979,"deduction_type":2,"cnt":5},{"shopcheck_data_id":1979,"deduction_type":3,"cnt":1}
-]''')
+# Split reports into Q1 and Apr by header check_date (need to look it up)
+HEADER_BY_ID = {h["id"]: h for h in HEADERS}
+REPORTS_APR = []
+REPORTS_Q1  = []
+for r in REPORTS:
+    h = HEADER_BY_ID.get(r["shopcheck_data_id"])
+    if not h:
+        continue
+    if h["check_date"][:7] == "2026-04":
+        REPORTS_APR.append(r)
+    else:
+        REPORTS_Q1.append(r)
+print(f"[split] {len(REPORTS_APR):>4d} April reports, {len(REPORTS_Q1):>4d} Q1 reports")
 
 # ---------------------------------------------------------------------------
-# Build helpers
+# Helpers
 # ---------------------------------------------------------------------------
-
-# dept_id -> store info
 STORE_BY_DEPT = {s["dept_id"]: s for s in STORES}
 
 def store_code(dept_id):
@@ -375,7 +111,6 @@ def role_for(post_code, inspection_type, name=None):
     return ROLE_FALLBACK.get(inspection_type, "Unknown")
 
 def parse_dt_counts(opp_desc_json):
-    """Parse opportunity_desc JSON -> {deduction_type: count}."""
     if not opp_desc_json:
         return {}
     try:
@@ -396,60 +131,95 @@ def parse_total_deduction(opp_desc_json):
         return 0
     return sum(x.get("deductionScore", 0) for x in arr)
 
-
-# ---------------------------------------------------------------------------
-# Load April opportunity items from disk (parses MCP response wrapper)
-# ---------------------------------------------------------------------------
-def load_april_opportunities():
-    path = RAW / "april_opportunities.json"
-    raw = path.read_text(encoding="utf-8")
-    wrapper = json.loads(raw)
-    inner = wrapper[0]["text"]
-    parsed = json.loads(inner)
-    return parsed["rows"]
-
-APR_OPPS = load_april_opportunities()
-
-# ---------------------------------------------------------------------------
-# Build maps
-# ---------------------------------------------------------------------------
-HEADER_BY_ID = {h["id"]: h for h in HEADERS}
 REPORT_BY_DATA_ID_APR = {r["shopcheck_data_id"]: r for r in REPORTS_APR}
-REPORT_BY_DATA_ID_Q1 = {r["shopcheck_data_id"]: r for r in REPORTS_Q1}
+REPORT_BY_DATA_ID_Q1  = {r["shopcheck_data_id"]: r for r in REPORTS_Q1}
 
-# April inspection IDs (from headers, deleted=0, large_category in 1084/1134/1184, in April 2026)
-APR_INSPECTION_IDS = sorted(
-    h["id"] for h in HEADERS
-    if h["check_date"][:7] == "2026-04"
-)
+# ---------------------------------------------------------------------------
+# Misubmission filter (Darwin Coronel duplicate self-check rule)
+#
+# Rule: drop any inspection where
+#   score = 100 AND item_count = 0
+#   AND there exists another inspection by the same inspector (checker_id),
+#       same store (dept_id), same date with item_count > 0.
+#
+# Applied as a post-query filter so the rule is documented and reproducible.
+# Applies ONLY to summary CSV + items CSV + report-layer counts;
+# the underlying DB and the inspector trend / monthly trend rows reflect this filter.
+# ---------------------------------------------------------------------------
+def compute_misubmission_exclusions():
+    """Return set of inspection_ids to exclude. Only considers status=1 (submitted)
+    rows so the filter aligns with the published view."""
+    # build map: (checker_id, dept_id, date) -> [(iid, item_count), ...]
+    grp = defaultdict(list)
+    for h in HEADERS:
+        if h["status"] != 1:
+            continue
+        iid = h["id"]
+        rep = REPORT_BY_DATA_ID_APR.get(iid) or REPORT_BY_DATA_ID_Q1.get(iid)
+        if not rep:
+            ic = 0
+            sc = None
+        else:
+            cnts = parse_dt_counts(rep["opportunity_desc"])
+            ic = sum(cnts.values())
+            sc = rep["score"]
+        key = (h["checker_id"], h["dept_id"], h["check_date"])
+        grp[key].append({"iid": iid, "item_count": ic, "score": sc, "header": h})
+
+    exclude = {}
+    for key, arr in grp.items():
+        if len(arr) < 2:
+            continue
+        has_real = any(x["item_count"] > 0 for x in arr)
+        if not has_real:
+            continue
+        for x in arr:
+            if x["score"] == 100 and x["item_count"] == 0:
+                h = x["header"]
+                exclude[x["iid"]] = {
+                    "inspector": h["checker_name"],
+                    "checker_id": h["checker_id"],
+                    "dept_id": h["dept_id"],
+                    "store_code": store_code(h["dept_id"]),
+                    "date": h["check_date"],
+                    "siblings": [s["iid"] for s in arr if s["iid"] != x["iid"]],
+                }
+    return exclude
+
+EXCLUDE = compute_misubmission_exclusions()
+print(f"[filter] misubmission exclusions: {len(EXCLUDE)} inspection(s)")
+for iid, info in sorted(EXCLUDE.items()):
+    print(f"  - drop inspection_id={iid}  inspector={info['inspector']}  "
+          f"store={info['store_code']}  date={info['date']}  "
+          f"reason=score=100 item_count=0; sibling(s) {info['siblings']} have items")
+
 
 # ---------------------------------------------------------------------------
 # CSV 1: april2026_inspection_summary.csv
 # ---------------------------------------------------------------------------
-def write_summary():
-    path = OUT / "april2026_inspection_summary.csv"
+def build_summary_rows():
     rows = []
     for h in HEADERS:
         if h["check_date"][:7] != "2026-04":
             continue
+        if h["status"] != 1:           # status=1 (submitted) view
+            continue
         iid = h["id"]
+        if iid in EXCLUDE:
+            continue
         rep = REPORT_BY_DATA_ID_APR.get(iid)
         type_zh, type_raw = TYPE_MAP[h["large_category_id"]]
         post = rep["checker_post_code"] if rep else None
-        # Severity counts
         if rep:
             cnts = parse_dt_counts(rep["opportunity_desc"])
             score = rep["score"]
             total_ded = parse_total_deduction(rep["opportunity_desc"])
         else:
-            cnts = {}
-            score = ""
-            total_ded = ""
+            cnts = {}; score = ""; total_ded = ""
         s_c = cnts.get(1, 0)
         m_c = cnts.get(3, 0)
         g_c = cnts.get(2, 0)
         l_c = cnts.get(4, 0)
-        item_count = s_c + m_c + g_c + l_c
         rows.append({
             "inspection_id": iid,
             "store_code": store_code(h["dept_id"]),
@@ -461,18 +231,17 @@ def write_summary():
             "inspector_role": role_for(post, type_zh, h["checker_name"]),
             "total_score": score,
             "total_deduction": total_ded,
-            "item_count": item_count,
-            "s_count": s_c,
-            "m_count": m_c,
-            "g_count": g_c,
-            "l_count": l_c,
+            "item_count": s_c + m_c + g_c + l_c,
+            "s_count": s_c, "m_count": m_c, "g_count": g_c, "l_count": l_c,
         })
     rows.sort(key=lambda r: (r["store_code"], r["inspection_date"], r["inspection_id"]))
-    fields = list(rows[0].keys()) if rows else [
-        "inspection_id","store_code","store_name","inspection_date","inspection_type",
-        "inspection_type_raw","inspector_name","inspector_role","total_score",
-        "total_deduction","item_count","s_count","m_count","g_count","l_count",
-    ]
+    return rows
+
+def write_summary(rows):
+    path = OUT / "april2026_inspection_summary.csv"
+    fields = ["inspection_id","store_code","store_name","inspection_date","inspection_type",
+              "inspection_type_raw","inspector_name","inspector_role","total_score",
+              "total_deduction","item_count","s_count","m_count","g_count","l_count"]
     with path.open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fields, quoting=csv.QUOTE_MINIMAL)
         w.writeheader()
@@ -483,18 +252,18 @@ def write_summary():
 # ---------------------------------------------------------------------------
 # CSV 2: april2026_inspection_items.csv
 # ---------------------------------------------------------------------------
-def write_items():
+def write_items(excluded_ids):
     path = OUT / "april2026_inspection_items.csv"
     rows = []
     sev_order = {"S": 0, "M": 1, "G": 2, "L": 3}
     for opp in APR_OPPS:
         iid = opp["shopcheck_data_id"]
+        if iid in excluded_ids:
+            continue
         h = HEADER_BY_ID.get(iid)
-        if not h:
+        if not h or h["status"] != 1:
             continue
         type_zh, _ = TYPE_MAP[h["large_category_id"]]
-        rep = REPORT_BY_DATA_ID_APR.get(iid)
-        post = rep["checker_post_code"] if rep else None
         sev = SEV_MAP.get(opp["deduction_type"], str(opp["deduction_type"]))
         desc = opp.get("remark")
         if desc is None or str(desc).strip() == "":
@@ -514,7 +283,6 @@ def write_items():
             "severity": sev,
             "deduction_points": opp["score_config"],
         })
-    # Sort: store, date, severity (S,M,G,L), most-negative deduction first
     rows.sort(key=lambda r: (
         r["store_code"], r["inspection_date"],
         sev_order.get(r["severity"], 99),
@@ -535,20 +303,20 @@ def write_items():
 # ---------------------------------------------------------------------------
 def write_store_master():
     path = OUT / "april2026_store_master.csv"
-    inspected_april = set()
-    for h in HEADERS:
-        if h["check_date"][:7] == "2026-04":
-            inspected_april.add(h["dept_id"])
+    inspected_april = {h["dept_id"] for h in HEADERS
+                       if h["check_date"][:7] == "2026-04" and h["status"] == 1
+                       and h["id"] not in EXCLUDE}
 
     rows = []
     for s in STORES:
-        # Include US tenant + dept_ids that had April inspections (covers 1141 IQA2 test shop)
+        # Only US-prefixed (LKUS) stores plus any IQA2 dept that had April inspections.
+        # Match v1 behavior: include LKUS US-prefixed, exclude others unless inspected.
         if s["tenant"] != "LKUS" and s["dept_id"] not in inspected_april:
             continue
-        # status: 1=active, 2=inactive/planned, others=closed
+        if s["tenant"] == "LKUS" and not (s["shop_no"] or "").startswith("US"):
+            continue
         st = s["status"]
         status_label = "active" if st == 1 else ("inactive" if st == 2 else "closed")
-        # Test flag overrides
         if s.get("test_flag") == 1 or s["shop_no"].startswith("US999") or s["shop_no"].startswith("CK"):
             status_label += " (test/internal)"
         opening = s.get("set_up_time") or ""
@@ -564,7 +332,7 @@ def write_store_master():
             "region": s.get("operation_area") or "",
             "inspected_in_april": "Yes" if s["dept_id"] in inspected_april else "No",
         })
-    rows.sort(key=lambda r: (r["store_code"]))
+    rows.sort(key=lambda r: r["store_code"])
     fields = ["store_id","store_code","store_name","address","status",
               "opening_date","region","inspected_in_april"]
     with path.open("w", newline="", encoding="utf-8") as f:
@@ -580,8 +348,13 @@ def write_store_master():
 def write_inspector_trend():
     path = OUT / "april2026_inspector_trend.csv"
     counters = defaultdict(lambda: {"jan":0, "feb":0, "mar":0, "apr":0,
-                                    "types": defaultdict(int), "post_codes": defaultdict(int)})
+                                    "types": defaultdict(int)})
     for h in HEADERS:
+        # Only published (status=1) inspections; apply misubmission filter to April
+        if h["status"] != 1:
+            continue
+        if h["check_date"][:7] == "2026-04" and h["id"] in EXCLUDE:
+            continue
         ym = h["check_date"][:7]
         bucket = {"2026-01":"jan","2026-02":"feb","2026-03":"mar","2026-04":"apr"}.get(ym)
         if not bucket:
@@ -591,18 +364,11 @@ def write_inspector_trend():
         type_zh, _ = TYPE_MAP[h["large_category_id"]]
         counters[name]["types"][type_zh] += 1
 
-    # Pull post codes from reports (Q1 + Apr) to assign role
     name_post = {}
-    for r in REPORTS_Q1 + REPORTS_APR:
-        if r.get("checker_name") and r.get("checker_post_code"):
-            name_post[r["checker_name"]] = r["checker_post_code"]
-    # Add from APR report list (Apr reports had no checker_name field — use header)
-    for h in HEADERS:
-        if h["check_date"][:7] != "2026-04":
-            continue
-        rep = REPORT_BY_DATA_ID_APR.get(h["id"])
-        if rep and h["checker_name"] and rep.get("checker_post_code"):
-            name_post.setdefault(h["checker_name"], rep["checker_post_code"])
+    for r in REPORTS:
+        h = HEADER_BY_ID.get(r["shopcheck_data_id"])
+        if h and h["checker_name"] and r.get("checker_post_code"):
+            name_post.setdefault(h["checker_name"], r["checker_post_code"])
 
     rows = []
     for name, c in counters.items():
@@ -611,10 +377,8 @@ def write_inspector_trend():
         rows.append({
             "inspector_name": name,
             "inspector_role": role_for(name_post.get(name), typical, name),
-            "jan_count": c["jan"],
-            "feb_count": c["feb"],
-            "mar_count": c["mar"],
-            "apr_count": c["apr"],
+            "jan_count": c["jan"], "feb_count": c["feb"],
+            "mar_count": c["mar"], "apr_count": c["apr"],
             "total_q1_apr": total,
             "typical_inspection_type": typical,
         })
@@ -633,50 +397,45 @@ def write_inspector_trend():
 # ---------------------------------------------------------------------------
 def write_trend_summary():
     path = OUT / "jan_to_apr2026_trend_summary.csv"
-
-    # For each (month, inspection_type): count, distinct stores, avg score, S/M/G/L totals, item_count
     by_key = defaultdict(lambda: {"insp_ids": set(), "stores": set(),
                                   "scores": [], "S":0, "M":0, "G":0, "L":0, "items":0})
 
-    # Helper: get reports for an inspection from either Apr or Q1 collection
     def get_report(iid):
         return REPORT_BY_DATA_ID_APR.get(iid) or REPORT_BY_DATA_ID_Q1.get(iid)
 
+    q1_by_iid = defaultdict(dict)
+    for d in Q1_DEDS:
+        q1_by_iid[d["shopcheck_data_id"]][d["deduction_type"]] = d["cnt"]
+
     for h in HEADERS:
+        if h["status"] != 1:
+            continue
+        if h["check_date"][:7] == "2026-04" and h["id"] in EXCLUDE:
+            continue
         ym = h["check_date"][:7]
         if ym not in {"2026-01","2026-02","2026-03","2026-04"}:
             continue
         type_zh, _ = TYPE_MAP[h["large_category_id"]]
         rep = get_report(h["id"])
-        # Severity counts come from JSON desc; for Q1 fallback to Q1_DEDUCTIONS
         if rep:
             cnts = parse_dt_counts(rep["opportunity_desc"])
             score = rep["score"]
         else:
-            cnts = {}
-            for d in Q1_DEDUCTIONS:
-                if d["shopcheck_data_id"] == h["id"]:
-                    cnts[d["deduction_type"]] = d["cnt"]
+            cnts = q1_by_iid.get(h["id"], {})
             score = None
         s_c = cnts.get(1, 0); m_c = cnts.get(3, 0); g_c = cnts.get(2, 0); l_c = cnts.get(4, 0)
 
-        key = (ym, type_zh)
-        bucket = by_key[key]
+        bucket = by_key[(ym, type_zh)]
         bucket["insp_ids"].add(h["id"])
         bucket["stores"].add(h["dept_id"])
         if score is not None:
             bucket["scores"].append(score)
-        bucket["S"] += s_c
-        bucket["M"] += m_c
-        bucket["G"] += g_c
-        bucket["L"] += l_c
+        bucket["S"] += s_c; bucket["M"] += m_c; bucket["G"] += g_c; bucket["L"] += l_c
         bucket["items"] += s_c + m_c + g_c + l_c
 
     rows = []
-    months = ["2026-01","2026-02","2026-03","2026-04"]
-    types  = ["门店自检","QA审计","区经检查"]
-    for m in months:
-        for t in types:
+    for m in ["2026-01","2026-02","2026-03","2026-04"]:
+        for t in ["门店自检","QA审计","区经检查"]:
             b = by_key.get((m, t))
             if b is None:
                 rows.append({"month":m,"inspection_type":t,"inspection_count":0,
@@ -703,10 +462,10 @@ def write_trend_summary():
 
 
 # ---------------------------------------------------------------------------
-# Schema notes file
+# Schema notes file (preserved from v1, with v2 refresh annotation)
 # ---------------------------------------------------------------------------
 SCHEMA_NOTES = """\
-April 2026 Inspection Export — Schema Notes
+April 2026 Inspection Export — Schema Notes (v2 REFRESH 2026-05-01)
 
 DISCOVERY
 =========
@@ -722,73 +481,51 @@ DISCOVERY
     t_shopcheck_config_snapshot 2506 rows  inspection config snapshot per data row
 - Store master found at:             aws-luckyus-opshop-rw / luckyus_opshop.t_shop_info  (519 rows)
 
-NOTE on the user's "empapp" naming
-==================================
-The empapp 门店稽核系统 surfaces in this database under the prefix `t_shopcheck_*`.
-There is no dedicated "empapp" database in the mcp-db-gateway server list.
-The opqualitycontrol cluster owns both shopcheck (audits) and other QA data
-(t_cs_sheet customer service tickets, t_duty_task_sheet 门店执勤, etc.).
+V2 REFRESH NOTES (2026-05-01)
+=============================
+- Re-pulled live data via mcp-db-gateway after two known changes:
+  1. Inspection 2040 (54th & 8th, 2026-04-30 QA audit by Eamonn Caballar) was
+     re-scored from 69 to 94 after store appeal approved. The S item is still
+     present on the row but its deductionScore was zeroed (count=1, score=0).
+  2. Inspection 2016 and 2017 (Darwin Coronel, 21st & 3rd, 2026-04-21 self-checks)
+     were misubmissions (score=100, item_count=0). They are excluded from the
+     published CSVs by the misubmission filter rule. The real inspection that day
+     is 2018 (score=64, 5 items). DB rows are NOT touched — exclusion is
+     applied at the report layer only.
 
 INSPECTION-TYPE MAPPING (large_category_id)
 ===========================================
-Resolved from t_shopcheck_data.large_category_name + cross-reference with
-t_shopcheck_category_config (top-level rows where parent_id=0):
-
    id 1084 'Store food safety self-check'   -> 门店自检   (Store Self-Inspection)
    id 1134 'Store food safety audit'        -> QA审计     (QA Audit)
    id 1184 'Area food safety Check'         -> 区经检查   (Area Manager Inspection)
 
-Excluded historical / test categories (not in scope):
-   id  924 'IQA2Test_门店营业检查'           -> internal QA2 test data
-   id  928 'US Store Food Safety Audit'      -> superseded by 1134
-   id 1075 'Test', 1080 'test'               -> test rows
-   id  977 'US Area food safety Check'       -> superseded by 1184
-   id 1026 'Store food safety self-check'    -> superseded by 1084
+SEVERITY MAPPING (S / M / G / L)
+================================
+   deduction_type 1 -> S
+   deduction_type 2 -> G
+   deduction_type 3 -> M
+   deduction_type 4 -> L
+   deduction_type 9 -> '9'  (kept literal — only 2 items repo-wide, score_config=0)
 
-SEVERITY MAPPING (S / M / G / L) — INFERRED
-===========================================
-The source `t_shopcheck_item_config.deduction_type` is a tinyint with values 1-4
-(plus rare 9). It is NOT directly labeled S/M/G/L. We derive the mapping from:
-  (a) the 'content' prefix on item_config rows: '(S)' and '(M)' literal markers, and
-  (b) the typical score_config values:
-       deduction_type 1 -> -5    (severe)
-       deduction_type 2 -> -2    (general — most common, 405 items)
-       deduction_type 3 -> -5    (major)
-       deduction_type 4 -> -1    (light, 82 items)
+SUBMITTED VIEW
+==============
+Published CSVs use status=1 (submitted) only. Drafts (status=0) are excluded —
+this matches the canonical view used by prior monthly reports.
 
-Final mapping used in the CSV `severity` column:
-       deduction_type 1 -> S
-       deduction_type 2 -> G
-       deduction_type 3 -> M
-       deduction_type 4 -> L
-       deduction_type 9 -> '9'  (kept literal — only 2 items repo-wide, both score_config=0)
+MISUBMISSION FILTER (post-query, v2 only)
+=========================================
+Exclusion rule:
+  drop any inspection where
+    score = 100 AND item_count = 0
+    AND there exists another inspection by the same inspector (checker_id),
+        same store (dept_id), same date with item_count > 0.
 
-CATEGORY HIERARCHY
-==================
-Three levels under each large_category_id (e.g. 1134):
-   level-1 = inspection type itself (1134 'Store food safety audit')
-   level-2 = wrapper "Store food safety self-check" (1475)
-   level-3 = MODULE  e.g. 1480 'Employees' Health and Personal Hygiene'
-                       1494 'Cleaning and Sanitation'
-                       1502 'Sanitation and Hygiene'
-                       1504 'Temperature Control / Expiration Date Management.'
-                       1487 'Process Control', 1485 'Approved Supplier', 1476 'Document Record',
-                       1509 'Maintenance of Equipment', 1512 'Facility', 1517 'Pests Control',
-                       1521 'Site Security', 1523 'Workplace Safety',
-                       1525 'Requirements on Store Audit Management Procedures'
-   level-4 = SUBCATEGORY (leaf), e.g. 1481 'Employees' Health', 1482 'Personal Hygiene',
-                                       1497 'Equipment and utensils', 1490 'Cross-Contamination',
-                                       1477 'Licenses and certificates', 1478 'Personal certificate'.
+Only affects published CSVs and report-layer counts. The underlying DB is NOT
+modified. Other clean-100 self-checks (e.g. one-off inspections that day) are
+preserved.
 
-Same module skeleton repeats under 1084 (path 1084,1579,*) and 1184 (path 1184,1630,*).
-
-For the CSV `module_name` column the script emits the level-3 module name; the
-level-4 leaf name goes to `module_subcategory`. Names are stored in English in
-this US-tenant deployment (the Chinese-name examples in the task brief do not
-appear in the source — those are aspirational). All names preserved verbatim.
-
-INSPECTOR ROLE BY POST CODE (derived from data)
-================================================
+INSPECTOR ROLE BY POST CODE
+============================
    LKUS00000076 -> Area Operations Manager     (Daniel Chu, Jung Han Liang)
    LKUS00000078 -> Senior QA Manager           (Yu Jiang)
    LKUS00000223 -> Senior QA Manager           (Eamonn Caballar)
@@ -804,17 +541,6 @@ KEY JOIN GRAPH
   t_shopcheck_item_config.category_config_id  ==  t_shopcheck_category_config.id (leaf)
   t_shopcheck_category_config.parent_id        ==  t_shopcheck_category_config.id (module)
   t_shopcheck_data.dept_id  ==  t_shop_info.dept_id        (store master)
-  t_shop_info.shop_no                                       store_code (US00xxx)
-
-April 2026 SCOPE COUNTS (deleted=0, large_category in 1084,1134,1184)
-=====================================================================
-  inspection rows (t_shopcheck_data)               : 63
-  reports (t_shopcheck_report)                     : 59  (4 inspections never had report rows; status=0 incomplete)
-  deduction items (t_shopcheck_opportunity)        : ~330 lines
-
-SAMPLE DATA (5 rows each — see actual CSV outputs for full data)
-=================================================================
-[See april2026_inspection_summary.csv and april2026_inspection_items.csv for full content.]
 """
 
 def write_schema_notes():
@@ -824,25 +550,56 @@ def write_schema_notes():
 
 
 # ---------------------------------------------------------------------------
-# Validation queries (replicated against in-memory data)
+# REFRESH DELTAS — compare prior CSV vs current
 # ---------------------------------------------------------------------------
-def run_validations():
+def load_prior_summary():
+    p = PRIOR_DIR / "april2026_inspection_summary.csv"
+    if not p.exists():
+        return {}
+    out = {}
+    with p.open() as f:
+        for r in csv.DictReader(f):
+            iid = int(r["inspection_id"])
+            out[iid] = r
+    return out
+
+def load_prior_items():
+    p = PRIOR_DIR / "april2026_inspection_items.csv"
+    if not p.exists():
+        return {}
+    out = {}
+    with p.open() as f:
+        for r in csv.DictReader(f):
+            iid = int(r["item_id"])
+            out[iid] = r
+    return out
+
+def fmt_int_or_blank(v):
+    if v == "" or v is None:
+        return ""
+    return str(v)
+
+
+# ---------------------------------------------------------------------------
+# Validation + REFRESH DELTAS
+# ---------------------------------------------------------------------------
+def run_validations(summary_rows):
     out_lines = []
     def emit(s=""):
         out_lines.append(s)
         print(s)
 
     emit("="*80)
-    emit("APRIL 2026 INSPECTION DATA — VALIDATION OUTPUT")
+    emit("APRIL 2026 INSPECTION DATA — VALIDATION OUTPUT (v2 REFRESH 2026-05-01)")
     emit("Source: aws-luckyus-opqualitycontrol-rw / luckyus_opqualitycontrol")
     emit("="*80)
 
-    # Filter helpers
-    apr_headers = [h for h in HEADERS if h["check_date"][:7] == "2026-04"]
+    apr_headers = [h for h in HEADERS if h["check_date"][:7] == "2026-04" and h["status"] == 1
+                   and h["id"] not in EXCLUDE]
     apr_h_by_id = {h["id"]: h for h in apr_headers}
 
-    # ---- A. April count by type ----
-    emit("\n--- A. April inspection count by type ---")
+    # ---- A. April count by type (post-filter) ----
+    emit("\n--- A. April inspection count by type (status=1, misubmission-filtered) ---")
     by_t = defaultdict(lambda: {"cnt":0, "stores":set()})
     for h in apr_headers:
         t_zh, _ = TYPE_MAP[h["large_category_id"]]
@@ -856,9 +613,8 @@ def run_validations():
     emit(f"{'TOTAL':16s} {total:5d}")
 
     # ---- B. April severity distribution ----
-    emit("\n--- B. April severity distribution (across all deduction items) ---")
-    sev_cnt = defaultdict(int)
-    sev_ded = defaultdict(int)
+    emit("\n--- B. April severity distribution (across all deduction items, post-filter) ---")
+    sev_cnt = defaultdict(int); sev_ded = defaultdict(int)
     for opp in APR_OPPS:
         if opp["shopcheck_data_id"] not in apr_h_by_id:
             continue
@@ -873,7 +629,7 @@ def run_validations():
         emit(f"{'OTHER':10s} {other_sev:5d}")
 
     # ---- C. April distinct store count ----
-    emit("\n--- C. April distinct stores inspected ---")
+    emit("\n--- C. April distinct stores inspected (post-filter) ---")
     apr_depts = {h["dept_id"] for h in apr_headers}
     emit(f"stores_inspected_april = {len(apr_depts)}")
 
@@ -891,7 +647,7 @@ def run_validations():
     if not multi:
         emit("(none)")
 
-    # ---- E. Same-day repeat inspections / score swings ≥ 20 ----
+    # ---- E. Same-day repeats / large score swings ----
     emit("\n--- E. Same-store same-day repeats / large score swings (≥20 pts) ---")
     by_dept_date = defaultdict(list)
     for h in apr_headers:
@@ -916,10 +672,14 @@ def run_validations():
     else:
         emit("(none)")
 
-    # ---- F. Q1+April trend ----
-    emit("\n--- F. Q1+April trend (month × type) ---")
+    # ---- F. Q1+April trend (status=1, post-filter) ----
+    emit("\n--- F. Q1+April trend (month × type, status=1 post-filter) ---")
     by_mon_type = defaultdict(lambda: {"cnt":0, "stores":set()})
     for h in HEADERS:
+        if h["status"] != 1:
+            continue
+        if h["check_date"][:7] == "2026-04" and h["id"] in EXCLUDE:
+            continue
         ym = h["check_date"][:7]
         if ym not in {"2026-01","2026-02","2026-03","2026-04"}:
             continue
@@ -936,42 +696,195 @@ def run_validations():
     emit("\n" + "="*80)
     emit("SPECIAL CHECKS")
     emit("="*80)
-
     qa_count = by_t.get("QA审计", {"cnt":0})["cnt"]
     area_count = by_t.get("区经检查", {"cnt":0})["cnt"]
-    if qa_count == 0:
-        emit("WARNING: Zero QA audits in April 2026")
-    else:
-        emit(f"INFO: QA审计 count in April = {qa_count} (NOT zero — contradicts the prior context).")
-    if area_count == 0:
-        emit("WARNING: Zero area manager inspections in April 2026 (4th consecutive month)")
-    else:
-        emit(f"INFO: 区经检查 count in April = {area_count} (NOT zero — contradicts the prior context).")
+    emit(f"QA审计 count in April = {qa_count}")
+    emit(f"区经检查 count in April = {area_count}")
 
-    # Cross-type stores already handled in D
-
-    # April vs March store coverage
-    mar_depts = {h["dept_id"] for h in HEADERS if h["check_date"][:7] == "2026-03"}
-    emit(f"\nApril active store count (distinct dept_id with inspection): {len(apr_depts)}")
-    emit(f"March active store count (distinct dept_id with inspection): {len(mar_depts)}")
-    emit(f"  -> April covered {len(apr_depts - mar_depts)} stores not inspected in March: " +
-         ", ".join(sorted(store_code(d) for d in apr_depts - mar_depts)))
-    emit(f"  -> March covered {len(mar_depts - apr_depts)} stores not inspected in April: " +
-         ", ".join(sorted(store_code(d) for d in mar_depts - apr_depts)))
-
-    # Yu Jiang vs Eamonn Caballar
     yj = {ym: 0 for ym in ["2026-01","2026-02","2026-03","2026-04"]}
-    ec = dict(yj)
+    ec = dict(yj); dc = dict(yj)
     for h in HEADERS:
+        if h["status"] != 1:
+            continue
+        if h["check_date"][:7] == "2026-04" and h["id"] in EXCLUDE:
+            continue
         ym = h["check_date"][:7]
         if ym not in yj: continue
         if h["checker_name"] == "Yu Jiang": yj[ym] += 1
         if h["checker_name"] == "Eamonn Caballar": ec[ym] += 1
-    emit("\nQA inspector workload by month:")
+        if h["checker_name"] == "Darwin Coronel": dc[ym] += 1
+    emit("\nKey inspector workload by month (post-filter):")
     emit(f"  Yu Jiang        : Jan={yj['2026-01']}  Feb={yj['2026-02']}  Mar={yj['2026-03']}  Apr={yj['2026-04']}")
     emit(f"  Eamonn Caballar : Jan={ec['2026-01']}  Feb={ec['2026-02']}  Mar={ec['2026-03']}  Apr={ec['2026-04']}")
+    emit(f"  Darwin Coronel  : Jan={dc['2026-01']}  Feb={dc['2026-02']}  Mar={dc['2026-03']}  Apr={dc['2026-04']}")
 
-    # Persist
+    # ============================================================
+    # REFRESH DELTAS (v2 vs v1)
+    # ============================================================
+    emit("\n" + "="*80)
+    emit("REFRESH DELTAS (v2 live re-pull vs v1 published CSV)")
+    emit("="*80)
+
+    prior_summary = load_prior_summary()
+    prior_items = load_prior_items()
+    cur_summary_by_iid = {r["inspection_id"]: r for r in summary_rows}
+
+    # Score changes
+    emit("\n--- Inspection rows with SCORE changes (v1 -> v2) ---")
+    score_changes = []
+    for iid, prior in prior_summary.items():
+        cur = cur_summary_by_iid.get(iid)
+        if not cur:
+            continue
+        prior_score = prior["total_score"]
+        cur_score   = str(cur["total_score"])
+        if prior_score != cur_score:
+            score_changes.append((iid, prior, cur))
+    if score_changes:
+        emit(f"{'iid':>5s} {'store':10s} {'date':12s} {'inspector':22s} {'v1_score':>8s} -> {'v2_score':>8s}  delta")
+        for iid, p, c in sorted(score_changes):
+            ps = p["total_score"] or "(blank)"
+            cs = str(c["total_score"]) if c["total_score"] != "" else "(blank)"
+            try:
+                d = int(c["total_score"]) - int(p["total_score"])
+                ds = f"{d:+d}"
+            except Exception:
+                ds = "n/a"
+            emit(f"{iid:5d} {p['store_code']:10s} {p['inspection_date']:12s} "
+                 f"{p['inspector_name'][:22]:22s} {ps:>8s} -> {cs:>8s}  {ds}")
+    else:
+        emit("(no score changes)")
+
+    # Item-count changes
+    emit("\n--- Inspection rows with ITEM_COUNT changes (v1 -> v2) ---")
+    ic_changes = []
+    for iid, prior in prior_summary.items():
+        cur = cur_summary_by_iid.get(iid)
+        if not cur:
+            continue
+        if str(prior["item_count"]) != str(cur["item_count"]):
+            ic_changes.append((iid, prior, cur))
+    if ic_changes:
+        emit(f"{'iid':>5s} {'store':10s} {'date':12s} {'inspector':22s} v1[S/M/G/L]={{:>11s}}".format("/total") +
+             "  v2[S/M/G/L]=/total")
+        for iid, p, c in sorted(ic_changes):
+            v1 = f"[{p['s_count']}/{p['m_count']}/{p['g_count']}/{p['l_count']}]={p['item_count']}"
+            v2 = f"[{c['s_count']}/{c['m_count']}/{c['g_count']}/{c['l_count']}]={c['item_count']}"
+            emit(f"{iid:5d} {p['store_code']:10s} {p['inspection_date']:12s} "
+                 f"{p['inspector_name'][:22]:22s} {v1:18s}  {v2:18s}")
+    else:
+        emit("(no item_count changes)")
+
+    # Note on appeal mechanics: appeal approvals at 54th & 8th nullify the
+    # deductionScore inside t_shopcheck_report.opportunity_desc JSON (e.g. -5 -> 0)
+    # but do NOT remove the t_shopcheck_opportunity row, so item_id stays in items.csv
+    # with the canonical score_config. Score changes show up in the SUMMARY total_score
+    # / total_deduction columns above.
+    emit("\nNOTE on inspection 2040 appeal:")
+    emit("  The S item (item_id=9074, 'air gap issue') is STILL PRESENT in items.csv")
+    emit("  with severity=S, deduction_points=-5 (the canonical clause default).")
+    emit("  The appeal nullified its effective deduction at the REPORT level only:")
+    emit("  in t_shopcheck_report.opportunity_desc JSON the deductionScore for type=1")
+    emit("  changed from -5 to 0 (count=1 still). Effect: total_score 69 -> 94,")
+    emit("  total_deduction -11 -> -6, item_count unchanged at 4.")
+
+    # Item-level changes (item_id removed or severity / deduction_points changed)
+    emit("\n--- Deduction items (item_id) REMOVED or CHANGED in severity/deduction_points ---")
+    cur_items = {}
+    items_path = OUT / "april2026_inspection_items.csv"
+    if items_path.exists():
+        with items_path.open() as f:
+            for r in csv.DictReader(f):
+                cur_items[int(r["item_id"])] = r
+
+    item_changes = []
+    item_removed = []
+    for item_id, prior in prior_items.items():
+        cur = cur_items.get(item_id)
+        if cur is None:
+            item_removed.append(prior)
+            continue
+        if (prior["severity"] != cur["severity"]
+            or str(prior["deduction_points"]) != str(cur["deduction_points"])):
+            item_changes.append((item_id, prior, cur))
+    if item_removed:
+        emit(f"REMOVED ({len(item_removed)}):")
+        for p in item_removed[:20]:
+            emit(f"  item_id={p['item_id']:>6s}  iid={p['inspection_id']}  "
+                 f"store={p['store_code']}  sev={p['severity']}  pts={p['deduction_points']}  "
+                 f"clause={p['clause_number']}  reason=row excluded by misubmission filter or DB delete")
+        if len(item_removed) > 20:
+            emit(f"  ... and {len(item_removed)-20} more")
+    else:
+        emit("(no item_id removed)")
+    if item_changes:
+        emit(f"\nCHANGED ({len(item_changes)}):")
+        for iid, p, c in item_changes:
+            emit(f"  item_id={iid}  iid={p['inspection_id']}  store={p['store_code']}  "
+                 f"v1: sev={p['severity']} pts={p['deduction_points']}  ->  "
+                 f"v2: sev={c['severity']} pts={c['deduction_points']}")
+    else:
+        emit("(no item severity/deduction_points changes)")
+
+    # Newly-added inspections (v2 has, v1 didn't)
+    new_iids = sorted(set(cur_summary_by_iid) - set(prior_summary))
+    if new_iids:
+        emit(f"\n--- NEW inspection rows in v2 ({len(new_iids)}) ---")
+        for iid in new_iids:
+            c = cur_summary_by_iid[iid]
+            emit(f"  iid={iid}  store={c['store_code']}  date={c['inspection_date']}  "
+                 f"inspector={c['inspector_name']}  type={c['inspection_type']}  "
+                 f"score={c['total_score']}  items={c['item_count']}")
+    else:
+        emit("\n(no new inspection rows)")
+
+    # Rows in v1 but not in v2 (beyond the misubmission filter — status downgrades, DB deletes, etc.)
+    dropped = sorted(set(prior_summary) - set(cur_summary_by_iid) - set(EXCLUDE))
+    if dropped:
+        emit(f"\n--- INSPECTION ROWS IN V1 BUT NOT IN V2 ({len(dropped)}) ---")
+        emit("(These are NOT misubmission excludes — they were dropped because"
+             " status is no longer 1, or the row was deleted in DB)")
+        for iid in dropped:
+            p = prior_summary[iid]
+            h = HEADER_BY_ID.get(iid)
+            reason = "no longer in DB"
+            if h:
+                if h["status"] != 1:
+                    reason = f"status={h['status']} (not submitted)"
+                else:
+                    reason = "passes filter — investigate"
+            emit(f"  iid={iid}  store={p['store_code']}  date={p['inspection_date']}  "
+                 f"inspector={p['inspector_name']}  v1_score={p['total_score'] or '(blank)'}  "
+                 f"v1_items={p['item_count']}  reason={reason}")
+    else:
+        emit("\n(no v1-only inspection rows)")
+
+    # Excluded by misubmission rule
+    emit(f"\n--- Inspection rows EXCLUDED by misubmission rule ({len(EXCLUDE)}) ---")
+    for iid, info in sorted(EXCLUDE.items()):
+        emit(f"  iid={iid}  inspector={info['inspector']}  store={info['store_code']}  "
+             f"date={info['date']}  "
+             f"reason=score=100 AND item_count=0 AND sibling(s) {info['siblings']} have items")
+
+    # Refreshed totals
+    emit("\n--- REFRESHED TOTALS (status=1, post-filter) ---")
+    emit("April 2026 by type:")
+    for t in ["门店自检","QA审计","区经检查"]:
+        b = by_t.get(t, {"cnt":0,"stores":set()})
+        emit(f"  {t:10s} : {b['cnt']:>3d} inspections, {len(b['stores']):>2d} distinct stores")
+    apr_total = sum(b['cnt'] for b in by_t.values())
+    emit(f"  TOTAL    : {apr_total:>3d}")
+
+    emit("\nAll months (Jan-Apr 2026) by type:")
+    for ym in ["2026-01","2026-02","2026-03","2026-04"]:
+        emit(f"  {ym}:")
+        m_total = 0
+        for t in ["门店自检","QA审计","区经检查"]:
+            b = by_mon_type.get((ym,t), {"cnt":0,"stores":set()})
+            emit(f"    {t:10s} : {b['cnt']:>3d} inspections, {len(b['stores']):>2d} stores")
+            m_total += b["cnt"]
+        emit(f"    TOTAL    : {m_total:>3d}")
+
     (OUT / "april2026_validation_output.txt").write_text("\n".join(out_lines), encoding="utf-8")
 
 
@@ -979,13 +892,15 @@ def run_validations():
 # Main
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    summary_n, summary_p = write_summary()
-    items_n,   items_p   = write_items()
+    summary_rows = build_summary_rows()
+    summary_n, summary_p = write_summary(summary_rows)
+    items_n,   items_p   = write_items(set(EXCLUDE))
     stores_n,  stores_p  = write_store_master()
     insp_n,    insp_p    = write_inspector_trend()
     trend_n,   trend_p   = write_trend_summary()
     schema_p             = write_schema_notes()
 
+    print()
     print(f"WROTE {summary_n} rows -> {summary_p}")
     print(f"WROTE {items_n} rows -> {items_p}")
     print(f"WROTE {stores_n} rows -> {stores_p}")
@@ -993,4 +908,4 @@ if __name__ == "__main__":
     print(f"WROTE {trend_n} rows -> {trend_p}")
     print(f"WROTE schema notes  -> {schema_p}")
     print()
-    run_validations()
+    run_validations(summary_rows)

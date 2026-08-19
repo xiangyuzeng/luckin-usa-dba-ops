@@ -1,0 +1,17 @@
+=== RDS Extended Support enablement — L2 — mode=DRY-RUN region=us-east-1 @ 2026-07-24T14:42:30Z ===
+operator=arn:aws:iam::257394478466:user/xiangyu.zeng
+targets=10
+
+  [PLAN ] aws-luckyus-fichargecontrol-rw                open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ifiaccounting-rw                  open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-ilsopdevopsdata-rw                open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iluckyams-rw                      open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iluckydorisops-rw                 open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iluckyhealth-rw                   open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-iopocp-rw                         open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-oplog-rw                          open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-opqualitycontrol-rw               open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+  [PLAN ] aws-luckyus-scm-wmssimulate-rw                open-source-rds-extended-support-disabled -> open-source-rds-extended-support
+
+=== summary L2 (DRY-RUN) : planned/done=10 already=0 skipped=0 failed=0 ===
+log: /home/op/claude-code/app/reports/rds-extended-support-enablement/scripts/logs/enable-L2-20260724T144230Z.log

@@ -1,24 +1,24 @@
 ================================================================================
-APRIL 2026 INSPECTION DATA — VALIDATION OUTPUT
+APRIL 2026 INSPECTION DATA — VALIDATION OUTPUT (v2 REFRESH 2026-05-01)
 Source: aws-luckyus-opqualitycontrol-rw / luckyus_opqualitycontrol
 ================================================================================
 
---- A. April inspection count by type ---
+--- A. April inspection count by type (status=1, misubmission-filtered) ---
 inspection_type    cnt  stores
-门店自检                36      13
-QA审计                13      13
+门店自检                32      13
+QA审计                12      12
 区经检查                14      13
-TOTAL               63
+TOTAL               58
 
---- B. April severity distribution (across all deduction items) ---
+--- B. April severity distribution (across all deduction items, post-filter) ---
 severity     cnt  total_deduction
-S             17              -85
+S             19              -95
 M             38             -190
-G            242             -476
-L             75              -61
+G            244             -480
+L             76              -62
 
---- C. April distinct stores inspected ---
-stores_inspected_april = 14
+--- C. April distinct stores inspected (post-filter) ---
+stores_inspected_april = 13
 
 --- D. Stores with multiple inspection TYPES in April ---
 store_code store_name                type_variety  types_seen
@@ -39,74 +39,98 @@ US00019    29th & 3rd                           2  区经检查 / 门店自检
 --- E. Same-store same-day repeats / large score swings (≥20 pts) ---
 store_code date         cnt swing  inspectors / scores
 US00020    2026-04-14     2    15  Javier Cruz(门店自检, score=95) | Javier Cruz(门店自检, score=80)
-US00020    2026-04-21     3    36  Darwin Coronel(门店自检, score=100) | Darwin Coronel(门店自检, score=100) | Darwin Coronel(门店自检, score=64)
 US00024    2026-04-25     2     5  Clara Mae Venturina(门店自检, score=90) | Daniel Chu(区经检查, score=85)
 US00025    2026-04-30     2     7  Eamonn Caballar(QA审计, score=87) | Daniel Chu(区经检查, score=94)
 US00027    2026-04-16     2     2  Wenny Lin(门店自检, score=65) | Jung Han Liang(区经检查, score=67)
 
---- F. Q1+April trend (month × type) ---
+--- F. Q1+April trend (month × type, status=1 post-filter) ---
 month      type           cnt  stores
-2026-01    门店自检            10       5
+2026-01    门店自检             7       4
 2026-01    QA审计             5       5
-2026-01    区经检查             6       6
-2026-02    门店自检            10       5
-2026-02    QA审计             3       3
+2026-01    区经检查             4       4
+2026-02    门店自检             5       2
+2026-02    QA审计             2       2
 2026-02    区经检查             0       0
 2026-03    门店自检            13       7
-2026-03    QA审计             3       2
+2026-03    QA审计             1       1
 2026-03    区经检查             0       0
-2026-04    门店自检            36      13
-2026-04    QA审计            13      13
+2026-04    门店自检            32      13
+2026-04    QA审计            12      12
 2026-04    区经检查            14      13
 
 ================================================================================
 SPECIAL CHECKS
 ================================================================================
-INFO: QA审计 count in April = 13 (NOT zero — contradicts the prior context).
-INFO: 区经检查 count in April = 14 (NOT zero — contradicts the prior context).
+QA审计 count in April = 12
+区经检查 count in April = 14
 
-April active store count (distinct dept_id with inspection): 14
-March active store count (distinct dept_id with inspection): 8
-  -> April covered 7 stores not inspected in March: US00000, US00002, US00003, US00004, US00005, US00012, US00019
-  -> March covered 1 stores not inspected in April: US99999
-
-QA inspector workload by month:
-  Yu Jiang        : Jan=5  Feb=2  Mar=2  Apr=0
-  Eamonn Caballar : Jan=0  Feb=0  Mar=1  Apr=13
+Key inspector workload by month (post-filter):
+  Yu Jiang        : Jan=5  Feb=2  Mar=0  Apr=0
+  Eamonn Caballar : Jan=0  Feb=0  Mar=1  Apr=12
+  Darwin Coronel  : Jan=0  Feb=0  Mar=1  Apr=2
 
 ================================================================================
-ADDITIONAL FINDING: SUBMITTED-ONLY (status=1) vs ALL-STATUSES BREAKDOWN
+REFRESH DELTAS (v2 live re-pull vs v1 published CSV)
 ================================================================================
-The task brief cites prior-month counts (Jan: 7+5+4=16, Feb: 5+2+0=7, Mar: 12+1+0=13).
-Those numbers only match when filtering t_shopcheck_data.status=1 (submitted/finalized).
-Our exports include all rows where deleted=0 (drafts + submitted), per the task rule
-"DO NOT skip rows or filter out edge cases". Both views below:
 
-month      type               all(deleted=0)    submitted(status=1)
-2026-01    门店自检                           10                      7
-2026-01    QA审计                            5                      5
-2026-01    区经检查                            6                      4
-2026-02    门店自检                           10                      5
-2026-02    QA审计                            3                      2
-2026-02    区经检查                            0                      0
-2026-03    门店自检                           13                     13
-2026-03    QA审计                            3                      1
-2026-03    区经检查                            0                      0
-2026-04    门店自检                           36                     33
-2026-04    QA审计                           13                     12
-2026-04    区经检查                           14                     14
+--- Inspection rows with SCORE changes (v1 -> v2) ---
+  iid store      date         inspector              v1_score -> v2_score  delta
+ 2032 US00005    2026-04-28   Eric Park               (blank) ->       63  n/a
+ 2040 US00005    2026-04-30   Eamonn Caballar              69 ->       94  +25
 
-Aggregate (sum of three types):
-month             all    submitted
-2026-01            21           16
-2026-02            13            7
-2026-03            16           14
-2026-04            63           59
+--- Inspection rows with ITEM_COUNT changes (v1 -> v2) ---
+  iid store      date         inspector              v1[S/M/G/L]=     /total  v2[S/M/G/L]=/total
+ 2032 US00005    2026-04-28   Eric Park              [0/0/0/0]=0         [2/0/3/1]=6       
 
-NOTES FOR DOWNSTREAM REPORT LAYER:
-  - status=1 mirrors what prior monthly reports apparently used.
-  - all-statuses exposes draft-but-not-submitted activity.
-  - Drafts (status=0) often represent inspections started but never finalized;
-    they may signal a data-quality issue worth investigating.
-  - The CSVs deliberately keep BOTH (no status filter) — the report layer can
-    project to the desired view.
+NOTE on inspection 2040 appeal:
+  The S item (item_id=9074, 'air gap issue') is STILL PRESENT in items.csv
+  with severity=S, deduction_points=-5 (the canonical clause default).
+  The appeal nullified its effective deduction at the REPORT level only:
+  in t_shopcheck_report.opportunity_desc JSON the deductionScore for type=1
+  changed from -5 to 0 (count=1 still). Effect: total_score 69 -> 94,
+  total_deduction -11 -> -6, item_count unchanged at 4.
+
+--- Deduction items (item_id) REMOVED or CHANGED in severity/deduction_points ---
+(no item_id removed)
+(no item severity/deduction_points changes)
+
+(no new inspection rows)
+
+--- INSPECTION ROWS IN V1 BUT NOT IN V2 (3) ---
+(These are NOT misubmission excludes — they were dropped because status is no longer 1, or the row was deleted in DB)
+  iid=1994  store=US00012  date=2026-04-13  inspector=Juliana Li  v1_score=(blank)  v1_items=0  reason=status=0 (not submitted)
+  iid=2002  store=US00000  date=2026-04-14  inspector=Eamonn Caballar  v1_score=(blank)  v1_items=0  reason=status=0 (not submitted)
+  iid=2004  store=US00008  date=2026-04-14  inspector=Yaqing Zuo  v1_score=(blank)  v1_items=0  reason=status=0 (not submitted)
+
+--- Inspection rows EXCLUDED by misubmission rule (2) ---
+  iid=2016  inspector=Darwin Coronel  store=US00020  date=2026-04-21  reason=score=100 AND item_count=0 AND sibling(s) [2017, 2018] have items
+  iid=2017  inspector=Darwin Coronel  store=US00020  date=2026-04-21  reason=score=100 AND item_count=0 AND sibling(s) [2016, 2018] have items
+
+--- REFRESHED TOTALS (status=1, post-filter) ---
+April 2026 by type:
+  门店自检       :  32 inspections, 13 distinct stores
+  QA审计       :  12 inspections, 12 distinct stores
+  区经检查       :  14 inspections, 13 distinct stores
+  TOTAL    :  58
+
+All months (Jan-Apr 2026) by type:
+  2026-01:
+    门店自检       :   7 inspections,  4 stores
+    QA审计       :   5 inspections,  5 stores
+    区经检查       :   4 inspections,  4 stores
+    TOTAL    :  16
+  2026-02:
+    门店自检       :   5 inspections,  2 stores
+    QA审计       :   2 inspections,  2 stores
+    区经检查       :   0 inspections,  0 stores
+    TOTAL    :   7
+  2026-03:
+    门店自检       :  13 inspections,  7 stores
+    QA审计       :   1 inspections,  1 stores
+    区经检查       :   0 inspections,  0 stores
+    TOTAL    :  14
+  2026-04:
+    门店自检       :  32 inspections, 13 stores
+    QA审计       :  12 inspections, 12 stores
+    区经检查       :  14 inspections, 13 stores
+    TOTAL    :  58

@@ -1,0 +1,59 @@
+inspection_id,store_code,store_name,inspection_date,inspection_type,inspection_type_raw,inspector_name,inspector_role,is_appealed,appeal_status,adjusted_total_score,original_total_score,adjusted_total_deduction,original_total_deduction,item_count,s_count,m_count,g_count,l_count
+1985,US00001,8th & Broadway,2026-04-04,门店自检,Store food safety self-check,Jian Ming Juo,Store Manager,0,none,66,66,-14,-14,7,1,0,3,3
+1987,US00001,8th & Broadway,2026-04-06,门店自检,Store food safety self-check,Jian Ming Juo,Store Manager,0,none,44,44,-36,-36,17,1,2,11,3
+1989,US00001,8th & Broadway,2026-04-09,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,1,pending,79,79,-21,-21,8,0,2,5,1
+2000,US00001,8th & Broadway,2026-04-14,门店自检,Store food safety self-check,Jian Ming Juo,Store Manager,0,none,83,83,-17,-17,8,0,2,3,3
+2045,US00001,8th & Broadway,2026-04-21,区经检查,Area food safety Check,Jung Han Liang,Area Operations Manager,0,none,85,85,-15,-15,6,0,1,5,0
+2022,US00001,8th & Broadway,2026-04-24,门店自检,Store food safety self-check,Huichen Jiang,Shift Supervisor / Trainer,0,none,91,91,-9,-9,5,0,0,4,1
+2009,US00002,28th & 6th,2026-04-17,门店自检,Store food safety self-check,Afsana Gu,Store Manager,0,none,71,71,-29,-29,14,0,1,11,2
+2046,US00002,28th & 6th,2026-04-23,区经检查,Area food safety Check,Jung Han Liang,Area Operations Manager,1,pending,88,88,-12,-12,5,0,1,3,1
+2031,US00002,28th & 6th,2026-04-27,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,1,pending,84,84,-16,-16,7,0,1,5,1
+1981,US00003,100 Maiden Ln,2026-04-01,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,0,none,84,84,-16,-16,8,0,1,4,3
+1990,US00003,100 Maiden Ln,2026-04-09,门店自检,Store food safety self-check,Dominique Meadows,Store Manager,0,none,91,91,-9,-9,4,0,1,1,2
+2010,US00003,100 Maiden Ln,2026-04-17,门店自检,Store food safety self-check,Dominique Meadows,Store Manager,0,none,96,96,-4,-4,2,0,0,2,0
+2024,US00003,100 Maiden Ln,2026-04-24,区经检查,Area food safety Check,Daniel Chu,Area Operations Manager,0,none,91,91,-9,-9,5,0,0,4,1
+1995,US00004,37th & Broadway,2026-04-13,门店自检,Store food safety self-check,Austin Gebhardt,Assistant Store Manager,0,none,79,79,-21,-21,9,0,1,8,0
+2047,US00004,37th & Broadway,2026-04-26,区经检查,Area food safety Check,Jung Han Liang,Area Operations Manager,0,none,89,89,-11,-11,6,0,0,5,1
+2036,US00004,37th & Broadway,2026-04-29,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,0,none,83,83,-17,-17,9,0,0,8,1
+2011,US00005,54th & 8th,2026-04-17,门店自检,Store food safety self-check,Eric Park,Store Manager,0,none,63,63,-17,-17,7,1,1,2,3
+2048,US00005,54th & 8th,2026-04-26,区经检查,Area food safety Check,Jung Han Liang,Area Operations Manager,0,none,66,66,-14,-14,7,1,0,3,3
+2032,US00005,54th & 8th,2026-04-28,门店自检,Store food safety self-check,Eric Park,Store Manager,0,none,63,63,-17,-17,6,2,0,3,1
+2040,US00005,54th & 8th,2026-04-30,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,1,approved,94,69,-6,-11,4,1,0,3,0
+1982,US00006,102 Fulton,2026-04-01,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,0,none,86,86,-14,-14,6,0,1,4,1
+1984,US00006,102 Fulton,2026-04-03,门店自检,Store food safety self-check,Shangxian Piao,Store Manager,0,none,89,89,-11,-11,4,0,1,3,0
+1993,US00006,102 Fulton,2026-04-11,门店自检,Store food safety self-check,Sami Dalao,Shift Supervisor / Trainer,0,none,93,93,-7,-7,5,0,1,2,2
+2021,US00006,102 Fulton,2026-04-24,门店自检,Store food safety self-check,Shangxian Piao,Store Manager,0,none,98,98,-2,-2,3,0,0,1,2
+2042,US00006,102 Fulton,2026-04-30,区经检查,Area food safety Check,Daniel Chu,Area Operations Manager,0,none,68,68,-12,-12,5,1,0,3,1
+1991,US00008,33rd & 10th,2026-04-09,门店自检,Store food safety self-check,Derson Liang,Assistant Store Manager,0,none,78,78,-22,-22,11,0,1,7,3
+2005,US00008,33rd & 10th,2026-04-15,门店自检,Store food safety self-check,Derson Liang,Assistant Store Manager,0,none,84,84,-16,-16,11,0,0,7,4
+2015,US00008,33rd & 10th,2026-04-21,门店自检,Store food safety self-check,Derson Liang,Assistant Store Manager,0,none,76,76,-24,-24,12,0,1,8,3
+2023,US00008,33rd & 10th,2026-04-24,门店自检,Store food safety self-check,Yaqing Zuo,Store Manager,0,none,81,81,-19,-19,9,0,1,6,2
+2030,US00008,33rd & 10th,2026-04-27,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,1,pending,87,87,-13,-13,7,0,0,6,1
+2049,US00008,33rd & 10th,2026-04-30,区经检查,Area food safety Check,Jung Han Liang,Area Operations Manager,0,none,47,47,-33,-33,13,2,2,6,3
+2001,US00012,16th & 6th,2026-04-14,门店自检,Store food safety self-check,Juliana Li,Store Manager,0,none,96,96,-4,-4,2,0,0,2,0
+2012,US00012,16th & 6th,2026-04-19,门店自检,Store food safety self-check,Joselyn Pacheco Trejo,Store Manager,0,none,100,100,0,0,0,0,0,0,0
+2027,US00012,16th & 6th,2026-04-25,门店自检,Store food safety self-check,Joselyn Pacheco Trejo,Store Manager,0,none,94,94,-6,-6,4,0,0,2,2
+2029,US00012,16th & 6th,2026-04-26,区经检查,Area food safety Check,Daniel Chu,Area Operations Manager,0,none,88,88,-12,-12,6,0,0,6,0
+2037,US00012,16th & 6th,2026-04-29,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,0,none,75,75,-25,-25,11,0,2,8,1
+2003,US00019,29th & 3rd,2026-04-14,门店自检,Store food safety self-check,Juan Ortiz-Fontanez,Store Manager,0,none,66,66,-14,-14,4,2,0,2,0
+2013,US00019,29th & 3rd,2026-04-16,区经检查,Area food safety Check,Jung Han Liang,Area Operations Manager,0,none,85,85,-15,-15,7,0,1,4,2
+2038,US00019,29th & 3rd,2026-04-29,门店自检,Store food safety self-check,Darwin Coronel,Store Manager,0,none,69,69,-11,-11,4,1,0,3,0
+2044,US00019,29th & 3rd,2026-04-30,区经检查,Area food safety Check,Daniel Chu,Area Operations Manager,0,none,75,75,-5,-5,1,1,0,0,0
+1998,US00020,21st & 3rd,2026-04-14,门店自检,Store food safety self-check,Javier Cruz,Shift Supervisor / Trainer,0,none,95,95,-5,-5,1,0,1,0,0
+1999,US00020,21st & 3rd,2026-04-14,门店自检,Store food safety self-check,Javier Cruz,Shift Supervisor / Trainer,0,none,80,80,-20,-20,7,0,2,5,0
+2018,US00020,21st & 3rd,2026-04-21,门店自检,Store food safety self-check,Darwin Coronel,Store Manager,0,none,64,64,-16,-16,5,1,1,3,0
+2020,US00020,21st & 3rd,2026-04-23,区经检查,Area food safety Check,Daniel Chu,Area Operations Manager,0,none,94,94,-6,-6,3,0,0,3,0
+2034,US00020,21st & 3rd,2026-04-28,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,0,none,82,82,-18,-18,6,0,2,4,0
+1992,US00024,15th & 3rd,2026-04-10,门店自检,Store food safety self-check,Clara Mae Venturina,Store Manager,0,none,98,98,-2,-2,1,0,0,1,0
+2007,US00024,15th & 3rd,2026-04-16,门店自检,Store food safety self-check,Clara Mae Venturina,Store Manager,0,none,82,82,-18,-18,10,0,1,6,3
+2025,US00024,15th & 3rd,2026-04-25,门店自检,Store food safety self-check,Clara Mae Venturina,Store Manager,0,none,90,90,-10,-10,7,0,0,5,2
+2026,US00024,15th & 3rd,2026-04-25,区经检查,Area food safety Check,Daniel Chu,Area Operations Manager,0,none,85,85,-15,-15,6,0,1,5,0
+2033,US00024,15th & 3rd,2026-04-28,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,1,approved,96,71,-4,-9,4,1,0,1,2
+1996,US00025,221 Grand,2026-04-13,门店自检,Store food safety self-check,Alexander G Harry,Assistant Store Manager,0,none,72,72,-8,-8,3,1,0,1,1
+2028,US00025,221 Grand,2026-04-26,门店自检,Store food safety self-check,Jonathan Soto,Assistant Store Manager,0,none,90,90,-10,-10,7,0,0,3,4
+2041,US00025,221 Grand,2026-04-30,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,0,none,87,87,-13,-13,7,0,0,6,1
+2043,US00025,221 Grand,2026-04-30,区经检查,Area food safety Check,Daniel Chu,Area Operations Manager,0,none,94,94,-6,-6,3,0,0,3,0
+2006,US00027,52nd & Madison,2026-04-16,门店自检,Store food safety self-check,Wenny Lin,Store Manager,0,none,65,65,-35,-35,16,0,2,11,3
+2014,US00027,52nd & Madison,2026-04-16,区经检查,Area food safety Check,Jung Han Liang,Area Operations Manager,0,none,67,67,-13,-13,6,1,0,3,2
+2019,US00027,52nd & Madison,2026-04-22,门店自检,Store food safety self-check,Brionna Jiles,Shift Supervisor / Trainer,0,none,59,59,-21,-21,8,1,1,5,1
+2039,US00027,52nd & Madison,2026-04-30,QA审计,Store food safety audit,Eamonn Caballar,Senior QA Manager,0,none,78,78,-22,-22,8,0,2,6,0

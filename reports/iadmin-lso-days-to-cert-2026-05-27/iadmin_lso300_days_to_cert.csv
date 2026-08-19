@@ -1,0 +1,41 @@
+﻿employee_no,full_name,email,hire_date,lso_acquired_date,days_to_cert,store_id,dept_name,current_position_code,current_position_name,employee_status,data_anomaly,cert_level
+US202505130002,Jay Gregory,jayrgregory99@gmail.com,2025-05-12,2025-06-11 04:16:45,30,,100 Maiden Ln,LKUS00000082,Store Manager,Separated,N,LSO300
+US202505130001,Conan Yim,conyim5858@gmail.com,2025-05-12,2025-06-11 21:27:12,30,,8th & Broadway,LKUS00000082,Store Manager,Separated,N,LSO300
+US202505130009,Ya Xin Chen,yaxin.chen@luckincoffee.us,2025-05-12,2025-06-13 02:18:48,32,,Store Operations Department,LKUS00000094,OPS Support,Active,N,LSO300
+US202505130005,Yaqing Zuo,maggiezuo1998@gmail.com,2025-05-12,2025-06-13 02:37:12,32,,33rd & 10th,LKUS00000082,Store Manager,Active,N,LSO300
+US202505130007,Jin Song Guan,jinsguan96@gmail.com,2025-05-12,2025-06-17 00:49:13,36,,8th & Broadway,LKUS00000098,Store Manager Trainee,Separated,N,LSO300
+US202505130008,Lin Yao Weng,lin.weng@luckincoffee.us,2025-05-12,2025-06-18 03:08:13,37,,Training Department,LKUS00000094,OPS Support,Active,N,LSO300
+US202505280001,Huanchun Xu,eunice.xu@luckincoffee.us,2025-05-27,2025-08-04 16:23:08,69,,Store Operations Department,LKUS00000094,OPS Support,Active,N,LSO300
+US202505280006,Dominique Meadows,dominiquemeadows@yahoo.com,2025-05-27,2025-08-27 06:28:28,92,,100 Maiden Ln,LKUS00000082,Store Manager,Active,N,LSO300
+US202506160006,Clara Mae Venturina,cmventurina@gmail.com,2025-06-16,2025-09-01 06:16:10,77,,15th & 3rd,LKUS00000082,Store Manager,Active,N,LSO300
+US202506160009,Jian Ming Juo,neoisleo@gmail.com,2025-06-16,2025-09-01 09:49:13,77,,40th & 10th,LKUS00000082,Store Manager,Active,N,LSO300
+US202506160005,Darwin Coronel,darwinc321@gmail.com,2025-06-16,2025-09-01 11:02:46,77,,29th & 3rd,LKUS00000082,Store Manager,Active,N,LSO300
+US202506160003,Tunisia Hayward,tunisiarenee@yahoo.com,2025-06-16,2025-09-03 02:22:00,79,,37th & Broadway,LKUS00000082,Store Manager,Active,N,LSO300
+US202506160001,Wenny Lin,wennylin07@gmail.com,2025-06-16,2025-09-03 03:48:35,79,,52nd & Madison,LKUS00000082,Store Manager,Active,N,LSO300
+US202507090003,Juan Ortiz-Fontanez,j.ortiz-fontanez@outlook.com,2025-07-09,2025-09-27 21:08:36,80,,108th & Broadway,LKUS00000082,Store Manager,Active,N,LSO300
+US202507170003,Eric Park,ericseungwonpark@gmail.com,2025-07-17,2025-09-28 19:59:12,73,,54th & 8th,LKUS00000082,Store Manager,Active,N,LSO300
+US202508120003,Afsana Gu,afsanagu25@gmail.com,2025-08-12,2025-09-30 01:20:53,49,,41st & Lexington,LKUS00000082,Store Manager,Active,N,LSO300
+US202506260003,Huichen Jiang,chenhuij96@gmail.com,2025-06-26,2025-10-04 01:30:34,100,,23rd & 8th,LKUS00000082,Store Manager,Active,N,LSO300
+US202506160007,Juliana Li,juulih00@gmail.com,2025-06-16,2025-10-10 07:32:41,116,,154 Bleecker,LKUS00000082,Store Manager,Active,N,LSO300
+US202507280004,Shangxian Piao,piaoshangxian3@gmail.com,2025-07-28,2025-10-27 06:15:41,91,,102 Fulton,LKUS00000082,Store Manager,Active,N,LSO300
+US202508050006,Brionna Jiles,brionnajiles95@gmail.com,2025-08-05,2025-12-03 01:44:02,120,,28th & 6th,LKUS00000082,Store Manager,Active,N,LSO300
+US202509090009,Kayen Wu He,kayenkwh@gmail.com,2025-09-09,2025-12-10 02:29:33,92,,221 Grand,LKUS00000082,Store Manager,Active,N,LSO300
+US202506260005,Vita Magnier,vmagnier87@gmail.com,2025-06-26,2025-12-19 22:27:32,176,,15th & 3rd,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202506180003,Andrew Hu,huandrew321@gmail.com,2025-06-18,2025-12-24 05:35:13,189,,28th & 6th,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202510070002,Joselyn Pacheco Trejo,joselyn34pacheco@gmail.com,2025-10-07,2025-12-30 23:31:31,84,,16th & 6th,LKUS00000082,Store Manager,Active,N,LSO300
+US202509230008,Chance Lee,chancelee2015@gmail.com,2025-09-23,2026-01-20 23:58:29,119,,21st & 3rd,LKUS00000098,Store Manager Trainee,Separated,N,LSO300
+US202507170004,Carina Medrano,carina.medrano30@gmail.com,2025-07-17,2026-01-24 12:06:30,191,,41st & Lexington,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202509090003,Austin Gebhardt,austingebhardt5@gmail.com,2025-09-09,2026-02-14 02:43:39,158,,37th & Broadway,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202509160008,Andy Weng,andywengchen@gmail.com,2025-09-16,2026-02-16 05:49:42,153,,29th & 3rd,LKUS00000083,Assistant Store Manager,Separated,N,LSO300
+US202509230011,Derson Liang,derson.liang@gmail.com,2025-09-23,2026-02-21 09:27:26,151,,33rd & 10th,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202509020005,Jonathan Soto,sjonathansoto1@gmail.com,2025-09-02,2026-02-25 07:04:59,176,,221 Grand,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202510210001,Javier Cruz,javiercruz52495@gmail.com,2025-10-21,2026-03-09 19:51:02,139,,21st & 3rd,LKUS00000082,Store Manager,Active,N,LSO300
+US202508050008,Alexander G Harry,alexandergharry@gmail.com,2025-08-05,2026-03-12 11:43:41,219,,154 Bleecker,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202510280004,Sami Dalao,dalao.sami@gmail.com,2025-10-28,2026-03-13 00:27:31,136,,102 Fulton,LKUS00000098,Store Manager Trainee,Active,N,LSO300
+US202508270001,Andrew Chen,andrewchen0213@gmail.com,2025-08-27,2026-03-17 04:06:55,202,,23rd & 8th,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202511250003,Eva Moustafa,evamoustafa8@gmail.com,2025-11-25,2026-03-25 19:20:35,120,,108th & Broadway,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202510140004,Qianxin Lu,lqxin1990@gmail.com,2025-10-14,2026-04-22 05:44:39,190,,221 Grand,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202512220008,Laurel Vorhies,jack.vorhies@gmail.com,2025-12-22,2026-04-23 23:56:45,122,,23rd & 8th,LKUS00000083,Assistant Store Manager,Active,N,LSO300
+US202512220002,Juan Cardenas,juancardenas12812@gmail.com,2025-12-22,2026-04-29 02:59:34,128,,21st & 3rd,LKUS00000098,Store Manager Trainee,Active,N,LSO300
+US202509300009,Vidal Mouet,vimouet@gmail.com,2025-09-30,2026-05-19 03:41:34,231,,52nd & Madison,LKUS00000085,Shift Supervisor,Active,N,LSO300
+US202601060002,Dominique Mann,dominique.mann23@aol.com,2026-01-06,2026-05-27 00:08:13,141,,100 Maiden Ln,LKUS00000085,Shift Supervisor,Active,N,LSO300

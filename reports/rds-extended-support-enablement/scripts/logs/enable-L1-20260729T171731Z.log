@@ -1,0 +1,79 @@
+=== RDS Extended Support enablement — L1 — mode=APPLY region=us-east-1 @ 2026-07-29T17:17:31Z ===
+operator=arn:aws:iam::257394478466:user/xiangyu.zeng
+targets=36
+
+aws-luckyus-devops-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-devops-rw                         -> open-source-rds-extended-support
+aws-luckyus-framework01-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-framework01-rw                    -> open-source-rds-extended-support
+aws-luckyus-framework02-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-framework02-rw                    -> open-source-rds-extended-support
+aws-luckyus-iadmin-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iadmin-rw                         -> open-source-rds-extended-support
+aws-luckyus-ibehr-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ibehr-rw                          -> open-source-rds-extended-support
+aws-luckyus-ibillingcentersrv-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ibillingcentersrv-rw              -> open-source-rds-extended-support
+aws-luckyus-ibizconfigcenter-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ibizconfigcenter-rw               -> open-source-rds-extended-support
+aws-luckyus-icyberdata-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-icyberdata-rw                     -> open-source-rds-extended-support
+aws-luckyus-iehr-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iehr-rw                           -> open-source-rds-extended-support
+aws-luckyus-igers-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-igers-rw                          -> open-source-rds-extended-support
+aws-luckyus-ijumpserver-jumpserver-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ijumpserver-jumpserver-rw         -> open-source-rds-extended-support
+aws-luckyus-iluckyauthapi-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iluckyauthapi-rw                  -> open-source-rds-extended-support
+aws-luckyus-iluckymedia-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iluckymedia-rw                    -> open-source-rds-extended-support
+aws-luckyus-iopenadmin-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iopenadmin-rw                     -> open-source-rds-extended-support
+aws-luckyus-iopenlinker-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iopenlinker-rw                    -> open-source-rds-extended-support
+aws-luckyus-iopenservice-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iopenservice-rw                   -> open-source-rds-extended-support
+aws-luckyus-iopshopexpand-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iopshopexpand-rw                  -> open-source-rds-extended-support
+aws-luckyus-iotplatform-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iotplatform-rw                    -> open-source-rds-extended-support
+aws-luckyus-ireplenishment-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ireplenishment-rw                 -> open-source-rds-extended-support
+aws-luckyus-isalesdatamarketing-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-isalesdatamarketing-rw            -> open-source-rds-extended-support
+aws-luckyus-isalesmembermarketing-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-isalesmembermarketing-rw          -> open-source-rds-extended-support
+aws-luckyus-iunifiedreconcile-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iunifiedreconcile-rw              -> open-source-rds-extended-support
+aws-luckyus-iworkflowmidlayer-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-iworkflowmidlayer-rw              -> open-source-rds-extended-support
+aws-luckyus-ldas-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ldas-rw                           -> open-source-rds-extended-support
+aws-luckyus-ldas01-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-ldas01-rw                         -> open-source-rds-extended-support
+aws-luckyus-mfranchise-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-mfranchise-rw                     -> open-source-rds-extended-support
+aws-luckyus-opempefficiency-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-opempefficiency-rw                -> open-source-rds-extended-support
+aws-luckyus-pubdm-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-pubdm-rw                          -> open-source-rds-extended-support
+aws-luckyus-scm-asset-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-asset-rw                      -> open-source-rds-extended-support
+aws-luckyus-scm-openapi-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-openapi-rw                    -> open-source-rds-extended-support
+aws-luckyus-scm-ordering-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-ordering-rw                   -> open-source-rds-extended-support
+aws-luckyus-scm-plan-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-plan-rw                       -> open-source-rds-extended-support
+aws-luckyus-scm-purchase-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-purchase-rw                   -> open-source-rds-extended-support
+aws-luckyus-scm-wds-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scm-wds-rw                        -> open-source-rds-extended-support
+aws-luckyus-scmsrm-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-scmsrm-rw                         -> open-source-rds-extended-support
+aws-luckyus-upush-rw	open-source-rds-extended-support	available
+  [DONE ] aws-luckyus-upush-rw                          -> open-source-rds-extended-support
+
+=== summary L1 (APPLY) : planned/done=36 already=0 skipped=0 failed=0 ===
+log: /home/op/claude-code/app/reports/rds-extended-support-enablement/scripts/logs/enable-L1-20260729T171731Z.log

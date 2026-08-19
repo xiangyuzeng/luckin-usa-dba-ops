@@ -1,0 +1,261 @@
+[
+ {
+  "iid": 2247,
+  "opp_id": 10272,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Dishwasher was being worked on and claimed it was fixed but shut down today \",\"attachment\":\"\",\"operator\":{\"empName\":\"Afsana Gu\",\"empNo\":\"US202508120003\",\"empPost\":\"LKUS00000082\",\"deptId\":20022,\"operateTime\":\"2026-07-07T16:44:41.406\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-07T16:45:03.866\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2247,
+  "opp_id": 10273,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Reported back in May \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mravkj98_3747068ac66a_aws_2.jpg\",\"operator\":{\"empName\":\"Afsana Gu\",\"empNo\":\"US202508120003\",\"empPost\":\"LKUS00000082\",\"deptId\":20022,\"operateTime\":\"2026-07-07T16:44:41.397\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-07T16:45:03.875\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2247,
+  "opp_id": 10276,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Safety hazard was reported \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mravlb6t_e09078d2c1ed_aws_2.jpg\",\"operator\":{\"empName\":\"Afsana Gu\",\"empNo\":\"US202508120003\",\"empPost\":\"LKUS00000082\",\"deptId\":20022,\"operateTime\":\"2026-07-07T16:44:41.416\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-07T16:45:03.886\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2251,
+  "opp_id": 10298,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Reported to BD team already. \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrf15l4k_5c607def46dd_aws_2.jpg\",\"operator\":{\"empName\":\"Yaqing Zuo\",\"empNo\":\"US202505130005\",\"empPost\":\"LKUS00000082\",\"deptId\":20008,\"operateTime\":\"2026-07-10T14:28:05.283\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-10T16:11:09.133\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2255,
+  "opp_id": 10330,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"This issue was submitted to BD and notified to the OM. This has been an ongoing issue for a week. We have tried to use the drain cleaner and attempted to physically remove the clog.\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mre1ht7g_c5ed74ebc138_aws_2.jpg\",\"operator\":{\"empName\":\"Eric Park\",\"empNo\":\"US202507170003\",\"empPost\":\"LKUS00000082\",\"deptId\":1141,\"operateTime\":\"2026-07-09T21:52:50.051\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-10T02:54:08.048\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2256,
+  "opp_id": 10333,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"This has already been reported to OM and was put on the BD list for months \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrecadp0_d7d94bcd893a_aws_2.jpg\",\"operator\":{\"empName\":\"Wenny Lin\",\"empNo\":\"US202506160001\",\"empPost\":\"LKUS00000082\",\"deptId\":20035,\"operateTime\":\"2026-07-10T02:53:11.973\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-10T02:54:34.254\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2256,
+  "opp_id": 10339,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"This was already reported to OM and has been put on the BD list for months\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrec91nr_7a276583232b_aws_2.jpg\",\"operator\":{\"empName\":\"Wenny Lin\",\"empNo\":\"US202506160001\",\"empPost\":\"LKUS00000082\",\"deptId\":20035,\"operateTime\":\"2026-07-10T02:53:11.964\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-10T02:54:34.264\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2267,
+  "opp_id": 10442,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Waiting on the part supply. Will follow up again to fix this \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrl666bo_c7168fb9f174_aws_2.jpg\",\"operator\":{\"empName\":\"Shangxian Piao\",\"empNo\":\"US202507280004\",\"empPost\":\"LKUS00000082\",\"deptId\":20010,\"operateTime\":\"2026-07-14T21:35:39.86\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-14T21:36:07.254\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2267,
+  "opp_id": 10443,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Still Waitng on BD team to adjust All the pipe. Already put on BD list on june 15th. Protect file Unable to take screen shots. \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrl650tq_91bc6c07dbd4_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrl650tq_b8c084bba8bb_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrl650tr_f1ca603b3b33_aws_2.jpg\",\"operator\":{\"empName\":\"Shangxian Piao\",\"empNo\":\"US202507280004\",\"empPost\":\"LKUS00000082\",\"deptId\":20010,\"operateTime\":\"2026-07-14T21:35:39.869\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-14T21:36:07.264\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2273,
+  "opp_id": 10474,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"A work order was put in and claimed it was completed on 7/4 but not done correctly \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrsbc4r7_6923dbb08eed_aws_2.jpg\",\"operator\":{\"empName\":\"Brionna Jiles\",\"empNo\":\"US202508050006\",\"empPost\":\"LKUS00000082\",\"deptId\":1128,\"operateTime\":\"2026-07-19T21:33:50.664\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-19T21:34:13.204\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2286,
+  "opp_id": 10552,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"BD issue that has already been reported and in BD maintenance list \",\"attachment\":\"\",\"operator\":{\"empName\":\"Clara Mae Venturina\",\"empNo\":\"US202506160006\",\"empPost\":\"LKUS00000082\",\"deptId\":20031,\"operateTime\":\"2026-07-21T18:15:52.885\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-21T18:16:56.14\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2287,
+  "opp_id": 10556,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Monica has visited weeks prior and we went through all the bd issues.  All bd issues have been on the bd list for weeks now with no one yet to follow up on the issues.\",\"attachment\":\"\",\"operator\":{\"empName\":\"Javier Cruz\",\"empNo\":\"US202510210001\",\"empPost\":\"LKUS00000082\",\"deptId\":20027,\"operateTime\":\"2026-07-22T15:45:21.332\"},\"approveResult\":{\"approve\":1,\"remark\":\"Please submit a screenshot of bd list showing you reported the problem next time when you appeal.\",\"attachment\":\"\",\"operator\":{\"empName\":\"Yu Jiang\",\"empNo\":\"US202504300001\",\"empPost\":\"LKUS00000078\",\"deptId\":1125,\"operateTime\":\"2026-07-26T00:22:34.679\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2287,
+  "opp_id": 10558,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Air curtain issue is on bd list and has been raised to ops\",\"attachment\":\"\",\"operator\":{\"empName\":\"Javier Cruz\",\"empNo\":\"US202510210001\",\"empPost\":\"LKUS00000082\",\"deptId\":20027,\"operateTime\":\"2026-07-22T15:45:21.322\"},\"approveResult\":{\"approve\":1,\"remark\":\"Please submit a screenshot of bd list showing you reported the problem next time when you appeal.\",\"attachment\":\"\",\"operator\":{\"empName\":\"Yu Jiang\",\"empNo\":\"US202504300001\",\"empPost\":\"LKUS00000078\",\"deptId\":1125,\"operateTime\":\"2026-07-26T00:22:34.69\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2290,
+  "opp_id": 10564,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Already reported on BD list, never came for it\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mruza9qq_594db6b5ebbc_aws_2.jpg\",\"operator\":{\"empName\":\"Eva Moustafa\",\"empNo\":\"US202511250003\",\"empPost\":\"LKUS00000082\",\"deptId\":20026,\"operateTime\":\"2026-07-21T18:20:03.228\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-22T14:41:25.418\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2292,
+  "opp_id": 10575,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Need another wire cover\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrwkoeto_4014e414947b_aws_2.jpg\",\"operator\":{\"empName\":\"Laurel Vorhies\",\"empNo\":\"US202512220008\",\"empPost\":\"LKUS00000082\",\"deptId\":20019,\"operateTime\":\"2026-07-22T21:08:29.155\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2297,
+  "opp_id": 10612,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"5.4.1. States “clean of free of food residues, limescale, mildew, and standing water.” In the picture it’s pieces of tape, that doesn’t fall into the categories \",\"attachment\":\"\",\"operator\":{\"empName\":\"Joselyn Pacheco Trejo\",\"empNo\":\"US202510070002\",\"empPost\":\"LKUS00000082\",\"deptId\":20020,\"operateTime\":\"2026-07-24T17:20:56.301\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2297,
+  "opp_id": 10617,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"On the BD list we have placed order for the mesh since it was causing backflow. A hole was found as well. Instead of replacing the mesh, BD team ripped more holes into it. \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrz78lwa_51c624ce421b_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrz78yru_f02d5947749a_aws_2.jpg\",\"operator\":{\"empName\":\"Joselyn Pacheco Trejo\",\"empNo\":\"US202510070002\",\"empPost\":\"LKUS00000082\",\"deptId\":20020,\"operateTime\":\"2026-07-24T17:20:56.312\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2298,
+  "opp_id": 10615,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Weekly order just arrived today, finally get time to swap those rusted racks with the new plastic storage racks. Rusted problem won’t exist for the future. Those rusted racks are tossed\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrxv6hgc_3c6f495a9178_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrxv6hgd_d23550f41294_aws_2.jpg\",\"operator\":{\"empName\":\"Kayen Wu He\",\"empNo\":\"US202509090009\",\"empPost\":\"LKUS00000082\",\"deptId\":20032,\"operateTime\":\"2026-07-23T18:49:14.67\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-23T20:24:16.409\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2298,
+  "opp_id": 10619,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Already enter in BD maintenance list on 7/17 to request shorten the pipe to aviod touching the drain filter\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrxv1u3d_3996741463f3_aws_2.jpg\",\"operator\":{\"empName\":\"Kayen Wu He\",\"empNo\":\"US202509090009\",\"empPost\":\"LKUS00000082\",\"deptId\":20032,\"operateTime\":\"2026-07-23T18:49:14.684\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-23T20:24:16.422\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2298,
+  "opp_id": 10621,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Already enter in BD maintenance list on 7/21 to request fix on door gap and door handle\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrxv0ruq_5fd9603fe00c_aws_2.jpg\",\"operator\":{\"empName\":\"Kayen Wu He\",\"empNo\":\"US202509090009\",\"empPost\":\"LKUS00000082\",\"deptId\":20032,\"operateTime\":\"2026-07-23T18:49:14.703\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-23T20:24:16.435\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2298,
+  "opp_id": 10622,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Already enter in BD maintenance list on 7/17 to request table edge protector\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrxuzeo3_5c2c3218cc5c_aws_2.jpg\",\"operator\":{\"empName\":\"Kayen Wu He\",\"empNo\":\"US202509090009\",\"empPost\":\"LKUS00000082\",\"deptId\":20032,\"operateTime\":\"2026-07-23T18:49:14.696\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-23T20:24:16.443\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2299,
+  "opp_id": 10624,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Work order currently in to fix air gap\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrxtnx8h_89ffc9769fbd_aws_2.jpg\",\"operator\":{\"empName\":\"Alexander G Harry\",\"empNo\":\"US202508050008\",\"empPost\":\"LKUS00000082\",\"deptId\":20016,\"operateTime\":\"2026-07-23T18:06:46.257\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-23T18:08:53.716\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2299,
+  "opp_id": 10626,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Compost bin broke\",\"attachment\":\"\",\"operator\":{\"empName\":\"Alexander G Harry\",\"empNo\":\"US202508050008\",\"empPost\":\"LKUS00000082\",\"deptId\":20016,\"operateTime\":\"2026-07-23T18:06:46.267\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-23T18:08:53.729\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2301,
+  "opp_id": 10635,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Report on BD list on 7/24 7am\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrz8kgg8_d656e5475990_aws_2.jpg\",\"operator\":{\"empName\":\"Jian Ming Juo\",\"empNo\":\"US202506160009\",\"empPost\":\"LKUS00000082\",\"deptId\":20025,\"operateTime\":\"2026-07-24T17:52:14.646\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2301,
+  "opp_id": 10637,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Report to BD list on 7/24\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrz8m111_8b62c9461cdd_aws_2.jpg\",\"operator\":{\"empName\":\"Jian Ming Juo\",\"empNo\":\"US202506160009\",\"empPost\":\"LKUS00000082\",\"deptId\":20025,\"operateTime\":\"2026-07-24T17:52:14.658\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2301,
+  "opp_id": 10638,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Report to OM on 7/2\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrz8e7be_cb9c31704ced_aws_2.jpg\",\"operator\":{\"empName\":\"Jian Ming Juo\",\"empNo\":\"US202506160009\",\"empPost\":\"LKUS00000082\",\"deptId\":20025,\"operateTime\":\"2026-07-24T17:52:14.668\"},\"approveResult\":null}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2302,
+  "opp_id": 10640,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"We wipe it every day but it gets dusty very fast. Was even wiped a couple of hours ago and is dusty again \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/ms11kql1_b962b347361d_aws_2.jpg\",\"operator\":{\"empName\":\"Huichen Jiang\",\"empNo\":\"US202506260003\",\"empPost\":\"LKUS00000082\",\"deptId\":1127,\"operateTime\":\"2026-07-26T00:12:11.674\"},\"approveResult\":{\"approve\":0,\"remark\":\"At the moment of the audit, the dust was there. Check right after wiping and see if the dead corner was not wiped or the fiber is from the rag.\",\"attachment\":\"\",\"operator\":{\"empName\":\"Yu Jiang\",\"empNo\":\"US202504300001\",\"empPost\":\"LKUS00000078\",\"deptId\":1125,\"operateTime\":\"2026-07-26T00:20:25.554\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2302,
+  "opp_id": 10641,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Already added to BD List!\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/ms11iig9_3d8269bc3df5_aws_2.jpg\",\"operator\":{\"empName\":\"Huichen Jiang\",\"empNo\":\"US202506260003\",\"empPost\":\"LKUS00000082\",\"deptId\":1127,\"operateTime\":\"2026-07-26T00:12:11.693\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Yu Jiang\",\"empNo\":\"US202504300001\",\"empPost\":\"LKUS00000078\",\"deptId\":1125,\"operateTime\":\"2026-07-26T00:20:25.563\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2302,
+  "opp_id": 10642,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Was cleaned immediately after noticing \",\"attachment\":\"\",\"operator\":{\"empName\":\"Huichen Jiang\",\"empNo\":\"US202506260003\",\"empPost\":\"LKUS00000082\",\"deptId\":1127,\"operateTime\":\"2026-07-26T00:12:11.683\"},\"approveResult\":{\"approve\":0,\"remark\":\"This is appeal, not corrective action stage\",\"attachment\":\"\",\"operator\":{\"empName\":\"Yu Jiang\",\"empNo\":\"US202504300001\",\"empPost\":\"LKUS00000078\",\"deptId\":1125,\"operateTime\":\"2026-07-26T00:20:25.572\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2302,
+  "opp_id": 10643,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Was cleaned after shown problem areas \",\"attachment\":\"\",\"operator\":{\"empName\":\"Huichen Jiang\",\"empNo\":\"US202506260003\",\"empPost\":\"LKUS00000082\",\"deptId\":1127,\"operateTime\":\"2026-07-26T00:12:11.703\"},\"approveResult\":{\"approve\":0,\"remark\":\"This is appeal, not corrective action stage\",\"attachment\":\"\",\"operator\":{\"empName\":\"Yu Jiang\",\"empNo\":\"US202504300001\",\"empPost\":\"LKUS00000078\",\"deptId\":1125,\"operateTime\":\"2026-07-26T00:20:25.581\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2303,
+  "opp_id": 10646,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Report on the BD list on 7/24 1 pm\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrz8olsy_bd4812e61565_aws_2.jpg\",\"operator\":{\"empName\":\"Jian Ming Juo\",\"empNo\":\"US202506160009\",\"empPost\":\"LKUS00000082\",\"deptId\":20025,\"operateTime\":\"2026-07-24T17:55:48.464\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-24T17:56:18.696\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2303,
+  "opp_id": 10647,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Report on the BD list on 7/24 morning 7:19am\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mrz8p3bw_d6155f68bb1b_aws_2.jpg\",\"operator\":{\"empName\":\"Jian Ming Juo\",\"empNo\":\"US202506160009\",\"empPost\":\"LKUS00000082\",\"deptId\":20025,\"operateTime\":\"2026-07-24T17:55:48.474\"},\"approveResult\":{\"approve\":1,\"remark\":null,\"attachment\":\"\",\"operator\":{\"empName\":\"Eamonn Caballar\",\"empNo\":\"US202601050001\",\"empPost\":\"LKUS00000223\",\"deptId\":1125,\"operateTime\":\"2026-07-24T17:56:18.709\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2338,
+  "opp_id": 10829,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Reported to BD on 7/27/2026. \",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msbrnsa2_382dce8ef6d7_aws_2.jpg\",\"operator\":{\"empName\":\"Dominique Meadows\",\"empNo\":\"US202505280006\",\"empPost\":\"LKUS00000082\",\"deptId\":1140,\"operateTime\":\"2026-08-02T12:18:57.431\"},\"approveResult\":{\"approve\":0,\"remark\":\"It’s still standing water; no action until I checked \",\"attachment\":\"\",\"operator\":{\"empName\":\"Jung Han Liang\",\"empNo\":\"US202504260006\",\"empPost\":\"LKUS00000076\",\"deptId\":1133,\"operateTime\":\"2026-08-02T12:25:46.308\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2338,
+  "opp_id": 10830,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Reported to BD on 7/27/2026\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msbrmz7h_2e0299aff66d_aws_2.jpg\",\"operator\":{\"empName\":\"Dominique Meadows\",\"empNo\":\"US202505280006\",\"empPost\":\"LKUS00000082\",\"deptId\":1140,\"operateTime\":\"2026-08-02T12:18:57.451\"},\"approveResult\":{\"approve\":1,\"remark\":\"Please follow up with BD and OM\",\"attachment\":\"\",\"operator\":{\"empName\":\"Jung Han Liang\",\"empNo\":\"US202504260006\",\"empPost\":\"LKUS00000076\",\"deptId\":1133,\"operateTime\":\"2026-08-02T12:25:46.318\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2338,
+  "opp_id": 10831,
+  "opp_status": 1,
+  "first_appeal_detail": "{\"describe\":\"Sani changed\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msbrhfo2_0ef0e59fd690_aws_2.jpg\",\"operator\":{\"empName\":\"Dominique Meadows\",\"empNo\":\"US202505280006\",\"empPost\":\"LKUS00000082\",\"deptId\":1140,\"operateTime\":\"2026-08-02T12:18:57.441\"},\"approveResult\":{\"approve\":0,\"remark\":\"Please change before check and change frequently. \",\"attachment\":\"\",\"operator\":{\"empName\":\"Jung Han Liang\",\"empNo\":\"US202504260006\",\"empPost\":\"LKUS00000076\",\"deptId\":1133,\"operateTime\":\"2026-08-02T12:25:46.327\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2341,
+  "opp_id": 10843,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Notified JC on 7/26 to fixed our pipe length. So far still no visit yet. Therefore we made a easy pipe as a temporary solution for overflow issue\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msam08da_54fa265c0d7b_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msam08da_04bcd158c00b_aws_2.jpg\",\"operator\":{\"empName\":\"Kayen Wu He\",\"empNo\":\"US202509090009\",\"empPost\":\"LKUS00000082\",\"deptId\":20032,\"operateTime\":\"2026-08-01T16:53:29.47\"},\"approveResult\":{\"approve\":1,\"remark\":\"It was reported,  but please put this in BD\",\"attachment\":\"\",\"operator\":{\"empName\":\"Jung Han Liang\",\"empNo\":\"US202504260006\",\"empPost\":\"LKUS00000076\",\"deptId\":1133,\"operateTime\":\"2026-08-02T12:16:25.063\"}}}",
+  "second_appeal_detail": ""
+ },
+ {
+  "iid": 2342,
+  "opp_id": 10847,
+  "opp_status": 0,
+  "first_appeal_detail": "{\"describe\":\"Lost screw reported in bd list\",\"attachment\":\"\",\"operator\":{\"empName\":\"Andrew Hu\",\"empNo\":\"US202506180003\",\"empPost\":\"LKUS00000083\",\"deptId\":20031,\"operateTime\":\"2026-08-01T01:28:47.143\"},\"approveResult\":{\"approve\":1,\"remark\":\"This is equipment instead, I will accept this case\",\"attachment\":\"\",\"operator\":{\"empName\":\"Jung Han Liang\",\"empNo\":\"US202504260006\",\"empPost\":\"LKUS00000076\",\"deptId\":1133,\"operateTime\":\"2026-08-02T12:26:52.082\"}}}",
+  "second_appeal_detail": ""
+ }
+]

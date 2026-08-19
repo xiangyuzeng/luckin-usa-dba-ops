@@ -1,4 +1,4 @@
-April 2026 Inspection Export — Schema Notes
+April 2026 Inspection Export — Schema Notes (v2 REFRESH 2026-05-01)
 
 DISCOVERY
 =========
@@ -14,73 +14,51 @@ DISCOVERY
     t_shopcheck_config_snapshot 2506 rows  inspection config snapshot per data row
 - Store master found at:             aws-luckyus-opshop-rw / luckyus_opshop.t_shop_info  (519 rows)
 
-NOTE on the user's "empapp" naming
-==================================
-The empapp 门店稽核系统 surfaces in this database under the prefix `t_shopcheck_*`.
-There is no dedicated "empapp" database in the mcp-db-gateway server list.
-The opqualitycontrol cluster owns both shopcheck (audits) and other QA data
-(t_cs_sheet customer service tickets, t_duty_task_sheet 门店执勤, etc.).
+V2 REFRESH NOTES (2026-05-01)
+=============================
+- Re-pulled live data via mcp-db-gateway after two known changes:
+  1. Inspection 2040 (54th & 8th, 2026-04-30 QA audit by Eamonn Caballar) was
+     re-scored from 69 to 94 after store appeal approved. The S item is still
+     present on the row but its deductionScore was zeroed (count=1, score=0).
+  2. Inspection 2016 and 2017 (Darwin Coronel, 21st & 3rd, 2026-04-21 self-checks)
+     were misubmissions (score=100, item_count=0). They are excluded from the
+     published CSVs by the misubmission filter rule. The real inspection that day
+     is 2018 (score=64, 5 items). DB rows are NOT touched — exclusion is
+     applied at the report layer only.
 
 INSPECTION-TYPE MAPPING (large_category_id)
 ===========================================
-Resolved from t_shopcheck_data.large_category_name + cross-reference with
-t_shopcheck_category_config (top-level rows where parent_id=0):
-
    id 1084 'Store food safety self-check'   -> 门店自检   (Store Self-Inspection)
    id 1134 'Store food safety audit'        -> QA审计     (QA Audit)
    id 1184 'Area food safety Check'         -> 区经检查   (Area Manager Inspection)
 
-Excluded historical / test categories (not in scope):
-   id  924 'IQA2Test_门店营业检查'           -> internal QA2 test data
-   id  928 'US Store Food Safety Audit'      -> superseded by 1134
-   id 1075 'Test', 1080 'test'               -> test rows
-   id  977 'US Area food safety Check'       -> superseded by 1184
-   id 1026 'Store food safety self-check'    -> superseded by 1084
+SEVERITY MAPPING (S / M / G / L)
+================================
+   deduction_type 1 -> S
+   deduction_type 2 -> G
+   deduction_type 3 -> M
+   deduction_type 4 -> L
+   deduction_type 9 -> '9'  (kept literal — only 2 items repo-wide, score_config=0)
 
-SEVERITY MAPPING (S / M / G / L) — INFERRED
-===========================================
-The source `t_shopcheck_item_config.deduction_type` is a tinyint with values 1-4
-(plus rare 9). It is NOT directly labeled S/M/G/L. We derive the mapping from:
-  (a) the 'content' prefix on item_config rows: '(S)' and '(M)' literal markers, and
-  (b) the typical score_config values:
-       deduction_type 1 -> -5    (severe)
-       deduction_type 2 -> -2    (general — most common, 405 items)
-       deduction_type 3 -> -5    (major)
-       deduction_type 4 -> -1    (light, 82 items)
+SUBMITTED VIEW
+==============
+Published CSVs use status=1 (submitted) only. Drafts (status=0) are excluded —
+this matches the canonical view used by prior monthly reports.
 
-Final mapping used in the CSV `severity` column:
-       deduction_type 1 -> S
-       deduction_type 2 -> G
-       deduction_type 3 -> M
-       deduction_type 4 -> L
-       deduction_type 9 -> '9'  (kept literal — only 2 items repo-wide, both score_config=0)
+MISUBMISSION FILTER (post-query, v2 only)
+=========================================
+Exclusion rule:
+  drop any inspection where
+    score = 100 AND item_count = 0
+    AND there exists another inspection by the same inspector (checker_id),
+        same store (dept_id), same date with item_count > 0.
 
-CATEGORY HIERARCHY
-==================
-Three levels under each large_category_id (e.g. 1134):
-   level-1 = inspection type itself (1134 'Store food safety audit')
-   level-2 = wrapper "Store food safety self-check" (1475)
-   level-3 = MODULE  e.g. 1480 'Employees' Health and Personal Hygiene'
-                       1494 'Cleaning and Sanitation'
-                       1502 'Sanitation and Hygiene'
-                       1504 'Temperature Control / Expiration Date Management.'
-                       1487 'Process Control', 1485 'Approved Supplier', 1476 'Document Record',
-                       1509 'Maintenance of Equipment', 1512 'Facility', 1517 'Pests Control',
-                       1521 'Site Security', 1523 'Workplace Safety',
-                       1525 'Requirements on Store Audit Management Procedures'
-   level-4 = SUBCATEGORY (leaf), e.g. 1481 'Employees' Health', 1482 'Personal Hygiene',
-                                       1497 'Equipment and utensils', 1490 'Cross-Contamination',
-                                       1477 'Licenses and certificates', 1478 'Personal certificate'.
+Only affects published CSVs and report-layer counts. The underlying DB is NOT
+modified. Other clean-100 self-checks (e.g. one-off inspections that day) are
+preserved.
 
-Same module skeleton repeats under 1084 (path 1084,1579,*) and 1184 (path 1184,1630,*).
-
-For the CSV `module_name` column the script emits the level-3 module name; the
-level-4 leaf name goes to `module_subcategory`. Names are stored in English in
-this US-tenant deployment (the Chinese-name examples in the task brief do not
-appear in the source — those are aspirational). All names preserved verbatim.
-
-INSPECTOR ROLE BY POST CODE (derived from data)
-================================================
+INSPECTOR ROLE BY POST CODE
+============================
    LKUS00000076 -> Area Operations Manager     (Daniel Chu, Jung Han Liang)
    LKUS00000078 -> Senior QA Manager           (Yu Jiang)
    LKUS00000223 -> Senior QA Manager           (Eamonn Caballar)
@@ -96,14 +74,3 @@ KEY JOIN GRAPH
   t_shopcheck_item_config.category_config_id  ==  t_shopcheck_category_config.id (leaf)
   t_shopcheck_category_config.parent_id        ==  t_shopcheck_category_config.id (module)
   t_shopcheck_data.dept_id  ==  t_shop_info.dept_id        (store master)
-  t_shop_info.shop_no                                       store_code (US00xxx)
-
-April 2026 SCOPE COUNTS (deleted=0, large_category in 1084,1134,1184)
-=====================================================================
-  inspection rows (t_shopcheck_data)               : 63
-  reports (t_shopcheck_report)                     : 59  (4 inspections never had report rows; status=0 incomplete)
-  deduction items (t_shopcheck_opportunity)        : ~330 lines
-
-SAMPLE DATA (5 rows each — see actual CSV outputs for full data)
-=================================================================
-[See april2026_inspection_summary.csv and april2026_inspection_items.csv for full content.]
