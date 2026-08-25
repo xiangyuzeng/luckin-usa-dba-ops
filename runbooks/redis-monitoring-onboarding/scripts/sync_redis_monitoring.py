@@ -6,6 +6,10 @@ sync_redis_monitoring.py — 全自动维护 AWS Redis 监控的三个文件（�
 
 数据源（三个）：
   · AWS ElastiCache  describe-replication-groups  → 每集群 endpoint + TransitEncryptionEnabled + AuthTokenEnabled
+                     endpoint 取法见 resolve_rg_endpoint：cluster mode **关**取
+                     NodeGroups[0].PrimaryEndpoint，cluster mode **开**（分片集群）取
+                     ConfigurationEndpoint（clustercfg.…，此时 PrimaryEndpoint 全为 null）；
+                     两个都取不到 → 记入 no_endpoint 显式上报，绝不静默跳过
   · ldas CMDB        luckyus_ozono.cache_cloud_app(app_status=1) → 每在营实例 host_info(host:port)
                      （只用于发现集群 + 与 AWS 对账，**不再取 password**）
   · 现有 redis-password.file → 每集群 token 的**权威来源**（见下方 token 规则）
@@ -29,6 +33,8 @@ join 键：DB 的 host_info  ==  AWS 的 PrimaryEndpoint.Address + ":" + Port
   python3 sync_redis_monitoring.py                       # dry-run：拉数据、join、报告差异，不写（默认）
   python3 sync_redis_monitoring.py --apply               # 备份后写回三个文件
   python3 sync_redis_monitoring.py --cron [--webhook 飞书URL]  # 定时对账：只读，仅漂移/硬问题时告警(发飞书)，恒退出 0
+  python3 sync_redis_monitoring.py --expand-shards ...   # 分片集群按**每节点**出 target（分片集群必加）
+  ⚠️ --expand-shards 会改变三文件内容 → 写文件与 --cron 对账**必须用同样的开关**，否则天天误报漂移
   （每次都会额外查 Prometheus，找"应监控却未有效监控"的实例；--skip-monitoring-check 可关；
    Prometheus 地址默认 http://10.238.3.136:9090，可用环境变量 PROMETHEUS_URL 覆盖）
 
@@ -55,7 +61,7 @@ AWS 凭证：默认走本机 aws cli 凭证链（instance profile / ~/.aws / 环
 若机器人开了"签名校验"，把密钥放环境变量 FEISHU_SIGN_SECRET，脚本自动叠加 timestamp+sign。
 
 crontab（无需 shell 包装，直接调本脚本的 --cron 模式）：
-  */30 * * * * cd <EXPORTER_DIR> && python3 sync_redis_monitoring.py --cron --webhook https://open.feishu.cn/open-apis/bot/v2/hook/xxxx
+  */30 * * * * cd <EXPORTER_DIR> && python3 sync_redis_monitoring.py --cron --expand-shards --webhook https://open.feishu.cn/open-apis/bot/v2/hook/xxxx
 """
 
 import argparse
@@ -132,8 +138,13 @@ def load_aws_conf(path: str) -> dict:
             "secret_access_key": sk, "region": s.get("region", "").strip()}
 
 
-def build_aws_invocation(query, region, aws_conf, base_env):
-    """构造 aws describe-replication-groups 的 (argv, env)。纯函数、可单测、不碰网络。
+def build_aws_invocation(query, region, aws_conf, base_env,
+                         operation="describe-replication-groups", extra_args=()):
+    """构造 aws elasticache <operation> 的 (argv, env)。纯函数、可单测、不碰网络。
+
+    operation/extra_args 默认值 = 原来的 describe-replication-groups，故对老调用方完全兼容；
+    --expand-shards 需要的 describe-cache-clusters --show-cache-node-info 走同一条构造路径，
+    这样凭证注入规则（下面那套）对两个调用**只有一份实现**，不会哪天只修一边。
 
     凭证注入规则（安全关键）：
       · access_key_id/secret_access_key 走 **env**（AWS_ACCESS_KEY_ID/SECRET），
@@ -159,8 +170,9 @@ def build_aws_invocation(query, region, aws_conf, base_env):
         env["AWS_PROFILE"] = aws_conf["profile"]
         for k in ("AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_SESSION_TOKEN"):
             env.pop(k, None)
-    argv += ["elasticache", "describe-replication-groups",
-             "--region", region, "--query", query, "--output", "json"]
+    argv += ["elasticache", operation]
+    argv += list(extra_args)
+    argv += ["--region", region, "--query", query, "--output", "json"]
     return argv, env
 
 
@@ -176,19 +188,15 @@ class AwsUnavailable(Exception):
     """
 
 
-def fetch_aws_rgs(region=REGION, aws_conf=None) -> dict:
-    """返回 { "<ep>:<port>": {"id":.., "tls":bool, "auth":bool} }。走本机 aws cli。
+def _aws_json(query, region, aws_conf, operation="describe-replication-groups",
+              extra_args=()):
+    """跑一条 aws elasticache 只读命令并解析 JSON；失败一律转成 AwsUnavailable。
 
-    aws_conf（来自 ldas.conf 的 [aws] 段，见 load_aws_conf）可选，指定 profile 或密钥；
-    缺省则用主机默认凭证链。argv/env 由纯函数 build_aws_invocation 构造（密钥只走 env）。
-    aws CLI 非零退出（权限/凭证/网络）或不在 PATH 上 → 抛 AwsUnavailable（带原因），
-    由调用方降级处理，不让异常冒泡成 traceback 把 cron 打崩。
+    抽出来是为了让 describe-replication-groups 与 describe-cache-clusters 共用同一套
+    凭证注入 + 降级语义（cron 不崩、apply 不半写），不会两处各写一遍再走岔。
     """
-    q = ("ReplicationGroups[].{id:ReplicationGroupId,"
-         "tls:TransitEncryptionEnabled,auth:AuthTokenEnabled,"
-         "ep:NodeGroups[0].PrimaryEndpoint.Address,"
-         "port:NodeGroups[0].PrimaryEndpoint.Port}")
-    argv, env = build_aws_invocation(q, region, aws_conf, os.environ)
+    argv, env = build_aws_invocation(query, region, aws_conf, os.environ,
+                                     operation=operation, extra_args=extra_args)
     try:
         out = subprocess.check_output(argv, stderr=subprocess.PIPE, env=env)
     except FileNotFoundError as e:                      # aws CLI 不在 PATH
@@ -196,14 +204,94 @@ def fetch_aws_rgs(region=REGION, aws_conf=None) -> dict:
     except subprocess.CalledProcessError as e:          # 权限/凭证/网络：非零退出
         err = (e.stderr or b"").decode("utf-8", "replace").strip()
         raise AwsUnavailable(err or f"aws 退出码 {e.returncode}") from e
-    rgs = json.loads(out)
-    amap = {}
+    return json.loads(out)
+
+
+def resolve_rg_endpoint(r: dict):
+    """从一条 describe-replication-groups 记录解析出监控用端点。纯函数、可单测、不碰网络。
+
+    返回 (hostport|None, cluster_enabled)。**两种集群形态的端点字段互斥**：
+      · cluster mode DISABLED（本 fleet 79/80）：NodeGroups[0].PrimaryEndpoint 有值，
+        ConfigurationEndpoint 为 null。
+      · cluster mode ENABLED（分片集群，如 luckyus-icdpactivityengine，3 分片）：
+        **NodeGroups[].PrimaryEndpoint 全为 null**，唯一可连地址是 ConfigurationEndpoint
+        （clustercfg.<rg>.…），ozono cache_cloud_app.host_info 登记的也正是它 → join 得上。
+    2026-08-20 事故：老代码只看 NodeGroups[0].PrimaryEndpoint，取不到就 `continue` 静默丢弃，
+    于是分片集群既不进 aws_map（→ 连 aws_only "未纳管" 都不会报），又让 ozono 那条在营记录
+    落进 db_only 被报成"改名/非 ElastiCache?"——真实原因（cluster mode）被完全掩盖，
+    集群长期漏监控。故：按 ClusterEnabled 选主字段、另一个当兜底；两个都取不到就返回 None，
+    由调用方**显式上报**（no_endpoint），绝不再静默 continue。
+    """
+    ce = bool(r.get("ce"))
+    order = (("cfg_ep", "cfg_port"), ("ep", "port")) if ce else \
+            (("ep", "port"), ("cfg_ep", "cfg_port"))
+    for addr_key, port_key in order:
+        if r.get(addr_key) and r.get(port_key):
+            return f"{r[addr_key]}:{r[port_key]}", ce
+    return None, ce
+
+
+def fetch_aws_rgs(region=REGION, aws_conf=None):
+    """返回 (amap, no_endpoint)。走本机 aws cli。
+
+      amap        { "<ep>:<port>": {"id":.., "tls":bool, "auth":bool,
+                                    "cluster":bool, "shards":int} }
+      no_endpoint [ {"id":.., "status":.., "cluster":bool} ]  端点解析不出来的 RG
+                  （创建中/形态异常）——**必须上报**，不能像 2026-08-20 之前那样静默吞掉。
+
+    端点选择规则见 resolve_rg_endpoint（cluster-mode 走 ConfigurationEndpoint）。
+    aws_conf（来自 ldas.conf 的 [aws] 段，见 load_aws_conf）可选，指定 profile 或密钥；
+    缺省则用主机默认凭证链。argv/env 由纯函数 build_aws_invocation 构造（密钥只走 env）。
+    aws CLI 非零退出（权限/凭证/网络）或不在 PATH 上 → 抛 AwsUnavailable（带原因），
+    由调用方降级处理，不让异常冒泡成 traceback 把 cron 打崩。
+    """
+    # 注意：分片数用 NodeGroups[].NodeGroupId 投影而非 JMESPath length()——
+    # NodeGroups 为 null 时 length() 直接报错会打崩整条查询，投影则安全地得到 null。
+    q = ("ReplicationGroups[].{id:ReplicationGroupId,"
+         "tls:TransitEncryptionEnabled,auth:AuthTokenEnabled,"
+         "status:Status,ce:ClusterEnabled,ngids:NodeGroups[].NodeGroupId,"
+         "ep:NodeGroups[0].PrimaryEndpoint.Address,"
+         "port:NodeGroups[0].PrimaryEndpoint.Port,"
+         "cfg_ep:ConfigurationEndpoint.Address,"
+         "cfg_port:ConfigurationEndpoint.Port}")
+    rgs = _aws_json(q, region, aws_conf)
+    amap, no_endpoint = {}, []
     for r in rgs:
-        if not r.get("ep"):
+        hostport, cluster = resolve_rg_endpoint(r)
+        if not hostport:                                # 绝不静默丢弃，攒起来上报
+            no_endpoint.append({"id": r.get("id") or "?",
+                                "status": r.get("status") or "?",
+                                "cluster": cluster})
             continue
-        amap[f"{r['ep']}:{r['port']}"] = {
-            "id": r["id"], "tls": bool(r["tls"]), "auth": bool(r["auth"])}
-    return amap
+        amap[hostport] = {
+            "id": r["id"], "tls": bool(r["tls"]), "auth": bool(r["auth"]),
+            "cluster": cluster, "shards": len(r.get("ngids") or [])}
+    return amap, sorted(no_endpoint, key=lambda x: x["id"])
+
+
+def fetch_aws_nodes(region=REGION, aws_conf=None) -> dict:
+    """返回 { "<rg_id>": [ {"node": <CacheClusterId>, "hostport": "<addr>:<port>"} ] }。
+
+    仅 --expand-shards 用：分片集群要按**节点**抓，而 describe-replication-groups 对
+    cluster-mode RG 不给节点端点（NodeGroupMembers 里只有 CacheClusterId），
+    只有 describe-cache-clusters --show-cache-node-info 才有 CacheNodes[].Endpoint。
+    节点端点形如 <rg>-000X-00Y.<rg>.<token>.use1.cache.amazonaws.com:6379，
+    **故障转移只换角色不换端点**，所以拿它当 target 是稳定的。
+    节点按 hostport 排序，保证渲染结果稳定（否则 AWS 返回顺序一抖就报假漂移）。
+    """
+    q = ("CacheClusters[].{rg:ReplicationGroupId,node:CacheClusterId,"
+         "ep:CacheNodes[0].Endpoint.Address,port:CacheNodes[0].Endpoint.Port}")
+    rows = _aws_json(q, region, aws_conf, operation="describe-cache-clusters",
+                     extra_args=("--show-cache-node-info",))
+    by_rg = {}
+    for r in rows:
+        if not (r.get("rg") and r.get("ep") and r.get("port")):
+            continue                     # 单机 cache cluster / 端点未就绪：与本功能无关
+        by_rg.setdefault(r["rg"], []).append(
+            {"node": r["node"], "hostport": f"{r['ep']}:{r['port']}"})
+    for nodes in by_rg.values():
+        nodes.sort(key=lambda n: n["hostport"])
+    return by_rg
 
 
 def fetch_db_instances(ldas_conf: dict) -> list:
@@ -311,15 +399,61 @@ def build_plan(db_rows: list, aws_map: dict, existing_tokens: dict):
             token = ""                    # 非 AUTH 一律空（塞 token 会被 redis:// 拒）
         matched[hp] = {
             "hostport": hp, "prefix": prefix, "uri": prefix + hp,
-            "token": token, "id": rg["id"], "tls": rg["tls"]}
+            "token": token, "id": rg["id"], "tls": rg["tls"],
+            "cluster": bool(rg.get("cluster")), "shards": int(rg.get("shards") or 0)}
     aws_only = sorted(v["id"] for k, v in aws_map.items() if k not in matched)
     entries = sorted(matched.values(), key=lambda e: e["uri"])
     return entries, sorted(db_only), aws_only, sorted(token_missing)
 
 
-def render_files(entries: list):
-    """从 entries 渲染三个文件的目标内容（字符串）。"""
-    pwd_obj = {e["uri"]: e["token"] for e in entries}
+def expand_cluster_entries(entries: list, nodes_by_rg: dict, existing_tokens: dict):
+    """把 cluster-mode 条目展开成**每节点一条** target。纯函数、可单测。
+
+    为什么必须展开（2026-08-20 实测）：`clustercfg.<rg>.…` 一条 DNS 记录里是**全部 N 个节点
+    的 IP**（3 主 + 3 从），服务端每次查询轮换顺序，客户端连第一个 → 每次 /scrape 落到
+    随机节点。后果：counter 类指标（commands_processed 等）在一个 instance 下混了 6 个
+    互不相干的计数器，rate() 全废；内存/键数只看得到 1/N 且在分片间跳；某个分片挂了只有
+    约 1/N 的抓取能发现 → 间歇性告警。节点端点则一节点一条稳定序列。
+
+    返回 (render_entries, pwd_entries, expand_missing)：
+      render_entries  targets 用（分片集群 → N 条节点；普通集群原样）
+      pwd_entries     redis-password.file 用 = render_entries + **保留的父集群条目**。
+                      保留父条目是为了**token 往返幂等**：token 的权威来源是现有密码文件，
+                      若展开后文件里只剩节点 key，下一轮 parse_existing_tokens 就找不到
+                      clustercfg 那个 key → build_plan 报 token_missing 并把 token 置空 →
+                      再 --apply 就会把 6 个节点的 token 清掉（7-16 事故的翻版）。
+                      多出来的父 key 对 exporter 完全无害（只按 target URI 查表）。
+      expand_missing  声明要展开却拿不到节点端点的集群 id（硬问题，绝不静默退回 clustercfg）
+    每节点 token：优先用密码文件里该节点自己的 token（允许人工按节点覆盖），
+    没有则沿用父集群的 token（AUTH token 是集群级的，N 个节点同一个）。
+    """
+    render, pwd_extra, missing = [], [], []
+    for e in entries:
+        if not e.get("cluster"):
+            render.append(e)
+            continue
+        nodes = nodes_by_rg.get(e["id"]) or []
+        if not nodes:
+            missing.append(e["id"])
+            render.append(e)              # 拿不到节点就先维持原样，但上报为硬问题
+            continue
+        for n in nodes:
+            hp = n["hostport"]
+            token = existing_tokens[hp] if hp in existing_tokens else e["token"]
+            render.append({**e, "hostport": hp, "uri": e["prefix"] + hp,
+                           "token": token, "id": n["node"], "parent": e["id"]})
+        pwd_extra.append(e)               # 父集群 key 留在密码文件里（见上：往返幂等）
+    render.sort(key=lambda x: x["uri"])
+    return render, render + pwd_extra, sorted(missing)
+
+
+def render_files(entries: list, pwd_entries: list = None):
+    """从 entries 渲染三个文件的目标内容（字符串）。
+
+    pwd_entries 缺省 = entries；--expand-shards 时它比 entries 多出被保留的父集群条目
+    （见 expand_cluster_entries 的 token 往返幂等说明）。
+    """
+    pwd_obj = {e["uri"]: e["token"] for e in (entries if pwd_entries is None else pwd_entries)}
     targets = [e["uri"] for e in entries]
     sd_obj = [{"targets": targets, "labels": {}}]
     return (json.dumps(pwd_obj, indent=2),
@@ -434,7 +568,40 @@ def feishu_sign(secret: str, timestamp: str) -> str:
     return base64.b64encode(digest).decode("utf-8")
 
 
-def send_alert(subject: str, body: str, webhook: str = "", secret: str = ""):
+FEISHU_MAX_ATTEMPTS   = 3          # 首发 + 2 次重试
+FEISHU_BACKOFF_SECONDS = (2, 6)   # 两次重试前分别等待；最坏总耗时 ~8s，对日频 cron 可接受
+
+
+def redact_webhook(url: str) -> str:
+    """飞书 webhook 末段是机器人 token（等同密码）→ 日志里只留前缀 + 掩码。
+
+    2026-08-20 复盘发现成功分支会把完整 URL 打进 /var/log/redis-mon-sync.log。
+    """
+    if not url:
+        return "(未配置)"
+    head, sep, tok = url.rpartition("/")
+    if not sep:
+        return "***"
+    return f"{head}/{tok[:4]}***" if tok else f"{head}/***"
+
+
+def feishu_retryable(code, msg: str = "") -> bool:
+    """飞书返回体是否值得重试。纯函数、可单测。
+
+    值得重试 = 限频/服务端临时问题（重试就能过去）；
+    不值得   = 签名错(19021)/机器人停用/URL 写错 —— 重试只是把同样的错再犯两遍。
+    2026-08-20 早晨的 cron 实际吃到 `code=11232 frequency limited`，
+    而那一轮恰好带着 db_only=1（新分片集群漏监控）的提示 → **故障告警自己被限频吞了**。
+    故按 code + msg 双判据：飞书限频有一族相近 code，只认死数字容易漏。
+    """
+    if code in (11232,):
+        return True
+    low = (msg or "").lower()
+    return "frequency limited" in low or "rate limit" in low or "too many request" in low
+
+
+def send_alert(subject: str, body: str, webhook: str = "", secret: str = "",
+               sleeper=None):
     """漂移告警：有飞书 webhook 就 POST 卡片；没配就只打印（cron 已把输出重定向进日志文件）。
 
     不发邮件、不依赖 cron MAILTO：无 webhook / 发送失败一律打印到 stdout，让它落进日志即可。
@@ -447,33 +614,50 @@ def send_alert(subject: str, body: str, webhook: str = "", secret: str = ""):
         print(body)
         return
 
+    import time
     import urllib.request
+    if sleeper is None:
+        sleeper = time.sleep                     # 单测注入假 sleeper，不真的等
     payload = build_feishu_payload(subject, body)
-    if secret:
-        import time
-        ts = str(int(time.time()))
-        payload["timestamp"] = ts
-        payload["sign"] = feishu_sign(secret, ts)
-    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(
-        webhook, data=data, headers={"Content-Type": "application/json"})
-    try:
-        resp = urllib.request.urlopen(req, timeout=10).read()
-    except Exception as e:                       # 网络/端点问题不该让 cron 崩，打印即可
-        print(f"      [WARN] 飞书 webhook 发送失败: {e}")
-        print(subject)
-        print(body)
-        return
-    try:
-        code = json.loads(resp.decode("utf-8")).get("code", 0)
-    except Exception:
-        code = 0                                 # 返回体解析不了就当发出去了
-    if code:                                     # code!=0 = 飞书侧拒绝（签名错/机器人停用等）
-        print(f"      [WARN] 飞书返回错误码 code={code}: {resp!r}")
-        print(subject)
-        print(body)
-    else:
-        print(f"      告警已发送到飞书 → {webhook}")
+    data_of = lambda: json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    dest = redact_webhook(webhook)               # 日志里绝不出现完整 URL（末段=token）
+
+    last = ""
+    for attempt in range(1, FEISHU_MAX_ATTEMPTS + 1):
+        if secret:                               # 每次重试都要重签：sign 绑定 timestamp
+            ts = str(int(time.time()))
+            payload["timestamp"] = ts
+            payload["sign"] = feishu_sign(secret, ts)
+        req = urllib.request.Request(
+            webhook, data=data_of(), headers={"Content-Type": "application/json"})
+        try:
+            resp = urllib.request.urlopen(req, timeout=10).read()
+        except Exception as e:                   # 网络/端点问题不该让 cron 崩
+            last, retryable = f"发送异常: {e}", True
+        else:
+            try:
+                parsed = json.loads(resp.decode("utf-8"))
+                code, msg = parsed.get("code", 0), parsed.get("msg", "")
+            except Exception:
+                code, msg = 0, ""                # 返回体解析不了就当发出去了
+            if not code:
+                print(f"      告警已发送到飞书 → {dest}"
+                      + (f"（第 {attempt} 次尝试）" if attempt > 1 else ""))
+                return
+            last, retryable = f"飞书返回 code={code} msg={msg!r}", feishu_retryable(code, msg)
+
+        if not retryable or attempt == FEISHU_MAX_ATTEMPTS:
+            break
+        wait = FEISHU_BACKOFF_SECONDS[min(attempt - 1, len(FEISHU_BACKOFF_SECONDS) - 1)]
+        print(f"      [WARN] {last} → 可重试，{wait}s 后第 {attempt + 1} 次尝试")
+        sleeper(wait)
+
+    # 送不出去 = 告警等于没发。--cron 恒退出 0，日志是唯一线索 → 打成可 grep 的醒目标记。
+    # （2026-08-20 就是这条路径：code=11232 限频，db_only=1 的漏监控提示被吃掉。）
+    print(f"      [WARN] {last}")
+    print(f"[ALERT-UNDELIVERED] 飞书未送达（{dest}），以下告警仅存在于本日志：")
+    print(subject)
+    print(body)
 
 
 def cron_degraded_no_aws(aws_err: str, webhook: str):
@@ -533,6 +717,13 @@ def main():
                          "缺省则只打印（cron 输出已重定向进日志，不发邮件）。签名校验密钥用环境变量 FEISHU_SIGN_SECRET")
     ap.add_argument("--ldas-conf", default=os.environ.get("LDAS_CONF", DEFAULT_LDAS_CONF),
                     help=f"ldas 连接配置文件（默认 {DEFAULT_LDAS_CONF}）")
+    ap.add_argument("--expand-shards", action="store_true",
+                    help="把 cluster-mode 分片集群展开成**每节点一个 target**（推荐）。"
+                         "不加时分片集群只有 clustercfg 一个 target，而该 DNS 名轮换指向全部"
+                         "N 个节点 → 每次抓取落到随机节点，counter 类指标 rate() 失真、"
+                         "内存/键数只见 1/N 且跳变、单分片故障只有约 1/N 概率被发现。"
+                         "⚠️ 本开关会改变三文件内容，**crontab 的 --cron 必须带同样的开关**，"
+                         "否则两边算出的 targets 不同、天天误报漂移。")
     ap.add_argument("--skip-monitoring-check", action="store_true",
                     help="跳过对 Prometheus 现状的检查（默认会查 up/redis_up 找应监控但未生效的实例）")
     args = ap.parse_args()
@@ -545,7 +736,7 @@ def main():
 
     print("[1] 拉取 AWS ElastiCache 加密/AUTH 状态 ...")
     try:
-        aws_map = fetch_aws_rgs(region, aws_conf)
+        aws_map, no_endpoint = fetch_aws_rgs(region, aws_conf)
     except AwsUnavailable as e:
         if args.cron:
             cron_degraded_no_aws(str(e), args.webhook)   # 降级 + 告警，恒退出 0
@@ -554,6 +745,10 @@ def main():
                  f"（需 elasticache:DescribeReplicationGroups 权限）：{e}")
     tls_n = sum(1 for v in aws_map.values() if v["tls"])
     print(f"    AWS RG {len(aws_map)}：TLS {tls_n} / 非TLS {len(aws_map)-tls_n}")
+    for rg in no_endpoint:      # 端点解析不出来 = 无法纳管，必须看得见（曾被静默 continue 吞掉）
+        print(f"  [!] AWS RG 取不到端点（PrimaryEndpoint / ConfigurationEndpoint 都为空），"
+              f"本轮无法纳管: {rg['id']}"
+              f"（status={rg['status']}{'，cluster-mode' if rg['cluster'] else ''}）")
 
     print("[2] 拉取 ldas cache_cloud_app 在营实例 ...")
     db_rows = fetch_db_instances(ldas_conf)
@@ -572,15 +767,42 @@ def main():
         db_rows, aws_map, existing_tokens)
     non_tls = [e["id"] for e in entries if not e["tls"]]
     print(f"    已匹配 {len(entries)}；其中非TLS(redis://) {len(non_tls)}: {non_tls}")
+    cluster_ids = [e["id"] for e in entries if e.get("cluster")]
+    pwd_entries, expand_missing = None, []
+    if cluster_ids and args.expand_shards:
+        print(f"    cluster-mode 分片集群 {len(cluster_ids)}: {cluster_ids}"
+              f" → --expand-shards：按节点展开")
+        try:
+            nodes_by_rg = fetch_aws_nodes(region, aws_conf)
+        except AwsUnavailable as e:
+            # 与 [1] 同样的语义：拿不到真值就绝不半写；cron 降级告警、apply/dry-run 干净退出
+            if args.cron:
+                cron_degraded_no_aws(f"describe-cache-clusters 失败（--expand-shards 需要）: {e}",
+                                     args.webhook)
+            sys.exit(f"[FATAL] 拿不到节点端点，--expand-shards 无法展开"
+                     f"（需 elasticache:DescribeCacheClusters 权限）：{e}")
+        before = len(entries)
+        entries, pwd_entries, expand_missing = expand_cluster_entries(
+            entries, nodes_by_rg, existing_tokens)
+        print(f"    展开后 target {before} → {len(entries)}"
+              f"（{', '.join(f'{rid}×{len(nodes_by_rg.get(rid) or [])}节点' for rid in cluster_ids)}）")
+        for rid in expand_missing:
+            print(f"  [!] 声明展开却拿不到节点端点，仍退回 clustercfg 单 target: {rid}")
+    elif cluster_ids:
+        print(f"    cluster-mode 分片集群 {len(cluster_ids)}（按 configuration endpoint 抓，"
+              f"单次抓取只反映当次连上的那个分片）: {cluster_ids}")
+        print("  [!] 未加 --expand-shards：该 target 只能当存活探针，"
+              "内存/键数/命令率不可用于判断（clustercfg 每次解析到不同节点）；"
+              "若现网三文件是用 --expand-shards 写的，本次会误报漂移。")
     for hp in db_only:
-        print(f"  [!] DB 在营但 AWS 无对应 RG（改名/非ElastiCache?）: {hp}")
+        print(f"  [!] DB 在营但 AWS 无对应 RG（改名/非ElastiCache/端点解析失败?）: {hp}")
     for hp in token_missing:
         print(f"  [!] AUTH 集群但现有密码文件缺 token（需人工补，先写空 → redis_up 会为0）: {hp}")
     for rid in aws_only:
         print(f"  [?] AWS 有 RG 但 DB 未登记在营（未纳管?）: {rid}")
 
     print("[5] 生成三文件" + ("（--apply 写回）" if apply else "（dry-run，不写）"))
-    pwd_text, sd_text = render_files(entries)
+    pwd_text, sd_text = render_files(entries, pwd_entries)
     changed_paths = []      # 文本层面会被改写的（驱动 --apply 归一化 + dry-run 报告）
     drift_paths = []        # 语义层面真的不同的（只喂给 --cron 漂移告警，忽略顺序/排版）
     for path, text, secret in ((PASSWORD_FILE, pwd_text, True),
@@ -617,11 +839,19 @@ def main():
     if args.cron:
         # 漂移判据 = drift_paths + db_only + token_missing + not_monitored（应监控却未生效）。
         drift = (bool(drift_paths) or bool(db_only) or bool(token_missing)
-                 or bool(not_monitored))
+                 or bool(not_monitored) or bool(no_endpoint) or bool(expand_missing))
         if drift:
             lines = []
+            if expand_missing:
+                lines.append("硬问题——声明 --expand-shards 却拿不到节点端点（仍是 clustercfg 单 target）：")
+                lines += [f"  - {rid}" for rid in expand_missing]
+            if no_endpoint:
+                lines.append("硬问题——AWS RG 取不到端点，无法纳管（创建中/形态异常）：")
+                lines += [f"  - {rg['id']} (status={rg['status']}"
+                          f"{', cluster-mode' if rg['cluster'] else ''})"
+                          for rg in no_endpoint]
             if db_only:
-                lines.append("硬问题——DB 在营但 AWS 无对应 RG（改名/非 ElastiCache?）：")
+                lines.append("硬问题——DB 在营但 AWS 无对应 RG（改名/非 ElastiCache/端点解析失败?）：")
                 lines += [f"  - {hp}" for hp in db_only]
             if token_missing:
                 lines.append("硬问题——AUTH 集群缺 token（现有密码文件里没有，需人工补，绝不从 ozono 猜）：")
@@ -637,7 +867,9 @@ def main():
                 lines += [f"  - {rid}" for rid in aws_only]
             subject = (f"[LKUS] AWS Redis 监控漂移待处理 "
                        f"(files={len(drift_paths)}, db_only={len(db_only)}, "
-                       f"token_missing={len(token_missing)}, not_monitored={len(not_monitored)})")
+                       f"token_missing={len(token_missing)}, "
+                       f"not_monitored={len(not_monitored)}, no_endpoint={len(no_endpoint)}, "
+                       f"expand_missing={len(expand_missing)})")
             send_alert(subject, "\n".join(lines), args.webhook,
                        os.environ.get("FEISHU_SIGN_SECRET", ""))
         else:
@@ -649,8 +881,9 @@ def main():
     else:
         print("\n完成。Prometheus file_sd 会热加载 targets。")
         print("redis-password.file 若有变化，请重启 exporter 使新密码生效。")
-    # db_only / token_missing / not_monitored 是需要人工关注的硬问题 → 非零退出码
-    sys.exit(1 if db_only or token_missing or not_monitored else 0)
+    # db_only / token_missing / not_monitored / no_endpoint / expand_missing = 人工关注的硬问题
+    sys.exit(1 if (db_only or token_missing or not_monitored
+                   or no_endpoint or expand_missing) else 0)
 
 
 if __name__ == "__main__":

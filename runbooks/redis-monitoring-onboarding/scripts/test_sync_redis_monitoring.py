@@ -548,5 +548,435 @@ class TestContentEquivalent(unittest.TestCase):
         self.assertFalse(m.content_equivalent("not json", "also not json"))
 
 
+class TestResolveRgEndpoint(unittest.TestCase):
+    """端点解析：cluster mode 开/关走不同字段。2026-08-20 漏监控事故的直接防线。"""
+
+    def test_cluster_mode_disabled_uses_primary_endpoint(self):
+        r = {"id": "luckyus-iadmin", "ce": False,
+             "ep": "master.luckyus-iadmin.vyllrs.use1.cache.amazonaws.com", "port": 6379,
+             "cfg_ep": None, "cfg_port": None}
+        self.assertEqual(
+            m.resolve_rg_endpoint(r),
+            ("master.luckyus-iadmin.vyllrs.use1.cache.amazonaws.com:6379", False))
+
+    def test_cluster_mode_enabled_uses_configuration_endpoint_regression_20260820(self):
+        # 真实数据：3 分片，NodeGroups[].PrimaryEndpoint 全 null，只有 clustercfg 可连。
+        # 老代码在这里 `continue` 静默丢弃 → luckyus-icdpactivityengine 长期漏监控。
+        r = {"id": "luckyus-icdpactivityengine", "ce": True,
+             "ep": None, "port": None,
+             "cfg_ep": "clustercfg.luckyus-icdpactivityengine.vyllrs.use1.cache.amazonaws.com",
+             "cfg_port": 6379}
+        hostport, cluster = m.resolve_rg_endpoint(r)
+        self.assertEqual(
+            hostport,
+            "clustercfg.luckyus-icdpactivityengine.vyllrs.use1.cache.amazonaws.com:6379")
+        self.assertTrue(cluster)
+
+    def test_cluster_mode_enabled_prefers_config_over_primary_if_both_present(self):
+        # 万一 AWS 两个都给：分片集群必须连 clustercfg，连某个分片 primary 只能看到 1/N
+        r = {"id": "rg", "ce": True, "ep": "shard1", "port": 6379,
+             "cfg_ep": "clustercfg", "cfg_port": 6379}
+        self.assertEqual(m.resolve_rg_endpoint(r), ("clustercfg:6379", True))
+
+    def test_non_cluster_falls_back_to_config_endpoint(self):
+        # ce 为假但只有 cfg（字段缺失/形态异常）→ 兜底用它，总比丢掉强
+        r = {"id": "rg", "ce": False, "ep": None, "port": None,
+             "cfg_ep": "cfg-host", "cfg_port": 6379}
+        self.assertEqual(m.resolve_rg_endpoint(r), ("cfg-host:6379", False))
+
+    def test_no_endpoint_at_all_returns_none(self):
+        r = {"id": "rg-creating", "ce": False, "ep": None, "port": None,
+             "cfg_ep": None, "cfg_port": None}
+        self.assertEqual(m.resolve_rg_endpoint(r), (None, False))
+
+    def test_missing_port_is_not_usable(self):
+        # 有地址没端口拼不出 host:port，别拼出 "host:None" 这种鬼 target
+        self.assertEqual(
+            m.resolve_rg_endpoint({"id": "rg", "ce": False, "ep": "h", "port": None}),
+            (None, False))
+
+
+class TestFetchAwsRgsParse(unittest.TestCase):
+    """fetch_aws_rgs 解析层：两种形态都要进 aws_map，取不到端点的必须上报而不是静默丢。"""
+
+    def _patch_output(self, payload):
+        import json as _json
+        orig = m.subprocess.check_output
+        m.subprocess.check_output = lambda *a, **k: _json.dumps(payload).encode()
+        self.addCleanup(setattr, m.subprocess, "check_output", orig)
+
+    def test_both_cluster_shapes_land_in_aws_map(self):
+        self._patch_output([
+            {"id": "luckyus-iadmin", "tls": True, "auth": True, "status": "available",
+             "ce": False, "ngids": ["0001"], "ep": "master.iadmin", "port": 6379,
+             "cfg_ep": None, "cfg_port": None},
+            {"id": "luckyus-icdpactivityengine", "tls": True, "auth": True,
+             "status": "available", "ce": True, "ngids": ["0001", "0002", "0003"],
+             "ep": None, "port": None, "cfg_ep": "clustercfg.icdp", "cfg_port": 6379},
+        ])
+        amap, no_endpoint = m.fetch_aws_rgs()
+        self.assertEqual(no_endpoint, [])
+        self.assertEqual(sorted(amap), ["clustercfg.icdp:6379", "master.iadmin:6379"])
+        self.assertEqual(amap["clustercfg.icdp:6379"],
+                         {"id": "luckyus-icdpactivityengine", "tls": True, "auth": True,
+                          "cluster": True, "shards": 3})
+        self.assertFalse(amap["master.iadmin:6379"]["cluster"])
+        self.assertEqual(amap["master.iadmin:6379"]["shards"], 1)
+
+    def test_rg_without_endpoint_is_reported_not_silently_dropped(self):
+        self._patch_output([
+            {"id": "luckyus-new", "tls": False, "auth": False, "status": "creating",
+             "ce": False, "ngids": None, "ep": None, "port": None,
+             "cfg_ep": None, "cfg_port": None},
+        ])
+        amap, no_endpoint = m.fetch_aws_rgs()
+        self.assertEqual(amap, {})
+        self.assertEqual(no_endpoint,
+                         [{"id": "luckyus-new", "status": "creating", "cluster": False}])
+
+    def test_no_endpoint_sorted_by_id(self):
+        self._patch_output([
+            {"id": "zzz", "tls": False, "auth": False, "status": "creating", "ce": False},
+            {"id": "aaa", "tls": False, "auth": False, "status": "creating", "ce": False},
+        ])
+        _, no_endpoint = m.fetch_aws_rgs()
+        self.assertEqual([r["id"] for r in no_endpoint], ["aaa", "zzz"])
+
+
+class TestBuildPlanClusterMode(unittest.TestCase):
+    """cluster-mode 集群 join 后应与普通集群一视同仁地进三文件，并带上 cluster 标记。"""
+
+    def test_cluster_entry_joins_and_keeps_flag(self):
+        hp = "clustercfg.luckyus-icdpactivityengine.vyllrs.use1.cache.amazonaws.com:6379"
+        aws = {hp: {"id": "luckyus-icdpactivityengine", "tls": True, "auth": True,
+                    "cluster": True, "shards": 3}}
+        db = [{"app": "luckyus_icdpactivityengine", "hostport": hp}]   # ozono 登记的正是 clustercfg
+        entries, db_only, aws_only, token_missing = m.build_plan(db, aws, {hp: "tok"})
+        self.assertEqual(db_only, [])          # 不再被误报成"AWS 无对应 RG"
+        self.assertEqual(aws_only, [])
+        self.assertEqual(len(entries), 1)
+        self.assertEqual(entries[0]["uri"], "rediss://" + hp)
+        self.assertEqual(entries[0]["token"], "tok")
+        self.assertTrue(entries[0]["cluster"])
+        self.assertEqual(entries[0]["shards"], 3)
+
+    def test_plain_entry_cluster_flag_defaults_false(self):
+        aws = {"ep-a:6379": _aws("rg", False, False)}     # 老 helper 不带 cluster 键
+        entries, _, _, _ = m.build_plan(
+            [{"app": "a", "hostport": "ep-a:6379"}], aws, {})
+        self.assertFalse(entries[0]["cluster"])
+        self.assertEqual(entries[0]["shards"], 0)
+
+
+def _nodes(rg, n=3, port=6379):
+    """构造 fetch_aws_nodes 形状的节点表：rg-000X-001，端点排序稳定。"""
+    return {rg: [{"node": f"{rg}-000{i}-001", "hostport": f"{rg}-000{i}-001.host:{port}"}
+                 for i in range(1, n + 1)]}
+
+
+class TestExpandClusterEntries(unittest.TestCase):
+    """--expand-shards：分片集群展开成每节点 target。clustercfg 单 target 会随机落到
+    N 个节点之一（2026-08-20 实测：一条 DNS 名 6 个 IP、顺序每次轮换），指标不可用。"""
+
+    def _cluster_entry(self, token="T0K"):
+        return {"hostport": "clustercfg.rg1:6379", "prefix": "rediss://",
+                "uri": "rediss://clustercfg.rg1:6379", "token": token,
+                "id": "rg1", "tls": True, "cluster": True, "shards": 3}
+
+    def test_expands_to_one_target_per_node(self):
+        render, pwd, missing = m.expand_cluster_entries(
+            [self._cluster_entry()], _nodes("rg1"), {})
+        self.assertEqual(missing, [])
+        self.assertEqual([e["uri"] for e in render],
+                         ["rediss://rg1-0001-001.host:6379",
+                          "rediss://rg1-0002-001.host:6379",
+                          "rediss://rg1-0003-001.host:6379"])
+        self.assertEqual([e["id"] for e in render],
+                         ["rg1-0001-001", "rg1-0002-001", "rg1-0003-001"])
+        for e in render:                       # 前缀/TLS/父集群信息随节点带下去
+            self.assertEqual(e["prefix"], "rediss://")
+            self.assertEqual(e["token"], "T0K")     # AUTH token 是集群级的，N 个节点同一个
+            self.assertEqual(e["parent"], "rg1")
+            self.assertTrue(e["cluster"])
+
+    def test_non_cluster_entries_pass_through_untouched(self):
+        plain = {"hostport": "master.a:6379", "prefix": "redis://",
+                 "uri": "redis://master.a:6379", "token": "", "id": "a",
+                 "tls": False, "cluster": False, "shards": 0}
+        render, pwd, missing = m.expand_cluster_entries([plain], _nodes("rg1"), {})
+        self.assertEqual(render, [plain])
+        self.assertEqual(pwd, [plain])         # 没有分片集群 → 不多留任何 key
+        self.assertEqual(missing, [])
+
+    def test_parent_key_kept_in_password_file_for_token_roundtrip(self):
+        render, pwd, _ = m.expand_cluster_entries(
+            [self._cluster_entry()], _nodes("rg1"), {})
+        uris = [e["uri"] for e in pwd]
+        self.assertIn("rediss://clustercfg.rg1:6379", uris)   # 父 key 必须留下
+        self.assertEqual(len(pwd), len(render) + 1)
+
+    def test_token_roundtrip_is_idempotent_across_runs(self):
+        """回归：展开后若密码文件只剩节点 key，下一轮就找不到 clustercfg 的 token →
+        build_plan 报 token_missing 并置空 → 再 --apply 会把 N 个节点的 token 全清掉。"""
+        hp = "clustercfg.rg1:6379"
+        aws = {hp: {"id": "rg1", "tls": True, "auth": True, "cluster": True, "shards": 3}}
+        db = [{"app": "rg1", "hostport": hp}]
+
+        # 第 1 轮：人工把真实 token 放进密码文件
+        e1, _, _, tm1 = m.build_plan(db, aws, {hp: "T0K"})
+        self.assertEqual(tm1, [])
+        r1, pwd1, _ = m.expand_cluster_entries(e1, _nodes("rg1"), {hp: "T0K"})
+        pwd_text, sd_text = m.render_files(r1, pwd1)
+
+        # 第 2 轮：只读回上一轮写下的密码文件
+        toks = m.parse_existing_tokens(pwd_text)
+        e2, _, _, tm2 = m.build_plan(db, aws, toks)
+        self.assertEqual(tm2, [])                       # 不再误报 token_missing
+        r2, pwd2, _ = m.expand_cluster_entries(e2, _nodes("rg1"), toks)
+        self.assertEqual(m.render_files(r2, pwd2), (pwd_text, sd_text))   # 完全幂等
+        for e in r2:
+            self.assertEqual(e["token"], "T0K")         # token 没被清空
+
+    def test_without_parent_key_the_token_would_be_lost_next_run(self):
+        """反证上一条：不保留父 key 时，第 2 轮 token_missing 会复发（故意留档）。"""
+        hp = "clustercfg.rg1:6379"
+        aws = {hp: {"id": "rg1", "tls": True, "auth": True, "cluster": True, "shards": 3}}
+        db = [{"app": "rg1", "hostport": hp}]
+        e1, _, _, _ = m.build_plan(db, aws, {hp: "T0K"})
+        r1, _, _ = m.expand_cluster_entries(e1, _nodes("rg1"), {hp: "T0K"})
+        pwd_text, _ = m.render_files(r1)                 # ← 不传 pwd_entries = 丢父 key
+        _, _, _, tm2 = m.build_plan(db, aws, m.parse_existing_tokens(pwd_text))
+        self.assertEqual(tm2, [hp])                      # token 丢了
+
+    def test_per_node_token_override_wins_over_parent(self):
+        toks = {"rg1-0002-001.host:6379": "NODE2"}
+        render, _, _ = m.expand_cluster_entries(
+            [self._cluster_entry("PARENT")], _nodes("rg1"), toks)
+        got = {e["id"]: e["token"] for e in render}
+        self.assertEqual(got["rg1-0002-001"], "NODE2")
+        self.assertEqual(got["rg1-0001-001"], "PARENT")
+
+    def test_blank_node_token_respected_not_overridden_by_parent(self):
+        # 显式空值 = 人工声明"这个节点不带密码"，不能被父 token 覆盖
+        toks = {"rg1-0001-001.host:6379": ""}
+        render, _, _ = m.expand_cluster_entries(
+            [self._cluster_entry("PARENT")], _nodes("rg1"), toks)
+        self.assertEqual({e["id"]: e["token"] for e in render}["rg1-0001-001"], "")
+
+    def test_missing_nodes_is_hard_problem_and_falls_back(self):
+        render, pwd, missing = m.expand_cluster_entries(
+            [self._cluster_entry()], {}, {})              # 拿不到任何节点
+        self.assertEqual(missing, ["rg1"])
+        self.assertEqual([e["uri"] for e in render], ["rediss://clustercfg.rg1:6379"])
+        self.assertEqual(pwd, render)                     # 没展开就别多留 key
+
+    def test_render_sorted_by_uri_across_mixed_entries(self):
+        plain = {"hostport": "zzz:6379", "prefix": "redis://", "uri": "redis://zzz:6379",
+                 "token": "", "id": "zzz", "tls": False, "cluster": False, "shards": 0}
+        render, _, _ = m.expand_cluster_entries(
+            [self._cluster_entry(), plain], _nodes("rg1"), {})
+        self.assertEqual([e["uri"] for e in render], sorted(e["uri"] for e in render))
+
+    def test_empty_input(self):
+        self.assertEqual(m.expand_cluster_entries([], {}, {}), ([], [], []))
+
+
+class TestRenderFilesWithPwdEntries(unittest.TestCase):
+
+    def test_pwd_entries_adds_keys_without_adding_targets(self):
+        node = {"uri": "rediss://n1:6379", "token": "T"}
+        parent = {"uri": "rediss://clustercfg:6379", "token": "T"}
+        pwd_text, sd_text = m.render_files([node], [node, parent])
+        import json as _json
+        self.assertEqual(sorted(_json.loads(pwd_text)),
+                         ["rediss://clustercfg:6379", "rediss://n1:6379"])
+        self.assertEqual(_json.loads(sd_text)[0]["targets"], ["rediss://n1:6379"])
+
+    def test_default_pwd_entries_is_entries(self):
+        e = [{"uri": "redis://a:6379", "token": ""}]
+        self.assertEqual(m.render_files(e), m.render_files(e, e))
+
+
+class TestFetchAwsNodes(unittest.TestCase):
+
+    def _patch_output(self, payload):
+        import json as _json
+        orig = m.subprocess.check_output
+        m.subprocess.check_output = lambda *a, **k: _json.dumps(payload).encode()
+        self.addCleanup(setattr, m.subprocess, "check_output", orig)
+
+    def test_groups_by_rg_and_sorts(self):
+        self._patch_output([
+            {"rg": "rg1", "node": "rg1-0002-001", "ep": "b.host", "port": 6379},
+            {"rg": "rg1", "node": "rg1-0001-001", "ep": "a.host", "port": 6379},
+            {"rg": "rg2", "node": "rg2-0001-001", "ep": "c.host", "port": 6379},
+        ])
+        by_rg = m.fetch_aws_nodes()
+        self.assertEqual([n["hostport"] for n in by_rg["rg1"]],
+                         ["a.host:6379", "b.host:6379"])
+        self.assertEqual(len(by_rg["rg2"]), 1)
+
+    def test_rows_without_rg_or_endpoint_skipped(self):
+        self._patch_output([
+            {"rg": None, "node": "standalone", "ep": "x.host", "port": 6379},
+            {"rg": "rg1", "node": "rg1-0001-001", "ep": None, "port": None},
+        ])
+        self.assertEqual(m.fetch_aws_nodes(), {})
+
+    def test_aws_failure_raises_AwsUnavailable(self):
+        import subprocess as sp
+
+        def boom(*a, **k):
+            raise sp.CalledProcessError(255, a[0], output=b"",
+                                        stderr=b"AccessDenied DescribeCacheClusters")
+        orig = m.subprocess.check_output
+        m.subprocess.check_output = boom
+        self.addCleanup(setattr, m.subprocess, "check_output", orig)
+        with self.assertRaises(m.AwsUnavailable) as ctx:
+            m.fetch_aws_nodes()
+        self.assertIn("AccessDenied", str(ctx.exception))
+
+
+class TestBuildAwsInvocationOperations(unittest.TestCase):
+    """凭证注入只有一份实现，两个 elasticache 操作共用（--expand-shards 需要第二个）。"""
+
+    def test_default_operation_unchanged(self):
+        argv, _ = m.build_aws_invocation("Q", "us-east-1", {}, {})
+        self.assertIn("describe-replication-groups", argv)
+        self.assertNotIn("--show-cache-node-info", argv)
+
+    def test_describe_cache_clusters_with_extra_args(self):
+        argv, _ = m.build_aws_invocation(
+            "Q", "us-east-1", {}, {}, operation="describe-cache-clusters",
+            extra_args=("--show-cache-node-info",))
+        self.assertEqual(argv[:4],
+                         ["aws", "elasticache", "describe-cache-clusters",
+                          "--show-cache-node-info"])
+        self.assertIn("--region", argv)
+
+    def test_credentials_still_never_reach_argv(self):
+        conf = {"access_key_id": "AKIA_X", "secret_access_key": "SEKRIT"}
+        argv, env = m.build_aws_invocation(
+            "Q", "us-east-1", conf, {}, operation="describe-cache-clusters",
+            extra_args=("--show-cache-node-info",))
+        self.assertNotIn("SEKRIT", " ".join(argv))       # ps 泄露防线，对新操作同样成立
+        self.assertEqual(env["AWS_SECRET_ACCESS_KEY"], "SEKRIT")
+
+
+class TestFeishuRetryable(unittest.TestCase):
+    """限频要重试，签名错/机器人停用不重试（重试只是把同样的错再犯两遍）。"""
+
+    def test_11232_frequency_limited_is_retryable(self):
+        # 2026-08-20 早晨 cron 实际吃到的返回体
+        self.assertTrue(m.feishu_retryable(
+            11232, "frequency limited psm[lark.oapi.app_platform_runtime]appID[1500]"))
+
+    def test_msg_based_detection_for_sibling_codes(self):
+        self.assertTrue(m.feishu_retryable(99999, "Rate limit exceeded"))
+        self.assertTrue(m.feishu_retryable(0, "too many requests"))
+
+    def test_signature_and_disabled_bot_not_retryable(self):
+        self.assertFalse(m.feishu_retryable(19021, "sign match fail"))
+        self.assertFalse(m.feishu_retryable(19001, "param invalid"))
+
+    def test_no_message_defaults_to_not_retryable(self):
+        self.assertFalse(m.feishu_retryable(12345))
+
+
+class TestRedactWebhook(unittest.TestCase):
+
+    def test_token_masked(self):
+        out = m.redact_webhook(
+            "https://open.feishu.cn/open-apis/bot/v2/hook/abcd1234-secret-token")
+        self.assertNotIn("secret-token", out)
+        self.assertTrue(out.endswith("/abcd***"))
+        self.assertIn("open.feishu.cn", out)          # 前缀保留，日志仍可辨认是哪个端点
+
+    def test_empty_and_degenerate(self):
+        self.assertEqual(m.redact_webhook(""), "(未配置)")
+        self.assertEqual(m.redact_webhook("nohost"), "***")
+
+
+class TestSendAlertRetry(unittest.TestCase):
+    """send_alert 的投递语义：限频重试、不可重试立即放弃、全失败要留可 grep 标记。"""
+
+    def _capture(self, responses):
+        """responses: 每次调用返回的 bytes，或抛出的异常。返回 (调用次数记录, 打印文本)。"""
+        import io as _io
+        import contextlib
+        calls = []
+
+        class FakeResp:
+            def __init__(self, b): self._b = b
+            def read(self): return self._b
+
+        def fake_urlopen(req, timeout=None):
+            calls.append(req.full_url)
+            r = responses[min(len(calls) - 1, len(responses) - 1)]
+            if isinstance(r, Exception):
+                raise r
+            return FakeResp(r)
+
+        import urllib.request as ur
+        orig = ur.urlopen
+        ur.urlopen = fake_urlopen
+        self.addCleanup(setattr, ur, "urlopen", orig)
+        buf = _io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            m.send_alert("SUBJ", "BODY", "https://open.feishu.cn/hook/tok123456",
+                         sleeper=lambda _s: None)          # 不真的等
+        return calls, buf.getvalue()
+
+    def test_rate_limited_then_success(self):
+        calls, out = self._capture([
+            b'{"code":11232,"msg":"frequency limited"}',
+            b'{"code":0}',
+        ])
+        self.assertEqual(len(calls), 2)                    # 重试了一次就成功
+        self.assertIn("告警已发送到飞书", out)
+        self.assertIn("第 2 次尝试", out)
+        self.assertNotIn("ALERT-UNDELIVERED", out)
+
+    def test_rate_limited_all_attempts_marks_undelivered(self):
+        calls, out = self._capture([b'{"code":11232,"msg":"frequency limited"}'])
+        self.assertEqual(len(calls), m.FEISHU_MAX_ATTEMPTS)
+        self.assertIn("[ALERT-UNDELIVERED]", out)          # 可 grep 的醒目标记
+        self.assertIn("SUBJ", out)                         # 正文仍落日志，不丢信息
+        self.assertIn("BODY", out)
+
+    def test_non_retryable_gives_up_immediately(self):
+        calls, out = self._capture([b'{"code":19021,"msg":"sign match fail"}'])
+        self.assertEqual(len(calls), 1)                    # 签名错不重试
+        self.assertIn("[ALERT-UNDELIVERED]", out)
+
+    def test_network_error_is_retried(self):
+        calls, out = self._capture([OSError("connection reset")])
+        self.assertEqual(len(calls), m.FEISHU_MAX_ATTEMPTS)
+        self.assertIn("[ALERT-UNDELIVERED]", out)
+
+    def test_first_try_success_makes_one_call(self):
+        calls, out = self._capture([b'{"code":0}'])
+        self.assertEqual(len(calls), 1)
+        self.assertNotIn("第 2 次尝试", out)
+
+    def test_webhook_token_never_printed(self):
+        _, out = self._capture([b'{"code":0}'])
+        self.assertNotIn("tok123456", out)                 # 完整 URL 绝不进日志
+        _, out2 = self._capture([b'{"code":11232,"msg":"frequency limited"}'])
+        self.assertNotIn("tok123456", out2)
+
+    def test_unparseable_body_treated_as_success(self):
+        calls, out = self._capture([b'not json'])
+        self.assertEqual(len(calls), 1)
+        self.assertIn("告警已发送到飞书", out)
+
+    def test_no_webhook_still_prints_alert(self):
+        import io as _io, contextlib
+        buf = _io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            m.send_alert("S", "B", "")
+        self.assertIn("S", buf.getvalue())
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
