@@ -1,0 +1,62 @@
+[
+ {
+  "id": 18,
+  "pqnc_type_code": "0002",
+  "name": "Critical",
+  "level": 1,
+  "weights": 10,
+  "status": 1,
+  "language_code": "en-US",
+  "language_value": "Critical"
+ },
+ {
+  "id": 18,
+  "pqnc_type_code": "0002",
+  "name": "Critical",
+  "level": 1,
+  "weights": 10,
+  "status": 1,
+  "language_code": "zh-CN",
+  "language_value": ""
+ },
+ {
+  "id": 19,
+  "pqnc_type_code": "0003",
+  "name": "Major",
+  "level": 1,
+  "weights": 2,
+  "status": 1,
+  "language_code": "en-US",
+  "language_value": "Major"
+ },
+ {
+  "id": 19,
+  "pqnc_type_code": "0003",
+  "name": "Major",
+  "level": 1,
+  "weights": 2,
+  "status": 1,
+  "language_code": "zh-CN",
+  "language_value": ""
+ },
+ {
+  "id": 20,
+  "pqnc_type_code": "0004",
+  "name": "Minor",
+  "level": 1,
+  "weights": 1,
+  "status": 1,
+  "language_code": "en-US",
+  "language_value": "Minor"
+ },
+ {
+  "id": 20,
+  "pqnc_type_code": "0004",
+  "name": "Minor",
+  "level": 1,
+  "weights": 1,
+  "status": 1,
+  "language_code": "zh-CN",
+  "language_value": ""
+ }
+]

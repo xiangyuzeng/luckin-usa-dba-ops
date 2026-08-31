@@ -1,0 +1,51 @@
+[
+ {
+  "status": 2,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 2,
+  "amt": 55.99
+ },
+ {
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 1,
+  "amt": 0.07
+ },
+ {
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 30,
+  "amt": 574.55
+ },
+ {
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 4,
+  "n": 13,
+  "amt": 65.91
+ },
+ {
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 4,
+  "amt": 11.63
+ },
+ {
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 2,
+  "amt": 30.34
+ },
+ {
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 9,
+  "amt": 247.19
+ }
+]

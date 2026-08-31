@@ -1,0 +1,116 @@
+[
+ {
+  "deduction_type": 1,
+  "score_config": -21,
+  "score_start": 100,
+  "n": 1
+ },
+ {
+  "deduction_type": 1,
+  "score_config": -20,
+  "score_start": 80,
+  "n": 2
+ },
+ {
+  "deduction_type": 1,
+  "score_config": -5,
+  "score_start": 80,
+  "n": 106
+ },
+ {
+  "deduction_type": 1,
+  "score_config": 0,
+  "score_start": 80,
+  "n": 4
+ },
+ {
+  "deduction_type": 1,
+  "score_config": 5,
+  "score_start": 80,
+  "n": 1
+ },
+ {
+  "deduction_type": 2,
+  "score_config": -10,
+  "score_start": 90,
+  "n": 1
+ },
+ {
+  "deduction_type": 2,
+  "score_config": -5,
+  "score_start": 100,
+  "n": 22
+ },
+ {
+  "deduction_type": 2,
+  "score_config": -2,
+  "score_start": 100,
+  "n": 411
+ },
+ {
+  "deduction_type": 2,
+  "score_config": 0,
+  "score_start": 100,
+  "n": 24
+ },
+ {
+  "deduction_type": 2,
+  "score_config": 2,
+  "score_start": 100,
+  "n": 5
+ },
+ {
+  "deduction_type": 3,
+  "score_config": -30,
+  "score_start": 100,
+  "n": 1
+ },
+ {
+  "deduction_type": 3,
+  "score_config": -10,
+  "score_start": 100,
+  "n": 8
+ },
+ {
+  "deduction_type": 3,
+  "score_config": -5,
+  "score_start": 100,
+  "n": 99
+ },
+ {
+  "deduction_type": 3,
+  "score_config": 0,
+  "score_start": 100,
+  "n": 8
+ },
+ {
+  "deduction_type": 4,
+  "score_config": -3,
+  "score_start": 100,
+  "n": 12
+ },
+ {
+  "deduction_type": 4,
+  "score_config": -1,
+  "score_start": 100,
+  "n": 85
+ },
+ {
+  "deduction_type": 4,
+  "score_config": 0,
+  "score_start": 100,
+  "n": 8
+ },
+ {
+  "deduction_type": 4,
+  "score_config": 10,
+  "score_start": 100,
+  "n": 1
+ },
+ {
+  "deduction_type": 9,
+  "score_config": 0,
+  "score_start": 100,
+  "n": 8
+ }
+]

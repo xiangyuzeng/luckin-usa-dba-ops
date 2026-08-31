@@ -1,0 +1,324 @@
+[
+ {
+  "t": "t_order",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键ID"
+ },
+ {
+  "t": "t_order",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(10)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_order",
+  "p": 3,
+  "c": "parent_id",
+  "ty": "bigint unsigned",
+  "cm": "父单号"
+ },
+ {
+  "t": "t_order",
+  "p": 4,
+  "c": "channel",
+  "ty": "smallint",
+  "cm": "订单渠道"
+ },
+ {
+  "t": "t_order",
+  "p": 5,
+  "c": "order_category",
+  "ty": "smallint unsigned",
+  "cm": "订单大类，类型的汇总"
+ },
+ {
+  "t": "t_order",
+  "p": 6,
+  "c": "order_type",
+  "ty": "smallint unsigned",
+  "cm": "订单类型，决定不同的履约流程"
+ },
+ {
+  "t": "t_order",
+  "p": 7,
+  "c": "user_no",
+  "ty": "varchar(32)",
+  "cm": "用户编码"
+ },
+ {
+  "t": "t_order",
+  "p": 8,
+  "c": "user_type",
+  "ty": "tinyint unsigned",
+  "cm": "顾客类型  1 个人"
+ },
+ {
+  "t": "t_order",
+  "p": 9,
+  "c": "user_nick_name",
+  "ty": "varchar(64)",
+  "cm": "用户昵称"
+ },
+ {
+  "t": "t_order",
+  "p": 10,
+  "c": "user_sex",
+  "ty": "smallint",
+  "cm": "性别,1:男,2:女"
+ },
+ {
+  "t": "t_order",
+  "p": 11,
+  "c": "shop_id",
+  "ty": "bigint unsigned",
+  "cm": "商户或门店ID"
+ },
+ {
+  "t": "t_order",
+  "p": 12,
+  "c": "shop_type",
+  "ty": "smallint unsigned",
+  "cm": "商家来源"
+ },
+ {
+  "t": "t_order",
+  "p": 13,
+  "c": "shop_name",
+  "ty": "varchar(100)",
+  "cm": "商户名"
+ },
+ {
+  "t": "t_order",
+  "p": 14,
+  "c": "shop_number",
+  "ty": "varchar(100)",
+  "cm": "门店序号"
+ },
+ {
+  "t": "t_order",
+  "p": 15,
+  "c": "country_code",
+  "ty": "varchar(20)",
+  "cm": "国家编码"
+ },
+ {
+  "t": "t_order",
+  "p": 16,
+  "c": "country_name",
+  "ty": "varchar(100)",
+  "cm": "国家名称"
+ },
+ {
+  "t": "t_order",
+  "p": 17,
+  "c": "city_code",
+  "ty": "varchar(20)",
+  "cm": "城市编码"
+ },
+ {
+  "t": "t_order",
+  "p": 18,
+  "c": "city_name",
+  "ty": "varchar(100)",
+  "cm": "城市名称"
+ },
+ {
+  "t": "t_order",
+  "p": 19,
+  "c": "status",
+  "ty": "tinyint unsigned",
+  "cm": "订单状态 10 已新建 20 已支付"
+ },
+ {
+  "t": "t_order",
+  "p": 20,
+  "c": "produce_status",
+  "ty": "smallint",
+  "cm": "制作状态，参见枚举"
+ },
+ {
+  "t": "t_order",
+  "p": 21,
+  "c": "express_status",
+  "ty": "smallint",
+  "cm": "配送状态，参见枚举"
+ },
+ {
+  "t": "t_order",
+  "p": 22,
+  "c": "invoice_status",
+  "ty": "smallint",
+  "cm": "发票状态，参见枚举"
+ },
+ {
+  "t": "t_order",
+  "p": 23,
+  "c": "refund_status",
+  "ty": "smallint",
+  "cm": "退款状态，参见枚举"
+ },
+ {
+  "t": "t_order",
+  "p": 24,
+  "c": "comment_status",
+  "ty": "smallint",
+  "cm": "评价状态，参见枚举"
+ },
+ {
+  "t": "t_order",
+  "p": 25,
+  "c": "display_flag",
+  "ty": "tinyint unsigned",
+  "cm": "删除可见标识 0不可见、1前端已删除，2后端已删除，3正常"
+ },
+ {
+  "t": "t_order",
+  "p": 26,
+  "c": "currency_code",
+  "ty": "varchar(10)",
+  "cm": "币种编码"
+ },
+ {
+  "t": "t_order",
+  "p": 27,
+  "c": "total_money",
+  "ty": "decimal(12,4) unsigned",
+  "cm": "交易总金额"
+ },
+ {
+  "t": "t_order",
+  "p": 28,
+  "c": "payable_money",
+  "ty": "decimal(12,4) unsigned",
+  "cm": "应付金额"
+ },
+ {
+  "t": "t_order",
+  "p": 29,
+  "c": "pay_money",
+  "ty": "decimal(12,4) unsigned",
+  "cm": "支付总金额"
+ },
+ {
+  "t": "t_order",
+  "p": 30,
+  "c": "pay_time",
+  "ty": "datetime",
+  "cm": "支付时间"
+ },
+ {
+  "t": "t_order",
+  "p": 31,
+  "c": "cancel_time",
+  "ty": "datetime",
+  "cm": "取消时间"
+ },
+ {
+  "t": "t_order",
+  "p": 32,
+  "c": "finish_time",
+  "ty": "datetime",
+  "cm": "完成时间"
+ },
+ {
+  "t": "t_order",
+  "p": 33,
+  "c": "create_type",
+  "ty": "smallint",
+  "cm": "创建人类型,1系统，2用户，3员工，参见枚举"
+ },
+ {
+  "t": "t_order",
+  "p": 34,
+  "c": "create_id",
+  "ty": "varchar(32)",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_order",
+  "p": 35,
+  "c": "create_name",
+  "ty": "varchar(60)",
+  "cm": "创建人"
+ },
+ {
+  "t": "t_order",
+  "p": 36,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_order",
+  "p": 37,
+  "c": "modify_id",
+  "ty": "varchar(32)",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_order",
+  "p": 38,
+  "c": "modify_name",
+  "ty": "varchar(60)",
+  "cm": "修改人"
+ },
+ {
+  "t": "t_order",
+  "p": 39,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "更新时间"
+ },
+ {
+  "t": "t_order",
+  "p": 40,
+  "c": "version",
+  "ty": "int",
+  "cm": "版本号"
+ },
+ {
+  "t": "t_order",
+  "p": 41,
+  "c": "refund_time",
+  "ty": "datetime",
+  "cm": "退款完成时间"
+ },
+ {
+  "t": "t_order",
+  "p": 42,
+  "c": "order_sub_type",
+  "ty": "smallint",
+  "cm": "订单子类型"
+ },
+ {
+  "t": "t_order",
+  "p": 43,
+  "c": "fulfill_status",
+  "ty": "smallint",
+  "cm": "履约状态"
+ },
+ {
+  "t": "t_order",
+  "p": 44,
+  "c": "order_language",
+  "ty": "varchar(20)",
+  "cm": "下单语言编码"
+ },
+ {
+  "t": "t_order",
+  "p": 45,
+  "c": "user_timezone",
+  "ty": "varchar(60)",
+  "cm": "用户设备时区、冗余存储备用"
+ },
+ {
+  "t": "t_order",
+  "p": 46,
+  "c": "invoiced_time",
+  "ty": "datetime",
+  "cm": "开票成功时间"
+ }
+]

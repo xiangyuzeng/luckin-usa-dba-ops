@@ -1,0 +1,373 @@
+[
+ {
+  "t": "t_shop_info",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 3,
+  "c": "dept_id",
+  "ty": "bigint",
+  "cm": "部门ID"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 4,
+  "c": "shop_no",
+  "ty": "varchar(8)",
+  "cm": "门店序号"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 5,
+  "c": "shop_name",
+  "ty": "varchar(128)",
+  "cm": "门店名称"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 6,
+  "c": "status",
+  "ty": "int",
+  "cm": "门店状态"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 7,
+  "c": "dept_name",
+  "ty": "varchar(128)",
+  "cm": "部门名称"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 8,
+  "c": "manager_name",
+  "ty": "varchar(128)",
+  "cm": "负责人姓名"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 9,
+  "c": "manager_phone",
+  "ty": "varchar(64)",
+  "cm": "负责人电话"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 10,
+  "c": "time_zone",
+  "ty": "varchar(32)",
+  "cm": "时区 UTC+HH:mm"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 11,
+  "c": "shop_email",
+  "ty": "varchar(64)",
+  "cm": "门店邮箱"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 12,
+  "c": "shop_phone",
+  "ty": "varchar(64)",
+  "cm": "门店电话"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 13,
+  "c": "brand_no",
+  "ty": "varchar(32)",
+  "cm": "品牌主数据编号"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 14,
+  "c": "shop_level",
+  "ty": "varchar(32)",
+  "cm": "门店级别"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 15,
+  "c": "operation_mode",
+  "ty": "tinyint(1)",
+  "cm": "支持运营模式，1：到店，2配送，3：全部"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 16,
+  "c": "cooperation_no",
+  "ty": "varchar(32)",
+  "cm": "运营合作模式主数据编号：直营，联营"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 17,
+  "c": "shop_model",
+  "ty": "tinyint(1)",
+  "cm": "门店模式:0服务店,1自助店"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 18,
+  "c": "shop_price_level",
+  "ty": "varchar(10)",
+  "cm": "自取价位级别"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 19,
+  "c": "shop_out_price_level",
+  "ty": "varchar(10)",
+  "cm": "商品外卖价位级别"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 20,
+  "c": "dispatch_range",
+  "ty": "varchar(2000)",
+  "cm": "配送范围"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 21,
+  "c": "set_up_time",
+  "ty": "datetime",
+  "cm": "开业日期"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 22,
+  "c": "shut_up_time",
+  "ty": "datetime",
+  "cm": "待停业日期"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 23,
+  "c": "off_time",
+  "ty": "datetime",
+  "cm": "停业日期"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 24,
+  "c": "internal",
+  "ty": "tinyint(1)",
+  "cm": "是否为内部店, 1：是,0：否"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 25,
+  "c": "eat_in",
+  "ty": "tinyint(1)",
+  "cm": "是否支持堂食, 1：是,0：否"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 26,
+  "c": "close_type",
+  "ty": "tinyint(1)",
+  "cm": "是否为封闭式, 1：是,0：否"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 27,
+  "c": "app_show_licence",
+  "ty": "tinyint(1)",
+  "cm": "App是否显示资质证照信息， 1：是,0：否"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 28,
+  "c": "qrcode",
+  "ty": "varchar(32)",
+  "cm": "二维码"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 29,
+  "c": "scene_type",
+  "ty": "varchar(32)",
+  "cm": "门店大位置类型"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 30,
+  "c": "scene_detail",
+  "ty": "varchar(32)",
+  "cm": "门店小位置类型"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 31,
+  "c": "country_no",
+  "ty": "varchar(32)",
+  "cm": "国家编号"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 32,
+  "c": "country_name",
+  "ty": "varchar(64)",
+  "cm": "国家名称"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 33,
+  "c": "administrative_area_mid",
+  "ty": "varchar(32)",
+  "cm": "一级行政区主数据Id"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 34,
+  "c": "administrative_area_name",
+  "ty": "varchar(128)",
+  "cm": "一级行政区"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 35,
+  "c": "locality_mid",
+  "ty": "varchar(32)",
+  "cm": "二级行政区主数据Id"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 36,
+  "c": "locality_name",
+  "ty": "varchar(128)",
+  "cm": "二级行政区"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 37,
+  "c": "sublocality_mid",
+  "ty": "varchar(32)",
+  "cm": "三级行政区主数据Id"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 38,
+  "c": "sublocality_name",
+  "ty": "varchar(128)",
+  "cm": "三级行政区"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 39,
+  "c": "location_longitude",
+  "ty": "decimal(10,6)",
+  "cm": "经度"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 40,
+  "c": "location_latitude",
+  "ty": "decimal(10,6)",
+  "cm": "纬度"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 41,
+  "c": "address",
+  "ty": "varchar(500)",
+  "cm": "地址"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 42,
+  "c": "remark",
+  "ty": "varchar(1000)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 43,
+  "c": "create_by",
+  "ty": "int",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 44,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 45,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 46,
+  "c": "modify_by",
+  "ty": "int",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 47,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 48,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 49,
+  "c": "test_flag",
+  "ty": "tinyint(1)",
+  "cm": "是否测试门店，1是，0否"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 50,
+  "c": "shop_phone_area",
+  "ty": "varchar(10)",
+  "cm": "门店电话区号"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 51,
+  "c": "manager_phone_area",
+  "ty": "varchar(10)",
+  "cm": "负责人电话区号"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 52,
+  "c": "biz_no",
+  "ty": "varchar(64)",
+  "cm": "外部系统创建门店的业务编码"
+ },
+ {
+  "t": "t_shop_info",
+  "p": 53,
+  "c": "operation_area",
+  "ty": "varchar(40)",
+  "cm": "运营管理区域部门编码"
+ }
+]

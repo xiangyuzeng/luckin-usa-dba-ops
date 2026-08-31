@@ -1,0 +1,442 @@
+[
+ {
+  "ym": "2026-01",
+  "status": 1,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 1,
+  "value_amount": 0.0
+ },
+ {
+  "ym": "2026-01",
+  "status": 2,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 1,
+  "value_amount": 49.03
+ },
+ {
+  "ym": "2026-01",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 1,
+  "value_amount": 13.46
+ },
+ {
+  "ym": "2026-01",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 4,
+  "n": 1,
+  "value_amount": 5.03
+ },
+ {
+  "ym": "2026-01",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 57,
+  "value_amount": 439.11
+ },
+ {
+  "ym": "2026-01",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 22,
+  "value_amount": 691.52
+ },
+ {
+  "ym": "2026-01",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 3,
+  "n": 2,
+  "value_amount": 17.28
+ },
+ {
+  "ym": "2026-01",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 5,
+  "n": 1,
+  "value_amount": 62.4
+ },
+ {
+  "ym": "2026-01",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 16,
+  "value_amount": 651.42
+ },
+ {
+  "ym": "2026-02",
+  "status": 1,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 2,
+  "value_amount": 0.0
+ },
+ {
+  "ym": "2026-02",
+  "status": 2,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 2,
+  "value_amount": 5.74
+ },
+ {
+  "ym": "2026-02",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 12,
+  "value_amount": 312.05
+ },
+ {
+  "ym": "2026-02",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 56,
+  "value_amount": 3513.31
+ },
+ {
+  "ym": "2026-02",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 7,
+  "value_amount": 232.5
+ },
+ {
+  "ym": "2026-02",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 3,
+  "n": 1,
+  "value_amount": 3.79
+ },
+ {
+  "ym": "2026-02",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 4,
+  "value_amount": 62.44
+ },
+ {
+  "ym": "2026-03",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 20,
+  "value_amount": 96.8
+ },
+ {
+  "ym": "2026-03",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 10,
+  "value_amount": 37.91
+ },
+ {
+  "ym": "2026-03",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 2,
+  "value_amount": 9.07
+ },
+ {
+  "ym": "2026-03",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 1,
+  "value_amount": 5.03
+ },
+ {
+  "ym": "2026-04",
+  "status": 2,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 7,
+  "value_amount": 9.18
+ },
+ {
+  "ym": "2026-04",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 15,
+  "value_amount": 258.03
+ },
+ {
+  "ym": "2026-04",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 32,
+  "value_amount": 121.74
+ },
+ {
+  "ym": "2026-04",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 4,
+  "n": 6,
+  "value_amount": 10.42
+ },
+ {
+  "ym": "2026-04",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 5,
+  "n": 8,
+  "value_amount": 24.7
+ },
+ {
+  "ym": "2026-04",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 7,
+  "value_amount": 68.36
+ },
+ {
+  "ym": "2026-05",
+  "status": 1,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 1,
+  "value_amount": 0.0
+ },
+ {
+  "ym": "2026-05",
+  "status": 2,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 12,
+  "value_amount": 79.46
+ },
+ {
+  "ym": "2026-05",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 3,
+  "value_amount": 33.57
+ },
+ {
+  "ym": "2026-05",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 17,
+  "value_amount": 186.31
+ },
+ {
+  "ym": "2026-05",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 4,
+  "n": 28,
+  "value_amount": 196.93
+ },
+ {
+  "ym": "2026-05",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 21,
+  "value_amount": 93.21
+ },
+ {
+  "ym": "2026-05",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 1,
+  "value_amount": 6.6
+ },
+ {
+  "ym": "2026-05",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 3,
+  "n": 1,
+  "value_amount": 1.82
+ },
+ {
+  "ym": "2026-05",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 1,
+  "value_amount": 9.08
+ },
+ {
+  "ym": "2026-06",
+  "status": 1,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 2,
+  "value_amount": 0.0
+ },
+ {
+  "ym": "2026-06",
+  "status": 2,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 3,
+  "value_amount": 17.55
+ },
+ {
+  "ym": "2026-06",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 14,
+  "value_amount": 441.29
+ },
+ {
+  "ym": "2026-06",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 4,
+  "n": 3,
+  "value_amount": 34.07
+ },
+ {
+  "ym": "2026-06",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 8,
+  "value_amount": 27.19
+ },
+ {
+  "ym": "2026-06",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 26,
+  "value_amount": 642.64
+ },
+ {
+  "ym": "2026-06",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 10,
+  "value_amount": 980.98
+ },
+ {
+  "ym": "2026-07",
+  "status": 2,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 2,
+  "value_amount": 55.99
+ },
+ {
+  "ym": "2026-07",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 1,
+  "value_amount": 0.07
+ },
+ {
+  "ym": "2026-07",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 30,
+  "value_amount": 574.55
+ },
+ {
+  "ym": "2026-07",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 4,
+  "n": 13,
+  "value_amount": 65.91
+ },
+ {
+  "ym": "2026-07",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 4,
+  "value_amount": 11.63
+ },
+ {
+  "ym": "2026-07",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 2,
+  "value_amount": 30.34
+ },
+ {
+  "ym": "2026-07",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 6,
+  "n": 9,
+  "value_amount": 247.19
+ },
+ {
+  "ym": "2026-08",
+  "status": 1,
+  "delete_flag": 1,
+  "responsibility": null,
+  "n": 1,
+  "value_amount": 0.0
+ },
+ {
+  "ym": "2026-08",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 8,
+  "value_amount": 47.49
+ },
+ {
+  "ym": "2026-08",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 10,
+  "value_amount": 41.16
+ },
+ {
+  "ym": "2026-08",
+  "status": 4,
+  "delete_flag": 0,
+  "responsibility": 4,
+  "n": 3,
+  "value_amount": 11.37
+ },
+ {
+  "ym": "2026-08",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 1,
+  "n": 4,
+  "value_amount": 14.41
+ },
+ {
+  "ym": "2026-08",
+  "status": 5,
+  "delete_flag": 0,
+  "responsibility": 2,
+  "n": 1,
+  "value_amount": 3.79
+ }
+]

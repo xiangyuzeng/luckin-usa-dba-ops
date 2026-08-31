@@ -1,0 +1,302 @@
+[
+ {
+  "locality_mid": "CI0001",
+  "locality_name": "北京"
+ },
+ {
+  "locality_mid": "CI0002",
+  "locality_name": "上海"
+ },
+ {
+  "locality_mid": "CI0007",
+  "locality_name": "深圳"
+ },
+ {
+  "locality_mid": "CI0013",
+  "locality_name": "厦门"
+ },
+ {
+  "locality_mid": "CI0376",
+  "locality_name": "公主岭"
+ },
+ {
+  "locality_mid": "CI0421",
+  "locality_name": "海门"
+ },
+ {
+  "locality_mid": "CI0463",
+  "locality_name": "龙海"
+ },
+ {
+  "locality_mid": "CI0488",
+  "locality_name": "蓬莱"
+ },
+ {
+  "locality_mid": "CI0513",
+  "locality_name": "偃师"
+ },
+ {
+  "locality_mid": "CI0752",
+  "locality_name": "香港"
+ },
+ {
+  "locality_mid": "CI0753",
+  "locality_name": "香港特别行政区"
+ },
+ {
+  "locality_mid": "CI0756",
+  "locality_name": "胡杨河"
+ },
+ {
+  "locality_mid": "CI0773",
+  "locality_name": "广德"
+ },
+ {
+  "locality_mid": "CI0774",
+  "locality_name": "新加坡"
+ },
+ {
+  "locality_mid": "CI0775",
+  "locality_name": "楚赫维尔"
+ },
+ {
+  "locality_mid": "CI0776",
+  "locality_name": "巴拿马城"
+ },
+ {
+  "locality_mid": "CI0777",
+  "locality_name": "吉隆坡"
+ },
+ {
+  "locality_mid": "CI0778",
+  "locality_name": "西雅图"
+ },
+ {
+  "locality_mid": "CI0779",
+  "locality_name": "芝加哥"
+ },
+ {
+  "locality_mid": "CI0780",
+  "locality_name": "亚的斯亚贝巴"
+ },
+ {
+  "locality_mid": "CI0781",
+  "locality_name": "曼谷"
+ },
+ {
+  "locality_mid": "CI0782",
+  "locality_name": "雅加达"
+ },
+ {
+  "locality_mid": "CI0783",
+  "locality_name": "马尼拉"
+ },
+ {
+  "locality_mid": "CI0784",
+  "locality_name": "米兰"
+ },
+ {
+  "locality_mid": "CI0785",
+  "locality_name": "波哥大"
+ },
+ {
+  "locality_mid": "CI0786",
+  "locality_name": "圣保罗"
+ },
+ {
+  "locality_mid": "CI0787",
+  "locality_name": "马塞卢"
+ },
+ {
+  "locality_mid": "CI0788",
+  "locality_name": "保定（雄县，容城，安新）"
+ },
+ {
+  "locality_mid": "CI0789",
+  "locality_name": "圣佩罗德苏拉"
+ },
+ {
+  "locality_mid": "CI0796",
+  "locality_name": "新山市"
+ },
+ {
+  "locality_mid": "CI0797",
+  "locality_name": "亚罗士打"
+ },
+ {
+  "locality_mid": "CI0798",
+  "locality_name": "双溪大年"
+ },
+ {
+  "locality_mid": "CI0799",
+  "locality_name": "哥打峇鲁"
+ },
+ {
+  "locality_mid": "CI0800",
+  "locality_name": "马六甲市"
+ },
+ {
+  "locality_mid": "CI0801",
+  "locality_name": "芙蓉市"
+ },
+ {
+  "locality_mid": "CI0802",
+  "locality_name": "关丹"
+ },
+ {
+  "locality_mid": "CI0803",
+  "locality_name": "乔治市"
+ },
+ {
+  "locality_mid": "CI0804",
+  "locality_name": "威省"
+ },
+ {
+  "locality_mid": "CI0805",
+  "locality_name": "怡保"
+ },
+ {
+  "locality_mid": "CI0806",
+  "locality_name": "加央"
+ },
+ {
+  "locality_mid": "CI0807",
+  "locality_name": "哥打基纳巴卢"
+ },
+ {
+  "locality_mid": "CI0808",
+  "locality_name": "古晋"
+ },
+ {
+  "locality_mid": "CI0809",
+  "locality_name": "莎阿南市"
+ },
+ {
+  "locality_mid": "CI0810",
+  "locality_name": "八打灵再也"
+ },
+ {
+  "locality_mid": "CI0811",
+  "locality_name": "瓜拉登嘉楼"
+ },
+ {
+  "locality_mid": "CI0812",
+  "locality_name": "维多利亚"
+ },
+ {
+  "locality_mid": "CI0813",
+  "locality_name": "布城"
+ },
+ {
+  "locality_mid": "CI0815",
+  "locality_name": "本哲阿南"
+ },
+ {
+  "locality_mid": "CI0833",
+  "locality_name": "Bentong"
+ },
+ {
+  "locality_mid": "CI0843",
+  "locality_name": "Gombak"
+ },
+ {
+  "locality_mid": "CI0865",
+  "locality_name": "Klang"
+ },
+ {
+  "locality_mid": "CI0873",
+  "locality_name": "Kuala Langat"
+ },
+ {
+  "locality_mid": "CI0917",
+  "locality_name": "Petaling"
+ },
+ {
+  "locality_mid": "CI0941",
+  "locality_name": "Sepang"
+ },
+ {
+  "locality_mid": "CI0967",
+  "locality_name": "Ulu Langat"
+ },
+ {
+  "locality_mid": "CI0970",
+  "locality_name": "阿瓦鲁阿"
+ },
+ {
+  "locality_mid": "CI0971",
+  "locality_name": "纽约市"
+ },
+ {
+  "locality_mid": "CI0972",
+  "locality_name": "锡考克斯"
+ },
+ {
+  "locality_mid": "CI0973",
+  "locality_name": "布里奇沃特"
+ },
+ {
+  "locality_mid": "CI0974",
+  "locality_name": "台北"
+ },
+ {
+  "locality_mid": "CI0975",
+  "locality_name": "新北"
+ },
+ {
+  "locality_mid": "CI0976",
+  "locality_name": "桃园"
+ },
+ {
+  "locality_mid": "CI0977",
+  "locality_name": "台中"
+ },
+ {
+  "locality_mid": "CI0978",
+  "locality_name": "台南"
+ },
+ {
+  "locality_mid": "CI0979",
+  "locality_name": "高雄"
+ },
+ {
+  "locality_mid": "CI0980",
+  "locality_name": "基隆"
+ },
+ {
+  "locality_mid": "CI0981",
+  "locality_name": "新竹"
+ },
+ {
+  "locality_mid": "CI0982",
+  "locality_name": "嘉义"
+ },
+ {
+  "locality_mid": "CI0983",
+  "locality_name": "新星"
+ },
+ {
+  "locality_mid": "CI0984",
+  "locality_name": "白杨"
+ },
+ {
+  "locality_mid": "CI0985",
+  "locality_name": "嫩江"
+ },
+ {
+  "locality_mid": "CI0986",
+  "locality_name": "无为"
+ },
+ {
+  "locality_mid": "CI1006",
+  "locality_name": "门罗镇"
+ },
+ {
+  "locality_mid": "CI1007",
+  "locality_name": "迈阿密"
+ },
+ {
+  "locality_mid": "CI1008",
+  "locality_name": "拉斯维加斯"
+ }
+]

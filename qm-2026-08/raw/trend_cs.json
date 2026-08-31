@@ -1,0 +1,578 @@
+[
+ {
+  "ym": "2026-01",
+  "l1_biz_type": null,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 65,
+  "stores": 9
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_13",
+  "n": 3,
+  "stores": 2
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_15",
+  "n": 4,
+  "stores": 3
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 8,
+  "stores": 5
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 4,
+  "stores": 3
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 18,
+  "stores": 8
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_5",
+  "n": 6,
+  "stores": 2
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 44,
+  "stores": 9
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_6,BIZ_TYPE_6",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-01",
+  "l1_biz_type": "BIZ_TYPE_8",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 50,
+  "stores": 9
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_13",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 4,
+  "stores": 4
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 7,
+  "stores": 6
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_5",
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 45,
+  "stores": 10
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_8",
+  "n": 4,
+  "stores": 3
+ },
+ {
+  "ym": "2026-02",
+  "l1_biz_type": "BIZ_TYPE_9",
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_1",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 80,
+  "stores": 11
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_13",
+  "n": 3,
+  "stores": 2
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_15",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 18,
+  "stores": 9
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 10,
+  "stores": 8
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_5",
+  "n": 9,
+  "stores": 8
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 79,
+  "stores": 11
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_8",
+  "n": 3,
+  "stores": 2
+ },
+ {
+  "ym": "2026-03",
+  "l1_biz_type": "BIZ_TYPE_9",
+  "n": 4,
+  "stores": 3
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_11",
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 145,
+  "stores": 14
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_13",
+  "n": 7,
+  "stores": 4
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_15",
+  "n": 6,
+  "stores": 4
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 19,
+  "stores": 8
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 22,
+  "stores": 7
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_5",
+  "n": 5,
+  "stores": 4
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 93,
+  "stores": 14
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_8",
+  "n": 14,
+  "stores": 3
+ },
+ {
+  "ym": "2026-04",
+  "l1_biz_type": "BIZ_TYPE_9",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_11",
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 72,
+  "stores": 18
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_14",
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_15",
+  "n": 8,
+  "stores": 5
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 14,
+  "stores": 9
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 9,
+  "stores": 7
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 15,
+  "stores": 10
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_5",
+  "n": 5,
+  "stores": 4
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 95,
+  "stores": 17
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_8",
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-05",
+  "l1_biz_type": "BIZ_TYPE_9",
+  "n": 6,
+  "stores": 5
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_1",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_11",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 51,
+  "stores": 15
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_13",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_15",
+  "n": 7,
+  "stores": 5
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_16",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_17",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_19",
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 17,
+  "stores": 11
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_30",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 27,
+  "stores": 14
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_5",
+  "n": 4,
+  "stores": 4
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 99,
+  "stores": 17
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_8",
+  "n": 6,
+  "stores": 4
+ },
+ {
+  "ym": "2026-06",
+  "l1_biz_type": "BIZ_TYPE_9",
+  "n": 6,
+  "stores": 6
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_11",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_13",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_15",
+  "n": 12,
+  "stores": 8
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_16",
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_17",
+  "n": 56,
+  "stores": 18
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_19",
+  "n": 7,
+  "stores": 4
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 11,
+  "stores": 8
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 6,
+  "stores": 6
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_30",
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 14,
+  "stores": 11
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 104,
+  "stores": 19
+ },
+ {
+  "ym": "2026-07",
+  "l1_biz_type": "BIZ_TYPE_9",
+  "n": 3,
+  "stores": 2
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": null,
+  "n": 21,
+  "stores": 12
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_11",
+  "n": 5,
+  "stores": 3
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_12",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_13",
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_15",
+  "n": 5,
+  "stores": 3
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_16",
+  "n": 13,
+  "stores": 6
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_17",
+  "n": 61,
+  "stores": 18
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_19",
+  "n": 4,
+  "stores": 3
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_2",
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_3",
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_30",
+  "n": 3,
+  "stores": 2
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_4",
+  "n": 22,
+  "stores": 10
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_6",
+  "n": 66,
+  "stores": 18
+ },
+ {
+  "ym": "2026-08",
+  "l1_biz_type": "BIZ_TYPE_9",
+  "n": 3,
+  "stores": 2
+ }
+]

@@ -1,0 +1,72 @@
+[
+ {
+  "large_category_id": 924,
+  "large_category_name": "IQA2Test_门店营业检查",
+  "status": 1,
+  "deleted": 0,
+  "n": 6
+ },
+ {
+  "large_category_id": 1084,
+  "large_category_name": "Store-Store food safety self-check",
+  "status": 0,
+  "deleted": 1,
+  "n": 1
+ },
+ {
+  "large_category_id": 1084,
+  "large_category_name": "Store-Store food safety self-check",
+  "status": 1,
+  "deleted": 0,
+  "n": 51
+ },
+ {
+  "large_category_id": 1134,
+  "large_category_name": "QA/QC-Store food safety audit",
+  "status": 1,
+  "deleted": 0,
+  "n": 20
+ },
+ {
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "status": 0,
+  "deleted": 0,
+  "n": 1
+ },
+ {
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "status": 0,
+  "deleted": 1,
+  "n": 1
+ },
+ {
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "status": 1,
+  "deleted": 0,
+  "n": 3
+ },
+ {
+  "large_category_id": 2045,
+  "large_category_name": "Test Video Audit-Opening Preparation",
+  "status": 0,
+  "deleted": 1,
+  "n": 1
+ },
+ {
+  "large_category_id": 2300,
+  "large_category_name": "Test Video Audit-Closing Cleaning",
+  "status": 0,
+  "deleted": 0,
+  "n": 2
+ },
+ {
+  "large_category_id": 2300,
+  "large_category_name": "Test Video Audit-Closing Cleaning",
+  "status": 0,
+  "deleted": 1,
+  "n": 1
+ }
+]

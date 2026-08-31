@@ -1,0 +1,612 @@
+[
+ {
+  "pqnc_no": "Q202607020001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 1.82,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:27:32",
+  "modified_time": "2026-08-14T19:27:33",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607020002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 0.26,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:19:09",
+  "modified_time": "2026-08-14T19:19:09",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607020003",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.97,
+  "supplier_mid": "SC055946",
+  "judgment_time": "2026-07-06T16:27:42",
+  "modified_time": "2026-07-06T16:27:42",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607030001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:02:10",
+  "modified_time": "2026-08-14T19:02:10",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607030002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.16,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:04:20",
+  "modified_time": "2026-08-14T19:04:20",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607030003",
+  "status": 5,
+  "responsibility": 1,
+  "value_amount": 7.57,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-07-13T16:53:24",
+  "modified_time": "2026-08-21T08:40:46",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607030004",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 8.33,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:00:58",
+  "modified_time": "2026-08-14T19:00:58",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607050001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 2.26,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:24:47",
+  "modified_time": "2026-08-14T19:24:47",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607050002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.16,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:12:43",
+  "modified_time": "2026-08-14T19:12:44",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607050003",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:14:22",
+  "modified_time": "2026-08-14T19:14:22",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607060001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 0.2,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:02:28",
+  "modified_time": "2026-08-14T19:02:28",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607070001",
+  "status": 2,
+  "responsibility": null,
+  "value_amount": 54.17,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-07T21:41:17",
+  "modified_time": "2026-07-07T22:49:21",
+  "delete_flag": 1
+ },
+ {
+  "pqnc_no": "Q202607070002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 2.26,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:03:35",
+  "modified_time": "2026-08-14T19:03:35",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607080001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.54,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:02:49",
+  "modified_time": "2026-08-14T19:02:49",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607090001",
+  "status": 5,
+  "responsibility": 1,
+  "value_amount": 0.52,
+  "supplier_mid": "SC055913",
+  "judgment_time": "2026-07-09T18:08:17",
+  "modified_time": "2026-07-21T01:02:20",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607090002",
+  "status": 5,
+  "responsibility": 2,
+  "value_amount": 4.16,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-07-09T18:07:30",
+  "modified_time": "2026-07-13T16:37:45",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607110001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 13.61,
+  "supplier_mid": "SC052224",
+  "judgment_time": "2026-08-28T17:54:25",
+  "modified_time": "2026-08-28T17:54:25",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607110002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 13.61,
+  "supplier_mid": "SC052224",
+  "judgment_time": "2026-08-28T17:54:40",
+  "modified_time": "2026-08-28T17:54:40",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607120001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.54,
+  "supplier_mid": "SC057779",
+  "judgment_time": "2026-08-14T19:04:36",
+  "modified_time": "2026-08-14T19:04:36",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607120002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.54,
+  "supplier_mid": "SC057779",
+  "judgment_time": "2026-08-14T19:04:05",
+  "modified_time": "2026-08-14T19:04:05",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607120003",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:03:50",
+  "modified_time": "2026-08-14T19:03:50",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607140001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 398.13,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-16T15:31:51",
+  "modified_time": "2026-07-16T15:31:51",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607160001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:04:54",
+  "modified_time": "2026-08-14T19:04:54",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607170001",
+  "status": 2,
+  "responsibility": null,
+  "value_amount": 1.82,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-22T18:01:46",
+  "modified_time": "2026-07-26T22:20:21",
+  "delete_flag": 1
+ },
+ {
+  "pqnc_no": "Q202607190001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:06:06",
+  "modified_time": "2026-08-14T19:06:06",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607190002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 8.33,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:05:08",
+  "modified_time": "2026-08-14T19:05:08",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607200001",
+  "status": 5,
+  "responsibility": 1,
+  "value_amount": 1.72,
+  "supplier_mid": "SC055913",
+  "judgment_time": "2026-07-20T16:59:28",
+  "modified_time": "2026-07-21T01:13:14",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607210001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 3.33,
+  "supplier_mid": "SC057779",
+  "judgment_time": "2026-08-14T19:05:27",
+  "modified_time": "2026-08-14T19:05:27",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607210002",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 2.06,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-22T17:58:44",
+  "modified_time": "2026-07-22T17:58:44",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220001",
+  "status": 5,
+  "responsibility": 2,
+  "value_amount": 26.18,
+  "supplier_mid": "SC057779",
+  "judgment_time": "2026-07-22T18:02:47",
+  "modified_time": "2026-08-13T20:44:10",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220002",
+  "status": 4,
+  "responsibility": 1,
+  "value_amount": 0.07,
+  "supplier_mid": "SC055913",
+  "judgment_time": "2026-08-24T15:55:31",
+  "modified_time": "2026-08-24T15:55:32",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220003",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.32,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T20:00:12",
+  "modified_time": "2026-08-03T20:00:12",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220004",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:59:52",
+  "modified_time": "2026-08-03T19:59:52",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220005",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:59:32",
+  "modified_time": "2026-08-03T19:59:32",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220006",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 3.79,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-22T18:15:57",
+  "modified_time": "2026-07-22T18:15:57",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220007",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:59:11",
+  "modified_time": "2026-08-03T19:59:11",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220008",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:58:17",
+  "modified_time": "2026-08-03T19:58:17",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220009",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 7.56,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:57:59",
+  "modified_time": "2026-08-03T19:57:58",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220010",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 11.36,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:57:29",
+  "modified_time": "2026-08-03T19:57:28",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220011",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:57:06",
+  "modified_time": "2026-08-03T19:57:06",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607220012",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:56:43",
+  "modified_time": "2026-08-03T19:56:43",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607230001",
+  "status": 5,
+  "responsibility": 1,
+  "value_amount": 1.82,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-07-24T19:49:39",
+  "modified_time": "2026-08-21T08:40:36",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607230002",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 22.71,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:07:31",
+  "modified_time": "2026-08-14T19:07:31",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607240001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.54,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:07:49",
+  "modified_time": "2026-08-14T19:07:49",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607260001",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:56:24",
+  "modified_time": "2026-08-03T19:56:24",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607260002",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 3.79,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:56:02",
+  "modified_time": "2026-08-03T19:56:02",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607260003",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 9.2,
+  "supplier_mid": "SC058362",
+  "judgment_time": "2026-08-14T19:15:34",
+  "modified_time": "2026-08-14T19:15:34",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607260004",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 13.63,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:10:41",
+  "modified_time": "2026-08-14T19:10:41",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607270001",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.16,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:25:42",
+  "modified_time": "2026-08-14T19:25:42",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280001",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 46.46,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-28T14:55:32",
+  "modified_time": "2026-07-28T14:55:32",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280002",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 68.28,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-28T14:55:01",
+  "modified_time": "2026-07-28T14:55:01",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280003",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 21.6,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-28T14:54:31",
+  "modified_time": "2026-07-28T14:54:31",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280004",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 26.0,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-28T14:54:13",
+  "modified_time": "2026-07-28T14:54:13",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280005",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 46.2,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-28T14:53:42",
+  "modified_time": "2026-07-28T14:53:42",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280006",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 22.4,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-28T14:52:58",
+  "modified_time": "2026-07-28T14:52:58",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280007",
+  "status": 5,
+  "responsibility": 6,
+  "value_amount": 10.4,
+  "supplier_mid": null,
+  "judgment_time": "2026-07-28T14:52:17",
+  "modified_time": "2026-07-28T14:52:17",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280008",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.16,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:16:16",
+  "modified_time": "2026-08-14T19:16:16",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280009",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 5.78,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:55:36",
+  "modified_time": "2026-08-03T19:55:36",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280010",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 13.61,
+  "supplier_mid": "SC052224",
+  "judgment_time": "2026-08-28T17:50:26",
+  "modified_time": "2026-08-28T17:50:26",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280011",
+  "status": 4,
+  "responsibility": 4,
+  "value_amount": 7.57,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-03T19:55:09",
+  "modified_time": "2026-08-03T19:55:09",
+  "delete_flag": 0
+ },
+ {
+  "pqnc_no": "Q202607280012",
+  "status": 4,
+  "responsibility": 2,
+  "value_amount": 4.54,
+  "supplier_mid": "SC057757",
+  "judgment_time": "2026-08-14T19:18:54",
+  "modified_time": "2026-08-14T19:18:54",
+  "delete_flag": 0
+ }
+]

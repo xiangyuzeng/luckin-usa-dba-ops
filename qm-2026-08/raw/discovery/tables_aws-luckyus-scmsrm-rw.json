@@ -1,0 +1,806 @@
+[
+ {
+  "s": "backup_tables",
+  "t": "t_mdm_goods_spec_draft_language_20251205",
+  "n": 23,
+  "upd": null
+ },
+ {
+  "s": "backup_tables",
+  "t": "t_mdm_goods_spec_draft_package_20251205",
+  "n": 36,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise",
+  "n": 9,
+  "upd": "2026-07-22T22:32:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_bank_info",
+  "n": 9,
+  "upd": "2026-07-22T19:14:30"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_bank_info_history",
+  "n": 51,
+  "upd": "2026-07-22T22:32:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_contact",
+  "n": 12,
+  "upd": "2026-07-22T19:14:30"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_contact_history",
+  "n": 62,
+  "upd": "2026-07-22T22:32:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_history",
+  "n": 49,
+  "upd": "2026-07-22T22:32:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_language",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_manufacturer",
+  "n": 8,
+  "upd": "2026-07-22T22:32:50"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_manufacturer_contact",
+  "n": 7,
+  "upd": "2026-07-22T19:23:12"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_manufacturer_contact_history",
+  "n": 16,
+  "upd": "2026-07-22T22:32:50"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_manufacturer_history",
+  "n": 16,
+  "upd": "2026-07-22T22:32:50"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_manufacturer_product_history",
+  "n": 12,
+  "upd": "2026-07-22T19:30:02"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_manufacturer_qualification",
+  "n": 13,
+  "upd": "2026-07-22T19:28:25"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_manufacturer_qualification_history",
+  "n": 24,
+  "upd": "2026-07-22T22:32:50"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_product_qualification",
+  "n": 12,
+  "upd": "2026-07-22T19:30:02"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_product_qualification_history",
+  "n": 16,
+  "upd": "2026-07-22T19:30:02"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_profile_attachment",
+  "n": 4,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_profile_attachment_history",
+  "n": 20,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_qualification",
+  "n": 13,
+  "upd": "2026-07-22T19:14:30"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_enterprise_qualification_history",
+  "n": 63,
+  "upd": "2026-07-22T22:32:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_goods_spec_expiration_date_check_config",
+  "n": 6,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_goods_spec_expiration_date_check_scope_config",
+  "n": 6,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_goods_spec_expiration_date_scope_config_extend",
+  "n": 2,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_goods_spec_qcm_scope_config",
+  "n": 20,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_goods_spec_quality_scope_config",
+  "n": 7,
+  "upd": "2026-07-28T08:22:46"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_inquiry_order",
+  "n": 26,
+  "upd": "2026-08-21T08:26:20"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_inquiry_order_attachment",
+  "n": 11,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_inquiry_order_item",
+  "n": 133,
+  "upd": "2026-07-31T04:00:05"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_inquiry_order_item_record",
+  "n": 20,
+  "upd": "2026-07-09T09:26:00"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_lark_approval_config",
+  "n": 3,
+  "upd": "2026-07-14T02:48:53"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_lark_approval_config_meta",
+  "n": 232,
+  "upd": "2026-07-14T02:48:53"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_manufacturer",
+  "n": 8,
+  "upd": "2026-07-22T19:28:25"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_bank",
+  "n": 574,
+  "upd": "2026-08-23T15:07:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_bank_branch",
+  "n": 483729,
+  "upd": "2026-08-30T15:07:34"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_cooperation_pattern",
+  "n": 6,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_cooperation_pattern_language",
+  "n": 8,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_country",
+  "n": 610,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_country_language",
+  "n": 1750,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_currency",
+  "n": 29,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_currency_language",
+  "n": 100,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods",
+  "n": 1539,
+  "upd": "2026-08-31T13:58:14"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_brand",
+  "n": 2569,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_brand_language",
+  "n": 276,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_draft",
+  "n": 1551,
+  "upd": "2026-08-31T13:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_draft_language",
+  "n": 2468,
+  "upd": "2026-08-31T02:41:45"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_finance_type",
+  "n": 124,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_finance_type_language",
+  "n": 372,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_language",
+  "n": 2433,
+  "upd": "2026-08-31T13:58:14"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_large_class",
+  "n": 93,
+  "upd": "2026-08-31T13:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_large_class_draft",
+  "n": 94,
+  "upd": "2026-08-31T13:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_large_class_draft_language",
+  "n": 107,
+  "upd": "2026-08-31T09:06:05"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_large_class_language",
+  "n": 215,
+  "upd": "2026-08-31T13:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_small_class",
+  "n": 829,
+  "upd": "2026-08-31T13:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_small_class_draft",
+  "n": 834,
+  "upd": "2026-08-31T13:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_small_class_draft_extend",
+  "n": 2,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_small_class_draft_language",
+  "n": 977,
+  "upd": "2026-08-31T09:06:05"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_small_class_extend",
+  "n": 2,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_small_class_language",
+  "n": 1879,
+  "upd": "2026-08-31T13:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec",
+  "n": 1881,
+  "upd": "2026-08-31T13:58:14"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_attachment",
+  "n": 418,
+  "upd": "2026-08-26T11:43:33"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft",
+  "n": 1860,
+  "upd": "2026-08-31T13:58:24"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_attachment",
+  "n": 442,
+  "upd": "2026-08-26T11:43:33"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_change_record_attachment",
+  "n": 236,
+  "upd": "2026-08-31T03:25:34"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_expiration_date_change_record",
+  "n": 57,
+  "upd": "2026-08-26T11:43:35"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_expiration_date_change_record_item",
+  "n": 111,
+  "upd": "2026-08-26T08:54:28"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_expiration_date_config",
+  "n": 238,
+  "upd": "2026-08-26T11:43:33"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_expiration_date_config_record",
+  "n": 324,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_extend",
+  "n": 686,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_history",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_images",
+  "n": 7726,
+  "upd": "2026-08-31T03:00:06"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_language",
+  "n": 2448,
+  "upd": "2026-08-31T03:24:11"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_master_data_change_record",
+  "n": 89,
+  "upd": "2026-08-19T02:08:49"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_master_data_change_record_images",
+  "n": 673,
+  "upd": "2026-08-18T10:05:03"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_master_data_change_record_language",
+  "n": 324,
+  "upd": "2026-08-18T10:05:03"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_master_data_change_record_package",
+  "n": 534,
+  "upd": "2026-08-18T10:05:03"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_master_data_change_record_snapshot",
+  "n": 88,
+  "upd": "2026-08-18T10:05:03"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_package",
+  "n": 5472,
+  "upd": "2026-08-31T03:00:06"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_quality",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_quality_change_record",
+  "n": 45,
+  "upd": "2026-08-31T03:25:41"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_draft_quality_change_record_item",
+  "n": 10,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_expiration_date_config",
+  "n": 219,
+  "upd": "2026-08-26T11:43:33"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_expiration_date_config_record",
+  "n": 293,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_extend",
+  "n": 625,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_images",
+  "n": 7439,
+  "upd": "2026-08-31T13:58:14"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_language",
+  "n": 2445,
+  "upd": "2026-08-31T13:58:14"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_package",
+  "n": 5395,
+  "upd": "2026-08-31T13:58:14"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_goods_spec_quality",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_locality",
+  "n": 232,
+  "upd": "2026-08-29T16:01:01"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_locality_language",
+  "n": 266,
+  "upd": "2026-08-29T16:01:01"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_organization",
+  "n": 26,
+  "upd": "2026-07-08T03:38:08"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_organization_language",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_product_value",
+  "n": 314,
+  "upd": "2026-08-31T14:50:20"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_province",
+  "n": 204,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_province_language",
+  "n": 121,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_rate",
+  "n": 16,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_supplier",
+  "n": 267,
+  "upd": "2026-08-31T14:27:41"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_supplier_language",
+  "n": 539,
+  "upd": "2026-08-31T14:27:41"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_tenant",
+  "n": 31,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_tenant_language",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_time_zone",
+  "n": 278,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_unit",
+  "n": 296,
+  "upd": "2026-08-26T10:02:57"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_mdm_unit_language",
+  "n": 532,
+  "upd": "2026-08-26T10:02:57"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc",
+  "n": 719,
+  "upd": "2026-08-31T14:33:29"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc_attachment",
+  "n": 2546,
+  "upd": "2026-08-28T22:59:51"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc_history",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc_operate_detail",
+  "n": 1529,
+  "upd": "2026-08-31T14:33:29"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc_relate_bill",
+  "n": 689,
+  "upd": "2026-08-28T22:59:51"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc_type",
+  "n": 4,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc_type_history",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_pqnc_type_language",
+  "n": 8,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_rfq_order",
+  "n": 13,
+  "upd": "2026-07-07T08:34:17"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_rfq_order_attachment",
+  "n": 11,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_rfq_order_item",
+  "n": 28,
+  "upd": "2026-07-07T08:34:17"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_rfq_order_item_record",
+  "n": 4,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_shop_info",
+  "n": 513,
+  "upd": "2026-08-18T04:50:08"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_shop_info_language",
+  "n": 108,
+  "upd": "2026-08-31T10:50:18"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_spec_order_entry_config",
+  "n": 2,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_stock_cell",
+  "n": 572,
+  "upd": "2026-08-31T10:50:18"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_stock_cell_language",
+  "n": 144,
+  "upd": "2026-08-31T10:50:18"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_bank_info",
+  "n": 254,
+  "upd": "2026-08-28T19:54:11"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_bank_info_history",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_contact",
+  "n": 252,
+  "upd": "2026-08-28T19:09:53"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_contact_history",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_history",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_purchase_sale_config",
+  "n": 3,
+  "upd": "2026-07-08T06:31:45"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_purchase_sale_config_item",
+  "n": 2,
+  "upd": "2026-07-08T06:31:45"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_qualification",
+  "n": 330,
+  "upd": "2026-08-28T19:09:53"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_supplier_qualification_history",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_tx_log",
+  "n": 894,
+  "upd": "2026-08-28T19:58:21"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_warehouse",
+  "n": 10,
+  "upd": "2026-08-21T16:37:23"
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_warehouse_language",
+  "n": 24,
+  "upd": null
+ },
+ {
+  "s": "luckyus_scm_srm",
+  "t": "t_warehouse_shop",
+  "n": 118,
+  "upd": "2026-08-18T16:40:01"
+ }
+]

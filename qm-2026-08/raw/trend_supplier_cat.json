@@ -1,0 +1,1730 @@
+[
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07440-02",
+  "n": 1,
+  "amt": 6.26
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07443-02",
+  "n": 1,
+  "amt": 0.12
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07448-01",
+  "n": 1,
+  "amt": 0.05
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07451-02",
+  "n": 1,
+  "amt": 0.64
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS08037-01",
+  "n": 2,
+  "amt": 6.85
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC055914",
+  "spec_mid": "GS07493-01",
+  "n": 1,
+  "amt": 5.03
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07565-01",
+  "n": 5,
+  "amt": 51.07
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07743-01",
+  "n": 5,
+  "amt": 100.28
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 1,
+  "amt": 2.26
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 3.41
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 4,
+  "amt": 34.08
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07825-01",
+  "n": 1,
+  "amt": 7.89
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 8,
+  "amt": 58.35
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS09421-01",
+  "n": 7,
+  "amt": 97.9
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07785-01",
+  "n": 2,
+  "amt": 6.82
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08252-01",
+  "n": 1,
+  "amt": 3.19
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 15,
+  "amt": 54.91
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07441-02",
+  "n": 1,
+  "amt": 8.05
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07470-01",
+  "n": 1,
+  "amt": 97.96
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07564-01",
+  "n": 3,
+  "amt": 46.2
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07572-01",
+  "n": 1,
+  "amt": 11.4
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07575-01",
+  "n": 1,
+  "amt": 31.58
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07601-02",
+  "n": 1,
+  "amt": 13.46
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07742-01",
+  "n": 4,
+  "amt": 239.2
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07743-01",
+  "n": 3,
+  "amt": 81.72
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07758-01",
+  "n": 2,
+  "amt": 5.38
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07763-01",
+  "n": 1,
+  "amt": 2.26
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.03
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07825-01",
+  "n": 2,
+  "amt": 15.96
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07828-01",
+  "n": 1,
+  "amt": 105.0
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 43.78
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 3,
+  "supplier_mid": null,
+  "spec_mid": "GS07758-01",
+  "n": 1,
+  "amt": 5.17
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 3,
+  "supplier_mid": null,
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 12.11
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 4,
+  "supplier_mid": "SC055914",
+  "spec_mid": "GS07494-01",
+  "n": 1,
+  "amt": 5.03
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 5,
+  "supplier_mid": null,
+  "spec_mid": "GS07965-01",
+  "n": 1,
+  "amt": 62.4
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07575-01",
+  "n": 7,
+  "amt": 221.06
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07743-01",
+  "n": 7,
+  "amt": 424.93
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 6,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08251-01",
+  "n": 1,
+  "amt": 2.2
+ },
+ {
+  "ym": "2026-01",
+  "responsibility": 6,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 1,
+  "amt": 3.23
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07451-02",
+  "n": 1,
+  "amt": 0.48
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS08037-01",
+  "n": 1,
+  "amt": 0.52
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 2,
+  "amt": 7.57
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 2,
+  "amt": 3.64
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS09421-01",
+  "n": 3,
+  "amt": 35.6
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07504-01",
+  "n": 12,
+  "amt": 1292.97
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07965-01",
+  "n": 10,
+  "amt": 937.97
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07966-01",
+  "n": 12,
+  "amt": 1182.88
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 13,
+  "amt": 51.68
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07504-01",
+  "n": 1,
+  "amt": 86.4
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07572-01",
+  "n": 4,
+  "amt": 79.87
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07743-01",
+  "n": 1,
+  "amt": 62.44
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07907-02",
+  "n": 1,
+  "amt": 119.99
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS08895-01",
+  "n": 1,
+  "amt": 38.56
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS08937-01",
+  "n": 1,
+  "amt": 81.85
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07466-01",
+  "n": 1,
+  "amt": 16.42
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07467-01",
+  "n": 1,
+  "amt": 15.15
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": "SC055946",
+  "spec_mid": "GS07658-01",
+  "n": 1,
+  "amt": 0.29
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07738-02",
+  "n": 1,
+  "amt": 15.7
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 13.63
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 2,
+  "amt": 6.82
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 2,
+  "amt": 3.64
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 3,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07572-01",
+  "n": 1,
+  "amt": 11.33
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 13.63
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 34.07
+ },
+ {
+  "ym": "2026-02",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.41
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07443-02",
+  "n": 1,
+  "amt": 0.05
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 1,
+  "supplier_mid": "SC055914",
+  "spec_mid": "GS07496-01",
+  "n": 1,
+  "amt": 5.03
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07743-01",
+  "n": 2,
+  "amt": 7.8
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 5,
+  "amt": 22.61
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08254-01",
+  "n": 1,
+  "amt": 2.42
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 6.81
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07470-01",
+  "n": 1,
+  "amt": 16.33
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07565-01",
+  "n": 3,
+  "amt": 11.35
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07579-01",
+  "n": 1,
+  "amt": 2.74
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07743-01",
+  "n": 3,
+  "amt": 19.07
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 3,
+  "amt": 6.78
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 6,
+  "amt": 23.86
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 2,
+  "amt": 3.64
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 2,
+  "supplier_mid": "SC058362",
+  "spec_mid": "GS07572-01",
+  "n": 1,
+  "amt": 11.5
+ },
+ {
+  "ym": "2026-03",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS08285-01",
+  "n": 1,
+  "amt": 5.03
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07437-01",
+  "n": 1,
+  "amt": 0.02
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07440-01",
+  "n": 5,
+  "amt": 8.03
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07448-01",
+  "n": 3,
+  "amt": 31.02
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 1,
+  "amt": 2.26
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 2,
+  "amt": 3.64
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS09530-01",
+  "n": 1,
+  "amt": 2.75
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07785-01",
+  "n": 2,
+  "amt": 6.82
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 0.58
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08252-01",
+  "n": 1,
+  "amt": 9.57
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 14,
+  "amt": 51.68
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS09432-01",
+  "n": 1,
+  "amt": 5.37
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07518-01",
+  "n": 1,
+  "amt": 17.29
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS08283-01",
+  "n": 1,
+  "amt": 1.72
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS08895-01",
+  "n": 1,
+  "amt": 77.12
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07465-01",
+  "n": 1,
+  "amt": 13.51
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07466-01",
+  "n": 1,
+  "amt": 13.79
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07470-01",
+  "n": 1,
+  "amt": 16.33
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC055786",
+  "spec_mid": "GS07531-01",
+  "n": 1,
+  "amt": 58.68
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07579-01",
+  "n": 1,
+  "amt": 32.92
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07743-01",
+  "n": 1,
+  "amt": 7.81
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 1,
+  "amt": 2.26
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 3.41
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 3,
+  "amt": 11.37
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 4,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS09530-01",
+  "n": 6,
+  "amt": 10.42
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 5,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07579-01",
+  "n": 1,
+  "amt": 5.49
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 5,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 3,
+  "amt": 6.78
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 5,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 3.41
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 5,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 5,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.41
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 5,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07763-01",
+  "n": 3,
+  "amt": 6.78
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07964-02",
+  "n": 1,
+  "amt": 32.34
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS09530-01",
+  "n": 1,
+  "amt": 3.5
+ },
+ {
+  "ym": "2026-04",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS09908-01",
+  "n": 1,
+  "amt": 21.95
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07468-01",
+  "n": 1,
+  "amt": 14.15
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07440-01",
+  "n": 2,
+  "amt": 4.31
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07575-02",
+  "n": 1,
+  "amt": 11.25
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07743-02",
+  "n": 1,
+  "amt": 18.16
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-02",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS09641-01",
+  "n": 1,
+  "amt": 0.07
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.41
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08252-01",
+  "n": 1,
+  "amt": 19.14
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 12,
+  "amt": 41.99
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07907-02",
+  "n": 1,
+  "amt": 119.99
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07468-01",
+  "n": 1,
+  "amt": 14.15
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07565-01",
+  "n": 3,
+  "amt": 5.67
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 4,
+  "amt": 11.29
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 2,
+  "amt": 7.58
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 6,
+  "amt": 27.63
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07932-01",
+  "n": 1,
+  "amt": 6.6
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 3,
+  "supplier_mid": null,
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 4,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07565-01",
+  "n": 1,
+  "amt": 1.99
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 4,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 27,
+  "amt": 194.94
+ },
+ {
+  "ym": "2026-05",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07743-01",
+  "n": 1,
+  "amt": 9.08
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 5,
+  "amt": 19.38
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS10076-01",
+  "n": 1,
+  "amt": 2.2
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07518-01",
+  "n": 1,
+  "amt": 103.74
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC055786",
+  "spec_mid": "GS07518-01",
+  "n": 4,
+  "amt": 259.35
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC055786",
+  "spec_mid": "GS07659-01",
+  "n": 1,
+  "amt": 40.43
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC055786",
+  "spec_mid": "GS07703-02",
+  "n": 1,
+  "amt": 5.34
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07565-01",
+  "n": 1,
+  "amt": 3.97
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07575-01",
+  "n": 1,
+  "amt": 5.63
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07743-01",
+  "n": 2,
+  "amt": 56.66
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 2,
+  "amt": 4.52
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 5,
+  "amt": 19.23
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 6,
+  "amt": 34.09
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 2,
+  "amt": 65.67
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07506-01",
+  "n": 1,
+  "amt": 249.9
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07745-01",
+  "n": 1,
+  "amt": 26.18
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 20.82
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07786-01",
+  "n": 2,
+  "amt": 40.88
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07788-01",
+  "n": 2,
+  "amt": 11.36
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07932-01",
+  "n": 3,
+  "amt": 26.4
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS10076-01",
+  "n": 3,
+  "amt": 105.6
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 4,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 3,
+  "amt": 34.07
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 43.78
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07932-01",
+  "n": 8,
+  "amt": 930.6
+ },
+ {
+  "ym": "2026-06",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS10076-01",
+  "n": 1,
+  "amt": 6.6
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07447-01",
+  "n": 1,
+  "amt": 1.72
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS07451-01",
+  "n": 1,
+  "amt": 0.07
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 1,
+  "supplier_mid": "SC055913",
+  "spec_mid": "GS08037-01",
+  "n": 1,
+  "amt": 0.52
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 7.57
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07634-01",
+  "n": 1,
+  "amt": 398.13
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07465-01",
+  "n": 3,
+  "amt": 40.83
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC055946",
+  "spec_mid": "GS07650-01",
+  "n": 1,
+  "amt": 4.97
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 2,
+  "amt": 4.52
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 8,
+  "amt": 37.72
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07786-01",
+  "n": 5,
+  "amt": 49.96
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 6,
+  "amt": 19.15
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07506-01",
+  "n": 1,
+  "amt": 3.33
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07745-01",
+  "n": 1,
+  "amt": 26.18
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07786-01",
+  "n": 2,
+  "amt": 9.08
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 2,
+  "supplier_mid": "SC058362",
+  "spec_mid": "GS07513-01",
+  "n": 1,
+  "amt": 9.2
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 4,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 13,
+  "amt": 65.91
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07504-01",
+  "n": 1,
+  "amt": 21.6
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07506-01",
+  "n": 1,
+  "amt": 2.06
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07575-01",
+  "n": 1,
+  "amt": 46.46
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07740-01",
+  "n": 1,
+  "amt": 26.0
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07743-01",
+  "n": 1,
+  "amt": 68.28
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07932-01",
+  "n": 1,
+  "amt": 46.2
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07965-01",
+  "n": 1,
+  "amt": 10.4
+ },
+ {
+  "ym": "2026-07",
+  "responsibility": 6,
+  "supplier_mid": null,
+  "spec_mid": "GS07966-01",
+  "n": 1,
+  "amt": 22.4
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC052224",
+  "spec_mid": "GS07469-02",
+  "n": 2,
+  "amt": 27.02
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07579-01",
+  "n": 1,
+  "amt": 2.74
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 2,
+  "amt": 7.58
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS08253-01",
+  "n": 2,
+  "amt": 6.46
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS10076-01",
+  "n": 1,
+  "amt": 2.2
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC073739",
+  "spec_mid": "GS07785-04",
+  "n": 2,
+  "amt": 7.58
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 1,
+  "supplier_mid": "SC073739",
+  "spec_mid": "GS07786-04",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07565-01",
+  "n": 1,
+  "amt": 1.99
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07579-01",
+  "n": 1,
+  "amt": 5.49
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07786-01",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": null,
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.79
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": "SC055914",
+  "spec_mid": "GS07494-01",
+  "n": 1,
+  "amt": 5.03
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07763-01",
+  "n": 1,
+  "amt": 6.77
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07785-01",
+  "n": 1,
+  "amt": 4.16
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07859-01",
+  "n": 1,
+  "amt": 1.82
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 2,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07788-01",
+  "n": 2,
+  "amt": 7.58
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 4,
+  "supplier_mid": "SC057757",
+  "spec_mid": "GS07788-01",
+  "n": 2,
+  "amt": 7.58
+ },
+ {
+  "ym": "2026-08",
+  "responsibility": 4,
+  "supplier_mid": "SC057779",
+  "spec_mid": "GS07788-01",
+  "n": 1,
+  "amt": 3.79
+ }
+]

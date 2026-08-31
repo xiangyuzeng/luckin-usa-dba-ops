@@ -1,0 +1,44 @@
+[
+ {
+  "id": 23,
+  "code": "FEEDBACK_SOURCE_COMMENT",
+  "name": "Order Comment",
+  "sort": 0,
+  "deleted": 0
+ },
+ {
+  "id": 24,
+  "code": "FEEDBACK_SOURCE_24",
+  "name": "Email",
+  "sort": 24,
+  "deleted": 0
+ },
+ {
+  "id": 25,
+  "code": "FEEDBACK_SOURCE_25",
+  "name": "Store",
+  "sort": 25,
+  "deleted": 0
+ },
+ {
+  "id": 26,
+  "code": "FEEDBACK_SOURCE_26",
+  "name": "Social Media",
+  "sort": 26,
+  "deleted": 0
+ },
+ {
+  "id": 27,
+  "code": "FEEDBACK_SOURCE_27",
+  "name": "Others",
+  "sort": 27,
+  "deleted": 0
+ },
+ {
+  "id": 28,
+  "code": "FEEDBACK_SOURCE_28",
+  "name": "Order Comment - Manual",
+  "sort": 28,
+  "deleted": 0
+ }
+]

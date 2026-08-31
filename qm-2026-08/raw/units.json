@@ -1,0 +1,326 @@
+[
+ {
+  "unit_mid": "QU001",
+  "unit_name": "升"
+ },
+ {
+  "unit_mid": "QU002",
+  "unit_name": "瓶"
+ },
+ {
+  "unit_mid": "QU003",
+  "unit_name": "袋"
+ },
+ {
+  "unit_mid": "QU004",
+  "unit_name": "斤"
+ },
+ {
+  "unit_mid": "QU005",
+  "unit_name": "克"
+ },
+ {
+  "unit_mid": "QU006",
+  "unit_name": "盒"
+ },
+ {
+  "unit_mid": "QU007",
+  "unit_name": "杯"
+ },
+ {
+  "unit_mid": "QU008",
+  "unit_name": "份"
+ },
+ {
+  "unit_mid": "QU009",
+  "unit_name": "个"
+ },
+ {
+  "unit_mid": "QU010",
+  "unit_name": "块"
+ },
+ {
+  "unit_mid": "QU011",
+  "unit_name": "箱"
+ },
+ {
+  "unit_mid": "QU012",
+  "unit_name": "台"
+ },
+ {
+  "unit_mid": "QU013",
+  "unit_name": "毫升"
+ },
+ {
+  "unit_mid": "QU014",
+  "unit_name": "桶"
+ },
+ {
+  "unit_mid": "QU015",
+  "unit_name": "包"
+ },
+ {
+  "unit_mid": "QU016",
+  "unit_name": "公斤"
+ },
+ {
+  "unit_mid": "QU017",
+  "unit_name": "抽"
+ },
+ {
+  "unit_mid": "QU018",
+  "unit_name": "张"
+ },
+ {
+  "unit_mid": "QU019",
+  "unit_name": "米"
+ },
+ {
+  "unit_mid": "QU020",
+  "unit_name": "把"
+ },
+ {
+  "unit_mid": "QU021",
+  "unit_name": "条"
+ },
+ {
+  "unit_mid": "QU022",
+  "unit_name": "套"
+ },
+ {
+  "unit_mid": "QU023",
+  "unit_name": "副"
+ },
+ {
+  "unit_mid": "QU024",
+  "unit_name": "卷"
+ },
+ {
+  "unit_mid": "QU025",
+  "unit_name": "件"
+ },
+ {
+  "unit_mid": "QU026",
+  "unit_name": "捆"
+ },
+ {
+  "unit_mid": "QU027",
+  "unit_name": "粒"
+ },
+ {
+  "unit_mid": "QU028",
+  "unit_name": "片"
+ },
+ {
+  "unit_mid": "QU029",
+  "unit_name": "吨"
+ },
+ {
+  "unit_mid": "QU030",
+  "unit_name": "分米"
+ },
+ {
+  "unit_mid": "QU031",
+  "unit_name": "厘米"
+ },
+ {
+  "unit_mid": "QU032",
+  "unit_name": "千米"
+ },
+ {
+  "unit_mid": "QU033",
+  "unit_name": "平方米"
+ },
+ {
+  "unit_mid": "QU034",
+  "unit_name": "平方千米"
+ },
+ {
+  "unit_mid": "QU035",
+  "unit_name": "立方米"
+ },
+ {
+  "unit_mid": "QU036",
+  "unit_name": "立方分米"
+ },
+ {
+  "unit_mid": "QU037",
+  "unit_name": "秒"
+ },
+ {
+  "unit_mid": "QU038",
+  "unit_name": "分"
+ },
+ {
+  "unit_mid": "QU039",
+  "unit_name": "小时"
+ },
+ {
+  "unit_mid": "QU040",
+  "unit_name": "天"
+ },
+ {
+  "unit_mid": "QU041",
+  "unit_name": "罐"
+ },
+ {
+  "unit_mid": "QU042",
+  "unit_name": "根"
+ },
+ {
+  "unit_mid": "QU043",
+  "unit_name": "提"
+ },
+ {
+  "unit_mid": "QU044",
+  "unit_name": "毫米"
+ },
+ {
+  "unit_mid": "QU045",
+  "unit_name": "平方毫米"
+ },
+ {
+  "unit_mid": "QU046",
+  "unit_name": "樘"
+ },
+ {
+  "unit_mid": "QU047",
+  "unit_name": "项"
+ },
+ {
+  "unit_mid": "QU048",
+  "unit_name": "付"
+ },
+ {
+  "unit_mid": "QU049",
+  "unit_name": "千克"
+ },
+ {
+  "unit_mid": "QU050",
+  "unit_name": "本"
+ },
+ {
+  "unit_mid": "QU051",
+  "unit_name": "支"
+ },
+ {
+  "unit_mid": "QU052",
+  "unit_name": "只"
+ },
+ {
+  "unit_mid": "QU053",
+  "unit_name": "组"
+ },
+ {
+  "unit_mid": "QU054",
+  "unit_name": "联"
+ },
+ {
+  "unit_mid": "QU055",
+  "unit_name": "枚"
+ },
+ {
+  "unit_mid": "QU056",
+  "unit_name": "年"
+ },
+ {
+  "unit_mid": "QU057",
+  "unit_name": "人.天"
+ },
+ {
+  "unit_mid": "QU058",
+  "unit_name": "次/月"
+ },
+ {
+  "unit_mid": "QU059",
+  "unit_name": "次"
+ },
+ {
+  "unit_mid": "QU060",
+  "unit_name": "家"
+ },
+ {
+  "unit_mid": "QU061",
+  "unit_name": "兆（M）"
+ },
+ {
+  "unit_mid": "QU062",
+  "unit_name": "起步价/公里（均价）"
+ },
+ {
+  "unit_mid": "QU063",
+  "unit_name": "里程费/公里（均价）"
+ },
+ {
+  "unit_mid": "QU064",
+  "unit_name": "时长费/分钟（均价）"
+ },
+ {
+  "unit_mid": "QU065",
+  "unit_name": "远途费/公里"
+ },
+ {
+  "unit_mid": "QU066",
+  "unit_name": "元/次"
+ },
+ {
+  "unit_mid": "QU067",
+  "unit_name": "月"
+ },
+ {
+  "unit_mid": "QU068",
+  "unit_name": "店"
+ },
+ {
+  "unit_mid": "QU069",
+  "unit_name": "泵"
+ },
+ {
+  "unit_mid": "QU070",
+  "unit_name": "元/立方/天"
+ },
+ {
+  "unit_mid": "QU071",
+  "unit_name": "元/立方"
+ },
+ {
+  "unit_mid": "QU072",
+  "unit_name": "元/店/月"
+ },
+ {
+  "unit_mid": "QU073",
+  "unit_name": "元/张"
+ },
+ {
+  "unit_mid": "QU074",
+  "unit_name": "元/件"
+ },
+ {
+  "unit_mid": "QU075",
+  "unit_name": "元/吨"
+ },
+ {
+  "unit_mid": "QU076",
+  "unit_name": "元/单"
+ },
+ {
+  "unit_mid": "QU077",
+  "unit_name": "元/车次"
+ },
+ {
+  "unit_mid": "QU078",
+  "unit_name": "元/立方米"
+ },
+ {
+  "unit_mid": "QU079",
+  "unit_name": "元/点位"
+ },
+ {
+  "unit_mid": "QU080",
+  "unit_name": "Shot"
+ },
+ {
+  "unit_mid": "QU081",
+  "unit_name": "盎司"
+ }
+]

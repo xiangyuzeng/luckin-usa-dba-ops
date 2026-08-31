@@ -1,0 +1,250 @@
+[
+ {
+  "snapshot_id": 3943,
+  "large_category_id": 1084,
+  "snapshot_create_time": "2025-11-07T10:56:35",
+  "used_by_checks": 24,
+  "first_check": "2026-01-06",
+  "last_check": "2026-02-11"
+ },
+ {
+  "snapshot_id": 3974,
+  "large_category_id": 1084,
+  "snapshot_create_time": "2026-02-12T06:37:11",
+  "used_by_checks": 24,
+  "first_check": "2026-02-14",
+  "last_check": "2026-03-27"
+ },
+ {
+  "snapshot_id": 5174,
+  "large_category_id": 1084,
+  "snapshot_create_time": "2026-04-01T01:42:34",
+  "used_by_checks": 1,
+  "first_check": "2026-04-02",
+  "last_check": "2026-04-02"
+ },
+ {
+  "snapshot_id": 5337,
+  "large_category_id": 1084,
+  "snapshot_create_time": "2026-04-03T13:14:08",
+  "used_by_checks": 49,
+  "first_check": "2026-04-03",
+  "last_check": "2026-05-07"
+ },
+ {
+  "snapshot_id": 5658,
+  "large_category_id": 1084,
+  "snapshot_create_time": "2026-05-08T06:22:44",
+  "used_by_checks": 112,
+  "first_check": "2026-05-01",
+  "last_check": "2026-07-06"
+ },
+ {
+  "snapshot_id": 5820,
+  "large_category_id": 1084,
+  "snapshot_create_time": "2026-07-07T09:40:19",
+  "used_by_checks": 62,
+  "first_check": "2026-07-07",
+  "last_check": "2026-08-09"
+ },
+ {
+  "snapshot_id": 6219,
+  "large_category_id": 1084,
+  "snapshot_create_time": "2026-08-10T07:34:24",
+  "used_by_checks": 40,
+  "first_check": "2026-08-10",
+  "last_check": "2026-08-30"
+ },
+ {
+  "snapshot_id": 3941,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2025-11-07T10:54:10",
+  "used_by_checks": 6,
+  "first_check": "2026-01-08",
+  "last_check": "2026-02-11"
+ },
+ {
+  "snapshot_id": 3968,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-02-12T06:26:25",
+  "used_by_checks": 1,
+  "first_check": "2026-02-12",
+  "last_check": "2026-02-12"
+ },
+ {
+  "snapshot_id": 3972,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-02-12T06:35:56",
+  "used_by_checks": 1,
+  "first_check": "2026-02-12",
+  "last_check": "2026-02-12"
+ },
+ {
+  "snapshot_id": 4848,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-03-31T11:28:14",
+  "used_by_checks": 2,
+  "first_check": "2026-03-31",
+  "last_check": "2026-03-31"
+ },
+ {
+  "snapshot_id": 5175,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-04-01T01:42:52",
+  "used_by_checks": 3,
+  "first_check": "2026-03-31",
+  "last_check": "2026-04-01"
+ },
+ {
+  "snapshot_id": 5338,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-04-03T13:14:29",
+  "used_by_checks": 11,
+  "first_check": "2026-04-09",
+  "last_check": "2026-04-30"
+ },
+ {
+  "snapshot_id": 5499,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-05-08T06:22:02",
+  "used_by_checks": 32,
+  "first_check": "2026-05-11",
+  "last_check": "2026-06-18"
+ },
+ {
+  "snapshot_id": 5819,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-07-07T09:40:05",
+  "used_by_checks": 13,
+  "first_check": "2026-07-07",
+  "last_check": "2026-07-21"
+ },
+ {
+  "snapshot_id": 5824,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-07-22T01:46:38",
+  "used_by_checks": 5,
+  "first_check": "2026-07-22",
+  "last_check": "2026-07-24"
+ },
+ {
+  "snapshot_id": 5825,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-07-24T17:53:51",
+  "used_by_checks": 6,
+  "first_check": "2026-07-24",
+  "last_check": "2026-08-06"
+ },
+ {
+  "snapshot_id": 6222,
+  "large_category_id": 1134,
+  "snapshot_create_time": "2026-08-10T07:35:09",
+  "used_by_checks": 16,
+  "first_check": "2026-08-11",
+  "last_check": "2026-08-14"
+ },
+ {
+  "snapshot_id": 3940,
+  "large_category_id": 1184,
+  "snapshot_create_time": "2025-11-07T10:53:24",
+  "used_by_checks": 6,
+  "first_check": "2026-01-11",
+  "last_check": "2026-01-18"
+ },
+ {
+  "snapshot_id": 5336,
+  "large_category_id": 1184,
+  "snapshot_create_time": "2026-04-03T13:13:24",
+  "used_by_checks": 17,
+  "first_check": "2026-04-16",
+  "last_check": "2026-05-03"
+ },
+ {
+  "snapshot_id": 5817,
+  "large_category_id": 1184,
+  "snapshot_create_time": "2026-05-08T06:23:14",
+  "used_by_checks": 39,
+  "first_check": "2026-05-11",
+  "last_check": "2026-06-30"
+ },
+ {
+  "snapshot_id": 5821,
+  "large_category_id": 1184,
+  "snapshot_create_time": "2026-07-07T09:40:30",
+  "used_by_checks": 23,
+  "first_check": "2026-07-08",
+  "last_check": "2026-08-05"
+ },
+ {
+  "snapshot_id": 6220,
+  "large_category_id": 1184,
+  "snapshot_create_time": "2026-08-10T07:34:38",
+  "used_by_checks": 4,
+  "first_check": "2026-08-11",
+  "last_check": "2026-08-24"
+ },
+ {
+  "snapshot_id": 6073,
+  "large_category_id": 1834,
+  "snapshot_create_time": "2026-07-24T18:29:45",
+  "used_by_checks": 1,
+  "first_check": "2026-07-24",
+  "last_check": "2026-07-24"
+ },
+ {
+  "snapshot_id": 6074,
+  "large_category_id": 1834,
+  "snapshot_create_time": "2026-07-24T22:48:44",
+  "used_by_checks": 2,
+  "first_check": "2026-07-24",
+  "last_check": "2026-07-24"
+ },
+ {
+  "snapshot_id": 6077,
+  "large_category_id": 1834,
+  "snapshot_create_time": "2026-07-24T23:11:02",
+  "used_by_checks": 2,
+  "first_check": "2026-07-24",
+  "last_check": "2026-07-24"
+ },
+ {
+  "snapshot_id": 6145,
+  "large_category_id": 1834,
+  "snapshot_create_time": "2026-07-31T14:23:50",
+  "used_by_checks": 1,
+  "first_check": "2026-07-31",
+  "last_check": "2026-07-31"
+ },
+ {
+  "snapshot_id": 6213,
+  "large_category_id": 1834,
+  "snapshot_create_time": "2026-07-31T14:30:09",
+  "used_by_checks": 2,
+  "first_check": "2026-07-31",
+  "last_check": "2026-07-31"
+ },
+ {
+  "snapshot_id": 6772,
+  "large_category_id": 2045,
+  "snapshot_create_time": "2026-08-12T20:02:50",
+  "used_by_checks": 1,
+  "first_check": "2026-08-12",
+  "last_check": "2026-08-12"
+ },
+ {
+  "snapshot_id": 6834,
+  "large_category_id": 2300,
+  "snapshot_create_time": "2026-08-12T20:10:47",
+  "used_by_checks": 1,
+  "first_check": "2026-08-12",
+  "last_check": "2026-08-12"
+ },
+ {
+  "snapshot_id": 6895,
+  "large_category_id": 2300,
+  "snapshot_create_time": "2026-08-13T15:20:25",
+  "used_by_checks": 2,
+  "first_check": "2026-08-13",
+  "last_check": "2026-08-13"
+ }
+]

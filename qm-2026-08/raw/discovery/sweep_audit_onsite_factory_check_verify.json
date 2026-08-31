@@ -1,0 +1,210 @@
+{
+ "aws-luckyus-cdpactivity-rw": [
+  {
+   "s": "luckyus_cdp_activity",
+   "t": "t_contact_template_audit_record",
+   "n": 803,
+   "upd": "2026-08-28T07:43:33"
+  }
+ ],
+ "aws-luckyus-devops-rw": [
+  {
+   "s": "luckyus_authservice",
+   "t": "uauth_authority_audits",
+   "n": 3471,
+   "upd": "2026-08-31T08:39:57"
+  },
+  {
+   "s": "luckyus_izeus",
+   "t": "t_audit_log",
+   "n": 6302,
+   "upd": "2026-08-31T14:58:49"
+  }
+ ],
+ "aws-luckyus-framework01-rw": [
+  {
+   "s": "luckyus_bsportal",
+   "t": "t_audit_log",
+   "n": 21793,
+   "upd": "2026-08-31T13:47:15"
+  },
+  {
+   "s": "luckyus_gaea",
+   "t": "t_config_center_data_source_audit",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_gaea",
+   "t": "t_config_center_data_source_audit_detail",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_gaea_new",
+   "t": "t_config_center_data_source_audit",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_gaea_new",
+   "t": "t_config_center_data_source_audit_detail",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-framework02-rw": [
+  {
+   "s": "luckyus_datalink",
+   "t": "t_dl_audit_log",
+   "n": 3073,
+   "upd": "2026-08-28T09:48:40"
+  },
+  {
+   "s": "luckyus_ihmonitorconsole",
+   "t": "t_audit_diff",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ihmonitorconsole",
+   "t": "t_audit_log",
+   "n": 286,
+   "upd": "2026-08-28T06:00:09"
+  }
+ ],
+ "aws-luckyus-icyberdata-rw": [
+  {
+   "s": "luckyus_icyberdata",
+   "t": "deploy_audit_record",
+   "n": 1719,
+   "upd": "2026-08-31T12:04:19"
+  }
+ ],
+ "aws-luckyus-ifiaccounting-rw": [
+  {
+   "s": "luckyus_ifiaccounting",
+   "t": "t_a_audit",
+   "n": 8042,
+   "upd": "2026-08-31T15:09:17"
+  },
+  {
+   "s": "luckyus_ifiaccounting",
+   "t": "t_a_audit_emp_match",
+   "n": 2,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-ijumpserver-jumpserver-rw": [
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "accounts_verifyaccountautomation",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "audits_activitylog",
+   "n": 17428,
+   "upd": "2026-08-31T13:58:48"
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "audits_ftplog",
+   "n": 47,
+   "upd": "2026-08-12T01:48:39"
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "audits_integrationapplicationlog",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "audits_operatelog",
+   "n": 805,
+   "upd": "2026-08-31T13:19:38"
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "audits_passwordchangelog",
+   "n": 2,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "audits_userloginlog",
+   "n": 728,
+   "upd": "2026-08-31T13:19:38"
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "audits_usersession",
+   "n": 1,
+   "upd": "2026-08-31T15:55:26"
+  }
+ ],
+ "aws-luckyus-iluckyams-rw": [
+  {
+   "s": "luckyus_iluckyams",
+   "t": "t_audit",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-ldas-rw": [
+  {
+   "s": "luckyus_apigatewayadmin",
+   "t": "t_api_gateway_invoker_rela_audit",
+   "n": 440,
+   "upd": "2026-08-31T11:59:36"
+  },
+  {
+   "s": "luckyus_ozono",
+   "t": "cache_cloud_audit",
+   "n": 97,
+   "upd": "2026-08-24T04:46:39"
+  }
+ ],
+ "aws-luckyus-salesmarketing-rw": [
+  {
+   "s": "luckyus_sales_marketing",
+   "t": "t_contact_template_audit_record",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_sales_marketing",
+   "t": "t_coupon_proposal_audit",
+   "n": 7,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-upush-rw": [
+  {
+   "s": "luckyus_iupushsms",
+   "t": "t_collect_verifycode",
+   "n": 250561,
+   "upd": "2026-08-31T15:57:37"
+  },
+  {
+   "s": "luckyus_iupushsms",
+   "t": "t_sent_verifycode_sms",
+   "n": 249769,
+   "upd": "2026-08-31T15:57:37"
+  },
+  {
+   "s": "luckyus_iupushsms",
+   "t": "t_verifycode_filled_mobile_statistics",
+   "n": 1411,
+   "upd": "2026-08-31T08:00:03"
+  },
+  {
+   "s": "luckyus_iupushsms",
+   "t": "t_verifycode_filled_statistics",
+   "n": 3729,
+   "upd": "2026-08-31T08:30:01"
+  }
+ ]
+}

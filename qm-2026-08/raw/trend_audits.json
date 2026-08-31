@@ -1,0 +1,461 @@
+[
+ {
+  "ym": "2026-01",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-01",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 6,
+  "stores": 5
+ },
+ {
+  "ym": "2026-01",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 7,
+  "stores": 4
+ },
+ {
+  "ym": "2026-01",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 5,
+  "stores": 5
+ },
+ {
+  "ym": "2026-01",
+  "large_category_id": 1184,
+  "large_category_name": "Area food safety Check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-01",
+  "large_category_id": 1184,
+  "large_category_name": "Area food safety Check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 4,
+  "stores": 4
+ },
+ {
+  "ym": "2026-02",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-02",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 10,
+  "stores": 4
+ },
+ {
+  "ym": "2026-02",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 6,
+  "stores": 3
+ },
+ {
+  "ym": "2026-02",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-02",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-03",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-03",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 13,
+  "stores": 7
+ },
+ {
+  "ym": "2026-03",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 2,
+  "stores": 1
+ },
+ {
+  "ym": "2026-03",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-04",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 6,
+  "stores": 6
+ },
+ {
+  "ym": "2026-04",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 35,
+  "stores": 13
+ },
+ {
+  "ym": "2026-04",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-04",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 12,
+  "stores": 12
+ },
+ {
+  "ym": "2026-04",
+  "large_category_id": 1184,
+  "large_category_name": "Area food safety Check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 14,
+  "stores": 13
+ },
+ {
+  "ym": "2026-05",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 6,
+  "stores": 6
+ },
+ {
+  "ym": "2026-05",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 51,
+  "stores": 18
+ },
+ {
+  "ym": "2026-05",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 16,
+  "stores": 16
+ },
+ {
+  "ym": "2026-05",
+  "large_category_id": 1184,
+  "large_category_name": "Area food safety Check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-05",
+  "large_category_id": 1184,
+  "large_category_name": "Area food safety Check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 21,
+  "stores": 18
+ },
+ {
+  "ym": "2026-06",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-06",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 3,
+  "stores": 2
+ },
+ {
+  "ym": "2026-06",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 54,
+  "stores": 18
+ },
+ {
+  "ym": "2026-06",
+  "large_category_id": 1134,
+  "large_category_name": "Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 16,
+  "stores": 16
+ },
+ {
+  "ym": "2026-06",
+  "large_category_id": 1184,
+  "large_category_name": "Area food safety Check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-06",
+  "large_category_id": 1184,
+  "large_category_name": "Area food safety Check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 18,
+  "stores": 18
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1084,
+  "large_category_name": "Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 6,
+  "stores": 6
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1084,
+  "large_category_name": "Store-Store food safety self-check",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1084,
+  "large_category_name": "Store-Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1084,
+  "large_category_name": "Store-Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 48,
+  "stores": 21
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1134,
+  "large_category_name": "QA/QC-Store food safety audit",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1134,
+  "large_category_name": "QA/QC-Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 19,
+  "stores": 18
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 21,
+  "stores": 21
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1834,
+  "large_category_name": "Test Video Audit",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1834,
+  "large_category_name": "Test Video Audit-During Business Hours",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-07",
+  "large_category_id": 1834,
+  "large_category_name": "Test Video Audit-During Business Hours",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 4,
+  "stores": 3
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 1084,
+  "large_category_name": "Store-Store food safety self-check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 1084,
+  "large_category_name": "Store-Store food safety self-check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 51,
+  "stores": 21
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 1134,
+  "large_category_name": "QA/QC-Store food safety audit",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 20,
+  "stores": 20
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 1184,
+  "large_category_name": "OM-Area food safety Check",
+  "submitted": 1,
+  "deleted": 0,
+  "n": 3,
+  "stores": 3
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 2045,
+  "large_category_name": "Test Video Audit-Opening Preparation",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 2300,
+  "large_category_name": "Test Video Audit-Closing Cleaning",
+  "submitted": 0,
+  "deleted": 0,
+  "n": 2,
+  "stores": 2
+ },
+ {
+  "ym": "2026-08",
+  "large_category_id": 2300,
+  "large_category_name": "Test Video Audit-Closing Cleaning",
+  "submitted": 0,
+  "deleted": 1,
+  "n": 1,
+  "stores": 1
+ }
+]

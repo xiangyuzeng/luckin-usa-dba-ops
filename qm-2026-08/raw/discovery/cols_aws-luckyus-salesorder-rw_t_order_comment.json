@@ -1,0 +1,219 @@
+[
+ {
+  "t": "t_order_comment",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键ID"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(10)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 3,
+  "c": "order_id",
+  "ty": "bigint",
+  "cm": "订单ID"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 4,
+  "c": "type",
+  "ty": "smallint",
+  "cm": "评价类别（1-订单）"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 5,
+  "c": "level",
+  "ty": "smallint",
+  "cm": "评价类型（满意，不满意，来源：运营系统）"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 6,
+  "c": "labels",
+  "ty": "varchar(200)",
+  "cm": "评价标签ID和name，JSON，来源：运营系统"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 7,
+  "c": "comment",
+  "ty": "varchar(1000)",
+  "cm": "评价内容"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 8,
+  "c": "comment_business_type",
+  "ty": "varchar(100)",
+  "cm": "评价业务类型"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 9,
+  "c": "reply",
+  "ty": "varchar(300)",
+  "cm": "回复内容"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 10,
+  "c": "reply_time",
+  "ty": "datetime",
+  "cm": "订单评价回复时间"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 11,
+  "c": "create_id",
+  "ty": "varchar(32)",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 12,
+  "c": "create_user",
+  "ty": "varchar(60)",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 13,
+  "c": "create_type",
+  "ty": "smallint",
+  "cm": "创建人类型,1系统，2用户，3员工，参见枚举"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 14,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "新建时间（评价时间）"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 15,
+  "c": "modify_id",
+  "ty": "varchar(32)",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 16,
+  "c": "modify_user",
+  "ty": "varchar(60)",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 17,
+  "c": "modify_type",
+  "ty": "smallint",
+  "cm": "修改人类型,1系统，2用户，3员工，参见枚举"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 18,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 19,
+  "c": "remark",
+  "ty": "varchar(300)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 20,
+  "c": "complaint_flag",
+  "ty": "smallint",
+  "cm": "是否投诉 0否 1是"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 21,
+  "c": "picture_url",
+  "ty": "varchar(1024)",
+  "cm": "图片URL"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 22,
+  "c": "dept_id",
+  "ty": "bigint",
+  "cm": "门店ID"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 23,
+  "c": "user_no",
+  "ty": "varchar(32)",
+  "cm": "用户编码"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 24,
+  "c": "origin",
+  "ty": "smallint",
+  "cm": "评价来源OperateEnum"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 25,
+  "c": "customer_reply_status",
+  "ty": "tinyint",
+  "cm": "回复状态 0否 1是"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 26,
+  "c": "customer_reply_content",
+  "ty": "varchar(500)",
+  "cm": "客服回复内容"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 27,
+  "c": "compensation_send_coupon",
+  "ty": "tinyint",
+  "cm": "是否补偿发券 0否1是"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 28,
+  "c": "contact_customer",
+  "ty": "tinyint",
+  "cm": "是否联系上顾客 0否 1是 2未联系"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 29,
+  "c": "reach_agreement",
+  "ty": "tinyint",
+  "cm": "是否达成一致 0否 1是， 当是否联系上顾客=是时，展示该字段"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 30,
+  "c": "compensation_reason_id",
+  "ty": "bigint",
+  "cm": "补偿原因id"
+ },
+ {
+  "t": "t_order_comment",
+  "p": 31,
+  "c": "proposal_no",
+  "ty": "varchar(45)",
+  "cm": "咖啡库发券方案编号"
+ }
+]

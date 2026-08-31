@@ -1,0 +1,4002 @@
+[
+ {
+  "id": 289,
+  "code": "BIZ_TYPE",
+  "name": "业务类型配置",
+  "parent_code": "0",
+  "path": "BIZ_TYPE",
+  "level": 0,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 290,
+  "code": "BIZ_TYPE_1",
+  "name": "Food safety",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_1",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 307,
+  "code": "BIZ_TYPE_1_2",
+  "name": "Feeling unwell",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 317,
+  "code": "BIZ_TYPE_1_2_1",
+  "name": "Vomiting",
+  "parent_code": "BIZ_TYPE_1_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2,BIZ_TYPE_1_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 318,
+  "code": "BIZ_TYPE_1_2_2",
+  "name": "Diarrhea",
+  "parent_code": "BIZ_TYPE_1_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2,BIZ_TYPE_1_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 320,
+  "code": "BIZ_TYPE_1_2_3",
+  "name": "Allergy",
+  "parent_code": "BIZ_TYPE_1_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2,BIZ_TYPE_1_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 321,
+  "code": "BIZ_TYPE_1_2_4",
+  "name": "Irregular heartbeat",
+  "parent_code": "BIZ_TYPE_1_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2,BIZ_TYPE_1_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 322,
+  "code": "BIZ_TYPE_1_2_5",
+  "name": "Sore throat",
+  "parent_code": "BIZ_TYPE_1_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2,BIZ_TYPE_1_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 323,
+  "code": "BIZ_TYPE_1_2_6",
+  "name": "Fever",
+  "parent_code": "BIZ_TYPE_1_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2,BIZ_TYPE_1_2_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 324,
+  "code": "BIZ_TYPE_1_2_7",
+  "name": "Other symptoms of discomfort",
+  "parent_code": "BIZ_TYPE_1_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_2,BIZ_TYPE_1_2_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 308,
+  "code": "BIZ_TYPE_1_3",
+  "name": "Quality",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 325,
+  "code": "BIZ_TYPE_1_3_1",
+  "name": "Taste spoiled",
+  "parent_code": "BIZ_TYPE_1_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_3,BIZ_TYPE_1_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 326,
+  "code": "BIZ_TYPE_1_3_2",
+  "name": "Visually spoiled",
+  "parent_code": "BIZ_TYPE_1_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_3,BIZ_TYPE_1_3_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 568,
+  "code": "BIZ_TYPE_1_3_3",
+  "name": "Other spoilage",
+  "parent_code": "BIZ_TYPE_1_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_3,BIZ_TYPE_1_3_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 309,
+  "code": "BIZ_TYPE_1_4",
+  "name": "Issue with expiry date",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 328,
+  "code": "BIZ_TYPE_1_4_1",
+  "name": "Beyond the expiry date",
+  "parent_code": "BIZ_TYPE_1_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_4,BIZ_TYPE_1_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 329,
+  "code": "BIZ_TYPE_1_4_2",
+  "name": "Questioning the expiry date",
+  "parent_code": "BIZ_TYPE_1_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_4,BIZ_TYPE_1_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 310,
+  "code": "BIZ_TYPE_1_5",
+  "name": "Foreign object (pest infestation)",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_5",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 330,
+  "code": "BIZ_TYPE_1_5_1",
+  "name": "Cockroaches",
+  "parent_code": "BIZ_TYPE_1_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_5,BIZ_TYPE_1_5_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 331,
+  "code": "BIZ_TYPE_1_5_2",
+  "name": "Rat",
+  "parent_code": "BIZ_TYPE_1_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_5,BIZ_TYPE_1_5_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 333,
+  "code": "BIZ_TYPE_1_5_3",
+  "name": "Flying insects/mosquitoes",
+  "parent_code": "BIZ_TYPE_1_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_5,BIZ_TYPE_1_5_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 334,
+  "code": "BIZ_TYPE_1_5_4",
+  "name": "Fly",
+  "parent_code": "BIZ_TYPE_1_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_5,BIZ_TYPE_1_5_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 335,
+  "code": "BIZ_TYPE_1_5_5",
+  "name": "Spider",
+  "parent_code": "BIZ_TYPE_1_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_5,BIZ_TYPE_1_5_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 336,
+  "code": "BIZ_TYPE_1_5_6",
+  "name": "Other pests",
+  "parent_code": "BIZ_TYPE_1_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_5,BIZ_TYPE_1_5_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 311,
+  "code": "BIZ_TYPE_1_6",
+  "name": "Foreign object (packaging materials)",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 338,
+  "code": "BIZ_TYPE_1_6_1",
+  "name": "Packaging edges of boxed materials",
+  "parent_code": "BIZ_TYPE_1_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6,BIZ_TYPE_1_6_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 339,
+  "code": "BIZ_TYPE_1_6_2",
+  "name": "Bottle cap/ring",
+  "parent_code": "BIZ_TYPE_1_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6,BIZ_TYPE_1_6_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 341,
+  "code": "BIZ_TYPE_1_6_3",
+  "name": "Packaging edges of bagged materials",
+  "parent_code": "BIZ_TYPE_1_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6,BIZ_TYPE_1_6_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 342,
+  "code": "BIZ_TYPE_1_6_4",
+  "name": "Paper scraps",
+  "parent_code": "BIZ_TYPE_1_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6,BIZ_TYPE_1_6_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 343,
+  "code": "BIZ_TYPE_1_6_5",
+  "name": "Aluminum foil",
+  "parent_code": "BIZ_TYPE_1_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6,BIZ_TYPE_1_6_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 344,
+  "code": "BIZ_TYPE_1_6_6",
+  "name": "Sealing sticker",
+  "parent_code": "BIZ_TYPE_1_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6,BIZ_TYPE_1_6_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 345,
+  "code": "BIZ_TYPE_1_6_7",
+  "name": "Lid plug/backflow plug",
+  "parent_code": "BIZ_TYPE_1_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_6,BIZ_TYPE_1_6_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 314,
+  "code": "BIZ_TYPE_1_7",
+  "name": "Foreign object(other materials)",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_7",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 347,
+  "code": "BIZ_TYPE_1_7_1",
+  "name": "Plastic wrap",
+  "parent_code": "BIZ_TYPE_1_7",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_7,BIZ_TYPE_1_7_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 348,
+  "code": "BIZ_TYPE_1_7_2",
+  "name": "Gloves",
+  "parent_code": "BIZ_TYPE_1_7",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_7,BIZ_TYPE_1_7_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 350,
+  "code": "BIZ_TYPE_1_7_3",
+  "name": "Label",
+  "parent_code": "BIZ_TYPE_1_7",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_7,BIZ_TYPE_1_7_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 351,
+  "code": "BIZ_TYPE_1_7_4",
+  "name": "Other materials",
+  "parent_code": "BIZ_TYPE_1_7",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_7,BIZ_TYPE_1_7_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 353,
+  "code": "BIZ_TYPE_1_7_5",
+  "name": "Equipment spare parts",
+  "parent_code": "BIZ_TYPE_1_7",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_7,BIZ_TYPE_1_7_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 354,
+  "code": "BIZ_TYPE_1_7_6",
+  "name": "Utensils",
+  "parent_code": "BIZ_TYPE_1_7",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_7,BIZ_TYPE_1_7_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 315,
+  "code": "BIZ_TYPE_1_8",
+  "name": "Foreign object(other)",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 357,
+  "code": "BIZ_TYPE_1_8_1",
+  "name": "Glass/ceramic fragments",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 371,
+  "code": "BIZ_TYPE_1_8_10",
+  "name": "Foreign object in ice cubes",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_10",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 359,
+  "code": "BIZ_TYPE_1_8_2",
+  "name": "Metal/steel wire",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 361,
+  "code": "BIZ_TYPE_1_8_3",
+  "name": "Coffee beans/coffee grounds",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 363,
+  "code": "BIZ_TYPE_1_8_4",
+  "name": "Hair",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 365,
+  "code": "BIZ_TYPE_1_8_5",
+  "name": "Medication/pills",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 366,
+  "code": "BIZ_TYPE_1_8_6",
+  "name": "Plastic",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 368,
+  "code": "BIZ_TYPE_1_8_7",
+  "name": "Cord/fibrous material",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 369,
+  "code": "BIZ_TYPE_1_8_8",
+  "name": "Paper",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_8",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 370,
+  "code": "BIZ_TYPE_1_8_9",
+  "name": "Other foreign object",
+  "parent_code": "BIZ_TYPE_1_8",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_8,BIZ_TYPE_1_8_9",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 761,
+  "code": "BIZ_TYPE_1_9",
+  "name": "Improper hygiene practices",
+  "parent_code": "BIZ_TYPE_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_9",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 762,
+  "code": "BIZ_TYPE_1_9_1",
+  "name": "Improper hygiene practices",
+  "parent_code": "BIZ_TYPE_1_9",
+  "path": "BIZ_TYPE,BIZ_TYPE_1,BIZ_TYPE_1_9,BIZ_TYPE_1_9_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 300,
+  "code": "BIZ_TYPE_10",
+  "name": "Spill",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_10",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 524,
+  "code": "BIZ_TYPE_10_1",
+  "name": "Spill",
+  "parent_code": "BIZ_TYPE_10",
+  "path": "BIZ_TYPE,BIZ_TYPE_10,BIZ_TYPE_10_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 525,
+  "code": "BIZ_TYPE_10_1_1",
+  "name": "Customer spill",
+  "parent_code": "BIZ_TYPE_10_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_10,BIZ_TYPE_10_1,BIZ_TYPE_10_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 536,
+  "code": "BIZ_TYPE_10_1_2",
+  "name": "Store spill",
+  "parent_code": "BIZ_TYPE_10_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_10,BIZ_TYPE_10_1,BIZ_TYPE_10_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 537,
+  "code": "BIZ_TYPE_10_1_3",
+  "name": "Package spillage",
+  "parent_code": "BIZ_TYPE_10_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_10,BIZ_TYPE_10_1,BIZ_TYPE_10_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 538,
+  "code": "BIZ_TYPE_10_1_4",
+  "name": "Delivery spill",
+  "parent_code": "BIZ_TYPE_10_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_10,BIZ_TYPE_10_1,BIZ_TYPE_10_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 301,
+  "code": "BIZ_TYPE_11",
+  "name": "Materials",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_11",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 530,
+  "code": "BIZ_TYPE_11_1",
+  "name": "Material shortage",
+  "parent_code": "BIZ_TYPE_11",
+  "path": "BIZ_TYPE,BIZ_TYPE_11,BIZ_TYPE_11_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 531,
+  "code": "BIZ_TYPE_11_1_1",
+  "name": "Out of napkins or straws",
+  "parent_code": "BIZ_TYPE_11_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_11,BIZ_TYPE_11_1,BIZ_TYPE_11_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 532,
+  "code": "BIZ_TYPE_11_1_2",
+  "name": "Out of ice",
+  "parent_code": "BIZ_TYPE_11_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_11,BIZ_TYPE_11_1,BIZ_TYPE_11_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 533,
+  "code": "BIZ_TYPE_11_1_3",
+  "name": "Out of marketing materials",
+  "parent_code": "BIZ_TYPE_11_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_11,BIZ_TYPE_11_1,BIZ_TYPE_11_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 302,
+  "code": "BIZ_TYPE_12",
+  "name": "Payment",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_12",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 480,
+  "code": "BIZ_TYPE_12_1",
+  "name": "Payment glitch",
+  "parent_code": "BIZ_TYPE_12",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 481,
+  "code": "BIZ_TYPE_12_1_1",
+  "name": "Duplicate payment",
+  "parent_code": "BIZ_TYPE_12_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_1,BIZ_TYPE_12_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 483,
+  "code": "BIZ_TYPE_12_1_2",
+  "name": "Payment declined",
+  "parent_code": "BIZ_TYPE_12_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_1,BIZ_TYPE_12_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 484,
+  "code": "BIZ_TYPE_12_1_3",
+  "name": "Other payment glitch",
+  "parent_code": "BIZ_TYPE_12_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_1,BIZ_TYPE_12_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 485,
+  "code": "BIZ_TYPE_12_2",
+  "name": "Payment suggestion",
+  "parent_code": "BIZ_TYPE_12",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 486,
+  "code": "BIZ_TYPE_12_2_1",
+  "name": "Need for more payment options",
+  "parent_code": "BIZ_TYPE_12_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_2,BIZ_TYPE_12_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 488,
+  "code": "BIZ_TYPE_12_3",
+  "name": "Payment security",
+  "parent_code": "BIZ_TYPE_12",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 491,
+  "code": "BIZ_TYPE_12_3_1",
+  "name": "Unauthorized payment(fraud)",
+  "parent_code": "BIZ_TYPE_12_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_3,BIZ_TYPE_12_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 493,
+  "code": "BIZ_TYPE_12_4",
+  "name": "Cancel",
+  "parent_code": "BIZ_TYPE_12",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 495,
+  "code": "BIZ_TYPE_12_4_1",
+  "name": "Cancel due to customer",
+  "parent_code": "BIZ_TYPE_12_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_4,BIZ_TYPE_12_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 498,
+  "code": "BIZ_TYPE_12_4_2",
+  "name": "Cancel due to store",
+  "parent_code": "BIZ_TYPE_12_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_4,BIZ_TYPE_12_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 500,
+  "code": "BIZ_TYPE_12_4_3",
+  "name": "Cancel due to other reasons",
+  "parent_code": "BIZ_TYPE_12_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_4,BIZ_TYPE_12_4_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 505,
+  "code": "BIZ_TYPE_12_5",
+  "name": "Refund",
+  "parent_code": "BIZ_TYPE_12",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_5",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 507,
+  "code": "BIZ_TYPE_12_5_2",
+  "name": "Refund due to customer",
+  "parent_code": "BIZ_TYPE_12_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_5,BIZ_TYPE_12_5_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 511,
+  "code": "BIZ_TYPE_12_5_4",
+  "name": "Refund unsuccessful",
+  "parent_code": "BIZ_TYPE_12_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_5,BIZ_TYPE_12_5_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 514,
+  "code": "BIZ_TYPE_12_6",
+  "name": "Vouchers",
+  "parent_code": "BIZ_TYPE_12",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_6",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 516,
+  "code": "BIZ_TYPE_12_6_1",
+  "name": "Can't use vouchers",
+  "parent_code": "BIZ_TYPE_12_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_6,BIZ_TYPE_12_6_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 519,
+  "code": "BIZ_TYPE_12_6_2",
+  "name": "Voucher usage problem",
+  "parent_code": "BIZ_TYPE_12_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_6,BIZ_TYPE_12_6_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 521,
+  "code": "BIZ_TYPE_12_6_3",
+  "name": "Voucher not received",
+  "parent_code": "BIZ_TYPE_12_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_12,BIZ_TYPE_12_6,BIZ_TYPE_12_6_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 303,
+  "code": "BIZ_TYPE_13",
+  "name": "System",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_13",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 438,
+  "code": "BIZ_TYPE_13_1",
+  "name": "System suggestion",
+  "parent_code": "BIZ_TYPE_13",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 441,
+  "code": "BIZ_TYPE_13_1_1",
+  "name": "System feature suggestions",
+  "parent_code": "BIZ_TYPE_13_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_1,BIZ_TYPE_13_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 444,
+  "code": "BIZ_TYPE_13_1_2",
+  "name": "Poor system user experience",
+  "parent_code": "BIZ_TYPE_13_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_1,BIZ_TYPE_13_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 447,
+  "code": "BIZ_TYPE_13_2",
+  "name": "System glitch",
+  "parent_code": "BIZ_TYPE_13",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 449,
+  "code": "BIZ_TYPE_13_2_1",
+  "name": "Can't open app",
+  "parent_code": "BIZ_TYPE_13_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_2,BIZ_TYPE_13_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 451,
+  "code": "BIZ_TYPE_13_2_2",
+  "name": "Data abnormality",
+  "parent_code": "BIZ_TYPE_13_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_2,BIZ_TYPE_13_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 456,
+  "code": "BIZ_TYPE_13_2_3",
+  "name": "System location error",
+  "parent_code": "BIZ_TYPE_13_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_2,BIZ_TYPE_13_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 458,
+  "code": "BIZ_TYPE_13_2_4",
+  "name": "Other system error",
+  "parent_code": "BIZ_TYPE_13_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_2,BIZ_TYPE_13_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 460,
+  "code": "BIZ_TYPE_13_4",
+  "name": "Account",
+  "parent_code": "BIZ_TYPE_13",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 462,
+  "code": "BIZ_TYPE_13_4_1",
+  "name": "Unable to log in",
+  "parent_code": "BIZ_TYPE_13_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_4,BIZ_TYPE_13_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 464,
+  "code": "BIZ_TYPE_13_4_2",
+  "name": "Unable to order",
+  "parent_code": "BIZ_TYPE_13_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_4,BIZ_TYPE_13_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 466,
+  "code": "BIZ_TYPE_13_4_3",
+  "name": "Member information change request",
+  "parent_code": "BIZ_TYPE_13_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_4,BIZ_TYPE_13_4_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 468,
+  "code": "BIZ_TYPE_13_4_4",
+  "name": "Unsubscribe",
+  "parent_code": "BIZ_TYPE_13_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_4,BIZ_TYPE_13_4_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 470,
+  "code": "BIZ_TYPE_13_4_5",
+  "name": "Other account issue",
+  "parent_code": "BIZ_TYPE_13_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_4,BIZ_TYPE_13_4_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 571,
+  "code": "BIZ_TYPE_13_4_6",
+  "name": "Removing payment details",
+  "parent_code": "BIZ_TYPE_13_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_13,BIZ_TYPE_13_4,BIZ_TYPE_13_4_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 304,
+  "code": "BIZ_TYPE_14",
+  "name": "Inquiry",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_14",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 332,
+  "code": "BIZ_TYPE_14_1",
+  "name": "Invoice inquiry",
+  "parent_code": "BIZ_TYPE_14",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 337,
+  "code": "BIZ_TYPE_14_1_1",
+  "name": "Request for invoice",
+  "parent_code": "BIZ_TYPE_14_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_1,BIZ_TYPE_14_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 340,
+  "code": "BIZ_TYPE_14_1_2",
+  "name": "Invoice rules inquiry",
+  "parent_code": "BIZ_TYPE_14_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_1,BIZ_TYPE_14_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 346,
+  "code": "BIZ_TYPE_14_2",
+  "name": "(Self) marketing inquiry",
+  "parent_code": "BIZ_TYPE_14",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 349,
+  "code": "BIZ_TYPE_14_2_1",
+  "name": "New user promotion",
+  "parent_code": "BIZ_TYPE_14_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_2,BIZ_TYPE_14_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 352,
+  "code": "BIZ_TYPE_14_2_2",
+  "name": "Other (self) marketing event",
+  "parent_code": "BIZ_TYPE_14_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_2,BIZ_TYPE_14_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 355,
+  "code": "BIZ_TYPE_14_2_3",
+  "name": "Membership inquiry",
+  "parent_code": "BIZ_TYPE_14_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_2,BIZ_TYPE_14_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 356,
+  "code": "BIZ_TYPE_14_2_4",
+  "name": "Price inquiry",
+  "parent_code": "BIZ_TYPE_14_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_2,BIZ_TYPE_14_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 358,
+  "code": "BIZ_TYPE_14_2_5",
+  "name": "Co-branding inquiry",
+  "parent_code": "BIZ_TYPE_14_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_2,BIZ_TYPE_14_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 360,
+  "code": "BIZ_TYPE_14_2_6",
+  "name": "Promotion content query",
+  "parent_code": "BIZ_TYPE_14_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_2,BIZ_TYPE_14_2_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 362,
+  "code": "BIZ_TYPE_14_3",
+  "name": "(Third-party) marketing inquiry",
+  "parent_code": "BIZ_TYPE_14",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 364,
+  "code": "BIZ_TYPE_14_3_1",
+  "name": "Payment channel promotion",
+  "parent_code": "BIZ_TYPE_14_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_3,BIZ_TYPE_14_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 367,
+  "code": "BIZ_TYPE_14_3_2",
+  "name": "Delivery platform promotion",
+  "parent_code": "BIZ_TYPE_14_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_3,BIZ_TYPE_14_3_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 372,
+  "code": "BIZ_TYPE_14_3_3",
+  "name": "Other third-party marketing event inquiry",
+  "parent_code": "BIZ_TYPE_14_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_3,BIZ_TYPE_14_3_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 381,
+  "code": "BIZ_TYPE_14_4",
+  "name": "Collaboration inquiry",
+  "parent_code": "BIZ_TYPE_14",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 385,
+  "code": "BIZ_TYPE_14_4_1",
+  "name": "Franchising",
+  "parent_code": "BIZ_TYPE_14_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_4,BIZ_TYPE_14_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 388,
+  "code": "BIZ_TYPE_14_4_2",
+  "name": "Hiring",
+  "parent_code": "BIZ_TYPE_14_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_4,BIZ_TYPE_14_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 390,
+  "code": "BIZ_TYPE_14_4_3",
+  "name": "Business collaboration",
+  "parent_code": "BIZ_TYPE_14_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_4,BIZ_TYPE_14_4_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 561,
+  "code": "BIZ_TYPE_14_4_4",
+  "name": "Catering/Truck service inquiry",
+  "parent_code": "BIZ_TYPE_14_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_4,BIZ_TYPE_14_4_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 562,
+  "code": "BIZ_TYPE_14_4_5",
+  "name": "Academic/Study project request (Interview/Information)",
+  "parent_code": "BIZ_TYPE_14_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_4,BIZ_TYPE_14_4_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 563,
+  "code": "BIZ_TYPE_14_4_6",
+  "name": "Sponsorship",
+  "parent_code": "BIZ_TYPE_14_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_4,BIZ_TYPE_14_4_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 421,
+  "code": "BIZ_TYPE_14_5",
+  "name": "Product information inquiry",
+  "parent_code": "BIZ_TYPE_14",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_5",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 423,
+  "code": "BIZ_TYPE_14_5_1",
+  "name": "Ingredient inquiry",
+  "parent_code": "BIZ_TYPE_14_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_5,BIZ_TYPE_14_5_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 426,
+  "code": "BIZ_TYPE_14_5_2",
+  "name": "Certificate inquiry",
+  "parent_code": "BIZ_TYPE_14_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_5,BIZ_TYPE_14_5_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 427,
+  "code": "BIZ_TYPE_14_5_3",
+  "name": "Nutrition grade inquiry",
+  "parent_code": "BIZ_TYPE_14_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_5,BIZ_TYPE_14_5_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 428,
+  "code": "BIZ_TYPE_14_5_4",
+  "name": "Allergens inquiry",
+  "parent_code": "BIZ_TYPE_14_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_5,BIZ_TYPE_14_5_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 430,
+  "code": "BIZ_TYPE_14_5_5",
+  "name": "Product description dispute",
+  "parent_code": "BIZ_TYPE_14_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_5,BIZ_TYPE_14_5_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 432,
+  "code": "BIZ_TYPE_14_5_6",
+  "name": "Other product information inquiry",
+  "parent_code": "BIZ_TYPE_14_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_5,BIZ_TYPE_14_5_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 564,
+  "code": "BIZ_TYPE_14_6",
+  "name": "Store inquiry",
+  "parent_code": "BIZ_TYPE_14",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_6",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 565,
+  "code": "BIZ_TYPE_14_6_1",
+  "name": "In-Store WiFi Request",
+  "parent_code": "BIZ_TYPE_14_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_6,BIZ_TYPE_14_6_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 566,
+  "code": "BIZ_TYPE_14_6_2",
+  "name": "Other store inquiry",
+  "parent_code": "BIZ_TYPE_14_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_6,BIZ_TYPE_14_6_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 569,
+  "code": "BIZ_TYPE_14_6_3",
+  "name": "Lost and found",
+  "parent_code": "BIZ_TYPE_14_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_6,BIZ_TYPE_14_6_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 570,
+  "code": "BIZ_TYPE_14_6_4",
+  "name": "Store operating hours",
+  "parent_code": "BIZ_TYPE_14_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_14,BIZ_TYPE_14_6,BIZ_TYPE_14_6_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 305,
+  "code": "BIZ_TYPE_15",
+  "name": "Other",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_15",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 313,
+  "code": "BIZ_TYPE_15_2",
+  "name": "Other",
+  "parent_code": "BIZ_TYPE_15",
+  "path": "BIZ_TYPE,BIZ_TYPE_15,BIZ_TYPE_15_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 316,
+  "code": "BIZ_TYPE_15_2_1",
+  "name": "No follow-up needed",
+  "parent_code": "BIZ_TYPE_15_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_15,BIZ_TYPE_15_2,BIZ_TYPE_15_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 319,
+  "code": "BIZ_TYPE_15_2_2",
+  "name": "Duplicate feedback",
+  "parent_code": "BIZ_TYPE_15_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_15,BIZ_TYPE_15_2,BIZ_TYPE_15_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 327,
+  "code": "BIZ_TYPE_15_2_3",
+  "name": "Other",
+  "parent_code": "BIZ_TYPE_15_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_15,BIZ_TYPE_15_2,BIZ_TYPE_15_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 572,
+  "code": "BIZ_TYPE_15_2_4",
+  "name": "Compliment",
+  "parent_code": "BIZ_TYPE_15_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_15,BIZ_TYPE_15_2,BIZ_TYPE_15_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 577,
+  "code": "BIZ_TYPE_16",
+  "name": "Pre-sales inquiry",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_16",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 578,
+  "code": "BIZ_TYPE_16_1",
+  "name": "Ordering method inquiry",
+  "parent_code": "BIZ_TYPE_16",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 579,
+  "code": "BIZ_TYPE_16_1_1",
+  "name": "Order channel inquiry",
+  "parent_code": "BIZ_TYPE_16_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_1,BIZ_TYPE_16_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 580,
+  "code": "BIZ_TYPE_16_1_2",
+  "name": "Order operation inquiry",
+  "parent_code": "BIZ_TYPE_16_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_1,BIZ_TYPE_16_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 581,
+  "code": "BIZ_TYPE_16_1_3",
+  "name": "Payment method inquiry",
+  "parent_code": "BIZ_TYPE_16_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_1,BIZ_TYPE_16_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 582,
+  "code": "BIZ_TYPE_16_2",
+  "name": "Store information inquiry",
+  "parent_code": "BIZ_TYPE_16",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 583,
+  "code": "BIZ_TYPE_16_2_1",
+  "name": "Store location inquiry",
+  "parent_code": "BIZ_TYPE_16_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_2,BIZ_TYPE_16_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 584,
+  "code": "BIZ_TYPE_16_2_2",
+  "name": "Store phone number inquiry",
+  "parent_code": "BIZ_TYPE_16_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_2,BIZ_TYPE_16_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 585,
+  "code": "BIZ_TYPE_16_2_3",
+  "name": "Store business hours inquiry",
+  "parent_code": "BIZ_TYPE_16_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_2,BIZ_TYPE_16_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 586,
+  "code": "BIZ_TYPE_16_3",
+  "name": "Delivery platform inquiry",
+  "parent_code": "BIZ_TYPE_16",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 587,
+  "code": "BIZ_TYPE_16_3_1",
+  "name": "Delivery platform inquiry",
+  "parent_code": "BIZ_TYPE_16_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_3,BIZ_TYPE_16_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 588,
+  "code": "BIZ_TYPE_16_4",
+  "name": "Product information inquiry",
+  "parent_code": "BIZ_TYPE_16",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 589,
+  "code": "BIZ_TYPE_16_4_1",
+  "name": "Drink inquiry",
+  "parent_code": "BIZ_TYPE_16_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4,BIZ_TYPE_16_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 590,
+  "code": "BIZ_TYPE_16_4_2",
+  "name": "Ingredient inquiry",
+  "parent_code": "BIZ_TYPE_16_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4,BIZ_TYPE_16_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 591,
+  "code": "BIZ_TYPE_16_4_3",
+  "name": "Certificate inquiry",
+  "parent_code": "BIZ_TYPE_16_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4,BIZ_TYPE_16_4_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 592,
+  "code": "BIZ_TYPE_16_4_4",
+  "name": "Allergens inquiry",
+  "parent_code": "BIZ_TYPE_16_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4,BIZ_TYPE_16_4_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 593,
+  "code": "BIZ_TYPE_16_4_5",
+  "name": "Product description dispute",
+  "parent_code": "BIZ_TYPE_16_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4,BIZ_TYPE_16_4_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 594,
+  "code": "BIZ_TYPE_16_4_6",
+  "name": "Other product information inquiry",
+  "parent_code": "BIZ_TYPE_16_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4,BIZ_TYPE_16_4_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 595,
+  "code": "BIZ_TYPE_16_4_7",
+  "name": "Food inquiry",
+  "parent_code": "BIZ_TYPE_16_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_4,BIZ_TYPE_16_4_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 596,
+  "code": "BIZ_TYPE_16_5",
+  "name": "Bulk order inquiry",
+  "parent_code": "BIZ_TYPE_16",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_5",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 597,
+  "code": "BIZ_TYPE_16_5_1",
+  "name": "Bulk voucher purchase inquiry",
+  "parent_code": "BIZ_TYPE_16_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_5,BIZ_TYPE_16_5_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 598,
+  "code": "BIZ_TYPE_16_5_2",
+  "name": "Corporate group order inquiry",
+  "parent_code": "BIZ_TYPE_16_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_5,BIZ_TYPE_16_5_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 599,
+  "code": "BIZ_TYPE_16_6",
+  "name": "Unable to place order inquiry",
+  "parent_code": "BIZ_TYPE_16",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_6",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 600,
+  "code": "BIZ_TYPE_16_6_1",
+  "name": "Machine malfunction",
+  "parent_code": "BIZ_TYPE_16_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_6,BIZ_TYPE_16_6_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 601,
+  "code": "BIZ_TYPE_16_6_2",
+  "name": "Store closure or renovation",
+  "parent_code": "BIZ_TYPE_16_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_6,BIZ_TYPE_16_6_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 602,
+  "code": "BIZ_TYPE_16_6_3",
+  "name": "Suspension",
+  "parent_code": "BIZ_TYPE_16_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_16,BIZ_TYPE_16_6,BIZ_TYPE_16_6_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 603,
+  "code": "BIZ_TYPE_17",
+  "name": "(Customer) Order cancellation/modification",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_17",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 604,
+  "code": "BIZ_TYPE_17_1",
+  "name": "Order placement method cancellation/modification",
+  "parent_code": "BIZ_TYPE_17",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 605,
+  "code": "BIZ_TYPE_17_1_1",
+  "name": "Channel & payment method cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_1,BIZ_TYPE_17_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 606,
+  "code": "BIZ_TYPE_17_2",
+  "name": "Order information cancellation/modification",
+  "parent_code": "BIZ_TYPE_17",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 607,
+  "code": "BIZ_TYPE_17_2_1",
+  "name": "Drink category cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_2,BIZ_TYPE_17_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 608,
+  "code": "BIZ_TYPE_17_2_2",
+  "name": "Food category cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_2,BIZ_TYPE_17_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 609,
+  "code": "BIZ_TYPE_17_2_3",
+  "name": "Drink temperature cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_2,BIZ_TYPE_17_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 610,
+  "code": "BIZ_TYPE_17_2_4",
+  "name": "Other accessory cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_2,BIZ_TYPE_17_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 611,
+  "code": "BIZ_TYPE_17_2_5",
+  "name": "Order note cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_2,BIZ_TYPE_17_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 612,
+  "code": "BIZ_TYPE_17_3",
+  "name": "Pickup information cancellation/modification",
+  "parent_code": "BIZ_TYPE_17",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 613,
+  "code": "BIZ_TYPE_17_3_1",
+  "name": "Pickup store cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_3,BIZ_TYPE_17_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 614,
+  "code": "BIZ_TYPE_17_3_2",
+  "name": "Pickup time cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_3,BIZ_TYPE_17_3_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 615,
+  "code": "BIZ_TYPE_17_3_3",
+  "name": "Order status cancellation/modification",
+  "parent_code": "BIZ_TYPE_17_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_3,BIZ_TYPE_17_3_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 616,
+  "code": "BIZ_TYPE_17_4",
+  "name": "No longer wanted",
+  "parent_code": "BIZ_TYPE_17",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 617,
+  "code": "BIZ_TYPE_17_4_1",
+  "name": "No longer wanted",
+  "parent_code": "BIZ_TYPE_17_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_17,BIZ_TYPE_17_4,BIZ_TYPE_17_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 618,
+  "code": "BIZ_TYPE_18",
+  "name": "(Customer) Pickup issues",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_18",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 619,
+  "code": "BIZ_TYPE_18_1",
+  "name": "Checking order status",
+  "parent_code": "BIZ_TYPE_18",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 620,
+  "code": "BIZ_TYPE_18_1_1",
+  "name": "Checking preparation progress",
+  "parent_code": "BIZ_TYPE_18_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_1,BIZ_TYPE_18_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 621,
+  "code": "BIZ_TYPE_18_2",
+  "name": "Urging order",
+  "parent_code": "BIZ_TYPE_18",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 622,
+  "code": "BIZ_TYPE_18_2_1",
+  "name": "Urging order preparation",
+  "parent_code": "BIZ_TYPE_18_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_2,BIZ_TYPE_18_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 624,
+  "code": "BIZ_TYPE_18_3",
+  "name": "Customer-caused spillage",
+  "parent_code": "BIZ_TYPE_18",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 625,
+  "code": "BIZ_TYPE_18_3_1",
+  "name": "Customer-caused spillage",
+  "parent_code": "BIZ_TYPE_18_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_3,BIZ_TYPE_18_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 626,
+  "code": "BIZ_TYPE_18_4",
+  "name": "Lost&found",
+  "parent_code": "BIZ_TYPE_18",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 627,
+  "code": "BIZ_TYPE_18_4_1",
+  "name": "Lost&found",
+  "parent_code": "BIZ_TYPE_18_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_4,BIZ_TYPE_18_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 763,
+  "code": "BIZ_TYPE_18_5",
+  "name": "Untimely pickup",
+  "parent_code": "BIZ_TYPE_18",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_5",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 764,
+  "code": "BIZ_TYPE_18_5_1",
+  "name": "Untimely pickup",
+  "parent_code": "BIZ_TYPE_18_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_18,BIZ_TYPE_18_5,BIZ_TYPE_18_5_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 643,
+  "code": "BIZ_TYPE_19",
+  "name": "Store operation issues",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_19",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 644,
+  "code": "BIZ_TYPE_19_1",
+  "name": "(Store)Improper system operation",
+  "parent_code": "BIZ_TYPE_19",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 645,
+  "code": "BIZ_TYPE_19_1_1",
+  "name": "Marked \"complete\" before finish production",
+  "parent_code": "BIZ_TYPE_19_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1,BIZ_TYPE_19_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 646,
+  "code": "BIZ_TYPE_19_1_2",
+  "name": "Marked as picked up before customer picking up",
+  "parent_code": "BIZ_TYPE_19_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1,BIZ_TYPE_19_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 647,
+  "code": "BIZ_TYPE_19_1_3",
+  "name": "Improper order cancellation",
+  "parent_code": "BIZ_TYPE_19_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1,BIZ_TYPE_19_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 648,
+  "code": "BIZ_TYPE_19_1_4",
+  "name": "Other improper operations",
+  "parent_code": "BIZ_TYPE_19_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1,BIZ_TYPE_19_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 649,
+  "code": "BIZ_TYPE_19_1_5",
+  "name": "Failed to close store in time",
+  "parent_code": "BIZ_TYPE_19_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1,BIZ_TYPE_19_1_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 650,
+  "code": "BIZ_TYPE_19_1_6",
+  "name": "Failed to suspend sales in time",
+  "parent_code": "BIZ_TYPE_19_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1,BIZ_TYPE_19_1_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 651,
+  "code": "BIZ_TYPE_19_1_7",
+  "name": "Refuse to provide scanner",
+  "parent_code": "BIZ_TYPE_19_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_1,BIZ_TYPE_19_1_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 652,
+  "code": "BIZ_TYPE_19_2",
+  "name": "(Store)Non-standard service conduct",
+  "parent_code": "BIZ_TYPE_19",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 653,
+  "code": "BIZ_TYPE_19_2_1",
+  "name": "Refuses cash/on-site ordering",
+  "parent_code": "BIZ_TYPE_19_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_2,BIZ_TYPE_19_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 654,
+  "code": "BIZ_TYPE_19_2_2",
+  "name": "Closing the store ahead of schedule",
+  "parent_code": "BIZ_TYPE_19_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_2,BIZ_TYPE_19_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 655,
+  "code": "BIZ_TYPE_19_2_3",
+  "name": "No pre-closing pickup reminders",
+  "parent_code": "BIZ_TYPE_19_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_2,BIZ_TYPE_19_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 656,
+  "code": "BIZ_TYPE_19_3",
+  "name": "(Store)Other operation issue",
+  "parent_code": "BIZ_TYPE_19",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 657,
+  "code": "BIZ_TYPE_19_3_1",
+  "name": "(Store)Other operation issue",
+  "parent_code": "BIZ_TYPE_19_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_3,BIZ_TYPE_19_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 658,
+  "code": "BIZ_TYPE_19_4",
+  "name": "Cancel due to stores",
+  "parent_code": "BIZ_TYPE_19",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 659,
+  "code": "BIZ_TYPE_19_4_1",
+  "name": "Cancel due to long wait",
+  "parent_code": "BIZ_TYPE_19_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_4,BIZ_TYPE_19_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 660,
+  "code": "BIZ_TYPE_19_4_2",
+  "name": "Cancel due to suspension",
+  "parent_code": "BIZ_TYPE_19_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_4,BIZ_TYPE_19_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 661,
+  "code": "BIZ_TYPE_19_4_3",
+  "name": "Cancel due to store closure",
+  "parent_code": "BIZ_TYPE_19_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_19,BIZ_TYPE_19_4,BIZ_TYPE_19_4_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 291,
+  "code": "BIZ_TYPE_2",
+  "name": "Product feedback",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_2",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 373,
+  "code": "BIZ_TYPE_2_2",
+  "name": "Drink taste",
+  "parent_code": "BIZ_TYPE_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 376,
+  "code": "BIZ_TYPE_2_2_1",
+  "name": "Coffee diluted",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 387,
+  "code": "BIZ_TYPE_2_2_10",
+  "name": "Too much milk flavor",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_10",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 389,
+  "code": "BIZ_TYPE_2_2_11",
+  "name": "Other taste issues",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_11",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 567,
+  "code": "BIZ_TYPE_2_2_12",
+  "name": "Not nice",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_12",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 377,
+  "code": "BIZ_TYPE_2_2_2",
+  "name": "Taste diluted",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 378,
+  "code": "BIZ_TYPE_2_2_3",
+  "name": "Too sweet",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 379,
+  "code": "BIZ_TYPE_2_2_4",
+  "name": "Not sweet",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 380,
+  "code": "BIZ_TYPE_2_2_5",
+  "name": "Too sour",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 382,
+  "code": "BIZ_TYPE_2_2_6",
+  "name": "Too bitter",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 383,
+  "code": "BIZ_TYPE_2_2_7",
+  "name": "Does not like taste",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 384,
+  "code": "BIZ_TYPE_2_2_8",
+  "name": "Not match",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_8",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 386,
+  "code": "BIZ_TYPE_2_2_9",
+  "name": "Coffee too strong",
+  "parent_code": "BIZ_TYPE_2_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_2,BIZ_TYPE_2_2_9",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 391,
+  "code": "BIZ_TYPE_2_4",
+  "name": "Food taste",
+  "parent_code": "BIZ_TYPE_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 392,
+  "code": "BIZ_TYPE_2_4_1",
+  "name": "Bad texture",
+  "parent_code": "BIZ_TYPE_2_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_4,BIZ_TYPE_2_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 393,
+  "code": "BIZ_TYPE_2_4_2",
+  "name": "Too sweet",
+  "parent_code": "BIZ_TYPE_2_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_4,BIZ_TYPE_2_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 394,
+  "code": "BIZ_TYPE_2_4_3",
+  "name": "Not nice",
+  "parent_code": "BIZ_TYPE_2_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_4,BIZ_TYPE_2_4_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 395,
+  "code": "BIZ_TYPE_2_4_4",
+  "name": "Other taste issues",
+  "parent_code": "BIZ_TYPE_2_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_4,BIZ_TYPE_2_4_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 681,
+  "code": "BIZ_TYPE_2_5",
+  "name": "Product condition",
+  "parent_code": "BIZ_TYPE_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_5",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 682,
+  "code": "BIZ_TYPE_2_5_1",
+  "name": "Melting cream/foam",
+  "parent_code": "BIZ_TYPE_2_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_5,BIZ_TYPE_2_5_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 683,
+  "code": "BIZ_TYPE_2_5_2",
+  "name": "Melting ice",
+  "parent_code": "BIZ_TYPE_2_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_5,BIZ_TYPE_2_5_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 684,
+  "code": "BIZ_TYPE_2_5_3",
+  "name": "Abnormal shape of light food",
+  "parent_code": "BIZ_TYPE_2_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_5,BIZ_TYPE_2_5_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 685,
+  "code": "BIZ_TYPE_2_5_4",
+  "name": "Melting light food",
+  "parent_code": "BIZ_TYPE_2_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_5,BIZ_TYPE_2_5_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 686,
+  "code": "BIZ_TYPE_2_5_5",
+  "name": "Clumping cream",
+  "parent_code": "BIZ_TYPE_2_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_5,BIZ_TYPE_2_5_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 687,
+  "code": "BIZ_TYPE_2_5_6",
+  "name": "Other product condition",
+  "parent_code": "BIZ_TYPE_2_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_2,BIZ_TYPE_2_5,BIZ_TYPE_2_5_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 667,
+  "code": "BIZ_TYPE_20",
+  "name": "(Company) Delivery issue",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_20",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 668,
+  "code": "BIZ_TYPE_20_1",
+  "name": "Backlogged orders",
+  "parent_code": "BIZ_TYPE_20",
+  "path": "BIZ_TYPE,BIZ_TYPE_20,BIZ_TYPE_20_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 669,
+  "code": "BIZ_TYPE_20_1_1",
+  "name": "Backlogged orders",
+  "parent_code": "BIZ_TYPE_20_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_20,BIZ_TYPE_20_1,BIZ_TYPE_20_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 670,
+  "code": "BIZ_TYPE_20_2",
+  "name": "Unable to deliver order",
+  "parent_code": "BIZ_TYPE_20",
+  "path": "BIZ_TYPE,BIZ_TYPE_20,BIZ_TYPE_20_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 671,
+  "code": "BIZ_TYPE_20_2_1",
+  "name": "Store emergencies",
+  "parent_code": "BIZ_TYPE_20_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_20,BIZ_TYPE_20_2,BIZ_TYPE_20_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 674,
+  "code": "BIZ_TYPE_21",
+  "name": "(Company) Packaging issue",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_21",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 675,
+  "code": "BIZ_TYPE_21_1",
+  "name": "Packaging material quality",
+  "parent_code": "BIZ_TYPE_21",
+  "path": "BIZ_TYPE,BIZ_TYPE_21,BIZ_TYPE_21_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 676,
+  "code": "BIZ_TYPE_21_1_1",
+  "name": "Packaging material quality",
+  "parent_code": "BIZ_TYPE_21_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_21,BIZ_TYPE_21_1,BIZ_TYPE_21_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 677,
+  "code": "BIZ_TYPE_21_2",
+  "name": "Packaging material odor",
+  "parent_code": "BIZ_TYPE_21",
+  "path": "BIZ_TYPE,BIZ_TYPE_21,BIZ_TYPE_21_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 678,
+  "code": "BIZ_TYPE_21_2_1",
+  "name": "Packaging material odor",
+  "parent_code": "BIZ_TYPE_21_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_21,BIZ_TYPE_21_2,BIZ_TYPE_21_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 679,
+  "code": "BIZ_TYPE_21_3",
+  "name": "Package spillage",
+  "parent_code": "BIZ_TYPE_21",
+  "path": "BIZ_TYPE,BIZ_TYPE_21,BIZ_TYPE_21_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 680,
+  "code": "BIZ_TYPE_21_3_1",
+  "name": "Package spillage",
+  "parent_code": "BIZ_TYPE_21_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_21,BIZ_TYPE_21_3,BIZ_TYPE_21_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 688,
+  "code": "BIZ_TYPE_22",
+  "name": "Other suggestion",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_22",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 689,
+  "code": "BIZ_TYPE_22_1",
+  "name": "(Company) Suggestion",
+  "parent_code": "BIZ_TYPE_22",
+  "path": "BIZ_TYPE,BIZ_TYPE_22,BIZ_TYPE_22_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 690,
+  "code": "BIZ_TYPE_22_1_1",
+  "name": "Advocate environmental protection",
+  "parent_code": "BIZ_TYPE_22_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_22,BIZ_TYPE_22_1,BIZ_TYPE_22_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 691,
+  "code": "BIZ_TYPE_22_1_2",
+  "name": "New location suggestion",
+  "parent_code": "BIZ_TYPE_22_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_22,BIZ_TYPE_22_1,BIZ_TYPE_22_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 692,
+  "code": "BIZ_TYPE_22_1_3",
+  "name": "Seating suggestion",
+  "parent_code": "BIZ_TYPE_22_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_22,BIZ_TYPE_22_1,BIZ_TYPE_22_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 693,
+  "code": "BIZ_TYPE_22_1_4",
+  "name": "In-store WiFi request",
+  "parent_code": "BIZ_TYPE_22_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_22,BIZ_TYPE_22_1,BIZ_TYPE_22_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 694,
+  "code": "BIZ_TYPE_23",
+  "name": "Account",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_23",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 695,
+  "code": "BIZ_TYPE_23_1",
+  "name": "Abnormal accounts",
+  "parent_code": "BIZ_TYPE_23",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 696,
+  "code": "BIZ_TYPE_23_1_1",
+  "name": "Unable to log in",
+  "parent_code": "BIZ_TYPE_23_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_1,BIZ_TYPE_23_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 697,
+  "code": "BIZ_TYPE_23_1_2",
+  "name": "Unable to order",
+  "parent_code": "BIZ_TYPE_23_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_1,BIZ_TYPE_23_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 698,
+  "code": "BIZ_TYPE_23_1_3",
+  "name": "Credit can't transfer",
+  "parent_code": "BIZ_TYPE_23_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_1,BIZ_TYPE_23_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 699,
+  "code": "BIZ_TYPE_23_2",
+  "name": "Account inquiry",
+  "parent_code": "BIZ_TYPE_23",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 700,
+  "code": "BIZ_TYPE_23_2_1",
+  "name": "Member information change request",
+  "parent_code": "BIZ_TYPE_23_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_2,BIZ_TYPE_23_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 701,
+  "code": "BIZ_TYPE_23_2_2",
+  "name": "Unsubscribe",
+  "parent_code": "BIZ_TYPE_23_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_2,BIZ_TYPE_23_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 702,
+  "code": "BIZ_TYPE_23_2_3",
+  "name": "Order history inquiry",
+  "parent_code": "BIZ_TYPE_23_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_2,BIZ_TYPE_23_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 703,
+  "code": "BIZ_TYPE_23_2_4",
+  "name": "Removing payment details",
+  "parent_code": "BIZ_TYPE_23_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_2,BIZ_TYPE_23_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 704,
+  "code": "BIZ_TYPE_23_2_5",
+  "name": "Other account issue",
+  "parent_code": "BIZ_TYPE_23_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_2,BIZ_TYPE_23_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 705,
+  "code": "BIZ_TYPE_23_3",
+  "name": "Risk control",
+  "parent_code": "BIZ_TYPE_23",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 706,
+  "code": "BIZ_TYPE_23_3_1",
+  "name": "Unblock risk control",
+  "parent_code": "BIZ_TYPE_23_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_23,BIZ_TYPE_23_3,BIZ_TYPE_23_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 707,
+  "code": "BIZ_TYPE_24",
+  "name": "Event/Promo issues & inquiries",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_24",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 708,
+  "code": "BIZ_TYPE_24_1",
+  "name": "Event/Promo rules",
+  "parent_code": "BIZ_TYPE_24",
+  "path": "BIZ_TYPE,BIZ_TYPE_24,BIZ_TYPE_24_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 709,
+  "code": "BIZ_TYPE_24_1_1",
+  "name": "Event/Promo participation inquiries",
+  "parent_code": "BIZ_TYPE_24_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_24,BIZ_TYPE_24_1,BIZ_TYPE_24_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 710,
+  "code": "BIZ_TYPE_24_1_2",
+  "name": "Cannot join event/promo",
+  "parent_code": "BIZ_TYPE_24_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_24,BIZ_TYPE_24_1,BIZ_TYPE_24_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 711,
+  "code": "BIZ_TYPE_24_1_3",
+  "name": "Event/Promo suggestion",
+  "parent_code": "BIZ_TYPE_24_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_24,BIZ_TYPE_24_1,BIZ_TYPE_24_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 712,
+  "code": "BIZ_TYPE_24_2",
+  "name": "Questioning promotions",
+  "parent_code": "BIZ_TYPE_24",
+  "path": "BIZ_TYPE,BIZ_TYPE_24,BIZ_TYPE_24_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 713,
+  "code": "BIZ_TYPE_24_2_1",
+  "name": "Questioning rules",
+  "parent_code": "BIZ_TYPE_24_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_24,BIZ_TYPE_24_2,BIZ_TYPE_24_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 714,
+  "code": "BIZ_TYPE_24_2_2",
+  "name": "Questioning stocks",
+  "parent_code": "BIZ_TYPE_24_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_24,BIZ_TYPE_24_2,BIZ_TYPE_24_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 715,
+  "code": "BIZ_TYPE_25",
+  "name": "General marketing inquiry",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_25",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 716,
+  "code": "BIZ_TYPE_25_1",
+  "name": "(Self) Marketing inquiry",
+  "parent_code": "BIZ_TYPE_25",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 717,
+  "code": "BIZ_TYPE_25_1_1",
+  "name": "New user promotion",
+  "parent_code": "BIZ_TYPE_25_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_1,BIZ_TYPE_25_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 718,
+  "code": "BIZ_TYPE_25_1_2",
+  "name": "Other marketing event",
+  "parent_code": "BIZ_TYPE_25_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_1,BIZ_TYPE_25_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 719,
+  "code": "BIZ_TYPE_25_1_3",
+  "name": "Membership inquiry",
+  "parent_code": "BIZ_TYPE_25_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_1,BIZ_TYPE_25_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 720,
+  "code": "BIZ_TYPE_25_1_4",
+  "name": "Referral inquiry",
+  "parent_code": "BIZ_TYPE_25_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_1,BIZ_TYPE_25_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 721,
+  "code": "BIZ_TYPE_25_1_5",
+  "name": "Promotion content inquiry",
+  "parent_code": "BIZ_TYPE_25_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_1,BIZ_TYPE_25_1_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 722,
+  "code": "BIZ_TYPE_25_2",
+  "name": "(Third-party) marketing inquiry",
+  "parent_code": "BIZ_TYPE_25",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 723,
+  "code": "BIZ_TYPE_25_2_1",
+  "name": "Payment channel promotion",
+  "parent_code": "BIZ_TYPE_25_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_2,BIZ_TYPE_25_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 724,
+  "code": "BIZ_TYPE_25_2_2",
+  "name": "Delivery platform promotion",
+  "parent_code": "BIZ_TYPE_25_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_2,BIZ_TYPE_25_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 725,
+  "code": "BIZ_TYPE_25_2_3",
+  "name": "Other third-party marketing event inquiry",
+  "parent_code": "BIZ_TYPE_25_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_25,BIZ_TYPE_25_2,BIZ_TYPE_25_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 726,
+  "code": "BIZ_TYPE_26",
+  "name": "Invoice",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_26",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 727,
+  "code": "BIZ_TYPE_26_1",
+  "name": "Invoice inquiry",
+  "parent_code": "BIZ_TYPE_26",
+  "path": "BIZ_TYPE,BIZ_TYPE_26,BIZ_TYPE_26_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 728,
+  "code": "BIZ_TYPE_26_1_1",
+  "name": "Request for invoice",
+  "parent_code": "BIZ_TYPE_26_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_26,BIZ_TYPE_26_1,BIZ_TYPE_26_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 729,
+  "code": "BIZ_TYPE_26_1_2",
+  "name": "Invoice rules inquiry",
+  "parent_code": "BIZ_TYPE_26_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_26,BIZ_TYPE_26_1,BIZ_TYPE_26_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 730,
+  "code": "BIZ_TYPE_27",
+  "name": "Collaboration",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_27",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 731,
+  "code": "BIZ_TYPE_27_1",
+  "name": "Collaboration inquiry",
+  "parent_code": "BIZ_TYPE_27",
+  "path": "BIZ_TYPE,BIZ_TYPE_27,BIZ_TYPE_27_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 732,
+  "code": "BIZ_TYPE_27_1_1",
+  "name": "Franchising",
+  "parent_code": "BIZ_TYPE_27_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_27,BIZ_TYPE_27_1,BIZ_TYPE_27_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 733,
+  "code": "BIZ_TYPE_27_1_2",
+  "name": "Business collaboration",
+  "parent_code": "BIZ_TYPE_27_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_27,BIZ_TYPE_27_1,BIZ_TYPE_27_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 765,
+  "code": "BIZ_TYPE_27_1_3",
+  "name": "Sponsorship",
+  "parent_code": "BIZ_TYPE_27_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_27,BIZ_TYPE_27_1,BIZ_TYPE_27_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 734,
+  "code": "BIZ_TYPE_28",
+  "name": "Hiring",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_28",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 735,
+  "code": "BIZ_TYPE_28_1",
+  "name": "Hiring inquiry",
+  "parent_code": "BIZ_TYPE_28",
+  "path": "BIZ_TYPE,BIZ_TYPE_28,BIZ_TYPE_28_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 736,
+  "code": "BIZ_TYPE_28_1_1",
+  "name": "Hiring inquiry",
+  "parent_code": "BIZ_TYPE_28_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_28,BIZ_TYPE_28_1,BIZ_TYPE_28_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 737,
+  "code": "BIZ_TYPE_29",
+  "name": "Compliments",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_29",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 738,
+  "code": "BIZ_TYPE_29_1",
+  "name": "Barista compliments",
+  "parent_code": "BIZ_TYPE_29",
+  "path": "BIZ_TYPE,BIZ_TYPE_29,BIZ_TYPE_29_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 739,
+  "code": "BIZ_TYPE_29_1_1",
+  "name": "Barista compliments",
+  "parent_code": "BIZ_TYPE_29_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_29,BIZ_TYPE_29_1,BIZ_TYPE_29_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 740,
+  "code": "BIZ_TYPE_29_2",
+  "name": "Customer service compliments",
+  "parent_code": "BIZ_TYPE_29",
+  "path": "BIZ_TYPE,BIZ_TYPE_29,BIZ_TYPE_29_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 741,
+  "code": "BIZ_TYPE_29_2_1",
+  "name": "Customer service compliments",
+  "parent_code": "BIZ_TYPE_29_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_29,BIZ_TYPE_29_2,BIZ_TYPE_29_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 292,
+  "code": "BIZ_TYPE_3",
+  "name": "Product suggestion",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_3",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 397,
+  "code": "BIZ_TYPE_3_2",
+  "name": "Ice volume",
+  "parent_code": "BIZ_TYPE_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 400,
+  "code": "BIZ_TYPE_3_2_1",
+  "name": "Too much ice",
+  "parent_code": "BIZ_TYPE_3_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_2,BIZ_TYPE_3_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 401,
+  "code": "BIZ_TYPE_3_2_2",
+  "name": "Too little ice",
+  "parent_code": "BIZ_TYPE_3_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_2,BIZ_TYPE_3_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 402,
+  "code": "BIZ_TYPE_3_2_3",
+  "name": "No ice adjustment option",
+  "parent_code": "BIZ_TYPE_3_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_2,BIZ_TYPE_3_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 399,
+  "code": "BIZ_TYPE_3_4",
+  "name": "Customized suggestion",
+  "parent_code": "BIZ_TYPE_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 409,
+  "code": "BIZ_TYPE_3_4_1",
+  "name": "Light food portion size",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 410,
+  "code": "BIZ_TYPE_3_4_2",
+  "name": "Drink temperature feedback",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 411,
+  "code": "BIZ_TYPE_3_4_3",
+  "name": "Request for new/return product",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 412,
+  "code": "BIZ_TYPE_3_4_4",
+  "name": "Product different from picture",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 413,
+  "code": "BIZ_TYPE_3_4_5",
+  "name": "Accessory pairing suggestion",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 414,
+  "code": "BIZ_TYPE_3_4_6",
+  "name": "Packaging material suggestion",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 415,
+  "code": "BIZ_TYPE_3_4_7",
+  "name": "Marketing materials feedback",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 416,
+  "code": "BIZ_TYPE_3_4_8",
+  "name": "Other customized feedback",
+  "parent_code": "BIZ_TYPE_3_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_4,BIZ_TYPE_3_4_8",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 534,
+  "code": "BIZ_TYPE_3_5",
+  "name": "Food feedback",
+  "parent_code": "BIZ_TYPE_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_5",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 535,
+  "code": "BIZ_TYPE_3_5_1",
+  "name": "Wrong/missing ingredients",
+  "parent_code": "BIZ_TYPE_3_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_3,BIZ_TYPE_3_5,BIZ_TYPE_3_5_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 742,
+  "code": "BIZ_TYPE_30",
+  "name": "Vouchers/ Coffee Credit issue&inquiry",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_30",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 743,
+  "code": "BIZ_TYPE_30_1",
+  "name": "Vouchers",
+  "parent_code": "BIZ_TYPE_30",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 744,
+  "code": "BIZ_TYPE_30_1_1",
+  "name": "Can't use vouchers",
+  "parent_code": "BIZ_TYPE_30_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_1,BIZ_TYPE_30_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 745,
+  "code": "BIZ_TYPE_30_1_2",
+  "name": "Voucher usage problem",
+  "parent_code": "BIZ_TYPE_30_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_1,BIZ_TYPE_30_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 746,
+  "code": "BIZ_TYPE_30_1_3",
+  "name": "Voucher not received",
+  "parent_code": "BIZ_TYPE_30_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_1,BIZ_TYPE_30_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 747,
+  "code": "BIZ_TYPE_30_2",
+  "name": "Coffee credit",
+  "parent_code": "BIZ_TYPE_30",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 748,
+  "code": "BIZ_TYPE_30_2_1",
+  "name": "Can't use credit",
+  "parent_code": "BIZ_TYPE_30_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_2,BIZ_TYPE_30_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 749,
+  "code": "BIZ_TYPE_30_2_2",
+  "name": "Credit usage problem",
+  "parent_code": "BIZ_TYPE_30_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_2,BIZ_TYPE_30_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 750,
+  "code": "BIZ_TYPE_30_2_3",
+  "name": "Credit not received",
+  "parent_code": "BIZ_TYPE_30_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_2,BIZ_TYPE_30_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 751,
+  "code": "BIZ_TYPE_30_2_4",
+  "name": "Cancel transfer",
+  "parent_code": "BIZ_TYPE_30_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_2,BIZ_TYPE_30_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 752,
+  "code": "BIZ_TYPE_30_2_5",
+  "name": "Transfer issue",
+  "parent_code": "BIZ_TYPE_30_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_2,BIZ_TYPE_30_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 753,
+  "code": "BIZ_TYPE_30_2_6",
+  "name": "Transfer status check",
+  "parent_code": "BIZ_TYPE_30_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_30,BIZ_TYPE_30_2,BIZ_TYPE_30_2_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 754,
+  "code": "BIZ_TYPE_31",
+  "name": "Price inquiry",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_31",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 755,
+  "code": "BIZ_TYPE_31_1",
+  "name": "Product price",
+  "parent_code": "BIZ_TYPE_31",
+  "path": "BIZ_TYPE,BIZ_TYPE_31,BIZ_TYPE_31_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 756,
+  "code": "BIZ_TYPE_31_1_1",
+  "name": "Product price inquiry",
+  "parent_code": "BIZ_TYPE_31_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_31,BIZ_TYPE_31_1,BIZ_TYPE_31_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 757,
+  "code": "BIZ_TYPE_31_1_2",
+  "name": "Store price discrepancy",
+  "parent_code": "BIZ_TYPE_31_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_31,BIZ_TYPE_31_1,BIZ_TYPE_31_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 758,
+  "code": "BIZ_TYPE_31_1_3",
+  "name": "Channel price difference",
+  "parent_code": "BIZ_TYPE_31_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_31,BIZ_TYPE_31_1,BIZ_TYPE_31_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 759,
+  "code": "BIZ_TYPE_31_1_4",
+  "name": "Menu price adjustment",
+  "parent_code": "BIZ_TYPE_31_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_31,BIZ_TYPE_31_1,BIZ_TYPE_31_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 760,
+  "code": "BIZ_TYPE_31_1_5",
+  "name": "Pickup method price gap",
+  "parent_code": "BIZ_TYPE_31_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_31,BIZ_TYPE_31_1,BIZ_TYPE_31_1_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 293,
+  "code": "BIZ_TYPE_4",
+  "name": "Service",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_4",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 417,
+  "code": "BIZ_TYPE_4_1",
+  "name": "(Store) Service attitude",
+  "parent_code": "BIZ_TYPE_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 418,
+  "code": "BIZ_TYPE_4_1_1",
+  "name": "Customer didn't specify reason",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 434,
+  "code": "BIZ_TYPE_4_1_10",
+  "name": "Other service attitude",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_10",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 576,
+  "code": "BIZ_TYPE_4_1_11",
+  "name": "Lack product knowledge",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_11",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 662,
+  "code": "BIZ_TYPE_4_1_12",
+  "name": "Demanding positive comments",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_12",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 419,
+  "code": "BIZ_TYPE_4_1_2",
+  "name": "No welcome",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 420,
+  "code": "BIZ_TYPE_4_1_3",
+  "name": "No assistance",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 422,
+  "code": "BIZ_TYPE_4_1_4",
+  "name": "Unfriendly behavior",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 424,
+  "code": "BIZ_TYPE_4_1_5",
+  "name": "Inappropriate language",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 425,
+  "code": "BIZ_TYPE_4_1_6",
+  "name": "Inappropriate behavior",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 429,
+  "code": "BIZ_TYPE_4_1_7",
+  "name": "Contacted customer inappropriately",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 431,
+  "code": "BIZ_TYPE_4_1_8",
+  "name": "Inattentive and unprofessional",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_8",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 433,
+  "code": "BIZ_TYPE_4_1_9",
+  "name": "Complain and grumble",
+  "parent_code": "BIZ_TYPE_4_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_1,BIZ_TYPE_4_1_9",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 435,
+  "code": "BIZ_TYPE_4_2",
+  "name": "(Store) Serious service attitude",
+  "parent_code": "BIZ_TYPE_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 436,
+  "code": "BIZ_TYPE_4_2_1",
+  "name": "Harassment",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 437,
+  "code": "BIZ_TYPE_4_2_2",
+  "name": "Threat",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 439,
+  "code": "BIZ_TYPE_4_2_3",
+  "name": "Argument",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 440,
+  "code": "BIZ_TYPE_4_2_4",
+  "name": "Verbal abuse",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 442,
+  "code": "BIZ_TYPE_4_2_5",
+  "name": "Insulting behavior",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 443,
+  "code": "BIZ_TYPE_4_2_6",
+  "name": "Physical assault",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 445,
+  "code": "BIZ_TYPE_4_2_7",
+  "name": "Leak of customer data",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 446,
+  "code": "BIZ_TYPE_4_2_8",
+  "name": "Other serious service attitude",
+  "parent_code": "BIZ_TYPE_4_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_2,BIZ_TYPE_4_2_8",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 663,
+  "code": "BIZ_TYPE_4_3",
+  "name": "(Store) Public image",
+  "parent_code": "BIZ_TYPE_4",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_3",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 664,
+  "code": "BIZ_TYPE_4_3_1",
+  "name": "Staff appearance is untidy/improper",
+  "parent_code": "BIZ_TYPE_4_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_3,BIZ_TYPE_4_3_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 665,
+  "code": "BIZ_TYPE_4_3_2",
+  "name": "Messy/dirty store environment",
+  "parent_code": "BIZ_TYPE_4_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_3,BIZ_TYPE_4_3_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 666,
+  "code": "BIZ_TYPE_4_3_3",
+  "name": "Foreign object in store",
+  "parent_code": "BIZ_TYPE_4_3",
+  "path": "BIZ_TYPE,BIZ_TYPE_4,BIZ_TYPE_4_3,BIZ_TYPE_4_3_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 294,
+  "code": "BIZ_TYPE_5",
+  "name": "Packing",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_5",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 448,
+  "code": "BIZ_TYPE_5_1",
+  "name": "(Store) packing",
+  "parent_code": "BIZ_TYPE_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 450,
+  "code": "BIZ_TYPE_5_1_1",
+  "name": "Damaged packaging",
+  "parent_code": "BIZ_TYPE_5_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_1,BIZ_TYPE_5_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 452,
+  "code": "BIZ_TYPE_5_1_2",
+  "name": "Packing error",
+  "parent_code": "BIZ_TYPE_5_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_1,BIZ_TYPE_5_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 454,
+  "code": "BIZ_TYPE_5_1_3",
+  "name": "Refuse to pack",
+  "parent_code": "BIZ_TYPE_5_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_1,BIZ_TYPE_5_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 455,
+  "code": "BIZ_TYPE_5_1_4",
+  "name": "Wrong or missing accessories",
+  "parent_code": "BIZ_TYPE_5_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_1,BIZ_TYPE_5_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 457,
+  "code": "BIZ_TYPE_5_1_5",
+  "name": "Labeling error",
+  "parent_code": "BIZ_TYPE_5_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_1,BIZ_TYPE_5_1_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 459,
+  "code": "BIZ_TYPE_5_1_6",
+  "name": "Not packed according to notes",
+  "parent_code": "BIZ_TYPE_5_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_1,BIZ_TYPE_5_1_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 461,
+  "code": "BIZ_TYPE_5_2",
+  "name": "(Company) packing",
+  "parent_code": "BIZ_TYPE_5",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 463,
+  "code": "BIZ_TYPE_5_2_1",
+  "name": "Packaging material quality",
+  "parent_code": "BIZ_TYPE_5_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_2,BIZ_TYPE_5_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 465,
+  "code": "BIZ_TYPE_5_2_2",
+  "name": "Packaging material odor",
+  "parent_code": "BIZ_TYPE_5_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_5,BIZ_TYPE_5_2,BIZ_TYPE_5_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 0
+ },
+ {
+  "id": 296,
+  "code": "BIZ_TYPE_6",
+  "name": "Store delivery issue",
+  "parent_code": "BIZ_TYPE",
+  "path": "BIZ_TYPE,BIZ_TYPE_6",
+  "level": 1,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 467,
+  "code": "BIZ_TYPE_6_1",
+  "name": "(Store) production",
+  "parent_code": "BIZ_TYPE_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 469,
+  "code": "BIZ_TYPE_6_1_1",
+  "name": "Insufficient drink portion",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 479,
+  "code": "BIZ_TYPE_6_1_10",
+  "name": "Other production issue",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_10",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 628,
+  "code": "BIZ_TYPE_6_1_11",
+  "name": "Prepared out of sequence",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_11",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 629,
+  "code": "BIZ_TYPE_6_1_12",
+  "name": "Preparation exceeded time limit",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_12",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 630,
+  "code": "BIZ_TYPE_6_1_13",
+  "name": "Incorrect preparation of hot/iced drink",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_13",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 631,
+  "code": "BIZ_TYPE_6_1_14",
+  "name": "Incorrect cup size",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_14",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 632,
+  "code": "BIZ_TYPE_6_1_15",
+  "name": "Incorrect sweetness level",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_15",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 633,
+  "code": "BIZ_TYPE_6_1_16",
+  "name": "Other incorrect note option",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_16",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 471,
+  "code": "BIZ_TYPE_6_1_2",
+  "name": "Improper hygiene practices",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 472,
+  "code": "BIZ_TYPE_6_1_3",
+  "name": "Wrong product category",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 473,
+  "code": "BIZ_TYPE_6_1_4",
+  "name": "Wrong product quantity",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 475,
+  "code": "BIZ_TYPE_6_1_6",
+  "name": "Not produced according to notes",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 476,
+  "code": "BIZ_TYPE_6_1_7",
+  "name": "Slow service rate/long wait",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_7",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 477,
+  "code": "BIZ_TYPE_6_1_8",
+  "name": "Food not fully thawed",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_8",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 478,
+  "code": "BIZ_TYPE_6_1_9",
+  "name": "Non-standard production",
+  "parent_code": "BIZ_TYPE_6_1",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_1,BIZ_TYPE_6_1_9",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 634,
+  "code": "BIZ_TYPE_6_2",
+  "name": "(Store) packing",
+  "parent_code": "BIZ_TYPE_6",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_2",
+  "level": 2,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 635,
+  "code": "BIZ_TYPE_6_2_1",
+  "name": "Packing error",
+  "parent_code": "BIZ_TYPE_6_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_2,BIZ_TYPE_6_2_1",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 636,
+  "code": "BIZ_TYPE_6_2_2",
+  "name": "Wrong or missing accessories",
+  "parent_code": "BIZ_TYPE_6_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_2,BIZ_TYPE_6_2_2",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 637,
+  "code": "BIZ_TYPE_6_2_3",
+  "name": "Spillage caused by store handling",
+  "parent_code": "BIZ_TYPE_6_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_2,BIZ_TYPE_6_2_3",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 638,
+  "code": "BIZ_TYPE_6_2_4",
+  "name": "Damaged packaging by store handling",
+  "parent_code": "BIZ_TYPE_6_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_2,BIZ_TYPE_6_2_4",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 639,
+  "code": "BIZ_TYPE_6_2_5",
+  "name": "Refuse to pack",
+  "parent_code": "BIZ_TYPE_6_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_2,BIZ_TYPE_6_2_5",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ },
+ {
+  "id": 640,
+  "code": "BIZ_TYPE_6_2_6",
+  "name": "Labeling error",
+  "parent_code": "BIZ_TYPE_6_2",
+  "path": "BIZ_TYPE,BIZ_TYPE_6,BIZ_TYPE_6_2,BIZ_TYPE_6_2_6",
+  "level": 3,
+  "deleted": 0,
+  "enabled": 1
+ }
+]

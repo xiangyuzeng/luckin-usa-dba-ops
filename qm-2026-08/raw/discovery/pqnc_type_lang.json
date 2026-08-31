@@ -1,0 +1,82 @@
+[
+ {
+  "id": 33,
+  "relate_key": "0001",
+  "field_name": "name",
+  "language_code": "en-US",
+  "language_value": "IQA2Test PQNCtype",
+  "created_time": "2025-03-18T14:11:10",
+  "modified_time": "2025-03-18T14:11:10",
+  "tenant": "IQA2"
+ },
+ {
+  "id": 34,
+  "relate_key": "0001",
+  "field_name": "name",
+  "language_code": "zh-CN",
+  "language_value": "IQA2Test PQNC类型",
+  "created_time": "2025-03-18T14:11:10",
+  "modified_time": "2025-03-18T14:11:10",
+  "tenant": "IQA2"
+ },
+ {
+  "id": 35,
+  "relate_key": "0002",
+  "field_name": "name",
+  "language_code": "en-US",
+  "language_value": "Critical",
+  "created_time": "2025-05-13T06:12:21",
+  "modified_time": "2025-05-13T06:12:21",
+  "tenant": "LKUS"
+ },
+ {
+  "id": 36,
+  "relate_key": "0002",
+  "field_name": "name",
+  "language_code": "zh-CN",
+  "language_value": "",
+  "created_time": "2025-05-13T06:12:21",
+  "modified_time": "2025-05-13T06:12:21",
+  "tenant": "LKUS"
+ },
+ {
+  "id": 37,
+  "relate_key": "0003",
+  "field_name": "name",
+  "language_code": "en-US",
+  "language_value": "Major",
+  "created_time": "2025-05-13T06:12:53",
+  "modified_time": "2025-05-13T06:12:53",
+  "tenant": "LKUS"
+ },
+ {
+  "id": 38,
+  "relate_key": "0003",
+  "field_name": "name",
+  "language_code": "zh-CN",
+  "language_value": "",
+  "created_time": "2025-05-13T06:12:53",
+  "modified_time": "2025-05-13T06:12:53",
+  "tenant": "LKUS"
+ },
+ {
+  "id": 39,
+  "relate_key": "0004",
+  "field_name": "name",
+  "language_code": "en-US",
+  "language_value": "Minor",
+  "created_time": "2025-05-13T06:13:16",
+  "modified_time": "2025-05-13T06:13:16",
+  "tenant": "LKUS"
+ },
+ {
+  "id": 40,
+  "relate_key": "0004",
+  "field_name": "name",
+  "language_code": "zh-CN",
+  "language_value": "",
+  "created_time": "2025-05-13T06:13:16",
+  "modified_time": "2025-05-13T06:13:16",
+  "tenant": "LKUS"
+ }
+]

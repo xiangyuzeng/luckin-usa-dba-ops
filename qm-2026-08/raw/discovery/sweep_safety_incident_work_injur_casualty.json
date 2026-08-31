@@ -1,0 +1,24 @@
+{
+ "aws-luckyus-ldas-rw": [
+  {
+   "s": "luckyus_ikafadmin",
+   "t": "t_kafka_ai_incident",
+   "n": 170,
+   "upd": "2026-08-07T21:05:17"
+  }
+ ],
+ "aws-luckyus-pubdm-rw": [
+  {
+   "s": "luckyus_pub_dm",
+   "t": "t_goods_safety_stock_config",
+   "n": 227,
+   "upd": null
+  },
+  {
+   "s": "luckyus_pub_dm",
+   "t": "t_goods_safety_stock_config_history",
+   "n": 232,
+   "upd": null
+  }
+ ]
+}

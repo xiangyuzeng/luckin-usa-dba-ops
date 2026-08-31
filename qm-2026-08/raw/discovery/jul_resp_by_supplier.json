@@ -1,0 +1,62 @@
+[
+ {
+  "responsibility": 1,
+  "supplier": "SYSCO",
+  "n": 2,
+  "amt": 9.39
+ },
+ {
+  "responsibility": 1,
+  "supplier": "VIOBIO MARKET PLACE INC",
+  "n": 3,
+  "amt": 2.31
+ },
+ {
+  "responsibility": 2,
+  "supplier": null,
+  "n": 1,
+  "amt": 398.13
+ },
+ {
+  "responsibility": 2,
+  "supplier": "SYSCO",
+  "n": 22,
+  "amt": 113.17
+ },
+ {
+  "responsibility": 2,
+  "supplier": "S&D coffee, Inc",
+  "n": 3,
+  "amt": 40.83
+ },
+ {
+  "responsibility": 2,
+  "supplier": "FREENOW USA INC.",
+  "n": 4,
+  "amt": 38.59
+ },
+ {
+  "responsibility": 2,
+  "supplier": "Primizie New York LLC",
+  "n": 1,
+  "amt": 9.2
+ },
+ {
+  "responsibility": 2,
+  "supplier": "Ecolab Inc.",
+  "n": 1,
+  "amt": 4.97
+ },
+ {
+  "responsibility": 4,
+  "supplier": "SYSCO",
+  "n": 13,
+  "amt": 65.91
+ },
+ {
+  "responsibility": 6,
+  "supplier": null,
+  "n": 9,
+  "amt": 247.19
+ }
+]

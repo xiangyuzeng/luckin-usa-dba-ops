@@ -1,0 +1,352 @@
+[
+ {
+  "t": "t_pqnc",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 2,
+  "c": "pqnc_no",
+  "ty": "varchar(32)",
+  "cm": "产品质量不合格单号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 3,
+  "c": "wms_pqnc_no",
+  "ty": "varchar(32)",
+  "cm": "三方pqnc单号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 4,
+  "c": "initiator",
+  "ty": "tinyint",
+  "cm": "发起方: 1-门店,2-仓库"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 5,
+  "c": "stock_cell_code",
+  "ty": "varchar(20)",
+  "cm": "库存单位code"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 6,
+  "c": "warehouse_mid",
+  "ty": "varchar(20)",
+  "cm": "仓库编号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 7,
+  "c": "spec_mid",
+  "ty": "varchar(20)",
+  "cm": "规格mid"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 8,
+  "c": "unit_mid",
+  "ty": "varchar(20)",
+  "cm": "单位mid"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 9,
+  "c": "discover_problems_time",
+  "ty": "datetime",
+  "cm": "发现问题时间"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 10,
+  "c": "party_name",
+  "ty": "varchar(128)",
+  "cm": "当事人名称"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 11,
+  "c": "discover_problems_time_period",
+  "ty": "tinyint",
+  "cm": "发现问题时间段:1-收货时,2-存储时,3-使用时,4-售出后 "
+ },
+ {
+  "t": "t_pqnc",
+  "p": 12,
+  "c": "batch_no",
+  "ty": "varchar(64)",
+  "cm": "批次号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 13,
+  "c": "problem_goods_quantity",
+  "ty": "decimal(19,2)",
+  "cm": "问题货物数量"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 14,
+  "c": "freeze_quantity",
+  "ty": "decimal(19,1)",
+  "cm": "冷冻数量"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 15,
+  "c": "refrigerate_quantity",
+  "ty": "decimal(19,1)",
+  "cm": "冷藏数量"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 16,
+  "c": "customer_compensation_info",
+  "ty": "varchar(512)",
+  "cm": "客服赔偿信息"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 17,
+  "c": "problem_goods_retention_status",
+  "ty": "tinyint",
+  "cm": "问题货物留存状态:1-已留存,2-未留存 "
+ },
+ {
+  "t": "t_pqnc",
+  "p": 18,
+  "c": "foreign_matter_retention_status",
+  "ty": "tinyint",
+  "cm": "异物留存状态:1-已留存,2-未留存,3-不涉及  "
+ },
+ {
+  "t": "t_pqnc",
+  "p": 19,
+  "c": "factory_name",
+  "ty": "varchar(128)",
+  "cm": "生产工厂名称"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 20,
+  "c": "problem_description",
+  "ty": "varchar(512)",
+  "cm": "问题详细描述"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 21,
+  "c": "value_amount",
+  "ty": "decimal(19,2)",
+  "cm": "货值金额"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 22,
+  "c": "approved_amount",
+  "ty": "decimal(19,2)",
+  "cm": "核定金额"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 23,
+  "c": "party_of_judgment",
+  "ty": "tinyint",
+  "cm": "待判责方:1-采购，2-质控"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 24,
+  "c": "responsibility",
+  "ty": "tinyint",
+  "cm": "判责结果:1-供应商，2-仓储，3-门店，4-供应商和仓储共同责任，5-责任不明"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 25,
+  "c": "party_of_confirm",
+  "ty": "tinyint",
+  "cm": "待确认方:1-供应商，2-仓储，3-门店，4-供应商及仓储"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 26,
+  "c": "supplier_mid",
+  "ty": "varchar(20)",
+  "cm": "供应商mid"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 27,
+  "c": "fine_detail_no",
+  "ty": "varchar(32)",
+  "cm": "扣款单编号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 28,
+  "c": "process_method",
+  "ty": "tinyint",
+  "cm": "处理方式:1-无实物退货，2-实物退货"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 29,
+  "c": "remarks",
+  "ty": "varchar(512)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 30,
+  "c": "status",
+  "ty": "tinyint",
+  "cm": "状态: 1-已新建,2-已退回,3-待判责,4-待确认,5-已完成"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 31,
+  "c": "creator_id",
+  "ty": "bigint",
+  "cm": "创建人"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 32,
+  "c": "creator_name",
+  "ty": "varchar(100)",
+  "cm": "新建人名称"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 33,
+  "c": "created_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 34,
+  "c": "modifier_id",
+  "ty": "bigint",
+  "cm": "修改人"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 35,
+  "c": "modifier_name",
+  "ty": "varchar(100)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 36,
+  "c": "modified_time",
+  "ty": "datetime",
+  "cm": "最后修改时间"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 37,
+  "c": "submit_time",
+  "ty": "timestamp",
+  "cm": "提交时间"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 38,
+  "c": "judgment_time",
+  "ty": "timestamp",
+  "cm": "判责时间"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 39,
+  "c": "judgment_dept_id",
+  "ty": "bigint",
+  "cm": "判责部门id"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 40,
+  "c": "judgment_dept_name",
+  "ty": "varchar(200)",
+  "cm": "判责部门名称"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 41,
+  "c": "complete_time",
+  "ty": "timestamp",
+  "cm": "完成时间"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 42,
+  "c": "delete_flag",
+  "ty": "tinyint",
+  "cm": "删除标识:1-是，0-否"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 43,
+  "c": "appealed_flag",
+  "ty": "tinyint",
+  "cm": "是否申诉过:1-是，0-否"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 44,
+  "c": "auto_confirm_flag",
+  "ty": "tinyint",
+  "cm": "是否自动确认:1-是，0-否"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 45,
+  "c": "quotation_no",
+  "ty": "varchar(32)",
+  "cm": "报价单编号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 46,
+  "c": "settle_currency",
+  "ty": "varchar(10)",
+  "cm": "结算币种编号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 47,
+  "c": "version",
+  "ty": "int",
+  "cm": "乐观锁版本号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 48,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 49,
+  "c": "ship_order_no",
+  "ty": "varchar(32)",
+  "cm": "发货单号"
+ },
+ {
+  "t": "t_pqnc",
+  "p": 50,
+  "c": "price",
+  "ty": "decimal(25,10)",
+  "cm": "配货单结存单价"
+ }
+]

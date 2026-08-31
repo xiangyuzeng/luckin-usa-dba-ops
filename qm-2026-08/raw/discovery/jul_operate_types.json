@@ -1,0 +1,32 @@
+[
+ {
+  "operate_type": 1,
+  "return_reason": null,
+  "n": 81,
+  "np": 50
+ },
+ {
+  "operate_type": 2,
+  "return_reason": 2,
+  "n": 11,
+  "np": 7
+ },
+ {
+  "operate_type": 2,
+  "return_reason": 3,
+  "n": 9,
+  "np": 9
+ },
+ {
+  "operate_type": 3,
+  "return_reason": null,
+  "n": 6,
+  "np": 6
+ },
+ {
+  "operate_type": 4,
+  "return_reason": null,
+  "n": 31,
+  "np": 31
+ }
+]

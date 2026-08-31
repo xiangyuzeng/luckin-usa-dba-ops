@@ -1,0 +1,42 @@
+[
+ {
+  "operate_type": 1,
+  "o1": "0003",
+  "o2": "",
+  "o3": "",
+  "n": 3,
+  "np": 3
+ },
+ {
+  "operate_type": 1,
+  "o1": "0004",
+  "o2": "",
+  "o3": "",
+  "n": 78,
+  "np": 50
+ },
+ {
+  "operate_type": 2,
+  "o1": null,
+  "o2": null,
+  "o3": null,
+  "n": 17,
+  "np": 14
+ },
+ {
+  "operate_type": 3,
+  "o1": null,
+  "o2": null,
+  "o3": null,
+  "n": 6,
+  "np": 6
+ },
+ {
+  "operate_type": 4,
+  "o1": null,
+  "o2": null,
+  "o3": null,
+  "n": 31,
+  "np": 31
+ }
+]

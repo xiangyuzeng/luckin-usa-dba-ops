@@ -1,0 +1,275 @@
+[
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 2,
+  "c": "pqnc_id",
+  "ty": "bigint",
+  "cm": "产品质量不合格单ID"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 3,
+  "c": "operate_type",
+  "ty": "tinyint",
+  "cm": "操作类型:1-判责，2-退回，3-确认，4-申诉"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 4,
+  "c": "responsibility",
+  "ty": "tinyint",
+  "cm": "判责结果:1-供应商，2-仓储，3-门店，4-供应商和仓储共同责任，5-责任不明"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 5,
+  "c": "supplier_mid",
+  "ty": "varchar(20)",
+  "cm": "供应商mid"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 6,
+  "c": "factory_name",
+  "ty": "varchar(128)",
+  "cm": "生产工厂名称"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 7,
+  "c": "one_pqnc_type_code",
+  "ty": "varchar(20)",
+  "cm": "pqnc类型一级"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 8,
+  "c": "two_pqnc_type_code",
+  "ty": "varchar(20)",
+  "cm": "pqnc类型二级"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 9,
+  "c": "three_pqnc_type_code",
+  "ty": "varchar(20)",
+  "cm": "pqnc类型三级"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 10,
+  "c": "process_method",
+  "ty": "tinyint",
+  "cm": "处理方式:1-无实物退货，2-实物退货"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 11,
+  "c": "weights",
+  "ty": "tinyint",
+  "cm": "权重"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 12,
+  "c": "return_reason",
+  "ty": "tinyint",
+  "cm": "退回原因:1-属于产品正常现象，2-信息不充分，3-关闭不合格单"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 13,
+  "c": "attachment_url",
+  "ty": "varchar(10000)",
+  "cm": "附件地址，多个用,隔开"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 14,
+  "c": "description",
+  "ty": "varchar(512)",
+  "cm": "说明"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 15,
+  "c": "auto_flag",
+  "ty": "tinyint",
+  "cm": "是否自动:1-是，2-否"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 16,
+  "c": "remarks",
+  "ty": "varchar(512)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 17,
+  "c": "operator_id",
+  "ty": "bigint",
+  "cm": "操作人"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 18,
+  "c": "operator_name",
+  "ty": "varchar(100)",
+  "cm": "操作人名称"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 19,
+  "c": "operator_dept_id",
+  "ty": "bigint",
+  "cm": "操作人部门ID"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 20,
+  "c": "operator_dept_name",
+  "ty": "varchar(100)",
+  "cm": "操作人部门"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 21,
+  "c": "operated_time",
+  "ty": "datetime",
+  "cm": "操作时间"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 22,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_pqnc_operate_detail",
+  "p": 23,
+  "c": "ship_order_no",
+  "ty": "varchar(32)",
+  "cm": "发货单号"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 2,
+  "c": "pqnc_id",
+  "ty": "bigint",
+  "cm": "产品质量不合格单ID"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 3,
+  "c": "bill_type",
+  "ty": "tinyint",
+  "cm": "单据类型: 1-发货单,2-配货单,3-调拨单"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 4,
+  "c": "relate_ticket_no",
+  "ty": "varchar(30)",
+  "cm": "关联单据号"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 5,
+  "c": "out_stock_cell_code",
+  "ty": "varchar(20)",
+  "cm": "出库单位"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 6,
+  "c": "in_stock_cell_code",
+  "ty": "varchar(20)",
+  "cm": "入库单位"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 7,
+  "c": "ship_batch_no",
+  "ty": "varchar(64)",
+  "cm": "发货批次号"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 8,
+  "c": "ship_quantity",
+  "ty": "decimal(19,1)",
+  "cm": "发货数量"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 9,
+  "c": "receive_quantity",
+  "ty": "decimal(19,1)",
+  "cm": "收货数量"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 10,
+  "c": "return_batch_no",
+  "ty": "varchar(64)",
+  "cm": "退货批次号"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 11,
+  "c": "problem_goods_quantity",
+  "ty": "decimal(19,2)",
+  "cm": "问题货物数量"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 12,
+  "c": "freeze_quantity",
+  "ty": "decimal(19,1)",
+  "cm": "冷冻数量"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 13,
+  "c": "refrigerate_quantity",
+  "ty": "decimal(19,1)",
+  "cm": "冷藏数量"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 14,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 15,
+  "c": "driven_type",
+  "ty": "tinyint",
+  "cm": "生成类型 1: 门店订货单; 2: 门店订货单（直采）;"
+ },
+ {
+  "t": "t_pqnc_relate_bill",
+  "p": 16,
+  "c": "supplier_mid",
+  "ty": "varchar(16)",
+  "cm": "供应商编号"
+ }
+]

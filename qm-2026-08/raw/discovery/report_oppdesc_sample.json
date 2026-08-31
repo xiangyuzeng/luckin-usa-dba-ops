@@ -1,0 +1,23 @@
+[
+ {
+  "shopcheck_data_id": 2352,
+  "score": 92,
+  "score_desc": "0",
+  "od": "[{\"deductionType\":2,\"count\":4,\"deductionScore\":-8},{\"deductionType\":4,\"count\":2,\"deductionScore\":0},{\"deductionType\":1,\"count\":1,\"deductionScore\":0}]",
+  "check_approach": 1
+ },
+ {
+  "shopcheck_data_id": 2353,
+  "score": 89,
+  "score_desc": "0",
+  "od": "[{\"deductionType\":2,\"count\":5,\"deductionScore\":-10},{\"deductionType\":4,\"count\":1,\"deductionScore\":-1}]",
+  "check_approach": 1
+ },
+ {
+  "shopcheck_data_id": 2357,
+  "score": 92,
+  "score_desc": "0",
+  "od": "[{\"deductionType\":2,\"count\":3,\"deductionScore\":-6},{\"deductionType\":4,\"count\":2,\"deductionScore\":-2},{\"deductionType\":1,\"count\":1,\"deductionScore\":0}]",
+  "check_approach": 1
+ }
+]

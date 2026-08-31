@@ -1,0 +1,527 @@
+[
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 3,
+  "c": "name",
+  "ty": "varchar(2000)",
+  "cm": "检查分类名称"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 4,
+  "c": "parent_id",
+  "ty": "bigint",
+  "cm": "父类id"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 5,
+  "c": "path",
+  "ty": "varchar(100)",
+  "cm": "根节点到当前节点的路径"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 6,
+  "c": "sort",
+  "ty": "smallint",
+  "cm": "排序"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 7,
+  "c": "status",
+  "ty": "tinyint(1)",
+  "cm": "状态 1有效，0无效"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 8,
+  "c": "check_approach",
+  "ty": "tinyint(1)",
+  "cm": "检查途径"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 9,
+  "c": "brand_no",
+  "ty": "varchar(32)",
+  "cm": "品牌主数据编号"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 10,
+  "c": "cooperation_no",
+  "ty": "varchar(32)",
+  "cm": "运营合作模式主数据编号"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 11,
+  "c": "remark",
+  "ty": "text",
+  "cm": "备注"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 12,
+  "c": "can_create_post_code",
+  "ty": "varchar(500)",
+  "cm": "可新建岗位"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 13,
+  "c": "can_view_post_code",
+  "ty": "varchar(500)",
+  "cm": "可查看岗位"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 14,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 15,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 16,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 17,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 18,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 19,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 20,
+  "c": "modifier_dept_id",
+  "ty": "bigint",
+  "cm": "修改人部门"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 21,
+  "c": "modifier_dept_name",
+  "ty": "varchar(64)",
+  "cm": "修改人部门名称"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 22,
+  "c": "deleted",
+  "ty": "tinyint",
+  "cm": "是否删除 0:未删除(默认),1:删除"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 23,
+  "c": "can_exec_post_code",
+  "ty": "varchar(1000)",
+  "cm": "可执行岗位，该岗位员工可申诉、整改"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 24,
+  "c": "need_appeal",
+  "ty": "tinyint",
+  "cm": "是否需要申诉 0:不需要,1:需要"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 25,
+  "c": "appeal_approve_post_code",
+  "ty": "varchar(1000)",
+  "cm": "申诉审批岗位"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 26,
+  "c": "appeal_limit_time_type",
+  "ty": "tinyint",
+  "cm": "申诉时效类型，0 天， 1 小时"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 27,
+  "c": "appeal_limit_time_data",
+  "ty": "int",
+  "cm": "申诉时效具体数值，配合appealLimitTimeType决定申诉时效多长"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 28,
+  "c": "need_improve",
+  "ty": "tinyint",
+  "cm": "是否需要整改 0:不需要,1:需要"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 29,
+  "c": "improve_approve_post_code",
+  "ty": "varchar(1000)",
+  "cm": "整改审批岗位"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 30,
+  "c": "allow_multiple_data",
+  "ty": "tinyint(1)",
+  "cm": "是否允许当月有多个有效工单 1是，0否"
+ },
+ {
+  "t": "t_shopcheck_category_config",
+  "p": 31,
+  "c": "discard_approve_post_code",
+  "ty": "varchar(500)",
+  "cm": "作废审批岗位"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 3,
+  "c": "large_category_id",
+  "ty": "bigint",
+  "cm": "检查大类id"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 4,
+  "c": "structure",
+  "ty": "mediumtext",
+  "cm": "门店检查配置树状结构json"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 5,
+  "c": "item_config_array",
+  "ty": "mediumtext",
+  "cm": "门店检查配置项json数组"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 6,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 7,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 8,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 9,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 10,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_config_snapshot",
+  "p": 11,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 3,
+  "c": "category_config_id",
+  "ty": "bigint",
+  "cm": "门店检查类配置id"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 4,
+  "c": "sort",
+  "ty": "smallint",
+  "cm": "排序"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 5,
+  "c": "content",
+  "ty": "text",
+  "cm": "检查项内容"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 6,
+  "c": "status",
+  "ty": "tinyint(1)",
+  "cm": "状态 1有效，0无效"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 7,
+  "c": "tag_id",
+  "ty": "bigint",
+  "cm": "标签id"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 8,
+  "c": "deduction_type",
+  "ty": "tinyint",
+  "cm": "扣分类型"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 9,
+  "c": "score_config",
+  "ty": "smallint",
+  "cm": "分数配置"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 10,
+  "c": "score_start",
+  "ty": "smallint",
+  "cm": "起评分"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 11,
+  "c": "check_guidance",
+  "ty": "text",
+  "cm": "检查指导"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 12,
+  "c": "check_guidance_photo",
+  "ty": "text",
+  "cm": "检查指导图片"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 13,
+  "c": "remark",
+  "ty": "text",
+  "cm": "备注"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 14,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 15,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 16,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 17,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 18,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 19,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 20,
+  "c": "modifier_dept_id",
+  "ty": "bigint",
+  "cm": "修改人部门"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 21,
+  "c": "modifier_dept_name",
+  "ty": "varchar(64)",
+  "cm": "修改人部门名称"
+ },
+ {
+  "t": "t_shopcheck_item_config",
+  "p": 22,
+  "c": "deleted",
+  "ty": "tinyint",
+  "cm": "是否删除 0:未删除(默认),1:删除"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 3,
+  "c": "large_category_id",
+  "ty": "bigint",
+  "cm": "检查大类id"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 4,
+  "c": "parent_id",
+  "ty": "bigint",
+  "cm": "标签父类id"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 5,
+  "c": "name",
+  "ty": "varchar(100)",
+  "cm": "标签名称"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 6,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 7,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 8,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 9,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 10,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_tag",
+  "p": 11,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ }
+]

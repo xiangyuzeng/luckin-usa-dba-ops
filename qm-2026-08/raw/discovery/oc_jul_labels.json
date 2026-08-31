@@ -1,0 +1,34 @@
+[
+ {
+  "lb": null,
+  "n": 14518
+ },
+ {
+  "lb": "[{\"id\":\"159\",\"name\":\"Taste\"}]",
+  "n": 153
+ },
+ {
+  "lb": "[{\"id\":\"158\",\"name\":\"Satisfied\"}]",
+  "n": 119
+ },
+ {
+  "lb": "[{\"id\":\"169\",\"name\":\"Other\"}]",
+  "n": 82
+ },
+ {
+  "lb": "[{\"id\":\"167\",\"name\":\"Wrong or missing product\"}]",
+  "n": 74
+ },
+ {
+  "lb": "[{\"id\":\"163\",\"name\":\"Wait time\"}]",
+  "n": 42
+ },
+ {
+  "lb": "[{\"id\":\"161\",\"name\":\"Service\"}]",
+  "n": 14
+ },
+ {
+  "lb": "[{\"id\":\"165\",\"name\":\"Wrong or missing packaging (e.g straws)\"}]",
+  "n": 9
+ }
+]

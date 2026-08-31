@@ -1,0 +1,128 @@
+{
+ "aws-luckyus-opqualitycontrol-rw": [
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_category_config",
+   "n": 1169,
+   "upd": "2026-08-18T09:11:17"
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_config_snapshot",
+   "n": 2718,
+   "upd": "2026-08-18T09:11:17"
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_data",
+   "n": 578,
+   "upd": "2026-08-30T19:10:09"
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_discard",
+   "n": 14,
+   "upd": null
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_improve_report",
+   "n": 823,
+   "upd": "2026-08-30T18:56:36"
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_item_config",
+   "n": 2105,
+   "upd": "2026-08-13T15:20:25"
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_opportunity",
+   "n": 3095,
+   "upd": "2026-08-30T19:10:09"
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_report",
+   "n": 567,
+   "upd": "2026-08-30T19:10:09"
+  },
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_shopcheck_tag",
+   "n": 503,
+   "upd": "2026-08-12T20:10:47"
+  }
+ ],
+ "aws-luckyus-scmsrm-rw": [
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc",
+   "n": 719,
+   "upd": "2026-08-31T14:33:29"
+  },
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc_attachment",
+   "n": 2546,
+   "upd": "2026-08-28T22:59:51"
+  },
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc_history",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc_operate_detail",
+   "n": 1529,
+   "upd": "2026-08-31T14:33:29"
+  },
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc_relate_bill",
+   "n": 689,
+   "upd": "2026-08-28T22:59:51"
+  },
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc_type",
+   "n": 4,
+   "upd": null
+  },
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc_type_history",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_scm_srm",
+   "t": "t_pqnc_type_language",
+   "n": 8,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-scm-wmssimulate-rw": [
+  {
+   "s": "luckyus_scm_wmssimulate",
+   "t": "t_pqnc",
+   "n": 464,
+   "upd": "2026-08-28T19:58:21"
+  },
+  {
+   "s": "luckyus_scm_wmssimulate",
+   "t": "t_pqnc_attachment",
+   "n": 1608,
+   "upd": "2026-08-28T19:58:21"
+  },
+  {
+   "s": "luckyus_scm_wmssimulate",
+   "t": "t_pqnc_relate_bill",
+   "n": 464,
+   "upd": "2026-08-28T19:58:21"
+  }
+ ]
+}

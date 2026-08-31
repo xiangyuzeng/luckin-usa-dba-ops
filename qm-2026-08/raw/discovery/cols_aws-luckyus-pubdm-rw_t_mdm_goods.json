@@ -1,0 +1,359 @@
+[
+ {
+  "t": "t_mdm_goods",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 2,
+  "c": "name",
+  "ty": "varchar(128)",
+  "cm": "货物名称"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 3,
+  "c": "mid",
+  "ty": "varchar(20)",
+  "cm": "主数据编号"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 4,
+  "c": "large_mid",
+  "ty": "varchar(20)",
+  "cm": "货物大类编号"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 5,
+  "c": "small_mid",
+  "ty": "varchar(20)",
+  "cm": "货物小类编号"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 6,
+  "c": "use_unit_mid",
+  "ty": "varchar(20)",
+  "cm": "用料单位编码"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 7,
+  "c": "unified_code",
+  "ty": "varchar(32)",
+  "cm": "唯一编码"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 8,
+  "c": "record_method",
+  "ty": "tinyint",
+  "cm": "库存记录方式:1-盘点为主,2-计算为主"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 9,
+  "c": "stock_type",
+  "ty": "tinyint",
+  "cm": "货物库存类型:1-可售卖库存与总库存相同,2-可售卖库存与总库存不同"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 10,
+  "c": "asset_flag",
+  "ty": "tinyint",
+  "cm": "是否资产 -- 废弃"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 11,
+  "c": "status",
+  "ty": "tinyint",
+  "cm": "状态"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 12,
+  "c": "created_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 13,
+  "c": "modified_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 14,
+  "c": "remark",
+  "ty": "varchar(255)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 15,
+  "c": "info_status",
+  "ty": "smallint",
+  "cm": "完善状态; 1:已完善，0:未完善"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 16,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 17,
+  "c": "product_value_mid",
+  "ty": "varchar(32)",
+  "cm": "产品值编号"
+ },
+ {
+  "t": "t_mdm_goods",
+  "p": 18,
+  "c": "product_value_code",
+  "ty": "varchar(32)",
+  "cm": "产品值编号"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键ID"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 2,
+  "c": "code",
+  "ty": "varchar(20)",
+  "cm": "库存单位编号"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 3,
+  "c": "name",
+  "ty": "varchar(80)",
+  "cm": "名称"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 4,
+  "c": "cell_type",
+  "ty": "tinyint",
+  "cm": "库存单位类型"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 5,
+  "c": "sub_type",
+  "ty": "int",
+  "cm": "库存单位子类型"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 6,
+  "c": "dominate_dept_id",
+  "ty": "bigint",
+  "cm": "库存支配部门id"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 7,
+  "c": "storage_dept_id",
+  "ty": "bigint",
+  "cm": "库存存放部门id"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 8,
+  "c": "storage_address",
+  "ty": "varchar(255)",
+  "cm": "库存存放部门地址"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 9,
+  "c": "storage_locality_mid",
+  "ty": "varchar(20)",
+  "cm": "库存存放部门二级行政区主数据Id"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 10,
+  "c": "principal",
+  "ty": "varchar(50)",
+  "cm": "负责人姓名"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 11,
+  "c": "email",
+  "ty": "varchar(50)",
+  "cm": "邮箱"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 12,
+  "c": "phone",
+  "ty": "varchar(50)",
+  "cm": "联系电话"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 13,
+  "c": "status",
+  "ty": "tinyint",
+  "cm": "状态"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 14,
+  "c": "info_status",
+  "ty": "tinyint",
+  "cm": "信息完善状态"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 15,
+  "c": "relate_dept_id",
+  "ty": "bigint",
+  "cm": "关联门店/仓库部门id"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 16,
+  "c": "location",
+  "ty": "varchar(50)",
+  "cm": "地址坐标"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 17,
+  "c": "qr_code",
+  "ty": "varchar(20)",
+  "cm": "唯一识别码"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 18,
+  "c": "country_mid",
+  "ty": "varchar(20)",
+  "cm": "国家主数据Id"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 19,
+  "c": "locality_mid",
+  "ty": "varchar(20)",
+  "cm": "二级行政区主数据Id"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 20,
+  "c": "organization",
+  "ty": "varchar(40)",
+  "cm": "货权主体组织编号"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 21,
+  "c": "creator_id",
+  "ty": "bigint",
+  "cm": "创建人"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 22,
+  "c": "creator_name",
+  "ty": "varchar(100)",
+  "cm": "新建人名称"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 23,
+  "c": "created_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 24,
+  "c": "modifier_id",
+  "ty": "bigint",
+  "cm": "修改人"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 25,
+  "c": "modifier_name",
+  "ty": "varchar(100)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 26,
+  "c": "modified_time",
+  "ty": "datetime",
+  "cm": "最后修改时间"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 27,
+  "c": "remark",
+  "ty": "varchar(255)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 28,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 29,
+  "c": "approve_flow_no",
+  "ty": "varchar(100)",
+  "cm": "lark审批流程编号"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 30,
+  "c": "approve_instance_no",
+  "ty": "varchar(100)",
+  "cm": "lark关联审批实例编号"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 31,
+  "c": "time_zone",
+  "ty": "varchar(100)",
+  "cm": "时区"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 32,
+  "c": "current_approve_node",
+  "ty": "varchar(500)",
+  "cm": "当前审批节点"
+ },
+ {
+  "t": "t_stock_cell",
+  "p": 33,
+  "c": "virtual_flag",
+  "ty": "tinyint",
+  "cm": "是否虚拟库存单位，1-是，0-否"
+ }
+]

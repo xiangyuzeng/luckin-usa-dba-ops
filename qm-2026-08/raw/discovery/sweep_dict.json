@@ -1,0 +1,208 @@
+{
+ "aws-luckyus-devops-rw": [
+  {
+   "s": "luckyus_izeus",
+   "t": "t_ingestion_dict",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-framework01-rw": [
+  {
+   "s": "luckyus_iluckyenvsystemweb",
+   "t": "t_dict",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-framework02-rw": [
+  {
+   "s": "luckyus_onepiececonsole",
+   "t": "dynamic_dict",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_onepiececonsole",
+   "t": "dynamic_dict_item",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_onepiececonsole",
+   "t": "static_dict",
+   "n": 688,
+   "upd": "2026-08-31T09:43:59"
+  },
+  {
+   "s": "luckyus_onepiececonsole",
+   "t": "static_dict_content",
+   "n": 415,
+   "upd": "2026-08-31T09:43:59"
+  },
+  {
+   "s": "luckyus_onepiececonsole",
+   "t": "static_dict_push_history",
+   "n": 8612,
+   "upd": "2026-08-31T09:44:00"
+  },
+  {
+   "s": "luckyus_onepiececonsole",
+   "t": "static_dict_push_history_content",
+   "n": 8161,
+   "upd": "2026-08-31T09:44:00"
+  }
+ ],
+ "aws-luckyus-iadmin-rw": [
+  {
+   "s": "luckyus_iadmin",
+   "t": "t_i18n_dynamic_dict",
+   "n": 33,
+   "upd": "2026-08-10T08:00:47"
+  }
+ ],
+ "aws-luckyus-ibizconfigcenter-rw": [
+  {
+   "s": "luckyus_ibizconfigcenter",
+   "t": "t_i18n_dynamic_dict",
+   "n": 1090,
+   "upd": "2026-08-27T03:19:52"
+  }
+ ],
+ "aws-luckyus-ijumpserver-jumpserver-rw": [
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "django_celery_beat_periodictask",
+   "n": 20,
+   "upd": "2026-08-31T15:50:21"
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "django_celery_beat_periodictasks",
+   "n": 1,
+   "upd": "2026-08-08T16:00:08"
+  }
+ ],
+ "aws-luckyus-iopenlinker-rw": [
+  {
+   "s": "luckyus_iopenlinker",
+   "t": "t_i18n_dynamic_dict",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-iopshopexpand-rw": [
+  {
+   "s": "luckyus_iopshopexpand",
+   "t": "t_i18n_dynamic_dict",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-iotplatform-rw": [
+  {
+   "s": "luckyus_iot_platform",
+   "t": "t_dict",
+   "n": 375,
+   "upd": null
+  },
+  {
+   "s": "luckyus_iot_platform",
+   "t": "t_iot_dict",
+   "n": 9665,
+   "upd": "2026-08-31T10:50:18"
+  }
+ ],
+ "aws-luckyus-ireplenishment-rw": [
+  {
+   "s": "luckyus_ireplenishment",
+   "t": "t_order_predict_alg_v2",
+   "n": 301255,
+   "upd": "2026-08-31T09:50:17"
+  },
+  {
+   "s": "luckyus_ireplenishment",
+   "t": "t_premix_material_predict_alg",
+   "n": 27113,
+   "upd": "2026-08-31T09:10:02"
+  },
+  {
+   "s": "luckyus_ireplenishment",
+   "t": "unfreeze_predict_alg",
+   "n": 31842,
+   "upd": "2026-08-31T08:05:02"
+  },
+  {
+   "s": "luckyus_ireplenishment",
+   "t": "warehouse_predict_alg_characteristics",
+   "n": 19958468,
+   "upd": "2026-08-31T08:20:18"
+  }
+ ],
+ "aws-luckyus-iunifiedreconcile-rw": [
+  {
+   "s": "luckyus_iunifiedreconcile",
+   "t": "t_i18n_dynamic_dict",
+   "n": 94,
+   "upd": "2026-08-19T02:58:21"
+  }
+ ],
+ "aws-luckyus-ldas-rw": [
+  {
+   "s": "luckyus_ikafadmin",
+   "t": "t_sys_dictionary",
+   "n": 9,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ikafadmin",
+   "t": "t_sys_dictionary_detail",
+   "n": 68,
+   "upd": "2026-08-17T06:09:28"
+  },
+  {
+   "s": "luckyus_ldas_cmdb",
+   "t": "t_cmdb_conf_dict",
+   "n": 2,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-mfranchise-rw": [
+  {
+   "s": "luckyus_mfranchise",
+   "t": "t_i18n_dynamic_dict",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-opempefficiency-rw": [
+  {
+   "s": "luckyus_opempefficiency",
+   "t": "t_i18n_dynamic_dict",
+   "n": 101,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-opshop-rw": [
+  {
+   "s": "luckyus_opshop",
+   "t": "t_i18n_dynamic_dict",
+   "n": 445,
+   "upd": "2026-08-03T03:01:52"
+  }
+ ],
+ "aws-luckyus-salesmarketing-rw": [
+  {
+   "s": "luckyus_sales_marketing",
+   "t": "t_mdm_dict",
+   "n": 288,
+   "upd": "2026-08-10T15:18:52"
+  },
+  {
+   "s": "luckyus_sales_marketing",
+   "t": "t_mdm_dict_language",
+   "n": 520,
+   "upd": "2026-08-10T15:18:52"
+  }
+ ]
+}

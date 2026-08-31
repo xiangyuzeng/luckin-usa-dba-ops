@@ -1,0 +1,92 @@
+{
+ "aws-luckyus-icyberdata-rw": [
+  {
+   "s": "luckyus_icyberdata",
+   "t": "model_canvas_comment",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_icyberdata",
+   "t": "model_canvas_comment_relation",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-ijumpserver-jumpserver-rw": [
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "acls_commandfilteracl_reviewers",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "acls_connectmethodacl_reviewers",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "acls_datamaskingrule_reviewers",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "acls_loginacl_reviewers",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "acls_loginassetacl_reviewers",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_ijumpserver_jumpserver",
+   "t": "tickets_comment",
+   "n": 0,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-ldas01-rw": [
+  {
+   "s": "luckyus_ldas_slowquery",
+   "t": "global_query_review",
+   "n": 26338,
+   "upd": "2026-08-31T15:07:59"
+  },
+  {
+   "s": "luckyus_ldas_slowquery",
+   "t": "global_query_review_history",
+   "n": 7899276,
+   "upd": "2026-08-31T15:08:00"
+  }
+ ],
+ "aws-luckyus-opqualitycontrol-rw": [
+  {
+   "s": "luckyus_opqualitycontrol",
+   "t": "t_cs_comment_tag_config",
+   "n": 19,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-opshop-rw": [
+  {
+   "s": "luckyus_opshop",
+   "t": "t_order_reviews",
+   "n": 60,
+   "upd": null
+  }
+ ],
+ "aws-luckyus-salesorder-rw": [
+  {
+   "s": "luckyus_sales_order",
+   "t": "t_order_comment",
+   "n": 147660,
+   "upd": "2026-08-31T04:44:00"
+  }
+ ]
+}

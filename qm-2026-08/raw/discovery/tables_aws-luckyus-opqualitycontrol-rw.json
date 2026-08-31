@@ -1,0 +1,284 @@
+[
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cash_check_form",
+  "n": 6802,
+  "upd": "2026-08-31T15:00:06"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cash_deposit_form",
+  "n": 420,
+  "upd": "2026-08-31T15:38:29"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_biz_type_config",
+  "n": 482,
+  "upd": "2026-07-14T03:32:37"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_comment_tag_config",
+  "n": 19,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_communication_records",
+  "n": 38,
+  "upd": "2026-07-10T06:17:49"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_feedback_source_config",
+  "n": 11,
+  "upd": "2026-07-10T06:26:42"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_relate_data",
+  "n": 968,
+  "upd": "2026-08-28T21:26:01"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_related_sheet",
+  "n": 24,
+  "upd": "2026-07-10T06:17:28"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_sheet",
+  "n": 2367,
+  "upd": "2026-08-31T14:40:10"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_sheet_handing_result",
+  "n": 33,
+  "upd": "2026-07-10T06:18:12"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_cs_sheet_resp_determination",
+  "n": 2347,
+  "upd": "2026-08-28T21:25:24"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_device_warn",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_device_warn_config",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_duty_push_messages",
+  "n": 1217,
+  "upd": "2026-08-31T15:41:33"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_duty_remind_rule",
+  "n": 5,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_duty_task_navigate_item",
+  "n": 12,
+  "upd": "2026-07-30T02:44:52"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_duty_task_navigate_sub_item",
+  "n": 89,
+  "upd": "2026-08-04T06:48:00"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_duty_task_navigate_sub_item_relate_shop",
+  "n": 10,
+  "upd": "2026-08-04T06:46:34"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_duty_task_sheet",
+  "n": 175118,
+  "upd": "2026-08-31T15:41:33"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_expiry_print_log",
+  "n": 385251,
+  "upd": "2026-08-31T15:43:05"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_goods_abandon_task_form",
+  "n": 14935,
+  "upd": "2026-08-31T06:00:05"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_goods_expiry_config",
+  "n": 3080,
+  "upd": "2026-08-28T10:26:24"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shop_task",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shop_task_emp",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shop_task_model",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shop_training_task_form",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_category_config",
+  "n": 1169,
+  "upd": "2026-08-18T09:11:17"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_config_snapshot",
+  "n": 2718,
+  "upd": "2026-08-18T09:11:17"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_data",
+  "n": 578,
+  "upd": "2026-08-30T19:10:09"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_discard",
+  "n": 14,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_improve_report",
+  "n": 823,
+  "upd": "2026-08-30T18:56:36"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_item_config",
+  "n": 2105,
+  "upd": "2026-08-13T15:20:25"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_opportunity",
+  "n": 3095,
+  "upd": "2026-08-30T19:10:09"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_report",
+  "n": 567,
+  "upd": "2026-08-30T19:10:09"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_shopcheck_tag",
+  "n": 503,
+  "upd": "2026-08-12T20:10:47"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_simple_task_form",
+  "n": 315361,
+  "upd": "2026-08-31T15:22:48"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_snapshot",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_category_item",
+  "n": 4,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_category_sub_item",
+  "n": 8,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_coffee_machine_form",
+  "n": 0,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_remind_type",
+  "n": 11,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_reminder",
+  "n": 12,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_template",
+  "n": 39,
+  "upd": "2026-07-30T10:01:47"
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_template_coffee_machine_ext",
+  "n": 4,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_template_goods_abandon_ext",
+  "n": 2,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_task_template_simple_ext",
+  "n": 98,
+  "upd": null
+ },
+ {
+  "s": "luckyus_opqualitycontrol",
+  "t": "t_work_flow_instance",
+  "n": 454,
+  "upd": "2026-08-30T19:10:09"
+ }
+]

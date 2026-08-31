@@ -1,0 +1,402 @@
+[
+ {
+  "stock_cell_code": "SU00000010",
+  "stock_cell_name": "8th & Broadway",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 1127,
+  "storage_dept_id": 1127,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000011",
+  "stock_cell_name": "28th & 6th",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 1128,
+  "storage_dept_id": 1128,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000012",
+  "stock_cell_name": "纽约综合仓库",
+  "cell_type": 1,
+  "sub_type": 101,
+  "status": 1,
+  "relate_dept_id": 1120,
+  "storage_dept_id": 1120,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000013",
+  "stock_cell_name": "纽约原料仓库",
+  "cell_type": 1,
+  "sub_type": 101,
+  "status": 1,
+  "relate_dept_id": 1119,
+  "storage_dept_id": 1119,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000014",
+  "stock_cell_name": "NJ Test Kitchen",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 1131,
+  "storage_dept_id": 1131,
+  "locality_mid": "CI0972"
+ },
+ {
+  "stock_cell_code": "SU00000016",
+  "stock_cell_name": "新泽西设备仓库",
+  "cell_type": 1,
+  "sub_type": 101,
+  "status": 1,
+  "relate_dept_id": 1139,
+  "storage_dept_id": 1139,
+  "locality_mid": "CI0973"
+ },
+ {
+  "stock_cell_code": "SU00000017",
+  "stock_cell_name": "100 Maiden Ln",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 1140,
+  "storage_dept_id": 1140,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000018",
+  "stock_cell_name": "54th & 8th",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 1141,
+  "storage_dept_id": 1141,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000519",
+  "stock_cell_name": "NJ Test Kitchen 2",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20007,
+  "storage_dept_id": 20007,
+  "locality_mid": "CI0972"
+ },
+ {
+  "stock_cell_code": "SU00000520",
+  "stock_cell_name": "33rd & 10th",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20008,
+  "storage_dept_id": 20008,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000521",
+  "stock_cell_name": "108th & Broadway",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20009,
+  "storage_dept_id": 20009,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000522",
+  "stock_cell_name": "102 Fulton",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20010,
+  "storage_dept_id": 20010,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000523",
+  "stock_cell_name": "37th & Broadway",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20011,
+  "storage_dept_id": 20011,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000525",
+  "stock_cell_name": "48th & 3rd",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20015,
+  "storage_dept_id": 20015,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000526",
+  "stock_cell_name": "154 Bleecker",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20016,
+  "storage_dept_id": 20016,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000527",
+  "stock_cell_name": "180 Varick",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20017,
+  "storage_dept_id": 20017,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000530",
+  "stock_cell_name": "NJ Engineer Workshop",
+  "cell_type": 3,
+  "sub_type": 301,
+  "status": 1,
+  "relate_dept_id": null,
+  "storage_dept_id": 1135,
+  "locality_mid": "CI0972"
+ },
+ {
+  "stock_cell_code": "SU00000531",
+  "stock_cell_name": "16th & 6th",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20019,
+  "storage_dept_id": 20019,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000532",
+  "stock_cell_name": "Grand Central Terminal",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20020,
+  "storage_dept_id": 20020,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000533",
+  "stock_cell_name": "25 Park Row",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20021,
+  "storage_dept_id": 20021,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000534",
+  "stock_cell_name": "41st & Lexington",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20022,
+  "storage_dept_id": 20022,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000537",
+  "stock_cell_name": "NJ R&D Lab",
+  "cell_type": 3,
+  "sub_type": 302,
+  "status": 1,
+  "relate_dept_id": null,
+  "storage_dept_id": 1110,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000538",
+  "stock_cell_name": "Reade & Broadway",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20023,
+  "storage_dept_id": 20023,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000539",
+  "stock_cell_name": "63rd & 3rd",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20024,
+  "storage_dept_id": 20024,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000540",
+  "stock_cell_name": "40th & 10th",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20025,
+  "storage_dept_id": 20025,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000541",
+  "stock_cell_name": "29th & 3rd",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20026,
+  "storage_dept_id": 20026,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000542",
+  "stock_cell_name": "21st & 3rd",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20027,
+  "storage_dept_id": 20027,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000543",
+  "stock_cell_name": "128 W 32nd St",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20028,
+  "storage_dept_id": 20028,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000544",
+  "stock_cell_name": "23rd & 8th",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20029,
+  "storage_dept_id": 20029,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000545",
+  "stock_cell_name": "23rd & 1st",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20030,
+  "storage_dept_id": 20030,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000546",
+  "stock_cell_name": "15th & 3rd",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20031,
+  "storage_dept_id": 20031,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000547",
+  "stock_cell_name": "221 Grand",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20032,
+  "storage_dept_id": 20032,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000549",
+  "stock_cell_name": "211 Schermerhorn",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20034,
+  "storage_dept_id": 20034,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000550",
+  "stock_cell_name": "52nd & Madison",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20035,
+  "storage_dept_id": 20035,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000551",
+  "stock_cell_name": "35th & 5th",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20036,
+  "storage_dept_id": 20036,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000552",
+  "stock_cell_name": "Shanghai Test Kitchen",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20046,
+  "storage_dept_id": 20046,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000557",
+  "stock_cell_name": "Jackson Ave - LIC",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20054,
+  "storage_dept_id": 20054,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000558",
+  "stock_cell_name": "148 Chambers",
+  "cell_type": 2,
+  "sub_type": 200,
+  "status": 1,
+  "relate_dept_id": 20055,
+  "storage_dept_id": 20055,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000566",
+  "stock_cell_name": "Marketing Virtual SKU",
+  "cell_type": 3,
+  "sub_type": 302,
+  "status": 1,
+  "relate_dept_id": null,
+  "storage_dept_id": 1111,
+  "locality_mid": "CI0971"
+ },
+ {
+  "stock_cell_code": "SU00000573",
+  "stock_cell_name": "Growth Inventory Unit",
+  "cell_type": 3,
+  "sub_type": 302,
+  "status": 1,
+  "relate_dept_id": null,
+  "storage_dept_id": 20108,
+  "locality_mid": "CI0971"
+ }
+]

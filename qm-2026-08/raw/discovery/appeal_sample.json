@@ -1,0 +1,20 @@
+[
+ {
+  "opp_id": 10889,
+  "shopcheck_data_id": 2350,
+  "status": 1,
+  "fa": "{\"describe\":\"IQA2_Test 第一次提交申诉\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mseavin3_e25042d9c373_aws_2.jpg\",\"operator\":{\"empName\":\"IQA2Test_ LiLi\",\"empNo\":\"A2202504150001\",\"empPost\":\"IQA200000001,IQA200000002\",\"deptId\":1084,\"operateTime\":\"2026-08-04T06:51:50.933\"},\"approveResult\":{\"approve\":0,\"remark\":\"IQA2_Test 第一次申诉不通过\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/mseawb2g_4cd4f848127e_aws_2.jpg\",\"operator\":{\"empName\":\"IQA2Test_ LiLi\",\"empNo\":\"A2202504150001\",\"empPost\":\"IQA200000001,IQA200000002\",\"deptId\":1084,\"operateTime\":\"2026-08-04T06:52:27.766\"}}}"
+ },
+ {
+  "opp_id": 10964,
+  "shopcheck_data_id": 2365,
+  "status": 1,
+  "fa": "{\"describe\":\"IQA2_Test 第一次提交申诉\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msmuk5t8_165f3528d1e0_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msmukme3_2ad1b1a395e8_aws_2.mp4\",\"operator\":{\"empName\":\"IQA2Test_ LiLi\",\"empNo\":\"A2202504150001\",\"empPost\":\"IQA200000001,IQA200000002\",\"deptId\":1084,\"operateTime\":\"2026-08-10T06:25:55.814\"},\"approveResult\":{\"approve\":0,\"remark\":\"IQA2_Test第一次申诉不通过\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msmvofzp_b421b16443e6_aws_2.jpg,https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msmvoxt5_60e36c4d1194_aws_2.mp4\",\"operator\":{\"empName\":\"IQA2Test_ LiLi\",\"empNo\":\"A2202504150001\",\"empPost\":\"IQA200000001,IQA200000002\",\"deptId\":1084,\"operateTime\":\"2026-08-10T06:56:53.415\"}}}"
+ },
+ {
+  "opp_id": 11202,
+  "shopcheck_data_id": 2408,
+  "status": 1,
+  "fa": "{\"describe\":\"IQA2_Test\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msyg2ipy_4c05188c829f_aws_2.jpg\",\"operator\":{\"empName\":\"IQATest_ Lin Li Ping\",\"empNo\":\"A1202406130001\",\"empPost\":\"IQA200020003\",\"deptId\":1084,\"operateTime\":\"2026-08-18T09:12:38.797\"},\"approveResult\":{\"approve\":0,\"remark\":\"IQA2_Test 申诉不通过\",\"attachment\":\"https://ilucky-fe-outside-aws-prod.luckincdn.us/iadmin/msyg575b_0b50f31893a5_aws_2.jpg\",\"operator\":{\"empName\":\"IQA2Test_ LiLi\",\"empNo\":\"A2202504150001\",\"empPost\":\"IQA200000001,IQA200000002\",\"deptId\":1084,\"operateTime\":\"2026-08-18T09:14:44.765\"}}}"
+ }
+]

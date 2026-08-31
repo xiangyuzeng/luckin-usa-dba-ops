@@ -1,0 +1,562 @@
+[
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 1,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 2,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 3,
+  "c": "code",
+  "ty": "varchar(200)",
+  "cm": "配置项编码"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 4,
+  "c": "name",
+  "ty": "varchar(500)",
+  "cm": "配置项名称"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 5,
+  "c": "parent_code",
+  "ty": "varchar(500)",
+  "cm": "父类编码"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 6,
+  "c": "path",
+  "ty": "varchar(2000)",
+  "cm": "根节点到当前节点的路径"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 7,
+  "c": "sort",
+  "ty": "bigint",
+  "cm": "序号"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 8,
+  "c": "tag_code",
+  "ty": "varchar(500)",
+  "cm": "标签编码"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 9,
+  "c": "level",
+  "ty": "smallint",
+  "cm": "级别 0:顶级, 1:一级, 2:二级, 3:三级"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 10,
+  "c": "deleted",
+  "ty": "tinyint",
+  "cm": "0正常，1删除"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 11,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "新建人id"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 12,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "新建人名称"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 13,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "新建时间"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 14,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人id"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 15,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 16,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 17,
+  "c": "modifier_dept_id",
+  "ty": "bigint",
+  "cm": "修改人部门id"
+ },
+ {
+  "t": "t_cs_biz_type_config",
+  "p": 18,
+  "c": "enabled",
+  "ty": "tinyint",
+  "cm": "是否有效：0无效，1有效"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 1,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 2,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 3,
+  "c": "type",
+  "ty": "tinyint",
+  "cm": "1咖啡券，2退款单"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 4,
+  "c": "sheet_id",
+  "ty": "bigint unsigned",
+  "cm": "客服工单id"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 5,
+  "c": "relate_id",
+  "ty": "varchar(256)",
+  "cm": "关联id，例如券id，退款单id"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 6,
+  "c": "data",
+  "ty": "text",
+  "cm": "关联数据"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 7,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "新建人id"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 8,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "新建人名称"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 9,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "新建时间"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 10,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人id"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 11,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_cs_relate_data",
+  "p": 12,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 1,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 2,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 3,
+  "c": "sheet_no",
+  "ty": "varchar(20)",
+  "cm": "工单号，命名规则CS年月日+6位"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 4,
+  "c": "create_source",
+  "ty": "tinyint",
+  "cm": "新建来源，1手动，2自动"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 5,
+  "c": "feedback_source",
+  "ty": "varchar(64)",
+  "cm": "反馈来源code"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 6,
+  "c": "comment_id",
+  "ty": "bigint",
+  "cm": "评价id"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 7,
+  "c": "comment_type",
+  "ty": "tinyint",
+  "cm": "评价类型，1满意-有评价，2满意-无评价，3不满意"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 8,
+  "c": "comment_tag_id",
+  "ty": "bigint",
+  "cm": "评价标签id，来自运营系统的配置"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 9,
+  "c": "comment_tag_name",
+  "ty": "varchar(200)",
+  "cm": "评价标签名称，来自运营系统的配置"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 10,
+  "c": "status",
+  "ty": "tinyint",
+  "cm": "工单状态，10待处理，20处理中，30已完结"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 11,
+  "c": "feedback_uname",
+  "ty": "varchar(200)",
+  "cm": "反馈人姓名"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 12,
+  "c": "feedback_detail",
+  "ty": "text",
+  "cm": "反馈详情"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 13,
+  "c": "feedback_detail_url",
+  "ty": "text",
+  "cm": "反馈附件"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 14,
+  "c": "relate_order_category",
+  "ty": "tinyint",
+  "cm": "0不关联订单，1关联实体商品订单，2关联虚拟商品订单"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 15,
+  "c": "order_id",
+  "ty": "bigint",
+  "cm": "关联订单id"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 16,
+  "c": "user_no",
+  "ty": "varchar(64)",
+  "cm": "关联会员编号"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 17,
+  "c": "dept_id",
+  "ty": "bigint",
+  "cm": "所属门店id"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 18,
+  "c": "locality_mid",
+  "ty": "varchar(32)",
+  "cm": "城市mid"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 19,
+  "c": "l1_biz_type",
+  "ty": "varchar(512)",
+  "cm": "一级业务类型，多个,号分隔"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 20,
+  "c": "l2_biz_type",
+  "ty": "varchar(512)",
+  "cm": "二级业务类型，多个,号分隔"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 21,
+  "c": "l3_biz_type",
+  "ty": "varchar(512)",
+  "cm": "三级业务类型，多个,号分隔"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 22,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "新建人id"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 23,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "新建人名称"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 24,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "新建时间"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 25,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人id"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 26,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 27,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 28,
+  "c": "comment",
+  "ty": "varchar(1000)",
+  "cm": "评价内容"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 29,
+  "c": "ext",
+  "ty": "json",
+  "cm": "扩展属性"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 30,
+  "c": "has_compensated",
+  "ty": "tinyint",
+  "cm": "是否赔付"
+ },
+ {
+  "t": "t_cs_sheet",
+  "p": 31,
+  "c": "next_flow_time",
+  "ty": "datetime",
+  "cm": "下次跟进时间"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 1,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 2,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 3,
+  "c": "sheet_id",
+  "ty": "bigint unsigned",
+  "cm": "客服工单id"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 4,
+  "c": "l1_biz_type",
+  "ty": "varchar(64)",
+  "cm": "一级业务类型"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 5,
+  "c": "l2_biz_type",
+  "ty": "varchar(64)",
+  "cm": "二级业务类型"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 6,
+  "c": "l3_biz_type",
+  "ty": "varchar(64)",
+  "cm": "三级业务类型"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 7,
+  "c": "related_commodity",
+  "ty": "text",
+  "cm": "涉及的商品编号（以逗号隔开）"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 8,
+  "c": "remark",
+  "ty": "varchar(2000)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 9,
+  "c": "remark_url",
+  "ty": "text",
+  "cm": "备注附件"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 10,
+  "c": "resp_dept",
+  "ty": "varchar(200)",
+  "cm": "责任部门"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 11,
+  "c": "deleted",
+  "ty": "tinyint",
+  "cm": "0正常，1删除"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 12,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "新建人id"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 13,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "新建人名称"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 14,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "新建时间"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 15,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人id"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 16,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 17,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 18,
+  "c": "related_order_id",
+  "ty": "bigint",
+  "cm": "涉及的订单编号"
+ },
+ {
+  "t": "t_cs_sheet_resp_determination",
+  "p": 19,
+  "c": "related_sheet_id",
+  "ty": "bigint",
+  "cm": "关联工单id（同步来源工单）"
+ }
+]

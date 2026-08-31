@@ -1,0 +1,639 @@
+[
+ {
+  "t": "t_shopcheck_data",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 3,
+  "c": "dept_id",
+  "ty": "bigint",
+  "cm": "门店id"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 4,
+  "c": "large_category_id",
+  "ty": "bigint",
+  "cm": "检查大类id"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 5,
+  "c": "large_category_name",
+  "ty": "varchar(2000)",
+  "cm": "t_shopcheck_category_config,检查大类名称"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 6,
+  "c": "check_date",
+  "ty": "date",
+  "cm": "检查日期"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 7,
+  "c": "can_view_post_code",
+  "ty": "varchar(500)",
+  "cm": "可查看岗位"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 8,
+  "c": "check_time_start",
+  "ty": "datetime",
+  "cm": "检查时间开始"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 9,
+  "c": "check_time_end",
+  "ty": "datetime",
+  "cm": "检查时间结束"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 10,
+  "c": "check_duration",
+  "ty": "bigint",
+  "cm": "检查时长（秒）"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 11,
+  "c": "status",
+  "ty": "tinyint(1)",
+  "cm": "状态是否已提交 1是，0否"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 12,
+  "c": "config_snapshot_id",
+  "ty": "bigint",
+  "cm": "门店检查配置结构快照id"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 13,
+  "c": "checker_id",
+  "ty": "bigint",
+  "cm": "检查人ID"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 14,
+  "c": "checker_name",
+  "ty": "varchar(64)",
+  "cm": "检查人名称"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 15,
+  "c": "deleted",
+  "ty": "tinyint",
+  "cm": "工单是否删除 0:未删除(默认),1:删除"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 16,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 17,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 18,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 19,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 20,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 21,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 22,
+  "c": "process_status",
+  "ty": "tinyint",
+  "cm": "流程状态 10已完成 20已生成 30申诉中 40整改中"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 23,
+  "c": "node_id",
+  "ty": "varchar(100)",
+  "cm": "流程状态当前节点Id"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 24,
+  "c": "can_exec_post_code",
+  "ty": "varchar(1000)",
+  "cm": "可执行岗位，该岗位员工可申诉、整改"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 25,
+  "c": "appeal_approve_post_code",
+  "ty": "varchar(1000)",
+  "cm": "申诉审批岗位"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 26,
+  "c": "improve_approve_post_code",
+  "ty": "varchar(1000)",
+  "cm": "整改审批岗位"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 27,
+  "c": "temp_data",
+  "ty": "text",
+  "cm": "暂存数据"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 28,
+  "c": "assignees",
+  "ty": "text",
+  "cm": "流程当前节点执行候选人"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 29,
+  "c": "new_flag",
+  "ty": "tinyint(1)",
+  "cm": "是否为新数据 1是，0否，2在途"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 30,
+  "c": "discard_approve_post_code",
+  "ty": "varchar(500)",
+  "cm": "作废审批岗位"
+ },
+ {
+  "t": "t_shopcheck_data",
+  "p": 31,
+  "c": "operation_area",
+  "ty": "varchar(40)",
+  "cm": "运营管理区域部门编码"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 3,
+  "c": "shopcheck_data_id",
+  "ty": "bigint",
+  "cm": "t_shopcheck_data,检查数据id"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 4,
+  "c": "approve",
+  "ty": "tinyint(1)",
+  "cm": "审批状态：是否通过 1是，0否，无值表示未审批"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 5,
+  "c": "pre_node_id",
+  "ty": "varchar(100)",
+  "cm": "发起作废的原节点Id"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 6,
+  "c": "reason",
+  "ty": "varchar(1000)",
+  "cm": "作废原因"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 7,
+  "c": "applicant_post_code",
+  "ty": "varchar(100)",
+  "cm": "申请人岗位编码"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 8,
+  "c": "remark",
+  "ty": "varchar(2000)",
+  "cm": "作废审批意见"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 9,
+  "c": "approve_time",
+  "ty": "datetime",
+  "cm": "审批时间"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 10,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 11,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 12,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 13,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 14,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_discard",
+  "p": 15,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 3,
+  "c": "shopcheck_data_id",
+  "ty": "bigint",
+  "cm": "检查数据id"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 4,
+  "c": "check_item_id",
+  "ty": "bigint",
+  "cm": "检查项id"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 5,
+  "c": "remark",
+  "ty": "varchar(500)",
+  "cm": "机会点备注"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 6,
+  "c": "photo",
+  "ty": "text",
+  "cm": "机会点图片"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 7,
+  "c": "deleted",
+  "ty": "tinyint",
+  "cm": "工单是否删除 0:未删除(默认),1:删除"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 8,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 9,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 10,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 11,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 12,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 13,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 14,
+  "c": "first_appeal_detail",
+  "ty": "text",
+  "cm": "第一次申诉详情，JSON格式"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 15,
+  "c": "second_appeal_detail",
+  "ty": "text",
+  "cm": "第二次申诉详情，JSON格式"
+ },
+ {
+  "t": "t_shopcheck_opportunity",
+  "p": 16,
+  "c": "status",
+  "ty": "tinyint",
+  "cm": "机会点状态：1有效 0无效"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "主键id"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 2,
+  "c": "tenant",
+  "ty": "varchar(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 3,
+  "c": "dept_id",
+  "ty": "bigint",
+  "cm": "门店id"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 4,
+  "c": "locality_mid",
+  "ty": "varchar(32)",
+  "cm": "二级行政区主数据Id"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 5,
+  "c": "brand_no",
+  "ty": "varchar(32)",
+  "cm": "品牌主数据编号"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 6,
+  "c": "cooperation_no",
+  "ty": "varchar(32)",
+  "cm": "运营合作模式主数据编号：直营，联营"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 7,
+  "c": "shop_level",
+  "ty": "varchar(32)",
+  "cm": "门店级别"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 8,
+  "c": "shopcheck_data_id",
+  "ty": "bigint",
+  "cm": "t_shopcheck_data,检查数据id"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 9,
+  "c": "large_category_id",
+  "ty": "bigint",
+  "cm": "t_shopcheck_category_config,检查大类id"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 10,
+  "c": "large_category_name",
+  "ty": "varchar(2000)",
+  "cm": "t_shopcheck_category_config,检查大类名称"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 11,
+  "c": "second_category_id",
+  "ty": "bigint",
+  "cm": "t_shopcheck_category_config,检查二级分类id(检查项目)"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 12,
+  "c": "second_category_name",
+  "ty": "varchar(2000)",
+  "cm": "t_shopcheck_category_config,检查二级分类名称(检查项目)"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 13,
+  "c": "can_view_post_code",
+  "ty": "varchar(500)",
+  "cm": "可查看岗位"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 14,
+  "c": "check_approach",
+  "ty": "tinyint(1)",
+  "cm": "检查途径"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 15,
+  "c": "checker_id",
+  "ty": "bigint",
+  "cm": "检查人ID"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 16,
+  "c": "checker_name",
+  "ty": "varchar(64)",
+  "cm": "检查人名称"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 17,
+  "c": "checker_post_code",
+  "ty": "varchar(100)",
+  "cm": "检查人岗位编码"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 18,
+  "c": "check_date",
+  "ty": "date",
+  "cm": "检查日期"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 19,
+  "c": "score",
+  "ty": "smallint",
+  "cm": "得分"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 20,
+  "c": "score_desc",
+  "ty": "varchar(10)",
+  "cm": "得分描述"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 21,
+  "c": "opportunities",
+  "ty": "varchar(1000)",
+  "cm": "机会点多个逗号分割"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 22,
+  "c": "opportunity_desc",
+  "ty": "varchar(2000)",
+  "cm": "机会点描述"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 23,
+  "c": "create_by",
+  "ty": "bigint",
+  "cm": "创建人ID"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 24,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建人名称"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 25,
+  "c": "create_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 26,
+  "c": "modify_by",
+  "ty": "bigint",
+  "cm": "修改人ID"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 27,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 28,
+  "c": "modify_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_shopcheck_report",
+  "p": 29,
+  "c": "status",
+  "ty": "tinyint",
+  "cm": "报告状态"
+ }
+]

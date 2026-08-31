@@ -1,0 +1,408 @@
+[
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 2,
+  "c": "draft_code",
+  "ty": "varchar(20)",
+  "cm": "草稿编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 3,
+  "c": "name",
+  "ty": "varchar(128)",
+  "cm": "货物规格名称"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 4,
+  "c": "mdm_created_in_advance",
+  "ty": "tinyint",
+  "cm": "是否提前创建主数据：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 5,
+  "c": "mid",
+  "ty": "varchar(20)",
+  "cm": "主数据编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 6,
+  "c": "draft_goods_code",
+  "ty": "varchar(20)",
+  "cm": "货物草稿编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 7,
+  "c": "goods_mid",
+  "ty": "varchar(20)",
+  "cm": "货物编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 8,
+  "c": "brand_mid",
+  "ty": "varchar(20)",
+  "cm": "品牌编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 9,
+  "c": "spec_type",
+  "ty": "smallint",
+  "cm": "货物规格类型 1:标品,2:非标品,3:定制\""
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 10,
+  "c": "material_flag",
+  "ty": "smallint",
+  "cm": "是否物资 1:是,0:否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 11,
+  "c": "dly_unit_mid",
+  "ty": "varchar(20)",
+  "cm": "配货单位编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 12,
+  "c": "pur_unit_mid",
+  "ty": "varchar(20)",
+  "cm": "采购单位编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 13,
+  "c": "wh_check_unit_mid",
+  "ty": "varchar(20)",
+  "cm": "仓库盘点单位"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 14,
+  "c": "shop_check_unit_mid",
+  "ty": "varchar(20)",
+  "cm": "门店盘点单位"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 15,
+  "c": "dly_use_ratio",
+  "ty": "decimal(19,2)",
+  "cm": "配货/用料 比例"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 16,
+  "c": "cg_dly_ratio",
+  "ty": "decimal(19,2)",
+  "cm": "采购/配货 比例"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 17,
+  "c": "wh_check_use_ratio",
+  "ty": "decimal(19,2)",
+  "cm": "仓库盘点/用料 比例"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 18,
+  "c": "shop_check_use_ratio",
+  "ty": "decimal(19,2)",
+  "cm": "门店盘点/用料 比例"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 19,
+  "c": "unified_code",
+  "ty": "varchar(32)",
+  "cm": "唯一编码"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 20,
+  "c": "expiration_date",
+  "ty": "int",
+  "cm": "保质期，单位天"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 21,
+  "c": "warehouse_acceptance_period",
+  "ty": "int",
+  "cm": "仓库允收期，单位天"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 22,
+  "c": "shop_acceptance_period",
+  "ty": "int",
+  "cm": "门店允收期，单位天"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 23,
+  "c": "storage_type",
+  "ty": "tinyint",
+  "cm": "存储类型:1-常温,2-冷冻,3-冷藏"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 24,
+  "c": "minimum_temperature",
+  "ty": "int",
+  "cm": "最低保存温度，单位℃"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 25,
+  "c": "maximum_temperature",
+  "ty": "int",
+  "cm": "最高保存温度，单位℃"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 26,
+  "c": "purchase_unloading_party",
+  "ty": "tinyint",
+  "cm": "采购入库卸货方:1-供应商,2-瑞幸"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 27,
+  "c": "order_entry_shop_flag",
+  "ty": "tinyint",
+  "cm": "订货入口,门店是否可定：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 28,
+  "c": "order_entry_construction_flag",
+  "ty": "tinyint",
+  "cm": "订货入口,营建是否可定：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 29,
+  "c": "split_flag",
+  "ty": "tinyint",
+  "cm": "是否拆零：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 30,
+  "c": "large_flag",
+  "ty": "tinyint",
+  "cm": "是否大件：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 31,
+  "c": "financial_service_flag",
+  "ty": "tinyint",
+  "cm": "是否金融业务：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 32,
+  "c": "reparation_price",
+  "ty": "decimal(16,4)",
+  "cm": "赔偿单价，单位元"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 33,
+  "c": "branch_no_flag",
+  "ty": "tinyint",
+  "cm": "是否应有批次号：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 34,
+  "c": "inspection_report_flag",
+  "ty": "tinyint",
+  "cm": "是否应有检验报告：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 35,
+  "c": "certificate_flag",
+  "ty": "tinyint",
+  "cm": "是否需要合格证：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 36,
+  "c": "bar_code_flag",
+  "ty": "tinyint",
+  "cm": "是否需要条形码：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 37,
+  "c": "prod_or_elec_equipment_flag",
+  "ty": "tinyint",
+  "cm": "是否生产设备或电子设备：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 38,
+  "c": "raw_material_flag",
+  "ty": "tinyint",
+  "cm": "是否原物料：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 39,
+  "c": "construction_flag",
+  "ty": "tinyint",
+  "cm": "是否属于营建类：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 40,
+  "c": "import_flag",
+  "ty": "tinyint",
+  "cm": "是否进口：1-是,0-否"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 41,
+  "c": "period_after_opening",
+  "ty": "int",
+  "cm": "开封保质期"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 42,
+  "c": "period_after_opening_unit",
+  "ty": "tinyint",
+  "cm": "开封保质期单位：1-小时，2-天"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 43,
+  "c": "approve_instance_no",
+  "ty": "varchar(100)",
+  "cm": "审批实例编号"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 44,
+  "c": "approve_flow_no",
+  "ty": "varchar(50)",
+  "cm": "审批流程编码"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 45,
+  "c": "draft_status",
+  "ty": "tinyint",
+  "cm": "状态 1-已新建,2-已补全,3-已提交审批,4-审批通过，5-审批驳回,6-已关联主数据"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 46,
+  "c": "creator_id",
+  "ty": "bigint",
+  "cm": "创建人id"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 47,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建者名称"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 48,
+  "c": "created_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 49,
+  "c": "modifier_id",
+  "ty": "bigint",
+  "cm": "修改人id"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 50,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 51,
+  "c": "modified_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 52,
+  "c": "remark",
+  "ty": "varchar(255)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 53,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 54,
+  "c": "freezer_space",
+  "ty": "decimal(19,6)",
+  "cm": "冷冻空间"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 55,
+  "c": "refrigerator_space",
+  "ty": "decimal(19,6)",
+  "cm": "冷藏空间"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 56,
+  "c": "current_approve_node",
+  "ty": "varchar(500)",
+  "cm": "当前审批节点"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 57,
+  "c": "quality_config_status",
+  "ty": "tinyint",
+  "cm": "质量配置状态，见ConfigStatusEnum"
+ },
+ {
+  "t": "t_mdm_goods_spec_draft",
+  "p": 58,
+  "c": "expiration_date_config_status",
+  "ty": "tinyint",
+  "cm": "效期配置状态，见ConfigStatusEnum"
+ }
+]

@@ -1,0 +1,604 @@
+[
+ {
+  "t": "t_enterprise",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 2,
+  "c": "enterprise_code",
+  "ty": "varchar(20)",
+  "cm": "企业编码"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 3,
+  "c": "enterprise_name",
+  "ty": "varchar(255)",
+  "cm": "企业名称"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 4,
+  "c": "social_credit_code",
+  "ty": "varchar(255)",
+  "cm": "统一社会信用代码"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 5,
+  "c": "type",
+  "ty": "smallint",
+  "cm": "企业性质"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 6,
+  "c": "status",
+  "ty": "smallint",
+  "cm": "状态"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 7,
+  "c": "legal_representative",
+  "ty": "varchar(128)",
+  "cm": "法人代表"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 8,
+  "c": "registered_capital",
+  "ty": "varchar(128)",
+  "cm": "注册资本"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 9,
+  "c": "establish_date",
+  "ty": "varchar(128)",
+  "cm": "成立日期"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 10,
+  "c": "license_validity",
+  "ty": "varchar(20)",
+  "cm": "营业执照有效期"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 11,
+  "c": "license_validity_long_term_flag",
+  "ty": "smallint",
+  "cm": "营业执照是否长期有效"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 12,
+  "c": "license_address",
+  "ty": "varchar(255)",
+  "cm": "执照详细地址"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 13,
+  "c": "registered_address",
+  "ty": "varchar(255)",
+  "cm": "注册地址"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 14,
+  "c": "address",
+  "ty": "varchar(255)",
+  "cm": "公司所在详细地址"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 15,
+  "c": "delivery_address",
+  "ty": "varchar(255)",
+  "cm": "发货详细地址"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 16,
+  "c": "refund_address",
+  "ty": "varchar(255)",
+  "cm": "退货收货详细地址"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 17,
+  "c": "business_scope",
+  "ty": "varchar(255)",
+  "cm": "经营范围"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 18,
+  "c": "annual_turnover",
+  "ty": "varchar(32)",
+  "cm": "年营业额"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 19,
+  "c": "contact_phone",
+  "ty": "varchar(32)",
+  "cm": "企业联系电话"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 20,
+  "c": "profile",
+  "ty": "varchar(255)",
+  "cm": "企业简介"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 21,
+  "c": "advantage",
+  "ty": "varchar(255)",
+  "cm": "行业竞对/行业资源/代理商家价格优势"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 22,
+  "c": "country_mid",
+  "ty": "varchar(20)",
+  "cm": "公司所在国家"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 23,
+  "c": "province_mid",
+  "ty": "varchar(20)",
+  "cm": "公司所在省份"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 24,
+  "c": "locality_mid",
+  "ty": "varchar(20)",
+  "cm": "城市mid"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 25,
+  "c": "submitter_id",
+  "ty": "bigint",
+  "cm": "提交人id"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 26,
+  "c": "submitter_name",
+  "ty": "varchar(64)",
+  "cm": "提交名称"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 27,
+  "c": "submit_time",
+  "ty": "datetime",
+  "cm": "提交时间"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 28,
+  "c": "first_auditor_id",
+  "ty": "bigint",
+  "cm": "一审审核人id"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 29,
+  "c": "first_auditor_name",
+  "ty": "varchar(64)",
+  "cm": "一审审核人名称"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 30,
+  "c": "first_audit_time",
+  "ty": "datetime",
+  "cm": "一审审核时间"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 31,
+  "c": "second_auditor_id",
+  "ty": "bigint",
+  "cm": "二审审核人id"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 32,
+  "c": "second_auditor_name",
+  "ty": "varchar(64)",
+  "cm": "二审审核人名称"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 33,
+  "c": "second_audit_time",
+  "ty": "datetime",
+  "cm": "二审审核时间"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 34,
+  "c": "creator_id",
+  "ty": "bigint",
+  "cm": "创建人id"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 35,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建者名称"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 36,
+  "c": "created_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 37,
+  "c": "modifier_id",
+  "ty": "bigint",
+  "cm": "修改人id"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 38,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 39,
+  "c": "modified_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 40,
+  "c": "remark",
+  "ty": "varchar(255)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 41,
+  "c": "reject_remark",
+  "ty": "varchar(255)",
+  "cm": "审核驳回原因"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 42,
+  "c": "sup_class",
+  "ty": "varchar(100)",
+  "cm": "供应商类型"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 43,
+  "c": "nc_type",
+  "ty": "smallint",
+  "cm": "供应商nc类型"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 44,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_enterprise",
+  "p": 45,
+  "c": "delete_flag",
+  "ty": "tinyint",
+  "cm": "是否删除：0-否，1-是"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 2,
+  "c": "mid",
+  "ty": "varchar(20)",
+  "cm": "供应商主数据编号"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 3,
+  "c": "name",
+  "ty": "varchar(255)",
+  "cm": "供应商名称"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 4,
+  "c": "sup_class",
+  "ty": "varchar(100)",
+  "cm": "供应商类型"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 5,
+  "c": "sup_nature",
+  "ty": "smallint",
+  "cm": "供应商形式 公司：1，个人：2，默认选择公司"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 6,
+  "c": "social_credit_code",
+  "ty": "varchar(64)",
+  "cm": "统一社会信用编号"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 7,
+  "c": "status",
+  "ty": "tinyint",
+  "cm": "状态 1:有效,0:无效"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 8,
+  "c": "nc_code",
+  "ty": "smallint",
+  "cm": "NC编号"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 9,
+  "c": "nc_type",
+  "ty": "smallint",
+  "cm": "供应商nc类型"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 10,
+  "c": "business_source_mid",
+  "ty": "varchar(255)",
+  "cm": "主数据业务来源编号 SF01,SF02"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 11,
+  "c": "info_status",
+  "ty": "tinyint",
+  "cm": "信息完善状态 0:未完善 1:已完善"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 12,
+  "c": "country_mid",
+  "ty": "varchar(20)",
+  "cm": "国家mid"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 13,
+  "c": "province_mid",
+  "ty": "varchar(20)",
+  "cm": "省份mid"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 14,
+  "c": "locality_mid",
+  "ty": "varchar(20)",
+  "cm": "城市mid"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 15,
+  "c": "address",
+  "ty": "varchar(255)",
+  "cm": "地址"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 16,
+  "c": "delivery_address",
+  "ty": "varchar(255)",
+  "cm": "发货地址"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 17,
+  "c": "refund_address",
+  "ty": "varchar(255)",
+  "cm": "退货地址"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 18,
+  "c": "creator_id",
+  "ty": "bigint",
+  "cm": "创建人id"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 19,
+  "c": "creator_name",
+  "ty": "varchar(64)",
+  "cm": "创建者名称"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 20,
+  "c": "created_time",
+  "ty": "datetime",
+  "cm": "创建时间"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 21,
+  "c": "modifier_id",
+  "ty": "bigint",
+  "cm": "修改人id"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 22,
+  "c": "modifier_name",
+  "ty": "varchar(64)",
+  "cm": "修改人名称"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 23,
+  "c": "modified_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 24,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 25,
+  "c": "approve_instance_no",
+  "ty": "varchar(100)",
+  "cm": "审批实例编号"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 26,
+  "c": "approve_flow_no",
+  "ty": "varchar(100)",
+  "cm": "审批流程编号"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 27,
+  "c": "remark",
+  "ty": "varchar(255)",
+  "cm": "备注"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 28,
+  "c": "version",
+  "ty": "int",
+  "cm": "版本号"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 29,
+  "c": "language_key",
+  "ty": "varchar(32)",
+  "cm": "多语言key"
+ },
+ {
+  "t": "t_mdm_supplier",
+  "p": 30,
+  "c": "current_approve_node",
+  "ty": "varchar(500)",
+  "cm": "当前审批节点"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 1,
+  "c": "id",
+  "ty": "bigint unsigned",
+  "cm": "自增主键"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 2,
+  "c": "supplier_id",
+  "ty": "bigint",
+  "cm": "供应商id"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 3,
+  "c": "qualification_name",
+  "ty": "varchar(255)",
+  "cm": "资质名称"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 4,
+  "c": "attachment_url",
+  "ty": "varchar(255)",
+  "cm": "资质附件url"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 5,
+  "c": "attachment_name",
+  "ty": "varchar(255)",
+  "cm": "资质附件名称"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 6,
+  "c": "validity_long_term_flag",
+  "ty": "smallint",
+  "cm": "是否长期有效"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 7,
+  "c": "validity_start",
+  "ty": "datetime",
+  "cm": "有效期（开始）"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 8,
+  "c": "validity_end",
+  "ty": "datetime",
+  "cm": "有效期（结束）"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 9,
+  "c": "status",
+  "ty": "smallint",
+  "cm": "状态"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 10,
+  "c": "modified_time",
+  "ty": "datetime",
+  "cm": "修改时间"
+ },
+ {
+  "t": "t_supplier_qualification",
+  "p": 11,
+  "c": "tenant",
+  "ty": "char(4)",
+  "cm": "租户"
+ }
+]

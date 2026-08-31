@@ -1,0 +1,3192 @@
+[
+ {
+  "id": 390,
+  "supplier_id": 592,
+  "qualification_name": "iSI Information ",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T02:24:10"
+ },
+ {
+  "id": 391,
+  "supplier_id": 592,
+  "qualification_name": "iSi Formation Document",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T02:24:10"
+ },
+ {
+  "id": 392,
+  "supplier_id": 592,
+  "qualification_name": "Submission Confirmation of New York State Biennial Statement",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T02:24:10"
+ },
+ {
+  "id": 393,
+  "supplier_id": 592,
+  "qualification_name": "Banking Info for Collections",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T02:24:10"
+ },
+ {
+  "id": 406,
+  "supplier_id": 615,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T05:19:56"
+ },
+ {
+  "id": 407,
+  "supplier_id": 615,
+  "qualification_name": "法人身份证",
+  "validity_long_term_flag": 0,
+  "validity_start": "2006-08-15T00:00:00",
+  "validity_end": "2026-08-15T00:00:00",
+  "status": null,
+  "modified_time": "2025-04-22T05:19:56"
+ },
+ {
+  "id": 408,
+  "supplier_id": 615,
+  "qualification_name": "开户许可",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T05:19:56"
+ },
+ {
+  "id": 409,
+  "supplier_id": 615,
+  "qualification_name": "质量体系认证",
+  "validity_long_term_flag": 0,
+  "validity_start": "2025-01-28T00:00:00",
+  "validity_end": "2028-01-20T00:00:00",
+  "status": null,
+  "modified_time": "2025-04-22T05:19:56"
+ },
+ {
+  "id": 410,
+  "supplier_id": 602,
+  "qualification_name": "登记证明",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T05:21:52"
+ },
+ {
+  "id": 411,
+  "supplier_id": 602,
+  "qualification_name": "开户许可证",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T05:21:52"
+ },
+ {
+  "id": 413,
+  "supplier_id": 600,
+  "qualification_name": "FDA",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T08:36:56"
+ },
+ {
+  "id": 414,
+  "supplier_id": 600,
+  "qualification_name": "银行信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T08:36:56"
+ },
+ {
+  "id": 415,
+  "supplier_id": 600,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-22T08:36:56"
+ },
+ {
+  "id": 416,
+  "supplier_id": 590,
+  "qualification_name": "银行信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-23T07:58:38"
+ },
+ {
+  "id": 417,
+  "supplier_id": 590,
+  "qualification_name": "FDA",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-23T07:58:38"
+ },
+ {
+  "id": 418,
+  "supplier_id": 590,
+  "qualification_name": "企业资质",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-23T07:58:38"
+ },
+ {
+  "id": 419,
+  "supplier_id": 601,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-24T09:22:24"
+ },
+ {
+  "id": 420,
+  "supplier_id": 581,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-24T09:39:35"
+ },
+ {
+  "id": 421,
+  "supplier_id": 577,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-24T09:43:46"
+ },
+ {
+  "id": 422,
+  "supplier_id": 583,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-24T10:09:26"
+ },
+ {
+  "id": 423,
+  "supplier_id": 579,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-24T11:02:26"
+ },
+ {
+  "id": 424,
+  "supplier_id": 617,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-24T11:21:41"
+ },
+ {
+  "id": 427,
+  "supplier_id": 594,
+  "qualification_name": "税务登记证",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-25T06:06:11"
+ },
+ {
+  "id": 428,
+  "supplier_id": 594,
+  "qualification_name": "开户许可证",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-25T06:06:11"
+ },
+ {
+  "id": 429,
+  "supplier_id": 594,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-25T06:06:11"
+ },
+ {
+  "id": 430,
+  "supplier_id": 594,
+  "qualification_name": "销售许可",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-25T06:06:11"
+ },
+ {
+  "id": 431,
+  "supplier_id": 575,
+  "qualification_name": "税号",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-25T09:51:16"
+ },
+ {
+  "id": 433,
+  "supplier_id": 598,
+  "qualification_name": "公司财务信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-27T02:08:49"
+ },
+ {
+  "id": 434,
+  "supplier_id": 598,
+  "qualification_name": "税务登记证明",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-27T02:08:49"
+ },
+ {
+  "id": 435,
+  "supplier_id": 586,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-29T02:58:26"
+ },
+ {
+  "id": 436,
+  "supplier_id": 586,
+  "qualification_name": "其他-账号信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-29T02:58:26"
+ },
+ {
+  "id": 439,
+  "supplier_id": 588,
+  "qualification_name": "W-9 form",
+  "validity_long_term_flag": 0,
+  "validity_start": "2023-03-28T00:00:00",
+  "validity_end": "2029-04-07T00:00:00",
+  "status": null,
+  "modified_time": "2025-04-30T03:37:26"
+ },
+ {
+  "id": 440,
+  "supplier_id": 588,
+  "qualification_name": "银行信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-30T03:37:26"
+ },
+ {
+  "id": 441,
+  "supplier_id": 588,
+  "qualification_name": "FDA承诺函",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-30T03:37:26"
+ },
+ {
+  "id": 442,
+  "supplier_id": 608,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 0,
+  "validity_start": "2021-08-25T00:00:00",
+  "validity_end": "2099-01-01T00:00:00",
+  "status": null,
+  "modified_time": "2025-04-30T06:31:01"
+ },
+ {
+  "id": 443,
+  "supplier_id": 619,
+  "qualification_name": "W-9 form",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-30T06:57:58"
+ },
+ {
+  "id": 444,
+  "supplier_id": 619,
+  "qualification_name": "FDA承诺函",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-30T06:57:58"
+ },
+ {
+  "id": 445,
+  "supplier_id": 619,
+  "qualification_name": "银行信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-04-30T06:57:58"
+ },
+ {
+  "id": 449,
+  "supplier_id": 621,
+  "qualification_name": "FDA",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-12T05:10:45"
+ },
+ {
+  "id": 450,
+  "supplier_id": 621,
+  "qualification_name": "账户",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-12T05:10:45"
+ },
+ {
+  "id": 451,
+  "supplier_id": 622,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-12T12:00:53"
+ },
+ {
+  "id": 452,
+  "supplier_id": 622,
+  "qualification_name": "Bank info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-12T12:00:53"
+ },
+ {
+  "id": 457,
+  "supplier_id": 624,
+  "qualification_name": "FDA认证",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-13T14:49:08"
+ },
+ {
+  "id": 458,
+  "supplier_id": 624,
+  "qualification_name": "银行信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-13T14:49:08"
+ },
+ {
+  "id": 459,
+  "supplier_id": 624,
+  "qualification_name": "W-9 form",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-13T14:49:08"
+ },
+ {
+  "id": 460,
+  "supplier_id": 625,
+  "qualification_name": "0000000",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-22T03:59:08"
+ },
+ {
+  "id": 464,
+  "supplier_id": 629,
+  "qualification_name": "房东银行资讯",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-30T15:45:42"
+ },
+ {
+  "id": 473,
+  "supplier_id": 637,
+  "qualification_name": "公司银行资料",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-05-30T17:56:18"
+ },
+ {
+  "id": 482,
+  "supplier_id": 632,
+  "qualification_name": "公司资讯",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-03T15:06:08"
+ },
+ {
+  "id": 483,
+  "supplier_id": 631,
+  "qualification_name": "房东银行资讯",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-03T15:07:09"
+ },
+ {
+  "id": 484,
+  "supplier_id": 628,
+  "qualification_name": "银行资讯",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-03T15:07:51"
+ },
+ {
+  "id": 485,
+  "supplier_id": 630,
+  "qualification_name": "房东银行资讯",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-03T15:10:16"
+ },
+ {
+  "id": 486,
+  "supplier_id": 639,
+  "qualification_name": "公司汇款资料",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-03T20:18:08"
+ },
+ {
+  "id": 487,
+  "supplier_id": 638,
+  "qualification_name": "公司资料",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-03T20:19:31"
+ },
+ {
+  "id": 489,
+  "supplier_id": 642,
+  "qualification_name": "银行汇款讯息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-04T18:58:16"
+ },
+ {
+  "id": 493,
+  "supplier_id": 644,
+  "qualification_name": "PSEG 页面",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-04T19:20:05"
+ },
+ {
+  "id": 496,
+  "supplier_id": 645,
+  "qualification_name": "公司账户",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-08T14:39:08"
+ },
+ {
+  "id": 497,
+  "supplier_id": 641,
+  "qualification_name": "房东汇款资讯",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-08T14:40:00"
+ },
+ {
+  "id": 498,
+  "supplier_id": 647,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-10T00:04:45"
+ },
+ {
+  "id": 499,
+  "supplier_id": 648,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-10T02:36:18"
+ },
+ {
+  "id": 500,
+  "supplier_id": 648,
+  "qualification_name": "银行资讯",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-10T02:36:18"
+ },
+ {
+  "id": 501,
+  "supplier_id": 649,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-11T14:24:48"
+ },
+ {
+  "id": 502,
+  "supplier_id": 650,
+  "qualification_name": "Lease",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-12T03:19:19"
+ },
+ {
+  "id": 507,
+  "supplier_id": 652,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-14T16:06:44"
+ },
+ {
+  "id": 508,
+  "supplier_id": 652,
+  "qualification_name": "ach ",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-14T16:06:44"
+ },
+ {
+  "id": 509,
+  "supplier_id": 623,
+  "qualification_name": "自采供应商",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-16T10:18:34"
+ },
+ {
+  "id": 510,
+  "supplier_id": 654,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-19T18:05:06"
+ },
+ {
+  "id": 511,
+  "supplier_id": 657,
+  "qualification_name": "W8ben-Gowith CA Inc",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-23T15:36:23"
+ },
+ {
+  "id": 514,
+  "supplier_id": 656,
+  "qualification_name": "Secretary of State Certificate of Status",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-24T06:21:58"
+ },
+ {
+  "id": 516,
+  "supplier_id": 659,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-24T20:00:44"
+ },
+ {
+  "id": 517,
+  "supplier_id": 653,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-25T17:30:19"
+ },
+ {
+  "id": 518,
+  "supplier_id": 658,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-25T20:19:25"
+ },
+ {
+  "id": 520,
+  "supplier_id": 663,
+  "qualification_name": "8-k",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-27T14:30:47"
+ },
+ {
+  "id": 524,
+  "supplier_id": 664,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-06-29T19:07:06"
+ },
+ {
+  "id": 527,
+  "supplier_id": 668,
+  "qualification_name": "Jz Construction Group Inc",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T14:42:45"
+ },
+ {
+  "id": 528,
+  "supplier_id": 667,
+  "qualification_name": "JK HVAC INC",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T14:43:11"
+ },
+ {
+  "id": 529,
+  "supplier_id": 634,
+  "qualification_name": "Entity",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T16:18:14"
+ },
+ {
+  "id": 530,
+  "supplier_id": 634,
+  "qualification_name": "Construction license",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T16:18:14"
+ },
+ {
+  "id": 531,
+  "supplier_id": 633,
+  "qualification_name": "公司资料",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T17:34:42"
+ },
+ {
+  "id": 532,
+  "supplier_id": 640,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T17:35:39"
+ },
+ {
+  "id": 533,
+  "supplier_id": 640,
+  "qualification_name": "EIN",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T17:35:39"
+ },
+ {
+  "id": 534,
+  "supplier_id": 636,
+  "qualification_name": "房东银行资料",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T17:36:26"
+ },
+ {
+  "id": 535,
+  "supplier_id": 635,
+  "qualification_name": "公司资料",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T17:37:26"
+ },
+ {
+  "id": 536,
+  "supplier_id": 669,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-07T20:44:19"
+ },
+ {
+  "id": 538,
+  "supplier_id": 666,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-09T10:03:01"
+ },
+ {
+  "id": 539,
+  "supplier_id": 672,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-16T20:31:53"
+ },
+ {
+  "id": 548,
+  "supplier_id": 673,
+  "qualification_name": "Bank information",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-31T15:35:14"
+ },
+ {
+  "id": 549,
+  "supplier_id": 673,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-31T15:35:14"
+ },
+ {
+  "id": 552,
+  "supplier_id": 674,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-07-31T18:48:35"
+ },
+ {
+  "id": 557,
+  "supplier_id": 676,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-06T04:15:54"
+ },
+ {
+  "id": 558,
+  "supplier_id": 671,
+  "qualification_name": "fw8ben",
+  "validity_long_term_flag": 1,
+  "validity_start": "2011-09-15T00:00:00",
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-06T07:47:10"
+ },
+ {
+  "id": 561,
+  "supplier_id": 677,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-08T01:39:17"
+ },
+ {
+  "id": 562,
+  "supplier_id": 677,
+  "qualification_name": "Bank Info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-08T01:39:17"
+ },
+ {
+  "id": 573,
+  "supplier_id": 678,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-15T04:48:07"
+ },
+ {
+  "id": 575,
+  "supplier_id": 679,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-18T15:26:56"
+ },
+ {
+  "id": 577,
+  "supplier_id": 681,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-21T20:10:30"
+ },
+ {
+  "id": 578,
+  "supplier_id": 613,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-25T19:33:11"
+ },
+ {
+  "id": 579,
+  "supplier_id": 682,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-26T20:14:41"
+ },
+ {
+  "id": 581,
+  "supplier_id": 684,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-28T20:22:36"
+ },
+ {
+  "id": 582,
+  "supplier_id": 685,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-08-28T21:50:34"
+ },
+ {
+  "id": 586,
+  "supplier_id": 680,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-02T15:20:57"
+ },
+ {
+  "id": 588,
+  "supplier_id": 670,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 0,
+  "validity_start": "2010-04-27T00:00:00",
+  "validity_end": "2030-04-26T00:00:00",
+  "status": null,
+  "modified_time": "2025-09-09T04:04:10"
+ },
+ {
+  "id": 589,
+  "supplier_id": 670,
+  "qualification_name": "W-8BEN-E",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-09T04:04:10"
+ },
+ {
+  "id": 594,
+  "supplier_id": 689,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-09T20:55:21"
+ },
+ {
+  "id": 596,
+  "supplier_id": 690,
+  "qualification_name": "New Jersey Division of Taxation",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-11T02:16:47"
+ },
+ {
+  "id": 597,
+  "supplier_id": 691,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-12T20:27:42"
+ },
+ {
+  "id": 598,
+  "supplier_id": 692,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-15T15:29:34"
+ },
+ {
+  "id": 599,
+  "supplier_id": 646,
+  "qualification_name": "verizon",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-15T15:34:53"
+ },
+ {
+  "id": 600,
+  "supplier_id": 651,
+  "qualification_name": "Con Edison",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-15T15:35:19"
+ },
+ {
+  "id": 603,
+  "supplier_id": 693,
+  "qualification_name": "New Jersey Division of Taxation",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-16T03:13:11"
+ },
+ {
+  "id": 605,
+  "supplier_id": 695,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-16T07:53:04"
+ },
+ {
+  "id": 607,
+  "supplier_id": 688,
+  "qualification_name": "Microsoft is a public trading company, don’t need a w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-16T17:01:51"
+ },
+ {
+  "id": 609,
+  "supplier_id": 697,
+  "qualification_name": "New York-Department of Taxation and Finance",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-17T09:29:59"
+ },
+ {
+  "id": 610,
+  "supplier_id": 698,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-17T20:38:41"
+ },
+ {
+  "id": 613,
+  "supplier_id": 696,
+  "qualification_name": "公司注册证明",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-19T02:57:24"
+ },
+ {
+  "id": 615,
+  "supplier_id": 701,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-23T15:25:12"
+ },
+ {
+  "id": 616,
+  "supplier_id": 701,
+  "qualification_name": "bank info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-23T15:25:12"
+ },
+ {
+  "id": 617,
+  "supplier_id": 702,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-23T15:39:49"
+ },
+ {
+  "id": 618,
+  "supplier_id": 702,
+  "qualification_name": "Buchanan Wire Instructions_Security",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-23T15:39:49"
+ },
+ {
+  "id": 619,
+  "supplier_id": 702,
+  "qualification_name": "Buchanan Wire Instructions_Operating",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-23T15:39:49"
+ },
+ {
+  "id": 620,
+  "supplier_id": 683,
+  "qualification_name": "Day Pitney",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-23T17:29:44"
+ },
+ {
+  "id": 625,
+  "supplier_id": 703,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-24T16:47:26"
+ },
+ {
+  "id": 626,
+  "supplier_id": 705,
+  "qualification_name": "W9 - Brause Realty Inc.",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-26T15:40:28"
+ },
+ {
+  "id": 627,
+  "supplier_id": 705,
+  "qualification_name": "W9 - Vanderbilt Associates I LLC",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-09-26T15:40:28"
+ },
+ {
+  "id": 635,
+  "supplier_id": 706,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-01T19:47:14"
+ },
+ {
+  "id": 636,
+  "supplier_id": 707,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-01T20:25:45"
+ },
+ {
+  "id": 637,
+  "supplier_id": 708,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": "2025-10-01T00:00:00",
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-02T18:34:15"
+ },
+ {
+  "id": 638,
+  "supplier_id": 709,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-07T15:08:35"
+ },
+ {
+  "id": 639,
+  "supplier_id": 709,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-07T15:08:35"
+ },
+ {
+  "id": 640,
+  "supplier_id": 710,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-09T00:00:36"
+ },
+ {
+  "id": 643,
+  "supplier_id": 712,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-11T14:58:53"
+ },
+ {
+  "id": 644,
+  "supplier_id": 712,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-11T14:58:53"
+ },
+ {
+  "id": 645,
+  "supplier_id": 699,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-14T17:28:13"
+ },
+ {
+  "id": 646,
+  "supplier_id": 714,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-14T18:45:28"
+ },
+ {
+  "id": 647,
+  "supplier_id": 714,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-14T18:45:28"
+ },
+ {
+  "id": 648,
+  "supplier_id": 591,
+  "qualification_name": "Banking information",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-15T08:01:09"
+ },
+ {
+  "id": 649,
+  "supplier_id": 591,
+  "qualification_name": "Request for Taxpayer Identification Number and Certification",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-15T08:01:09"
+ },
+ {
+  "id": 650,
+  "supplier_id": 591,
+  "qualification_name": "Statement of Commitment",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-15T08:01:09"
+ },
+ {
+  "id": 653,
+  "supplier_id": 609,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-16T03:48:49"
+ },
+ {
+  "id": 658,
+  "supplier_id": 704,
+  "qualification_name": "官方回执",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-16T12:24:39"
+ },
+ {
+  "id": 659,
+  "supplier_id": 704,
+  "qualification_name": "账户信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-16T12:24:39"
+ },
+ {
+  "id": 660,
+  "supplier_id": 704,
+  "qualification_name": "W9 form-1",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-16T12:24:39"
+ },
+ {
+  "id": 661,
+  "supplier_id": 704,
+  "qualification_name": "W9 form-2",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-16T12:24:39"
+ },
+ {
+  "id": 662,
+  "supplier_id": 716,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-16T16:21:13"
+ },
+ {
+  "id": 663,
+  "supplier_id": 716,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-16T16:21:13"
+ },
+ {
+  "id": 667,
+  "supplier_id": 718,
+  "qualification_name": "W9 form",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-17T02:52:10"
+ },
+ {
+  "id": 668,
+  "supplier_id": 719,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-17T04:24:15"
+ },
+ {
+  "id": 669,
+  "supplier_id": 720,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-17T04:34:37"
+ },
+ {
+  "id": 674,
+  "supplier_id": 721,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-17T10:47:43"
+ },
+ {
+  "id": 676,
+  "supplier_id": 711,
+  "qualification_name": "Blockiot, LLC",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-20T06:38:46"
+ },
+ {
+  "id": 677,
+  "supplier_id": 711,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-20T06:38:46"
+ },
+ {
+  "id": 688,
+  "supplier_id": 700,
+  "qualification_name": "EIN Information",
+  "validity_long_term_flag": 0,
+  "validity_start": "2025-09-23T00:00:00",
+  "validity_end": "2035-09-23T00:00:00",
+  "status": null,
+  "modified_time": "2025-10-23T08:12:15"
+ },
+ {
+  "id": 689,
+  "supplier_id": 700,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-23T08:12:15"
+ },
+ {
+  "id": 690,
+  "supplier_id": 717,
+  "qualification_name": "W9 form",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-23T12:42:53"
+ },
+ {
+  "id": 691,
+  "supplier_id": 717,
+  "qualification_name": "EL",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-23T12:42:53"
+ },
+ {
+  "id": 692,
+  "supplier_id": 715,
+  "qualification_name": "31110000769903508A",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-28T08:06:57"
+ },
+ {
+  "id": 693,
+  "supplier_id": 715,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-28T08:06:57"
+ },
+ {
+  "id": 694,
+  "supplier_id": 715,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-28T08:06:57"
+ },
+ {
+  "id": 697,
+  "supplier_id": 687,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-30T07:13:35"
+ },
+ {
+  "id": 698,
+  "supplier_id": 687,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-30T07:13:35"
+ },
+ {
+  "id": 699,
+  "supplier_id": 723,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-30T08:03:30"
+ },
+ {
+  "id": 700,
+  "supplier_id": 723,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-30T08:03:30"
+ },
+ {
+  "id": 704,
+  "supplier_id": 686,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-30T16:20:55"
+ },
+ {
+  "id": 705,
+  "supplier_id": 725,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-30T21:54:50"
+ },
+ {
+  "id": 707,
+  "supplier_id": 713,
+  "qualification_name": "BUSINESS REGISTRATION CERTIFICATE",
+  "validity_long_term_flag": 0,
+  "validity_start": "2025-04-01T00:00:00",
+  "validity_end": "2026-03-31T00:00:00",
+  "status": null,
+  "modified_time": "2025-10-31T11:26:46"
+ },
+ {
+  "id": 708,
+  "supplier_id": 713,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": "2025-10-28T00:00:00",
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-10-31T11:26:46"
+ },
+ {
+  "id": 709,
+  "supplier_id": 727,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": "2025-01-06T00:00:00",
+  "validity_end": "2028-01-05T00:00:00",
+  "status": null,
+  "modified_time": "2025-11-04T09:11:03"
+ },
+ {
+  "id": 711,
+  "supplier_id": 728,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-12T02:31:44"
+ },
+ {
+  "id": 712,
+  "supplier_id": 722,
+  "qualification_name": "W9 ",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-12T06:23:07"
+ },
+ {
+  "id": 713,
+  "supplier_id": 729,
+  "qualification_name": "W-8BEN",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-12T07:01:39"
+ },
+ {
+  "id": 714,
+  "supplier_id": 730,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-12T22:55:43"
+ },
+ {
+  "id": 715,
+  "supplier_id": 731,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-13T20:14:35"
+ },
+ {
+  "id": 716,
+  "supplier_id": 731,
+  "qualification_name": "bank information",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-13T20:14:35"
+ },
+ {
+  "id": 719,
+  "supplier_id": 732,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-14T14:21:03"
+ },
+ {
+  "id": 720,
+  "supplier_id": 732,
+  "qualification_name": "bank information",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-14T14:21:03"
+ },
+ {
+  "id": 721,
+  "supplier_id": 573,
+  "qualification_name": "美国注册证书",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-19T02:03:18"
+ },
+ {
+  "id": 723,
+  "supplier_id": 735,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-20T17:40:27"
+ },
+ {
+  "id": 724,
+  "supplier_id": 735,
+  "qualification_name": "wire info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-20T17:40:27"
+ },
+ {
+  "id": 725,
+  "supplier_id": 734,
+  "qualification_name": "W-8BEN-E",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-21T01:27:44"
+ },
+ {
+  "id": 727,
+  "supplier_id": 665,
+  "qualification_name": "商業登記",
+  "validity_long_term_flag": 0,
+  "validity_start": "2024-11-26T00:00:00",
+  "validity_end": "2025-11-25T00:00:00",
+  "status": null,
+  "modified_time": "2025-11-26T08:09:30"
+ },
+ {
+  "id": 728,
+  "supplier_id": 665,
+  "qualification_name": "W8表格",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-11-26T08:09:30"
+ },
+ {
+  "id": 729,
+  "supplier_id": 736,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-02T15:48:21"
+ },
+ {
+  "id": 730,
+  "supplier_id": 737,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-02T18:04:08"
+ },
+ {
+  "id": 731,
+  "supplier_id": 737,
+  "qualification_name": "Wire information",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-02T18:04:08"
+ },
+ {
+  "id": 732,
+  "supplier_id": 738,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-04T19:08:18"
+ },
+ {
+  "id": 733,
+  "supplier_id": 738,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-04T19:08:18"
+ },
+ {
+  "id": 734,
+  "supplier_id": 739,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-04T22:25:59"
+ },
+ {
+  "id": 736,
+  "supplier_id": 741,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-08T21:00:29"
+ },
+ {
+  "id": 741,
+  "supplier_id": 740,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-10T03:51:31"
+ },
+ {
+  "id": 742,
+  "supplier_id": 742,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-10T06:42:22"
+ },
+ {
+  "id": 743,
+  "supplier_id": 743,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-10T16:09:19"
+ },
+ {
+  "id": 744,
+  "supplier_id": 743,
+  "qualification_name": "wire information",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-10T16:09:19"
+ },
+ {
+  "id": 745,
+  "supplier_id": 584,
+  "qualification_name": "STATE OF DELAWARE CERTIFICATE OF INCORPORATION",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-11T04:11:38"
+ },
+ {
+  "id": 746,
+  "supplier_id": 745,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-15T18:28:45"
+ },
+ {
+  "id": 748,
+  "supplier_id": 747,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-16T23:16:10"
+ },
+ {
+  "id": 749,
+  "supplier_id": 749,
+  "qualification_name": "Form W-9 ",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-17T10:06:25"
+ },
+ {
+  "id": 754,
+  "supplier_id": 750,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-19T16:31:07"
+ },
+ {
+  "id": 755,
+  "supplier_id": 750,
+  "qualification_name": "Wire information",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-19T16:31:07"
+ },
+ {
+  "id": 756,
+  "supplier_id": 751,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-21T03:33:53"
+ },
+ {
+  "id": 761,
+  "supplier_id": 744,
+  "qualification_name": "Data Knowledge Management LLC",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-22T12:03:41"
+ },
+ {
+  "id": 762,
+  "supplier_id": 744,
+  "qualification_name": "W9-page1-2",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-22T12:03:41"
+ },
+ {
+  "id": 763,
+  "supplier_id": 744,
+  "qualification_name": "W9-page3-4",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-22T12:03:41"
+ },
+ {
+  "id": 764,
+  "supplier_id": 744,
+  "qualification_name": "W9-page5-6",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-22T12:03:41"
+ },
+ {
+  "id": 769,
+  "supplier_id": 748,
+  "qualification_name": "Form W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-24T02:04:55"
+ },
+ {
+  "id": 772,
+  "supplier_id": 753,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-25T22:52:05"
+ },
+ {
+  "id": 773,
+  "supplier_id": 675,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-28T01:15:44"
+ },
+ {
+  "id": 777,
+  "supplier_id": 756,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2025-12-29T20:09:13"
+ },
+ {
+  "id": 779,
+  "supplier_id": 757,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-05T21:25:29"
+ },
+ {
+  "id": 781,
+  "supplier_id": 758,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-06T23:05:53"
+ },
+ {
+  "id": 782,
+  "supplier_id": 759,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-08T22:23:38"
+ },
+ {
+  "id": 783,
+  "supplier_id": 761,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-14T17:30:28"
+ },
+ {
+  "id": 784,
+  "supplier_id": 643,
+  "qualification_name": "COI",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-14T20:15:32"
+ },
+ {
+  "id": 785,
+  "supplier_id": 643,
+  "qualification_name": "清洁公司",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-14T20:15:32"
+ },
+ {
+  "id": 786,
+  "supplier_id": 762,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-28T07:01:29"
+ },
+ {
+  "id": 787,
+  "supplier_id": 762,
+  "qualification_name": "Bank info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-28T07:01:29"
+ },
+ {
+  "id": 789,
+  "supplier_id": 763,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-29T21:07:55"
+ },
+ {
+  "id": 790,
+  "supplier_id": 616,
+  "qualification_name": "美国菲诺银行开户证明",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-29T23:08:02"
+ },
+ {
+  "id": 791,
+  "supplier_id": 618,
+  "qualification_name": "SYSCO 资质",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-29T23:08:10"
+ },
+ {
+  "id": 792,
+  "supplier_id": 764,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-30T03:29:56"
+ },
+ {
+  "id": 793,
+  "supplier_id": 764,
+  "qualification_name": "W-8BEN-E",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-01-30T03:29:56"
+ },
+ {
+  "id": 796,
+  "supplier_id": 765,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-02-04T21:22:08"
+ },
+ {
+  "id": 797,
+  "supplier_id": 754,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 0,
+  "validity_start": "2025-01-01T00:00:00",
+  "validity_end": "2025-12-31T00:00:00",
+  "status": null,
+  "modified_time": "2026-02-06T15:32:42"
+ },
+ {
+  "id": 800,
+  "supplier_id": 755,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": "2025-01-01T00:00:00",
+  "validity_end": "2025-12-31T00:00:00",
+  "status": null,
+  "modified_time": "2026-02-06T16:19:59"
+ },
+ {
+  "id": 801,
+  "supplier_id": 766,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-02-10T19:20:34"
+ },
+ {
+  "id": 802,
+  "supplier_id": 767,
+  "qualification_name": "N/A",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-02-12T19:34:53"
+ },
+ {
+  "id": 803,
+  "supplier_id": 768,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": "2026-02-18T00:00:00",
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-02-18T18:25:00"
+ },
+ {
+  "id": 804,
+  "supplier_id": 627,
+  "qualification_name": "梅里埃检测技术（上海）有限公司",
+  "validity_long_term_flag": 1,
+  "validity_start": "2024-09-30T00:00:00",
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-06T05:45:08"
+ },
+ {
+  "id": 805,
+  "supplier_id": 627,
+  "qualification_name": "W-8BEN-E",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-06T05:45:08"
+ },
+ {
+  "id": 809,
+  "supplier_id": 771,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-19T16:10:04"
+ },
+ {
+  "id": 810,
+  "supplier_id": 772,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-19T16:14:29"
+ },
+ {
+  "id": 811,
+  "supplier_id": 773,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-19T19:54:19"
+ },
+ {
+  "id": 812,
+  "supplier_id": 774,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-19T20:05:36"
+ },
+ {
+  "id": 813,
+  "supplier_id": 775,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-19T20:40:48"
+ },
+ {
+  "id": 815,
+  "supplier_id": 777,
+  "qualification_name": "logo",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-24T18:08:50"
+ },
+ {
+  "id": 816,
+  "supplier_id": 778,
+  "qualification_name": "logo",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-24T18:17:45"
+ },
+ {
+  "id": 817,
+  "supplier_id": 779,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-25T15:32:10"
+ },
+ {
+  "id": 818,
+  "supplier_id": 780,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-25T17:31:33"
+ },
+ {
+  "id": 819,
+  "supplier_id": 780,
+  "qualification_name": "Insurance",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-01-18T00:00:00",
+  "validity_end": "2027-01-18T00:00:00",
+  "status": null,
+  "modified_time": "2026-03-25T17:31:33"
+ },
+ {
+  "id": 820,
+  "supplier_id": 780,
+  "qualification_name": "Insurance",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-02-01T00:00:00",
+  "validity_end": "2027-02-01T00:00:00",
+  "status": null,
+  "modified_time": "2026-03-25T17:31:33"
+ },
+ {
+  "id": 822,
+  "supplier_id": 781,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-25T18:46:20"
+ },
+ {
+  "id": 824,
+  "supplier_id": 776,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-27T14:36:05"
+ },
+ {
+  "id": 825,
+  "supplier_id": 782,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-30T15:37:36"
+ },
+ {
+  "id": 826,
+  "supplier_id": 783,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-30T15:51:03"
+ },
+ {
+  "id": 827,
+  "supplier_id": 784,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-30T16:07:40"
+ },
+ {
+  "id": 828,
+  "supplier_id": 785,
+  "qualification_name": "Signed W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-30T21:40:47"
+ },
+ {
+  "id": 830,
+  "supplier_id": 787,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-03-31T17:41:19"
+ },
+ {
+  "id": 831,
+  "supplier_id": 788,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-02T19:53:06"
+ },
+ {
+  "id": 832,
+  "supplier_id": 769,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-06T21:17:45"
+ },
+ {
+  "id": 833,
+  "supplier_id": 746,
+  "qualification_name": "W-9 Form",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-08T00:00:00",
+  "validity_end": "2029-04-08T00:00:00",
+  "status": null,
+  "modified_time": "2026-04-08T09:49:37"
+ },
+ {
+  "id": 834,
+  "supplier_id": 789,
+  "qualification_name": "Massachusetts-Division of Taxation",
+  "validity_long_term_flag": 1,
+  "validity_start": "2026-04-01T00:00:00",
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-08T11:39:17"
+ },
+ {
+  "id": 835,
+  "supplier_id": 790,
+  "qualification_name": "w-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-08T20:56:10"
+ },
+ {
+  "id": 836,
+  "supplier_id": 791,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-09T18:25:29"
+ },
+ {
+  "id": 837,
+  "supplier_id": 791,
+  "qualification_name": "Bank info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-09T18:25:29"
+ },
+ {
+  "id": 839,
+  "supplier_id": 792,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-10T02:29:36"
+ },
+ {
+  "id": 840,
+  "supplier_id": 792,
+  "qualification_name": "Channel Partner Certification",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-01T00:00:00",
+  "validity_end": "2028-12-31T00:00:00",
+  "status": null,
+  "modified_time": "2026-04-10T02:29:36"
+ },
+ {
+  "id": 853,
+  "supplier_id": 794,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-13T14:29:48"
+ },
+ {
+  "id": 854,
+  "supplier_id": 795,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-13T16:19:45"
+ },
+ {
+  "id": 861,
+  "supplier_id": 793,
+  "qualification_name": "SETTLEMENT & RELEASE AGREEMENT",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-10T00:00:00",
+  "validity_end": "2026-04-23T00:00:00",
+  "status": null,
+  "modified_time": "2026-04-15T02:03:05"
+ },
+ {
+  "id": 862,
+  "supplier_id": 793,
+  "qualification_name": "Screenshot Company No.",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-15T02:03:05"
+ },
+ {
+  "id": 863,
+  "supplier_id": 793,
+  "qualification_name": "W-9 Form",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-10T00:00:00",
+  "validity_end": "2029-04-10T00:00:00",
+  "status": null,
+  "modified_time": "2026-04-15T02:03:05"
+ },
+ {
+  "id": 864,
+  "supplier_id": 786,
+  "qualification_name": "Channel Partner Certification",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-01T00:00:00",
+  "validity_end": "2028-12-31T00:00:00",
+  "status": null,
+  "modified_time": "2026-04-15T05:41:02"
+ },
+ {
+  "id": 865,
+  "supplier_id": 786,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-15T05:41:02"
+ },
+ {
+  "id": 867,
+  "supplier_id": 796,
+  "qualification_name": "Deluxe",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-16T17:22:53"
+ },
+ {
+  "id": 868,
+  "supplier_id": 770,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-17T17:04:11"
+ },
+ {
+  "id": 870,
+  "supplier_id": 797,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-04-23T15:34:10"
+ },
+ {
+  "id": 878,
+  "supplier_id": 800,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-10T23:52:10"
+ },
+ {
+  "id": 879,
+  "supplier_id": 801,
+  "qualification_name": "Company Logo",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-11T15:22:57"
+ },
+ {
+  "id": 880,
+  "supplier_id": 724,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-14T20:24:06"
+ },
+ {
+  "id": 881,
+  "supplier_id": 724,
+  "qualification_name": "wire instruction",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-14T20:24:06"
+ },
+ {
+  "id": 882,
+  "supplier_id": 803,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-20T20:05:55"
+ },
+ {
+  "id": 886,
+  "supplier_id": 804,
+  "qualification_name": "W-8 Form",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-26T01:26:56"
+ },
+ {
+  "id": 887,
+  "supplier_id": 806,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-28T20:21:26"
+ },
+ {
+  "id": 888,
+  "supplier_id": 807,
+  "qualification_name": "W-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-29T15:29:01"
+ },
+ {
+  "id": 889,
+  "supplier_id": 808,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-05-30T23:39:39"
+ },
+ {
+  "id": 893,
+  "supplier_id": 655,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-04T08:16:29"
+ },
+ {
+  "id": 894,
+  "supplier_id": 810,
+  "qualification_name": "w-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-05T19:26:04"
+ },
+ {
+  "id": 895,
+  "supplier_id": 813,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-08T15:12:33"
+ },
+ {
+  "id": 896,
+  "supplier_id": 814,
+  "qualification_name": "公司注册证明书01",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-09T02:21:20"
+ },
+ {
+  "id": 901,
+  "supplier_id": 815,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-11T02:30:12"
+ },
+ {
+  "id": 903,
+  "supplier_id": 817,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-16T18:57:40"
+ },
+ {
+  "id": 904,
+  "supplier_id": 812,
+  "qualification_name": "执照",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-18T09:48:09"
+ },
+ {
+  "id": 905,
+  "supplier_id": 811,
+  "qualification_name": "W8税务表格",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-22T02:16:41"
+ },
+ {
+  "id": 906,
+  "supplier_id": 733,
+  "qualification_name": "Banking Notification",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-10T00:00:00",
+  "validity_end": "2029-04-10T00:00:00",
+  "status": null,
+  "modified_time": "2026-06-23T06:59:37"
+ },
+ {
+  "id": 907,
+  "supplier_id": 733,
+  "qualification_name": "W-9 Form",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-10T00:00:00",
+  "validity_end": "2029-04-10T00:00:00",
+  "status": null,
+  "modified_time": "2026-06-23T06:59:37"
+ },
+ {
+  "id": 908,
+  "supplier_id": 818,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-23T16:18:24"
+ },
+ {
+  "id": 909,
+  "supplier_id": 819,
+  "qualification_name": "bank info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-23T18:30:19"
+ },
+ {
+  "id": 910,
+  "supplier_id": 819,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-23T18:30:19"
+ },
+ {
+  "id": 914,
+  "supplier_id": 820,
+  "qualification_name": "w-9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-24T14:08:37"
+ },
+ {
+  "id": 915,
+  "supplier_id": 821,
+  "qualification_name": "w9- pw: Luckin26",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-06-25T19:36:18"
+ },
+ {
+  "id": 916,
+  "supplier_id": 822,
+  "qualification_name": "-",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-02T05:20:37"
+ },
+ {
+  "id": 917,
+  "supplier_id": 823,
+  "qualification_name": "资质信息",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-03T03:27:27"
+ },
+ {
+  "id": 918,
+  "supplier_id": 823,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-03T03:27:27"
+ },
+ {
+  "id": 919,
+  "supplier_id": 824,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-06T20:41:29"
+ },
+ {
+  "id": 920,
+  "supplier_id": 825,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-08T03:20:07"
+ },
+ {
+  "id": 921,
+  "supplier_id": 827,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-10T16:36:58"
+ },
+ {
+  "id": 922,
+  "supplier_id": 828,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-10T19:51:43"
+ },
+ {
+  "id": 923,
+  "supplier_id": 830,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-14T10:02:15"
+ },
+ {
+  "id": 924,
+  "supplier_id": 831,
+  "qualification_name": "w-9 & bank info",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-14T14:26:54"
+ },
+ {
+  "id": 925,
+  "supplier_id": 832,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-15T15:05:18"
+ },
+ {
+  "id": 926,
+  "supplier_id": 833,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-16T08:58:42"
+ },
+ {
+  "id": 927,
+  "supplier_id": 805,
+  "qualification_name": "FDA",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-22T22:32:21"
+ },
+ {
+  "id": 928,
+  "supplier_id": 805,
+  "qualification_name": "Third-party GFSI audit certification",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-22T22:32:21"
+ },
+ {
+  "id": 929,
+  "supplier_id": 805,
+  "qualification_name": "Letter of Guarantee – Food Ingredients",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-22T22:32:21"
+ },
+ {
+  "id": 930,
+  "supplier_id": 805,
+  "qualification_name": "W-9 Form",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-22T22:32:21"
+ },
+ {
+  "id": 931,
+  "supplier_id": 816,
+  "qualification_name": "营业执照",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-24T09:20:58"
+ },
+ {
+  "id": 932,
+  "supplier_id": 816,
+  "qualification_name": "W8",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-24T09:20:58"
+ },
+ {
+  "id": 933,
+  "supplier_id": 662,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-24T19:17:36"
+ },
+ {
+  "id": 934,
+  "supplier_id": 662,
+  "qualification_name": "Wire Transfers",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-24T19:17:36"
+ },
+ {
+  "id": 935,
+  "supplier_id": 662,
+  "qualification_name": "FDA registration",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-07-24T19:17:36"
+ },
+ {
+  "id": 936,
+  "supplier_id": 662,
+  "qualification_name": "NY lab certificate",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-04-01T00:00:00",
+  "validity_end": "2027-04-01T00:00:00",
+  "status": null,
+  "modified_time": "2026-07-24T19:17:36"
+ },
+ {
+  "id": 938,
+  "supplier_id": 836,
+  "qualification_name": "KEX EXPRESS (US) LLC",
+  "validity_long_term_flag": 0,
+  "validity_start": "2026-07-17T00:00:00",
+  "validity_end": "2027-09-30T00:00:00",
+  "status": null,
+  "modified_time": "2026-07-31T18:05:34"
+ },
+ {
+  "id": 939,
+  "supplier_id": 835,
+  "qualification_name": "公司登記基本資料（商工登記公示資料）",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-08-03T02:01:45"
+ },
+ {
+  "id": 940,
+  "supplier_id": 835,
+  "qualification_name": "w8 - business",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-08-03T02:01:45"
+ },
+ {
+  "id": 941,
+  "supplier_id": 837,
+  "qualification_name": "W9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-08-05T18:39:39"
+ },
+ {
+  "id": 942,
+  "supplier_id": 838,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-08-05T18:46:31"
+ },
+ {
+  "id": 943,
+  "supplier_id": 839,
+  "qualification_name": "WiseNet Asia",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-08-12T03:44:41"
+ },
+ {
+  "id": 948,
+  "supplier_id": 841,
+  "qualification_name": "Wisenet Asia Pte Ltd",
+  "validity_long_term_flag": 1,
+  "validity_start": "2026-05-11T00:00:00",
+  "validity_end": "2026-08-17T00:00:00",
+  "status": null,
+  "modified_time": "2026-08-26T14:13:44"
+ },
+ {
+  "id": 949,
+  "supplier_id": 841,
+  "qualification_name": "Wisenet Asia Pte Ltd",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-08-26T14:13:44"
+ },
+ {
+  "id": 950,
+  "supplier_id": 844,
+  "qualification_name": "w9",
+  "validity_long_term_flag": 1,
+  "validity_start": null,
+  "validity_end": null,
+  "status": null,
+  "modified_time": "2026-08-28T19:09:50"
+ }
+]

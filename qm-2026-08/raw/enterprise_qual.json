@@ -1,0 +1,132 @@
+[
+ {
+  "id": 23,
+  "enterprise_id": 12,
+  "qualification_name": "IQA2_Test企业资质1",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "IQA2"
+ },
+ {
+  "id": 24,
+  "enterprise_id": 13,
+  "qualification_name": " IQA2_Test资质",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "IQA2"
+ },
+ {
+  "id": 25,
+  "enterprise_id": 14,
+  "qualification_name": "美国菲诺银行开户证明",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ },
+ {
+  "id": 26,
+  "enterprise_id": 12,
+  "qualification_name": "IQA2_Test企业资质2",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "IQA2"
+ },
+ {
+  "id": 27,
+  "enterprise_id": 12,
+  "qualification_name": "IQA2_Test企业资质3",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "IQA2"
+ },
+ {
+  "id": 30,
+  "enterprise_id": 15,
+  "qualification_name": "SYSCO 资质",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ },
+ {
+  "id": 31,
+  "enterprise_id": 17,
+  "qualification_name": "美国注册证书",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ },
+ {
+  "id": 32,
+  "enterprise_id": 16,
+  "qualification_name": "STATE OF DELAWARE CERTIFICATE OF INCORPORATION",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ },
+ {
+  "id": 33,
+  "enterprise_id": 19,
+  "qualification_name": "IQA2_Test资质",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "IQA2"
+ },
+ {
+  "id": 34,
+  "enterprise_id": 20,
+  "qualification_name": "FDA",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ },
+ {
+  "id": 35,
+  "enterprise_id": 20,
+  "qualification_name": "Third-party GFSI audit certification",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ },
+ {
+  "id": 36,
+  "enterprise_id": 20,
+  "qualification_name": "Letter of Guarantee – Food Ingredients",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ },
+ {
+  "id": 37,
+  "enterprise_id": 20,
+  "qualification_name": "W-9 Form",
+  "validity_start": null,
+  "validity_end": null,
+  "validity_long_term_flag": 1,
+  "status": null,
+  "tenant": "LKUS"
+ }
+]

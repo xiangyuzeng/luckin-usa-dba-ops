@@ -1,0 +1,117 @@
+[
+ {
+  "mid": "SC0001",
+  "name": "办公用品",
+  "status": 1
+ },
+ {
+  "mid": "SC0002",
+  "name": "器具类",
+  "status": 1
+ },
+ {
+  "mid": "SC0003",
+  "name": "轻食",
+  "status": 1
+ },
+ {
+  "mid": "SC0004",
+  "name": "包装类",
+  "status": 1
+ },
+ {
+  "mid": "SC0005",
+  "name": "医药",
+  "status": 1
+ },
+ {
+  "mid": "SC0006",
+  "name": "原料",
+  "status": 1
+ },
+ {
+  "mid": "SC0007",
+  "name": "营销物料",
+  "status": 1
+ },
+ {
+  "mid": "SC0008",
+  "name": "生产设备",
+  "status": 1
+ },
+ {
+  "mid": "SC0009",
+  "name": "电子设备",
+  "status": 1
+ },
+ {
+  "mid": "SC0010",
+  "name": "实验大类",
+  "status": 0
+ },
+ {
+  "mid": "SC0011",
+  "name": "营建类",
+  "status": 1
+ },
+ {
+  "mid": "SC0012",
+  "name": "零件",
+  "status": 1
+ },
+ {
+  "mid": "SC0013",
+  "name": "工服类",
+  "status": 1
+ },
+ {
+  "mid": "SC0014",
+  "name": "日耗品",
+  "status": 1
+ },
+ {
+  "mid": "SC0015",
+  "name": "零食",
+  "status": 1
+ },
+ {
+  "mid": "SC0016",
+  "name": "周边产品",
+  "status": 1
+ },
+ {
+  "mid": "SC0017",
+  "name": "饮品",
+  "status": 1
+ },
+ {
+  "mid": "SC0018",
+  "name": "实验大类A",
+  "status": 0
+ },
+ {
+  "mid": "SC0019",
+  "name": "实验大类0910",
+  "status": 0
+ },
+ {
+  "mid": "SC0020",
+  "name": "食品添加剂",
+  "status": 1
+ },
+ {
+  "mid": "SC0021",
+  "name": "原料配料",
+  "status": 1
+ },
+ {
+  "mid": "SC0022",
+  "name": "IQATest_实验大类",
+  "status": 0
+ },
+ {
+  "mid": "SC0027",
+  "name": "海外-原料",
+  "status": 1
+ }
+]

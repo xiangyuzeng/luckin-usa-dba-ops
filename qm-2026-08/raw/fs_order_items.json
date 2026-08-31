@@ -1,0 +1,263 @@
+[
+ {
+  "order_id": 119650501448212480,
+  "spu_name": "Iced Latte",
+  "spu_code": "PR000015",
+  "sku_name": "Regular/Cold/Regular Ice/Dark Roast/Espresso(2)/Almond Milk",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119690015013117952,
+  "spu_name": "Iced Coconut Latte",
+  "spu_code": "PR000021",
+  "sku_name": "Regular/Cold/Regular Ice/Medium Roast/Espresso(2)/Coconut Milk",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119695372984672256,
+  "spu_name": "Kyoto Matcha Coconut Water",
+  "spu_code": "PR000129",
+  "sku_name": "Regular/Cold/Regular Ice/Cane Sugar Syrup(1)/Matcha Sauce(2)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Matcha"
+ },
+ {
+  "order_id": 119714053273837568,
+  "spu_name": "Coconut Latte",
+  "spu_code": "PR000022",
+  "sku_name": "Large/Hot/Medium Roast/Espresso(3)/Coconut Milk/Regular Hot",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119725435608260608,
+  "spu_name": "Orange Velvet Latte",
+  "spu_code": "PR000141",
+  "sku_name": "Regular/Hot/Medium Roast/Ristretto(2)/2% Milk/Regular Hot/Cane Sugar Syrup(1)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119730254561566720,
+  "spu_name": "Iced Latte",
+  "spu_code": "PR000015",
+  "sku_name": "Large/Cold/Regular Ice/Dark Roast/Espresso(4)/Oat Milk/Vanilla Syrup(4)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119730254561566720,
+  "spu_name": "Sausage Egg & Cheese Croissant",
+  "spu_code": "PR000063",
+  "sku_name": "Warmed",
+  "sku_num": 1,
+  "one_category_name": "Food",
+  "two_category_name": null
+ },
+ {
+  "order_id": 119742341673385984,
+  "spu_name": "Iced Coconut Latte",
+  "spu_code": "PR000021",
+  "sku_name": "Large/Cold/Regular Ice/Medium Roast/Espresso(3)/Coconut Milk",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119743192680890368,
+  "spu_name": "Iced Toffee Hazelnut Latte",
+  "spu_code": "PR000090",
+  "sku_name": "Regular/Cold/Extra Ice/Dark Roast/Ristretto(2)/Oat Milk/Toffee Hazelnut Flavored Syrup(3)/No Whipped Cream/Caramel Drizzle",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119748894249984000,
+  "spu_name": "Kyoto Matcha Latte",
+  "spu_code": "PR000072",
+  "sku_name": "Regular/Hot/Whole Milk/Regular Hot/Cane Sugar Syrup(2)/Matcha Powder",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Matcha"
+ },
+ {
+  "order_id": 119761334354313216,
+  "spu_name": "lced Kyoto Matcha Latte",
+  "spu_code": "PR000071",
+  "sku_name": "Regular/Cold/No Ice/Oat Milk/Cane Sugar Syrup(4)/Matcha Powder",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Matcha"
+ },
+ {
+  "order_id": 119770822943703040,
+  "spu_name": "Coconut Cold Brew",
+  "spu_code": "PR000137",
+  "sku_name": "Large/Cold/Regular Ice/Cold Brew Base(4)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Cold Brew"
+ },
+ {
+  "order_id": 119782181521596416,
+  "spu_name": "Cold Brew",
+  "spu_code": "PR000135",
+  "sku_name": "Regular/Cold/Regular Ice/Cold Brew Base(4)/2% Milk(1)/Vanilla Sweet Cold Foam",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Cold Brew"
+ },
+ {
+  "order_id": 119782181521596416,
+  "spu_name": "Sausage Egg & Cheese Croissant",
+  "spu_code": "PR000063",
+  "sku_name": "Warmed",
+  "sku_num": 1,
+  "one_category_name": "Food",
+  "two_category_name": null
+ },
+ {
+  "order_id": 119799755923783680,
+  "spu_name": "lced Kyoto Matcha Latte",
+  "spu_code": "PR000071",
+  "sku_name": "Regular/Cold/Extra Ice/Oat Milk/Cane Sugar Syrup(4)/Matcha Powder",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Matcha"
+ },
+ {
+  "order_id": 119799755923783680,
+  "spu_name": "Sausage Egg & Cheese Croissant",
+  "spu_code": "PR000063",
+  "sku_name": "Warmed",
+  "sku_num": 1,
+  "one_category_name": "Food",
+  "two_category_name": null
+ },
+ {
+  "order_id": 119812512647790592,
+  "spu_name": "Iced Caramel Popcorn Latte",
+  "spu_code": "PR000080",
+  "sku_name": "Large/Cold/Regular Ice/Medium Roast/Espresso(4)/Coconut Milk/Velvet Milk(4)/Popcorn Flavored Syrup(3)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119865049425649664,
+  "spu_name": "Iced Americano",
+  "spu_code": "PR000006",
+  "sku_name": "Regular/Cold/Light Ice/Decaf/Espresso(2)/Coconut Milk(1)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119887228703875072,
+  "spu_name": "Latte",
+  "spu_code": "PR000016",
+  "sku_name": "Regular/Hot/Dark Roast/Espresso(3)/Coconut Milk/Regular Hot",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119898902223699968,
+  "spu_name": "Iced Latte",
+  "spu_code": "PR000015",
+  "sku_name": "Large/Cold/Regular Ice/Dark Roast/Espresso(3)/2% Milk/Vanilla Syrup(1)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119923083694850048,
+  "spu_name": "Iced Coconut Latte",
+  "spu_code": "PR000021",
+  "sku_name": "Large/Cold/Light Ice/Medium Roast/Espresso(3)/Coconut Milk",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119923083694850048,
+  "spu_name": "Sunny Citrus",
+  "spu_code": "PR000149",
+  "sku_name": "Super Bottle/Cold/Regular Ice/Jasmine Tea(2)/Carrot & Orange Blend(6)/Cane Sugar Syrup(1)/No Chia Seeds",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Super Drink"
+ },
+ {
+  "order_id": 119927358462410752,
+  "spu_name": "Iced Orange Americano",
+  "spu_code": "PR000138",
+  "sku_name": "Regular/Cold/Regular Ice/Medium Roast/Ristretto(2)/Orange Blended Juice Drink(4)/Cane Sugar Syrup(1)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119933076003405824,
+  "spu_name": "Iced Spanish Latte",
+  "spu_code": "PR000086",
+  "sku_name": "Large/Cold/Light Ice/Medium Roast/Ristretto(4)/Whole Milk/Velvet Milk(2)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119933363699073024,
+  "spu_name": "Iced Latte",
+  "spu_code": "PR000015",
+  "sku_name": "Regular/Cold/Regular Ice/Dark Roast/Espresso(2)/Coconut Milk",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119945014468984832,
+  "spu_name": "Iced Velvet Latte",
+  "spu_code": "PR000023",
+  "sku_name": "Regular/Cold/Regular Ice/Dark Roast/Espresso(2)/Whole Milk/Velvet Milk(3)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119956614169018368,
+  "spu_name": "Latte",
+  "spu_code": "PR000016",
+  "sku_name": "Regular/Hot/Medium Roast/Espresso(2)/Non-fat/Skim Milk/Regular Hot",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Classic drinks"
+ },
+ {
+  "order_id": 119968054619684865,
+  "spu_name": "lced Kyoto Matcha Coconut Latte",
+  "spu_code": "PR000073",
+  "sku_name": "Regular/Cold/Light Ice/Coconut Milk/Matcha Sauce(3)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Fresh ground coffee"
+ },
+ {
+  "order_id": 119999220915912704,
+  "spu_name": "Jasmine Cold Brew",
+  "spu_code": "PR000136",
+  "sku_name": "Large/Cold/Regular Ice/Cold Brew Base(7)/Jasmine Tea(4)",
+  "sku_num": 1,
+  "one_category_name": "Drink",
+  "two_category_name": "Cold Brew"
+ }
+]

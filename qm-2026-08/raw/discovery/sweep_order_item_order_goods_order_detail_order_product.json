@@ -1,0 +1,34 @@
+{
+ "aws-luckyus-salesorder-rw": [
+  {
+   "s": "luckyus_sales_order",
+   "t": "t_order_item",
+   "n": 1766406,
+   "upd": "2026-08-31T00:35:07"
+  },
+  {
+   "s": "luckyus_sales_order",
+   "t": "t_order_item_change",
+   "n": 0,
+   "upd": null
+  },
+  {
+   "s": "luckyus_sales_order",
+   "t": "t_order_item_package",
+   "n": 125047,
+   "upd": "2026-08-30T22:07:59"
+  },
+  {
+   "s": "luckyus_sales_order",
+   "t": "t_order_item_share",
+   "n": 77890,
+   "upd": "2026-08-28T11:43:12"
+  },
+  {
+   "s": "luckyus_sales_order",
+   "t": "t_order_item_stat_fact",
+   "n": 63504,
+   "upd": "2026-08-31T04:01:20"
+  }
+ ]
+}
