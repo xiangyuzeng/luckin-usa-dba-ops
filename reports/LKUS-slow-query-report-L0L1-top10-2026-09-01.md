@@ -7,7 +7,8 @@
 | 出具日期 | 2026-09-01 |
 | 出具人 | 曾翔宇（DBA / Infrastructure） |
 | 范围 | **L0 + L1 共 48 台实例**（等级表本次按六级标准定稿，见第一节） |
-| 排除 | **账号 `diagtools` 的全部查询**（DBA 自有：看板采集容器 + mcp-db-gateway 临时查询） |
+| 排除 | ① 账号 `diagtools` 的全部查询（DBA 自有）；② **不存在优化动作的条目**（已停跑、计划已最优、纯行锁等待、单次只扫几十行等），排除理由逐条列出 |
+| 入选判据 | **单次扫描行数** + **扫描/返回比** —— 榜单服务于优化，产不出动作的不占名额 |
 | 数据窗口 | 2026-08-25 ~ 2026-09-01（7 天日差分） |
 | 数据来源 | `ldas01` 采集表（≥1s 指纹）+ CloudWatch 慢日志原文按 `User@Host` 归属 + 现场 `EXPLAIN` / `performance_schema` 计时 |
 
@@ -58,27 +59,39 @@
 
 ## 二、TOP10（采集表口径：单次 ≥1s 指纹，7 天新增 DB 时间）
 
-| # | 等级 | 实例 | 指纹 | DB时间 | 次数 | 均耗 | 执行账号 | 结论出处 |
+> **入选判据**：榜单的目的是产出优化动作，因此**不存在优化动作的条目直接排除**，
+> 不占用 TOP10 名额。筛选依据是两个可量化信号 —— **单次扫描行数** 与 **扫描/返回比**：
+> 单次扫描量大、或扫很多却返回很少 = 有优化空间；单次只扫几十行、或扫描量约等于返回量
+> = 已经很优化了，慢在别处（争用、锁、频次），列出来不产生动作。
+
+| # | 等级 | 实例 | 指纹 | DB时间 | 次数 | 单次扫描行 | 优化动作 | 出处 |
 |---|---|---|---|---:|---:|---:|---|---|
-| 1 | L0 | opshopsale | `00259408` | **4,976.9s** | 768 | 6.48s | `iopshopsaleservice_A_o` | -0901 |
-| 2 | L0 | salespayment | `fe67d6b5` | **3,780.6s** | 2,304 | 1.64s | `isalespmtadmin_A_o` | -0901 |
-| 3 | L0 | salesmarketing | `9919be27` | 371.2s | 8 | 46.40s | `isalescouponservice_A_o` | -0901 |
-| 4 | L0 | cdpactivity | `142b98a6` | 191.7s | 104 | 1.84s | `icdpactivityengine_A_o` | -0901-B |
-| 5 | L0 | salesorder | `792aa5a0` | 93.9s | 80 | 1.17s | `isalesorderservice_A_o` | -0901-B |
-| 6 | L0 | salesorder | `8d07ade5` | 84.3s | 14 | 6.02s | `isalesorderservice_A_o` | -0901-B |
-| 7 | L0 | salesorder | `ba25fea5` | 80.2s | 16 | 5.01s | `isalesorderservice_A_o` | -0901-B |
-| 8 | L0 | salesorder | `397899b0` | 55.7s | 13 | 4.29s | `isalesorderservice_A_o` | -0901-B（已停跑） |
-| 9 | L1 | opempefficiency | `a0258469` | 36.4s | 14 | 2.60s | `iopempefficiency_A_o` | **本报告新增** |
-| 10 | L1 | opempefficiency | `8d7d1910` | 31.2s | 14 | 2.23s | `iopempefficiency_A_w` | **本报告新增** |
+| 1 | L0 | opshopsale | `00259408` | **4,976.9s** | 768 | 766,796 | 巡检去重 + 降频（每 30min→每天，-99%） | -0901 |
+| 2 | L0 | salespayment | `fe67d6b5` | **3,780.6s** | 2,304 | 164,324 | 先修费用预估回写逻辑，再加索引 | -0901 |
+| 3 | L0 | salesmarketing | `9919be27` | 371.2s | 8 | 3,041,567 | 加 `(tenant, coupon_source, id)` | -0901 |
+| 4 | L0 | cdpactivity | `142b98a6` | 191.7s | 104 | 12,337 | **错峰**（SQL 实测 27ms，无 SQL 优化空间）+ 预防性索引 B-01 | -0901-B |
+| 5 | L0 | salesorder | `792aa5a0` | 93.9s | 80 | 20,597 | 加 `(tenant, checking_status, deleted, checking_date)` B-06 | -0901-B |
+| 6 | L0 | salesorder | `8d07ade5` | 84.3s | 14 | 1,265,167 | 加 `(tenant, status, deleted, checking_date)` B-08 | -0901-B |
+| 7 | L0 | salesorder | `ba25fea5` | 80.2s | 16 | 1,264,122 | 同 B-08 一个索引解决两条 | -0901-B |
+| 8 | L1 | opempefficiency | `a0258469` | 36.4s | 14 | 2,185 | **错峰**（非整点实测 332ms vs 记录 2,572ms） | 本报告 |
+| 9 | L1 | opempefficiency | `8d7d1910` | 31.2s | 14 | 2,603 | **错峰**（2,515 行 / 4.5MB 的表扫 2.83 秒） | 本报告 |
+| 10 | L1 | ibillingcentersrv | `efba7db1` | 12.4s | 4 | **228,777** | 待分析 —— 单次扫 22.9 万行，扫描量在 L1 尾部最高 | 待排期 |
 
-**被剔除的 `diagtools` 条目**（按 DB 时间本会排在第 5、6、11 名）：
-`e5a8e692` 179.8s、`09d7feb6` 142.1s（store-ops 看板 SPU 双扫描）、`e2b527f7` 44.6s（store-ops 效能）。
-三条今天已改完并部署，见 -0901-B / -0901-C。
+**分布**：8 条在 L0、2 条在 L1，集中在 5 台实例。第 1、2 名合计 8,757.5s，
+占本 TOP10 总量（9,701.9s）的 **90.3%** —— 优化收益也集中在这两条。
 
-**分布**：TOP10 里 8 条在 L0、2 条在 L1；按实例集中在 4 台（salesorder ×4、opempefficiency ×2、
-opshopsale / salespayment / salesmarketing / cdpactivity 各 1）。
-第 1、2 名合计 8,757.5s，占本 TOP10 总量（9,702.1s）的 **90.3%** —— 加进 L1 并没有改变
-「头部两条吃掉九成」的格局。
+### 本轮排除的条目（不是漏掉，是没有优化动作）
+
+| 指纹 | 实例 | DB时间 | 排除理由 |
+|---|---|---:|---|
+| `397899b0` | salesorder | 55.7s | **已停跑** —— `LAST_SEEN 2026-08-28`，功能疑似下线，无需优化 |
+| `18f0b86c` | salespayment | 27.6s | **执行计划已最优** —— range 走 `idx_create_time`，无 filesort 无临时表；-0901-B 明确「不建议加索引」 |
+| `53e2bc9c` | scmsrm | 27.4s | **`INSERT`，扫描 0 行** —— 没有可优化的读路径，慢在写入/提交 |
+| `04bc9a2d` | upush | 21.6s | **已最优** —— 该库慢日志前四是 `select * from t_mdm_tenant`（扫 10 行返回 1 行）、`commit;`（953 次 304 秒）、`INSERT`；一条可优化的都没有，慢在提交延迟 |
+| `151b0ae8` | ijumpserver | 18.9s | 分级调整后归 **L3 安全运维**，出范围 |
+
+被剔除的 `diagtools` 三条（`e5a8e692` 179.8s、`09d7feb6` 142.1s、`e2b527f7` 44.6s，
+store-ops 看板取数）按 DB 时间本会排在第 5、6、11 名，**今天已改完并部署**，见 -0901-B / -0901-C。
 
 ---
 
@@ -149,47 +162,39 @@ UPDATE t_attendance_change SET status = 4, modify_time = now(), modifier_name = 
 
 ---
 
-## 四、🔴 口径警告：这个 TOP10 依赖 ≥1s 门槛，换个口径完全是另一张榜
+## 四、🔴 口径警告：换成慢日志原文口径，第一名完全不同
 
-采集表 `t_dba_collect_slow_query` **只收 `avg_sec ≥ 1s` 的指纹**。
-对**同一批 L0+L1 实例**（48 台中 46 台有慢日志组，`ibehr` / `isalescouponservice` 未开启）
-直接按慢日志原文聚合，同样剔除 `diagtools`，`long_query_time = 0.1s`：
+采集表 `t_dba_collect_slow_query` **只收 `avg_sec ≥ 1s` 的指纹**，高频低耗型查询整体不在其中。
+对同一批 L0+L1 实例（48 台中 46 台有慢日志组）按慢日志原文聚合，同样剔除 `diagtools`，
+并套用与第二节相同的「有无优化价值」判据：
 
-| # | 实例 | 账号 | 7天次数 | DB时间 | 均耗 | 扫描行数 | 在采集表榜单上？ |
-|---|---|---|---:|---:|---:|---:|---|
-| 1 | salesmarketing | `isalesmktadmin_A_o` | 66,990 | **23,060.7s** | 0.34s | **3,447,785,825** | ❌ 均耗 <1s |
-| 2 | opshopsale | `iopshopsaleservice_A_o` | 752 | 4,865.9s | 6.47s | 573,099,416 | ✅ 第 1 名 |
-| 3 | salespayment | `isalespmtadmin_A_o` | 2,256 | 3,671.4s | 1.63s | 366,259,114 | ✅ 第 2 名 |
-| 4 | isalesprivatedomain | `privatedomainserv_A_o` | 11,918 | 3,499.3s | 0.29s | 58,795,601 | ❌ |
-| 5 | ipermission | `iopenauth_A_o` | 11,280 | 2,716.8s | 0.24s | **763,957,415** | ❌ |
-| 6 | salesmarketing | `isalescouponservice_A_o` | 8,197 | 2,534.7s | 0.31s | 14,701,778 | ❌ |
-| 7 | cdpactivity | `icdpactivityengine_A_o` | 11,790 | 2,444.7s | 0.21s | 612,229 | ❌ |
-| 8 | framework01 | `kbx_w` | 10,090 | 2,440.4s | 0.24s | 10,090 | ❌ |
-| 9 | salespayment | `dbms_dbsearch` | 8,726 | 2,325.8s | 0.27s | 57,856,189 | ❌ |
-| 10 | ipermission | `iopenauth_A_o` | 5,044 | 1,988.4s | 0.39s | 41,369,902 | ❌ |
+| # | 实例 | 7天次数 | DB时间 | 单次扫描 | 单次返回 | 扫描/返回 | 优化价值 |
+|---|---|---:|---:|---:|---:|---:|---|
+| 1 | salesmarketing | 66,990 | **23,060.7s** | 51,467 | **0.14** | **37 万:1** | ✅✅ 每 9 秒一次、每次扫 5 万行几乎不返回 |
+| 2 | opshopsale | 752 | 4,865.9s | 762,100 | 0 | ∞ | ✅ 已有结论（-0901 第 1 名） |
+| 3 | salespayment | 2,256 | 3,671.4s | 162,349 | 5,000 | 32:1 | ✅ 已有结论（-0901 第 2 名，每次捞满 5000） |
+| 4 | isalesprivatedomain | 11,922 | 3,499.5s | 4,933 | **0** | ∞ | ✅ 扫 4,933 行**一行不返回**，与 opshopsale 同型 |
+| 5 | salesmarketing | 11,484 | 1,929.8s | **290,421** | 1 | **29 万:1** | ✅✅ `count(1) from t_market_activity_partake`，扫 29 万行只为一个数 |
+| 6 | salesorder | 5,599 | 1,957.7s | 779 | 0.44 | 1,780:1 | ✅ 选择率极低 |
+| 7 | salespayment | 8,726 | 2,325.8s | 6,630 | 9.5 | 700:1 | ✅ 但归属是**监控看板**（`dbms_dbsearch`，Grafana 取数），修法是降频/改写面板 |
+| 8 | ipermission | 11,280 | 2,716.8s | 67,727 | **33,974** | 2:1 | 🟡 不是扫描浪费，是**一次取回 3.4 万行**；方向是应用侧缓存/减少调用，不是加索引 |
+| 9 | ipermission | 5,048 | 1,989.0s | 8,203 | 6,280 | 1.3:1 | 🟡 同上 |
+| 10 | salesmarketing | 8,197 | 2,534.7s | 1,794 | 965 | 1.9:1 | 🟡 选择率合理、扫描量小，优化空间有限 |
 
-**10 条里只有 2 条出现在采集表榜单上。** 合计约 49,548 秒，是第二节 TOP10 合计（9,702 秒）的 5.1 倍。
+**排除（无优化价值）**：
 
-三点值得单独说：
+| 实例 | 语句 | DB时间 | 排除理由 |
+|---|---|---:|---|
+| cdpactivity | `SELECT COUNT(*) FROM t_contact_activity WHERE deleted != 1 …` | 2,444.7s | **单次只扫 52 行**、返回 1 行，0.21 秒 —— 已经很优化了，慢在频次与争用，加索引改写都无意义 |
+| framework01 | `SELECT * FROM es_qrtz_LOCKS … FOR UPDATE` | 2,440.4s | **扫描 1 行、返回 1 行** —— Quartz 调度器抢锁，纯行锁等待，SQL 层没有任何可优化处 |
 
-1. **第 1 名是整个 L0+L1 里最贵的一条，却完全不在榜上。**
-   `isalesmktadmin_A_o` 7 天执行 66,990 次（约每 9 秒一次）、扫 **34.5 亿行**、烧掉 23,061 秒 —— 
-   是采集表榜首 `opshopsale` 的 4.6 倍，只因为平均 0.34 秒就被 1 秒门槛整个滤掉。
-   单次平均扫 51,467 行，是典型的「单次不慢、但次数多且每次都扫一堆」。
+**两点结论**：
 
-2. **第 8 名根本不是查询问题。** `kbx_w` 的
-   `SELECT * FROM es_qrtz_LOCKS WHERE SCHED_NAME='KBXScheduler' AND LOCK_NAME='TRIGGER_ACCESS' FOR UPDATE`
-   扫描行数恰好等于执行次数（10,090 / 10,090，每次 1 行）—— **纯行锁等待**，
-   Quartz 调度器抢锁，SQL 本身无可优化。
-
-3. **第 9 名 `dbms_dbsearch` 大概率也是我们自己的。** 它的语句形如
-   `select UNIX_TIMESTAMP()*1000 AS _timestamp, count(t.id) AS _value, c.name from …` ——
-   `_timestamp` / `_value` 是 Grafana MySQL 数据源的取数约定，即**某个监控看板在轮询生产库**。
-   这与第一节 `ldas01` 的 `idbtask_w` 是同一类：**「剔除 `diagtools`」只挡住了一个账号，
-   挡不住 DBA/监控体系用别的账号发出的查询。** 建议后续按「归属」而不是按账号名过滤。
-
-**结论**：「单次耗时」和「累计影响」是两把尺子。现有台账只有前者，
-高频低耗型查询（第 1、4、5、6、7、9、10 名）整体在治理视野之外。已记为行动项 E-03。
+1. **原文口径的第一名（23,061 秒 / 34.5 亿行）完全不在采集表榜单上**，只因为均耗 0.34 秒。
+   它和第 5 名同属 `salesmarketing`，两条合计 **每周扫 68 亿行** —— 是当前 L0+L1 里最大的优化机会，
+   比采集表榜首 `opshopsale` 大 4.6 倍。已记为 E-04。
+2. **`dbms_dbsearch` 大概率也是我们自己的**（`_timestamp` / `_value` 是 Grafana MySQL 数据源约定），
+   与 `ldas01` 的 `idbtask_w` 同类：**「剔除 `diagtools`」只挡住一个账号**。已记为 E-05。
 
 ---
 
@@ -201,7 +206,9 @@ UPDATE t_attendance_change SET status = 4, modify_time = now(), modifier_name = 
 | E-02 | 分级映射表按五级标准定稿，11 台移出业务档；重新生成后需重新套用 | P1 | DBA | **已改**（3 处待确认） |
 | E-03 | 周度分诊补「扫描行数 / 累计 DB 时间」维度，覆盖均耗 <1s 的高频查询 | P2 | DBA | 待做（与 -0901-C 的 C-02 合并） |
 | E-05 | 过滤 DBA 自有查询改为按「归属」而非账号名（`diagtools` 之外还有 `idbtask_w`、`dbms_dbsearch`） | P2 | DBA | 待做 |
-| E-04 | 复核 `isalesmktadmin_A_o` 那条（7 天 66,990 次 / 34.5 亿行 / 23,061 秒）—— 原文口径下的真·第一名 | P1 | DBA + 张晓松 | 待做 |
+| E-04 | 复核 salesmarketing 两条（`isalesmktadmin_A_o` 66,990 次/34.5 亿行/23,061s；`count(1) from t_market_activity_partake` 11,484 次/单次扫 29 万行）—— 合计每周 68 亿行，当前最大优化机会 | P1 | DBA + 张晓松 | 待做 |
+| E-06 | `isalesprivatedomain` 那条：单次扫 4,933 行**返回 0 行**，与 opshopsale 空转型同构 | P2 | DBA + 张翔 | 待做 |
+| E-07 | `ipermission` 两条不是扫描浪费而是单次取回 3.4 万行；方向是应用侧缓存/减少调用频次 | P2 | 陈亮/张晓松 | 待沟通 |
 | — | TOP10 第 1~8 名的处置见 -0901 / -0901-B，本次无变化 | — | — | — |
 
 ---
