@@ -73,8 +73,13 @@ def load_tier_map(path):
 
 def load_registry(path):
     rows = read_csv_skip_comments(path, "分析台账")
-    reg, bad = {}, []
+    reg, bad, malformed = {}, [], []
     for r in rows:
+        # 字段里出现没加引号的逗号会让 DictReader 多切出一列（键为 None），
+        # 后面所有列跟着错位。宁可报错也不要静默错位。
+        if None in r or any(v is None for v in r.values()):
+            malformed.append(r.get("digest_id", "?")[:8])
+            continue
         st = (r.get("status") or "").strip()
         if st not in VALID_STATUS:
             bad.append((r.get("digest_id", "?")[:8], st))
@@ -82,6 +87,10 @@ def load_registry(path):
                (r.get("schema_name") or "").strip(),
                (r.get("digest_id") or "").strip())
         reg[key] = r
+    if malformed:
+        sys.exit("[FATAL] 台账有 %d 行列数不符（多半是 verdict/备注里有没加引号的逗号）：%s\n"
+                 "        修法：用 csv 模块重写该文件，含逗号的字段会自动加引号。"
+                 % (len(malformed), ", ".join(malformed)))
     if bad:
         sys.exit("[FATAL] 台账里有非法 status（只能是 %s）：%s"
                  % ("/".join(VALID_STATUS), ", ".join(f"{d}={s!r}" for d, s in bad)))

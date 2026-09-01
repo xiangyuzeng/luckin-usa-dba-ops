@@ -1,0 +1,27 @@
+# 独立 Git 仓库目录（不应被父仓库追踪）
+claude-code-output/
+eks-graviton-migration/
+elasticache-analysis/
+skills/
+sopprompt/
+qa_dashboard/
+lkus-argus/
+luckyus_horae_split/
+
+# Binaries
+kubectl
+
+# 常见忽略文件
+.DS_Store
+*.pyc
+__pycache__/
+.env
+
+# Build artifacts
+.next/
+node_modules/
+*.pack
+
+# core dumps (a 130MB core.1154 once blocked a push)
+core
+core.[0-9]*

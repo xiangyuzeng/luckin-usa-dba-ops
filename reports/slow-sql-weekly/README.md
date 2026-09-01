@@ -58,7 +58,7 @@ python3 weekly_slow_sql_triage.py --show-sql          # L0，近 7 天
 
 ---
 
-## 五个坑
+## 六个坑
 
 1. **应用改了 SQL 文本 → digest 变 → 台账认不出，会当作 NEW 重新分析。** 这是期望行为（SQL 变了本来就该重看），但要知道「同一个业务查询」可能在台账里留下多条历史记录。
 
@@ -72,6 +72,10 @@ python3 weekly_slow_sql_triage.py --show-sql          # L0，近 7 天
 
 ---
 
+6. **台账是 CSV，`verdict` 里不能有裸逗号。** 手工编辑时若在备注中打了英文逗号又没加引号，`DictReader` 会多切一列、后面所有列跟着错位。脚本已加校验，遇到会直接 `[FATAL]` 报错退出（不会静默错位）；修法是用 `csv` 模块重写该文件——含逗号的字段会自动加引号。中文顿号「、」和分号「；」都是安全的。
+
+---
+
 ## 相关文件
 
 | 路径 | 内容 |
@@ -80,4 +84,5 @@ python3 weekly_slow_sql_triage.py --show-sql          # L0，近 7 天
 | `weekly_slow_sql_triage.py` | 本目录 · 分诊脚本 |
 | `/app/luckin-slow-sql-tier-map.csv` | L0–L4 分级映射（65 台）|
 | `/app/luckin-slow-sql-topn-dashboard.json` | Grafana 看板 `lkus-slow-sql-topn`，18 panel |
-| `LKUS-slow-query-report-L0-2026-09-01.md` | `/app/reports/` · 首份完整分析报告（LCNA-DBA-SQL-2026-0901）|
+| `LKUS-slow-query-report-L0-2026-09-01.md` | `/app/reports/` · TOP3 分析报告（LCNA-DBA-SQL-2026-0901）|
+| `LKUS-slow-query-report-L0-pending9-2026-09-01.md` | `/app/reports/` · 剩余 9 条分析报告（LCNA-DBA-SQL-2026-0901-B）|
