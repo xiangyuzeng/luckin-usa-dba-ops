@@ -1,0 +1,29 @@
+# 慢 SQL 分析台账 —— 记录「已经分析过」的 SQL 指纹，供每周分析时跳过，避免重复分析
+#
+# 主键 = (instance, schema_name, digest_id)。digest_id = MD5(t_dba_collect_slow_query.query)。
+#   应用改了 SQL 文本 → digest 变 → 自动当作新指纹重新分析，这是期望行为。
+#
+# status 取值（只能用这五个，weekly_slow_sql_triage.py 会校验）：
+#   pending   已入册、尚未出结论      → 每周仍会提醒，超过 --stale-days 天会标 STALE
+#   analyzed  已出结论、改造未完成    → 每周静默；指标较基线劣化时会重新弹出
+#   fixed     已修复                  → 若再次出现在榜单上会标 RECURRED（说明修复没生效）
+#   accepted  已评估，接受现状不改造  → 永久静默，除非劣化
+#   deferred  本期不处理，下季度再看  → 静默至 recheck_after
+#
+# base_* = 登记当时的基线，用于判断「是否变差了」。复查时如果确认新水位合理，手工更新基线并更新 last_reviewed。
+# recheck_after = 到期强制复查日（YYYY-MM-DD，留空表示不设）。
+# 手工编辑本文件即可；脚本 --append-new 只会往末尾追加 status=pending 的新行，不会改动已有行。
+#
+digest_id,instance,schema_name,main_table,level,status,first_analyzed,last_reviewed,report_id,owner,action_ids,base_dbtime_7d_sec,base_exec_7d,base_avg_sec,base_rows_examined,recheck_after,verdict
+002594087b0ffda5821a985206ac050c,aws-luckyus-opshopsale-rw,luckyus_opshopsale,t_shopsale_spu+t_shopsale_rmk,L0,analyzed,2026-09-01,2026-09-01,LCNA-DBA-SQL-2026-0901,陈培浩/游熖,A-03;A-04;A-05;A-09,4976.9,768,6.48,766796,2026-10-01,一致性巡检 4736 次返回 0 行;FIND_IN_SET 不可索引+LEFT JOIN 被 WHERE 退化;两个 Pod 无分布式锁重复执行。修法=去重+降频,非加索引
+fe67d6b5ea5ef170101086cb4a04ab74,aws-luckyus-salespayment-rw,luckyus_sales_payment,t_channel_fee,L0,analyzed,2026-09-01,2026-09-01,LCNA-DBA-SQL-2026-0901,张晓松,A-01;A-02;A-06,3780.6,2304,1.64,164324,2026-09-15,费用预估任务空转 17 个月;每次恒返回满 5000 行;718696 行(51.6%)total_fee_est 为空且 fee_est_times 全为 0。先修回写再加索引
+9919be2718c3de41cec5f251b9adf610,aws-luckyus-salesmarketing-rw,luckyus_sales_marketing,t_coupon_record_expired,L0,analyzed,2026-09-01,2026-09-01,LCNA-DBA-SQL-2026-0901,张晓松,A-07;A-10,371.2,8,46.40,3041567,2026-10-01,归档探针 ORDER BY 主键+LIMIT 1 诱发优化器误判(估 3 行实扫 312 万);coupon_source/tenant 均无索引;扫描位置每天+3500 逐日劣化
+142b98a602183246db631721b0e6e9ea,aws-luckyus-cdpactivity-rw,luckyus_cdp_activity,t_contact_activity_instance_record,L0,pending,2026-09-01,,,张晓松,,191.7,104,1.84,12337,,
+e5a8e692edd6cb3b850fe46361f7a35b,aws-luckyus-salesorder-rw,luckyus_sales_order,t_order+t_order_item,L0,pending,2026-09-01,,,张晓松,,179.8,6,29.96,1966907,,
+09d7feb62352d0cf0bf761815c7bff1b,aws-luckyus-salesorder-rw,luckyus_sales_order,t_order+t_order_item,L0,pending,2026-09-01,,,张晓松,,142.1,6,23.69,1966908,,
+792aa5a0e55f22bcf33cdcae297cdf51,aws-luckyus-salesorder-rw,luckyus_sales_order,t_finance_refund,L0,pending,2026-09-01,,,张晓松,,93.9,80,1.17,20597,,
+8d07ade52a18a66ee9b4c7775dcddf08,aws-luckyus-salesorder-rw,luckyus_sales_order,t_finance_receipt,L0,pending,2026-09-01,,,张晓松,,84.3,14,6.02,1265167,,
+ba25fea5c4939d2b1da6b30ea986b7da,aws-luckyus-salesorder-rw,luckyus_sales_order,t_finance_receipt,L0,pending,2026-09-01,,,张晓松,,80.2,16,5.01,1264122,,
+397899b0f311e0a1b5db05da9be5001c,aws-luckyus-salesorder-rw,luckyus_sales_order,t_order+t_order_item,L0,pending,2026-09-01,,,张晓松,,55.7,13,4.29,89078,,
+e2b527f71ec26d63c531e90a22375ee6,aws-luckyus-salesorder-rw,luckyus_sales_order,t_order+t_order_make,L0,pending,2026-09-01,,,张晓松,,44.6,6,7.44,1741112,,
+18f0b86cb54c8bce581a3b9153fec867,aws-luckyus-salespayment-rw,luckyus_sales_payment,t_channel_pay_order,L0,pending,2026-09-01,,,张晓松,,27.6,8,3.45,10851,,
