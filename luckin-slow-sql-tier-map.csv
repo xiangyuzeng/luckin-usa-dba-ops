@@ -1,29 +1,28 @@
 # 慢 SQL 看板等级映射
 #
-# 分级标准（David 2026-09-01 定稿，六级）：
+# 分级标准（David 2026-09-01 定稿，五级）：
 #   L0 核心业务功能
 #   L1 重要业务功能
 #   L2 次要业务功能
-#   L3 辅助系统：系统周边运维、保障系统安全运行；出问题则业务系统处于不安全状态
-#   L4 统计分析系统：围绕业务系统提供支持活动，对时效性要求不高
-#   L5 其他测试系统
+#   L3 安全运维：系统周边运维、保障系统安全运行；出问题则业务系统处于不安全状态
+#   L4 数据分析：围绕业务系统提供支持活动，对时效性要求不高
 #
 # 套用规则：
 #   1) L0/L1/L2 一律沿用「MySQL 8.4.9 升级跟踪表」的服务等级列（业务重要性口径），
 #      一台挂多个服务取最高。本表不对业务库的重要性做二次判断。
-#   2) 只把「本身不是业务功能」的实例移出业务档，改按角色归 L3 / L4 / L5。
-#      2026-09-01 共移出 12 台，见各行 note。
+#   2) 只把「本身不是业务功能」的实例移出业务档，改按角色归 L3 / L4。
+#      2026-09-01 共移出 11 台，见各行 note。
 #
 # 🔴 重跑任何从升级跟踪表生成映射的脚本，只会还原 L0/L1/L2，
-#    L3/L4/L5 这 12 台的归类会丢失，必须按本表 note 重新套用。
+#    L3/L4 这 11 台的归类会丢失，必须按本表 note 重新套用。
 #
 # 待 David 确认的 3 处（其余按标准可直接对号入座）：
-#   iriskcontrolservice  保持 L0   风控属信息安全，也可论证为 L3 辅助系统；
+#   iriskcontrolservice  保持 L0   风控属信息安全，也可论证为 L3 安全运维；
 #                                 按「跟踪表说它是核心业务就不擅自降档」保守保留，请确认
 #   isalesdatamarketing  保持 L1   名字像分析、分组属国际营销增长，未确认是分析还是业务功能
 #   pubdm                L1→L4    公共数据集市；idm（供应链）从这里取数，若视作业务链路应退回 L1
 #
-# ⚠️ 一处标准本身的空缺：登录/权限/日志这类「基础组件」在六级标准里没有独立档位，
+# ⚠️ 一处标准本身的空缺：登录/权限/日志这类「基础组件」没有独立档位，
 #    按规则 1 沿用跟踪表——ipermission=L0、iluckyauthapi=L1、oplog=L2。
 #    若认为它们的故障影响面应高于跟踪表给的档位，需要另行指定。
 #
@@ -44,7 +43,7 @@ aws-luckyus-salesorder-rw,L0,国际营销增长,张晓松,核心业务功能—�
 aws-luckyus-salespayment-rw,L0,国际营销增长,张晓松,核心业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-scm-shopstock-rw,L0,国际供应链,方思扬,核心业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-scmcommodity-rw,L0,国际供应链,方思扬,核心业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
-aws-luckyus-devops-rw,L3,质量效能/运维,林鑫涛/吴心一/徐博轩/杨涛/姚清居/桂升斌/吴春林,2026-09-01 六级标准：辅助系统——iZeus 告警平台——坏了业务处于无监控的不安全状态（升级跟踪表服务等级为 L1，非业务系统故不沿用）
+aws-luckyus-devops-rw,L3,质量效能/运维,林鑫涛/吴心一/徐博轩/杨涛/姚清居/桂升斌/吴春林,2026-09-01 五级标准：安全运维——iZeus 告警平台——坏了业务处于无监控的不安全状态（升级跟踪表服务等级为 L1，非业务系统故不沿用）
 aws-luckyus-framework01-rw,L1,架构,车永生/罗宁/黄国仲/林正权/王卫/张隆洋/刘俊琪,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-framework02-rw,L1,架构,罗宁/林正权/张黎明/代俊健/王卫,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-horae-rw,L1,业务,,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
@@ -54,7 +53,7 @@ aws-luckyus-ibillingcentersrv-rw,L1,国际公共平台,陈亮,重要业务功能
 aws-luckyus-ibizconfigcenter-rw,L1,国际公共平台,陈亮,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-iehr-rw,L1,国际公共平台,陈亮,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-igers-rw,L1,国际公共平台,陈亮,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
-aws-luckyus-ijumpserver-jumpserver-rw,L3,信息安全,刘成锡,2026-09-01 六级标准：辅助系统——堡垒机，运维访问管控（升级跟踪表服务等级为 L1，非业务系统故不沿用）
+aws-luckyus-ijumpserver-jumpserver-rw,L3,信息安全,刘成锡,2026-09-01 五级标准：安全运维——堡垒机，运维访问管控（升级跟踪表服务等级为 L1，非业务系统故不沿用）
 aws-luckyus-iluckyams-rw,L1,业务,,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-iluckyauthapi-rw,L1,国际公共平台,陈亮,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-iluckymedia-rw,L1,国际运营,张少群,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
@@ -69,11 +68,11 @@ aws-luckyus-isalesdatamarketing-rw,L1,国际营销增长,李加彬/张翔/张晓
 aws-luckyus-isalesmembermarketing-rw,L1,国际营销增长,李加彬/张翔/张晓松,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-iunifiedreconcile-rw,L1,国际公共平台,陈亮/陈洪君,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-iworkflowmidlayer-rw,L1,国际公共平台,陈亮/陈洪君,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
-aws-luckyus-ldas-rw,L4,运维/DBA自有,张杨/孔增/金盛昌/张黎明/翁延海,2026-09-01 六级标准：统计分析系统——DBA 自有 CMDB（升级跟踪表服务等级为 L1，非业务系统故不沿用）
-aws-luckyus-ldas01-rw,L4,运维/DBA自有,张杨,2026-09-01 六级标准：统计分析系统——DBA 自有数据平台，慢 SQL 采集表所在（升级跟踪表服务等级为 L1，非业务系统故不沿用）
+aws-luckyus-ldas-rw,L4,运维/DBA自有,张杨/孔增/金盛昌/张黎明/翁延海,2026-09-01 五级标准：数据分析——DBA 自有 CMDB（升级跟踪表服务等级为 L1，非业务系统故不沿用）
+aws-luckyus-ldas01-rw,L4,运维/DBA自有,张杨,2026-09-01 五级标准：数据分析——DBA 自有数据平台，慢 SQL 采集表所在（升级跟踪表服务等级为 L1，非业务系统故不沿用）
 aws-luckyus-mfranchise-rw,L1,国际公共平台,陈亮/陈洪君,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-opempefficiency-rw,L1,国际运营,陈培浩,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
-aws-luckyus-pubdm-rw,L4,国际供应链,方思扬,2026-09-01 六级标准：统计分析系统——公共数据集市（idm 取数）（升级跟踪表服务等级为 L1，非业务系统故不沿用）
+aws-luckyus-pubdm-rw,L4,国际供应链,方思扬,2026-09-01 五级标准：数据分析——公共数据集市（idm 取数）（升级跟踪表服务等级为 L1，非业务系统故不沿用）
 aws-luckyus-scm-asset-rw,L1,国际供应链,方思扬,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-scm-openapi-rw,L1,国际供应链,方思扬,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-scm-ordering-rw,L1,国际供应链,方思扬,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
@@ -84,13 +83,13 @@ aws-luckyus-scmsrm-rw,L1,国际供应链,方思扬,重要业务功能——沿�
 aws-luckyus-upush-rw,L1,架构,罗宁/林智贤/刘洋,重要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-fichargecontrol-rw,L2,国际公共平台,尤志杰,次要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-ifiaccounting-rw,L2,国际公共平台,尤志杰,次要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
-aws-luckyus-ilsopdevopsdata-rw,L3,质量效能,夏文涛,2026-09-01 六级标准：辅助系统——LSOP 质量效能运维数据（升级跟踪表服务等级为 L2，非业务系统故不沿用）
-aws-luckyus-iluckyhealth-rw,L3,运维,叶荣海,2026-09-01 六级标准：辅助系统——健康检查/巡检（升级跟踪表服务等级为 L2，非业务系统故不沿用）
+aws-luckyus-ilsopdevopsdata-rw,L3,质量效能,夏文涛,2026-09-01 五级标准：安全运维——LSOP 质量效能运维数据（升级跟踪表服务等级为 L2，非业务系统故不沿用）
+aws-luckyus-iluckyhealth-rw,L3,运维,叶荣海,2026-09-01 五级标准：安全运维——健康检查/巡检（升级跟踪表服务等级为 L2，非业务系统故不沿用）
 aws-luckyus-iopocp-rw,L2,国际运营,陈培浩,次要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-oplog-rw,L2,国际运营,张少群,次要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
 aws-luckyus-opqualitycontrol-rw,L2,国际运营,陈培浩,次要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
-aws-luckyus-scm-wmssimulate-rw,L5,国际供应链,方思扬,2026-09-01 六级标准：其他测试系统——WMS 模拟环境（升级跟踪表服务等级为 L2，非业务系统故不沿用）
-aws-luckyus-icyberdata-rw,L4,大数据,田洪彬,2026-09-01 六级标准：统计分析系统——Doris 任务调度元数据，数据平台（升级跟踪表服务等级为 L3，非业务系统故不沿用）
-aws-luckyus-iluckydorisops-rw,L4,大数据,苏晓博,2026-09-01 六级标准：统计分析系统——Doris 运维库，数据平台（升级跟踪表服务等级为 L3，非业务系统故不沿用）
-aws-luckyus-ldasverify01-rw,L5,运维/DBA自有,,2026-09-01 六级标准：其他测试系统——DBA 自有验证实例（升级跟踪表服务等级为 L3，非业务系统故不沿用）
-aws-luckyus-ldasverify02-rw,L5,运维/DBA自有,,2026-09-01 六级标准：其他测试系统——DBA 自有验证实例（升级跟踪表服务等级为 L3，非业务系统故不沿用）
+aws-luckyus-scm-wmssimulate-rw,L2,国际供应链,方思扬,次要业务功能——沿用 MySQL 8.4.9 升级跟踪表服务等级
+aws-luckyus-icyberdata-rw,L4,大数据,田洪彬,2026-09-01 五级标准：数据分析——Doris 任务调度元数据，数据平台（升级跟踪表服务等级为 L3，非业务系统故不沿用）
+aws-luckyus-iluckydorisops-rw,L4,大数据,苏晓博,2026-09-01 五级标准：数据分析——Doris 运维库，数据平台（升级跟踪表服务等级为 L3，非业务系统故不沿用）
+aws-luckyus-ldasverify01-rw,L4,运维/DBA自有,,2026-09-01 五级标准：数据分析——DBA 自有验证实例（升级跟踪表服务等级为 L3，非业务系统故不沿用）
+aws-luckyus-ldasverify02-rw,L4,运维/DBA自有,,2026-09-01 五级标准：数据分析——DBA 自有验证实例（升级跟踪表服务等级为 L3，非业务系统故不沿用）
