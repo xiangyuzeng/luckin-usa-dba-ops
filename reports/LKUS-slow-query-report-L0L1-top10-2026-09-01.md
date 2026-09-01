@@ -152,29 +152,44 @@ UPDATE t_attendance_change SET status = 4, modify_time = now(), modifier_name = 
 ## 四、🔴 口径警告：这个 TOP10 依赖 ≥1s 门槛，换个口径完全是另一张榜
 
 采集表 `t_dba_collect_slow_query` **只收 `avg_sec ≥ 1s` 的指纹**。
-直接对同样 48 台实例的慢日志原文按语句聚合（同样剔除 `diagtools`，`long_query_time=0.1s`）：
+对**同一批 L0+L1 实例**（48 台中 46 台有慢日志组，`ibehr` / `isalescouponservice` 未开启）
+直接按慢日志原文聚合，同样剔除 `diagtools`，`long_query_time = 0.1s`：
 
 | # | 实例 | 账号 | 7天次数 | DB时间 | 均耗 | 扫描行数 | 在采集表榜单上？ |
 |---|---|---|---:|---:|---:|---:|---|
 | 1 | salesmarketing | `isalesmktadmin_A_o` | 66,990 | **23,060.7s** | 0.34s | **3,447,785,825** | ❌ 均耗 <1s |
 | 2 | opshopsale | `iopshopsaleservice_A_o` | 752 | 4,865.9s | 6.47s | 573,099,416 | ✅ 第 1 名 |
 | 3 | salespayment | `isalespmtadmin_A_o` | 2,256 | 3,671.4s | 1.63s | 366,259,114 | ✅ 第 2 名 |
-| 4 | isalesprivatedomain | `privatedomainserv_A_o` | 11,918 | 3,499.3s | 0.29s | 58,795,601 | ❌ 均耗 <1s |
-| 5 | ipermission | `iopenauth_A_o` | 11,280 | 2,716.8s | 0.24s | 763,957,415 | ❌ 均耗 <1s |
-| 6 | salesmarketing | `isalescouponservice_A_o` | 8,197 | 2,534.7s | 0.31s | 14,701,778 | ❌ 均耗 <1s |
-| 7 | framework01 | `kbx_w` | 10,090 | 2,440.4s | 0.24s | 10,090 | ❌ 均耗 <1s |
-| 8 | iopenlinker | `iopenlinker_A_o` | 7,087 | 1,887.2s | 0.27s | 25,137 | ❌ 均耗 <1s |
+| 4 | isalesprivatedomain | `privatedomainserv_A_o` | 11,918 | 3,499.3s | 0.29s | 58,795,601 | ❌ |
+| 5 | ipermission | `iopenauth_A_o` | 11,280 | 2,716.8s | 0.24s | **763,957,415** | ❌ |
+| 6 | salesmarketing | `isalescouponservice_A_o` | 8,197 | 2,534.7s | 0.31s | 14,701,778 | ❌ |
+| 7 | cdpactivity | `icdpactivityengine_A_o` | 11,790 | 2,444.7s | 0.21s | 612,229 | ❌ |
+| 8 | framework01 | `kbx_w` | 10,090 | 2,440.4s | 0.24s | 10,090 | ❌ |
+| 9 | salespayment | `dbms_dbsearch` | 8,726 | 2,325.8s | 0.27s | 57,856,189 | ❌ |
+| 10 | ipermission | `iopenauth_A_o` | 5,044 | 1,988.4s | 0.39s | 41,369,902 | ❌ |
 
-**第 1 名 7 天扫了 34.5 亿行、烧掉 23,061 秒 DB 时间 —— 是采集表榜单第 1 名的 4.6 倍，
-却因为平均 0.34 秒而完全不在榜上。** 它每次执行平均扫 51,467 行返回不多，
-执行 66,990 次（约每 9 秒一次）。
+**10 条里只有 2 条出现在采集表榜单上。** 合计约 49,548 秒，是第二节 TOP10 合计（9,702 秒）的 5.1 倍。
 
-第 7 名 `kbx_w` 的 `SELECT * FROM es_qrtz_LOCKS WHERE SCHED_NAME='KBXScheduler' AND LOCK_NAME='TRIGGER_ACCESS' FOR UPDATE`
-扫描行数等于执行次数（10,090 行 / 10,090 次，每次 1 行）—— **典型的行锁等待**，
-Quartz 调度器抢锁，与 SQL 效率无关。
+三点值得单独说：
 
-**结论**：「单次耗时」和「累计影响」是两把不同的尺子。现有台账只有前者，
-高频低耗型查询（`isalesmktadmin_A_o` 这类）在治理视野之外。已记为行动项 E-03。
+1. **第 1 名是整个 L0+L1 里最贵的一条，却完全不在榜上。**
+   `isalesmktadmin_A_o` 7 天执行 66,990 次（约每 9 秒一次）、扫 **34.5 亿行**、烧掉 23,061 秒 —— 
+   是采集表榜首 `opshopsale` 的 4.6 倍，只因为平均 0.34 秒就被 1 秒门槛整个滤掉。
+   单次平均扫 51,467 行，是典型的「单次不慢、但次数多且每次都扫一堆」。
+
+2. **第 8 名根本不是查询问题。** `kbx_w` 的
+   `SELECT * FROM es_qrtz_LOCKS WHERE SCHED_NAME='KBXScheduler' AND LOCK_NAME='TRIGGER_ACCESS' FOR UPDATE`
+   扫描行数恰好等于执行次数（10,090 / 10,090，每次 1 行）—— **纯行锁等待**，
+   Quartz 调度器抢锁，SQL 本身无可优化。
+
+3. **第 9 名 `dbms_dbsearch` 大概率也是我们自己的。** 它的语句形如
+   `select UNIX_TIMESTAMP()*1000 AS _timestamp, count(t.id) AS _value, c.name from …` ——
+   `_timestamp` / `_value` 是 Grafana MySQL 数据源的取数约定，即**某个监控看板在轮询生产库**。
+   这与第一节 `ldas01` 的 `idbtask_w` 是同一类：**「剔除 `diagtools`」只挡住了一个账号，
+   挡不住 DBA/监控体系用别的账号发出的查询。** 建议后续按「归属」而不是按账号名过滤。
+
+**结论**：「单次耗时」和「累计影响」是两把尺子。现有台账只有前者，
+高频低耗型查询（第 1、4、5、6、7、9、10 名）整体在治理视野之外。已记为行动项 E-03。
 
 ---
 
@@ -185,7 +200,8 @@ Quartz 调度器抢锁，与 SQL 效率无关。
 | E-01 | opempefficiency 两个定时任务从整点 `:00` / `05:00` 错峰 | P2 | 国际运营（陈培浩/游熖） | 待沟通 |
 | E-02 | 分级映射表按五级标准定稿，11 台移出业务档；重新生成后需重新套用 | P1 | DBA | **已改**（3 处待确认） |
 | E-03 | 周度分诊补「扫描行数 / 累计 DB 时间」维度，覆盖均耗 <1s 的高频查询 | P2 | DBA | 待做（与 -0901-C 的 C-02 合并） |
-| E-04 | 复核 `isalesmktadmin_A_o` 那条（7 天 34.5 亿行）—— 新口径下的真·第一名 | P1 | DBA + 张晓松 | 待做 |
+| E-05 | 过滤 DBA 自有查询改为按「归属」而非账号名（`diagtools` 之外还有 `idbtask_w`、`dbms_dbsearch`） | P2 | DBA | 待做 |
+| E-04 | 复核 `isalesmktadmin_A_o` 那条（7 天 66,990 次 / 34.5 亿行 / 23,061 秒）—— 原文口径下的真·第一名 | P1 | DBA + 张晓松 | 待做 |
 | — | TOP10 第 1~8 名的处置见 -0901 / -0901-B，本次无变化 | — | — | — |
 
 ---
