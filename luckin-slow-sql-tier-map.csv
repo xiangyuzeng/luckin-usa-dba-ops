@@ -1,0 +1,77 @@
+# 慢 SQL 看板等级映射 —— 由 make_tier_map.py 从 MySQL 8.4.9 升级跟踪表生成
+# level: L0核心业务 > L1重要业务 > L2普通业务 > L3大数据/DBA自有 > L4测试/验证库；未列出的实例=未分类
+#        L0/L1/L2 取自升级表服务等级(一台挂多个服务取最高)；业务分组=大数据 的一律降 L3；测试/验证库人工定 L4
+# 手工改这个文件后重跑 build_slow_sql_dashboard.py 即可；重跑 make_tier_map.py 会覆盖手工修改
+#
+# 手工降级（重新生成后必须重新套用，升级跟踪表里这几台仍是原等级）：
+#   aws-luckyus-ldas01-rw   L1 → L3   DBA 自有数据平台（慢 SQL 采集表所在）
+#   aws-luckyus-ldas-rw     L1 → L3   DBA 自有 CMDB
+#   aws-luckyus-devops-rw   L1 → L2   iZeus 告警平台库
+# 判据（David 2026-09-01）：挂了不影响业务系统运行的，不进 L0/L1。
+# ldasverify01/02 早先按同一判据定为 L3，这次是把同族的其余几台对齐。
+instance,level,group,owner,note
+aws-luckyus-cdpactivity-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
+aws-luckyus-fitax-rw,L0,国际公共平台,尤志杰,升级跟踪表8.4.9
+aws-luckyus-ipermission-rw,L0,国际公共平台,陈亮/张晓松,升级跟踪表8.4.9
+aws-luckyus-iriskcontrolservice-rw,L0,信息安全,林宏鹏,升级跟踪表8.4.9
+aws-luckyus-isalescdp-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
+aws-luckyus-isalesprivatedomain-rw,L0,国际营销增长,张翔/上官锦程/王良,升级跟踪表8.4.9
+aws-luckyus-opproduction-rw,L0,国际运营,陈培浩/游熖,升级跟踪表8.4.9
+aws-luckyus-opshop-rw,L0,国际运营,陈培浩/游熖,升级跟踪表8.4.9
+aws-luckyus-opshopsale-rw,L0,国际运营,陈培浩/游熖,升级跟踪表8.4.9
+aws-luckyus-salescrm-rw,L0,国际营销增长,张翔/高如森,升级跟踪表8.4.9
+aws-luckyus-salesmarketing-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
+aws-luckyus-salesorder-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
+aws-luckyus-salespayment-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
+aws-luckyus-scm-shopstock-rw,L0,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scmcommodity-rw,L0,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-devops-rw,L2,质量效能/运维,林鑫涛/吴心一/徐博轩/杨涛/姚清居/桂升斌/吴春林,2026-09-01 David 定：挂了不影响业务系统运行 → 非业务档；iZeus 告警平台库，原 L1
+aws-luckyus-framework01-rw,L1,架构,车永生/罗宁/黄国仲/林正权/王卫/张隆洋/刘俊琪,升级跟踪表8.4.9
+aws-luckyus-framework02-rw,L1,架构,罗宁/林正权/张黎明/代俊健/王卫,升级跟踪表8.4.9
+aws-luckyus-horae-rw,L1,业务,,升级表未收录；David 确认=业务库 L1(Chronus 调度库)；Prometheus mysqld_exporter 待 David 补，补完本行不用改
+aws-luckyus-iadmin-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
+aws-luckyus-ibehr-rw,L1,业务,,升级表未收录；David 确认=业务库 L1
+aws-luckyus-ibillingcentersrv-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
+aws-luckyus-ibizconfigcenter-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
+aws-luckyus-iehr-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
+aws-luckyus-igers-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
+aws-luckyus-ijumpserver-jumpserver-rw,L1,信息安全,刘成锡,升级跟踪表8.4.9
+aws-luckyus-iluckyams-rw,L1,业务,,升级表未收录；David 确认=业务库 L1
+aws-luckyus-iluckyauthapi-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
+aws-luckyus-iluckymedia-rw,L1,国际运营,张少群,升级跟踪表8.4.9
+aws-luckyus-iopenadmin-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-iopenlinker-rw,L1,国际营销增长,张晓松,升级跟踪表8.4.9
+aws-luckyus-iopenservice-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
+aws-luckyus-iopshopexpand-rw,L1,国际运营,陈培浩,升级跟踪表8.4.9
+aws-luckyus-iotplatform-rw,L1,AIot,李晨端/左达奇,升级跟踪表8.4.9
+aws-luckyus-ireplenishment-rw,L1,供应链算法,高天牧/黄方进,升级跟踪表8.4.9
+aws-luckyus-isalescouponservice-rw,L1,国际营销增长,,升级表未收录；David 确认=优惠券服务 L1
+aws-luckyus-isalesdatamarketing-rw,L1,国际营销增长,李加彬/张翔/张晓松,升级跟踪表8.4.9
+aws-luckyus-isalesmembermarketing-rw,L1,国际营销增长,李加彬/张翔/张晓松,升级跟踪表8.4.9
+aws-luckyus-iunifiedreconcile-rw,L1,国际公共平台,陈亮/陈洪君,升级跟踪表8.4.9
+aws-luckyus-iworkflowmidlayer-rw,L1,国际公共平台,陈亮/陈洪君,升级跟踪表8.4.9
+aws-luckyus-ldas-rw,L3,运维/DBA自有,张杨/孔增/金盛昌/张黎明/翁延海,2026-09-01 David 定：挂了不影响业务系统运行 → 非业务档；DBA 自有 CMDB，与 ldas01 同族（David 只点名 ldas01，按同一口径一并下调，如不同意请驳回）
+aws-luckyus-ldas01-rw,L3,运维/DBA自有,张杨,2026-09-01 David 定：挂了不影响业务系统运行 → 非业务档；DBA 自有数据平台，与 ldasverify01/02 同族
+aws-luckyus-mfranchise-rw,L1,国际公共平台,陈亮/陈洪君,升级跟踪表8.4.9
+aws-luckyus-opempefficiency-rw,L1,国际运营,陈培浩,升级跟踪表8.4.9
+aws-luckyus-pubdm-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scm-asset-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scm-openapi-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scm-ordering-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scm-plan-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scm-purchase-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scm-wds-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-scmsrm-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-upush-rw,L1,架构,罗宁/林智贤/刘洋,升级跟踪表8.4.9
+aws-luckyus-fichargecontrol-rw,L2,国际公共平台,尤志杰,升级跟踪表8.4.9
+aws-luckyus-ifiaccounting-rw,L2,国际公共平台,尤志杰,升级跟踪表8.4.9
+aws-luckyus-ilsopdevopsdata-rw,L2,质量效能,夏文涛,升级跟踪表8.4.9
+aws-luckyus-iluckyhealth-rw,L2,运维,叶荣海,升级跟踪表8.4.9
+aws-luckyus-iopocp-rw,L2,国际运营,陈培浩,升级跟踪表8.4.9
+aws-luckyus-oplog-rw,L2,国际运营,张少群,升级跟踪表8.4.9
+aws-luckyus-opqualitycontrol-rw,L2,国际运营,陈培浩,升级跟踪表8.4.9
+aws-luckyus-scm-wmssimulate-rw,L2,国际供应链,方思扬,升级跟踪表8.4.9
+aws-luckyus-icyberdata-rw,L3,大数据,田洪彬,升级跟踪表8.4.9(原 L1，因业务分组=大数据降为 L3)
+aws-luckyus-iluckydorisops-rw,L3,大数据,苏晓博,升级跟踪表8.4.9(原 L2，因业务分组=大数据降为 L3)
+aws-luckyus-ldasverify01-rw,L3,运维/DBA自有,,升级表未收录；David 确认=运维数据库(DBA 自有验证实例)，归 L3 非业务档
+aws-luckyus-ldasverify02-rw,L3,运维/DBA自有,,升级表未收录；David 确认=运维数据库(DBA 自有验证实例)，归 L3 非业务档
