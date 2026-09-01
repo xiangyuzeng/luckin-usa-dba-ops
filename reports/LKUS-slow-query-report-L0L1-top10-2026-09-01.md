@@ -6,32 +6,56 @@
 | 前序报告 | -0901（L0 TOP3）、-0901-B（L0 剩余 9 条）、-0901-C（按账号回溯）、-0901-D（效能看板） |
 | 出具日期 | 2026-09-01 |
 | 出具人 | 曾翔宇（DBA / Infrastructure） |
-| 范围 | **L0 + L1 共 50 台实例**（等级表本次已更正，见第一节） |
+| 范围 | **L0 + L1 共 51 台实例**（等级表本次按新判据整体重排，见第一节） |
 | 排除 | **账号 `diagtools` 的全部查询**（DBA 自有：看板采集容器 + mcp-db-gateway 临时查询） |
 | 数据窗口 | 2026-08-25 ~ 2026-09-01（7 天日差分） |
 | 数据来源 | `ldas01` 采集表（≥1s 指纹）+ CloudWatch 慢日志原文按 `User@Host` 归属 + 现场 `EXPLAIN` / `performance_schema` 计时 |
 
 ---
 
-## 一、先更正分级：三台运维自有实例出榜
+## 一、先更正分级：整张表按组件角色重排
 
-David 2026-09-01 定的判据：**挂了不影响业务系统运行的，不进 L0/L1**。据此本次调整：
+David 2026-09-01 给出的分级判据，与此前映射表的依据**不是一回事**。此前等级取自
+「MySQL 8.4.9 升级跟踪表」的服务等级列，那是**业务重要性**口径；新判据是**组件角色**：
 
-| 实例 | 原 | 现 | 说明 |
-|---|---|---|---|
-| `aws-luckyus-ldas01-rw` | L1 | **L3** | DBA 自有数据平台（慢 SQL 采集表就在上面） |
-| `aws-luckyus-ldas-rw` | L1 | **L3** | DBA 自有 CMDB，与 ldas01 同族 |
-| `aws-luckyus-devops-rw` | L1 | **L2** | iZeus 告警平台库 |
+| 等级 | 定义 |
+|---|---|
+| **L0 基础组件** | 一旦出问题会影响**大部分业务系统**。例：登录、权限、日志 |
+| **L1 业务功能** | 一旦出问题会影响**某个业务功能** |
+| **L2 辅助系统** | 系统周边运维、保障系统安全运行；出问题则业务系统处于**不安全状态** |
+| **L3 统计分析系统** | 围绕业务系统提供支持活动，对**时效性要求不高** |
+| **L4 其他测试系统** | — |
 
-`ldasverify01/02` 早先已按同一判据定为 L3，这次是把同族其余几台对齐。
+据此整表重排，**65 台中 32 台等级变化**：
 
-> ⚠️ `ldas-rw` David 未点名，是我按同一口径一并下调的，如不同意请驳回。
-> 改动写在 `/app/luckin-slow-sql-tier-map.csv` 头部的「手工降级」块里 ——
-> 升级跟踪表里这三台仍是原等级，**重新生成映射表后必须重新套用**。
+| 方向 | 台数 | 实例 |
+|---|---:|---|
+| → **L0** | 8 台变更 | `iluckyauthapi`（登录）、`ipermission`（权限）、`oplog`（日志）、`ibizconfigcenter`（配置中心）、`framework01` / `framework02` / `horae`（Chronus 调度）、`upush`（统一推送）、`iworkflowmidlayer`（工作流中间层）；`ipermission` 原本就是 L0，未变 |
+| L0 → **L1** | 13 | `salesorder`、`salespayment`、`salesmarketing`、`salescrm`、`cdpactivity`、`isalescdp`、`isalesprivatedomain`、`opshop`、`opshopsale`、`opproduction`、`scm-shopstock`、`scmcommodity`、`fitax` |
+| L2 → **L1** | 4 | `fichargecontrol`、`ifiaccounting`、`iopocp`、`opqualitycontrol` |
+| → **L2** | 2 | `ijumpserver`（堡垒机）、`iriskcontrolservice`（风控） |
+| → **L3** | 2 | `pubdm`、`isalesdatamarketing`（另有 `icyberdata`、`iluckydorisops`、`ldas`、`ldas01` 本就在 L3） |
+| → **L4** | 3 | `ldasverify01/02`、`scm-wmssimulate` |
 
-调整后 L0+L1 = 50 台（原 53 台）。**这一步直接改变了榜单**：调整前 `ldas01` 三条
-（151.3s / 100.8s / 61.7s，账号 `idbtask_w`）本会占据第 5、6、10 名 —— 那也是我们自己的东西，
-只是换了个账号名，`diagtools` 这一条过滤拦不住它。
+新分布：**L0 × 9、L1 × 42、L2 × 5、L3 × 6、L4 × 3**。
+
+> ⚠️ **6 处判断待 David 确认**：`iriskcontrolservice`→L2（风控算辅助还是业务功能）、
+> `upush`→L0、`iworkflowmidlayer`→L0（是否算基础组件）、`framework02`→L0（库内容未核实，
+> 按与 framework01 同族推断）、`pubdm`→L3、`isalesdatamarketing`→L3。
+> 判据原文与这 6 处都写在 `/app/luckin-slow-sql-tier-map.csv` 表头。
+> **任何从升级跟踪表重新生成映射的脚本都会覆盖本表**，必须按新判据重新套用。
+
+### 重排后最重要的一个事实
+
+**按新判据，基础组件层几乎没有慢 SQL 问题。** 新 L0 的 9 台实例 7 天只有 5 条 ≥5s 的指纹、
+合计 **64.6 秒**；本报告 TOP10 里那些几千秒级的大头，**全部落在 L1 业务功能层**。
+换句话说：慢查询集中在业务功能，不在公共基础设施 —— 这与重排前「TOP10 里 8 条在 L0」的
+印象完全相反，只是因为口径换了。
+
+> 顺带保留上一轮的结论：`ldas01` / `ldas`（DBA 自有数据平台）归 L3、`devops`（iZeus 告警库）
+> 归 L2 —— 新判据下依然成立。这一步让它们出榜；否则 `ldas01` 三条（151.3s / 100.8s / 61.7s，
+> 账号 `idbtask_w`）会占据第 5、6、10 名。**那也是我们自己的东西，只是换了个账号名，
+> 「剔除 diagtools」这条过滤拦不住它** —— 按账号过滤不够，还得按归属看。
 
 ---
 
@@ -39,14 +63,14 @@ David 2026-09-01 定的判据：**挂了不影响业务系统运行的，不进 
 
 | # | 等级 | 实例 | 指纹 | DB时间 | 次数 | 均耗 | 执行账号 | 结论出处 |
 |---|---|---|---|---:|---:|---:|---|---|
-| 1 | L0 | opshopsale | `00259408` | **4,976.9s** | 768 | 6.48s | `iopshopsaleservice_A_o` | -0901 |
-| 2 | L0 | salespayment | `fe67d6b5` | **3,780.6s** | 2,304 | 1.64s | `isalespmtadmin_A_o` | -0901 |
-| 3 | L0 | salesmarketing | `9919be27` | 371.2s | 8 | 46.40s | `isalescouponservice_A_o` | -0901 |
-| 4 | L0 | cdpactivity | `142b98a6` | 191.7s | 104 | 1.84s | `icdpactivityengine_A_o` | -0901-B |
-| 5 | L0 | salesorder | `792aa5a0` | 93.9s | 80 | 1.17s | `isalesorderservice_A_o` | -0901-B |
-| 6 | L0 | salesorder | `8d07ade5` | 84.3s | 14 | 6.02s | `isalesorderservice_A_o` | -0901-B |
-| 7 | L0 | salesorder | `ba25fea5` | 80.2s | 16 | 5.01s | `isalesorderservice_A_o` | -0901-B |
-| 8 | L0 | salesorder | `397899b0` | 55.7s | 13 | 4.29s | `isalesorderservice_A_o` | -0901-B（已停跑） |
+| 1 | L1 | opshopsale | `00259408` | **4,976.9s** | 768 | 6.48s | `iopshopsaleservice_A_o` | -0901 |
+| 2 | L1 | salespayment | `fe67d6b5` | **3,780.6s** | 2,304 | 1.64s | `isalespmtadmin_A_o` | -0901 |
+| 3 | L1 | salesmarketing | `9919be27` | 371.2s | 8 | 46.40s | `isalescouponservice_A_o` | -0901 |
+| 4 | L1 | cdpactivity | `142b98a6` | 191.7s | 104 | 1.84s | `icdpactivityengine_A_o` | -0901-B |
+| 5 | L1 | salesorder | `792aa5a0` | 93.9s | 80 | 1.17s | `isalesorderservice_A_o` | -0901-B |
+| 6 | L1 | salesorder | `8d07ade5` | 84.3s | 14 | 6.02s | `isalesorderservice_A_o` | -0901-B |
+| 7 | L1 | salesorder | `ba25fea5` | 80.2s | 16 | 5.01s | `isalesorderservice_A_o` | -0901-B |
+| 8 | L1 | salesorder | `397899b0` | 55.7s | 13 | 4.29s | `isalesorderservice_A_o` | -0901-B（已停跑） |
 | 9 | L1 | opempefficiency | `a0258469` | 36.4s | 14 | 2.60s | `iopempefficiency_A_o` | **本报告新增** |
 | 10 | L1 | opempefficiency | `8d7d1910` | 31.2s | 14 | 2.23s | `iopempefficiency_A_w` | **本报告新增** |
 
@@ -54,10 +78,10 @@ David 2026-09-01 定的判据：**挂了不影响业务系统运行的，不进 
 `e5a8e692` 179.8s、`09d7feb6` 142.1s（store-ops 看板 SPU 双扫描）、`e2b527f7` 44.6s（store-ops 效能）。
 三条今天已改完并部署，见 -0901-B / -0901-C。
 
-**分布**：TOP10 里 8 条在 L0、2 条在 L1；按实例集中在 4 台（salesorder ×4、opempefficiency ×2、
+**分布**：按新判据 **TOP10 全部 10 条都在 L1 业务功能层，L0 基础组件层一条都没有**；按实例集中在 4 台（salesorder ×4、opempefficiency ×2、
 opshopsale / salespayment / salesmarketing / cdpactivity 各 1）。
-第 1、2 名合计 8,757.5s，占本 TOP10 总量（9,702.1s）的 **90.3%** —— 与只看 L0 时的结论一致，
-**加进 L1 并没有改变「头部两条吃掉九成」的格局**。
+第 1、2 名合计 8,757.5s，占本 TOP10 总量（9,702.1s）的 **90.3%**——「头部两条吃掉九成」的格局，
+在换判据前后都成立。
 
 ---
 
@@ -131,7 +155,7 @@ UPDATE t_attendance_change SET status = 4, modify_time = now(), modifier_name = 
 ## 四、🔴 口径警告：这个 TOP10 依赖 ≥1s 门槛，换个口径完全是另一张榜
 
 采集表 `t_dba_collect_slow_query` **只收 `avg_sec ≥ 1s` 的指纹**。
-直接对同样 50 台实例的慢日志原文按语句聚合（同样剔除 `diagtools`，`long_query_time=0.1s`）：
+直接对同样 51 台实例的慢日志原文按语句聚合（同样剔除 `diagtools`，`long_query_time=0.1s`）：
 
 | # | 实例 | 账号 | 7天次数 | DB时间 | 均耗 | 扫描行数 | 在采集表榜单上？ |
 |---|---|---|---:|---:|---:|---:|---|

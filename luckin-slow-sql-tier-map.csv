@@ -1,77 +1,90 @@
-# 慢 SQL 看板等级映射 —— 由 make_tier_map.py 从 MySQL 8.4.9 升级跟踪表生成
-# level: L0核心业务 > L1重要业务 > L2普通业务 > L3大数据/DBA自有 > L4测试/验证库；未列出的实例=未分类
-#        L0/L1/L2 取自升级表服务等级(一台挂多个服务取最高)；业务分组=大数据 的一律降 L3；测试/验证库人工定 L4
-# 手工改这个文件后重跑 build_slow_sql_dashboard.py 即可；重跑 make_tier_map.py 会覆盖手工修改
+# 慢 SQL 看板等级映射
 #
-# 手工降级（重新生成后必须重新套用，升级跟踪表里这几台仍是原等级）：
-#   aws-luckyus-ldas01-rw   L1 → L3   DBA 自有数据平台（慢 SQL 采集表所在）
-#   aws-luckyus-ldas-rw     L1 → L3   DBA 自有 CMDB
-#   aws-luckyus-devops-rw   L1 → L2   iZeus 告警平台库
-# 判据（David 2026-09-01）：挂了不影响业务系统运行的，不进 L0/L1。
-# ldasverify01/02 早先按同一判据定为 L3，这次是把同族的其余几台对齐。
+# 分级判据（David 2026-09-01 定，按组件角色，不是按业务重要性）：
+#   L0 基础组件：一旦出问题会影响大部分业务系统。例：登录、权限、日志
+#   L1 业务功能：一旦出问题会影响某个业务功能
+#   L2 辅助系统：系统周边运维、保障系统安全运行；出问题则业务系统处于不安全状态
+#   L3 统计分析系统：围绕业务系统提供支持活动，对时效性要求不高
+#   L4 其他测试系统
+#
+# 🔴 本表 2026-09-01 按上述判据整体重排，65 台中 32 台等级变化。
+#    在此之前等级取自「MySQL 8.4.9 升级跟踪表」的服务等级列，那是业务重要性口径，
+#    与本判据不是一回事——所以交易/营销/运营类（salesorder、salespayment、salesmarketing、
+#    opshopsale、cdpactivity 等）从 L0 降到 L1，而登录/权限/日志/配置/调度从 L1 升到 L0。
+#    重跑任何从升级跟踪表生成映射的脚本都会覆盖本表，必须按本判据重新套用。
+#
+# 待 David 确认的 6 处判断（其余按判据可直接对号入座）：
+#   iriskcontrolservice  L0→L2  风控：按「坏了业务处于不安全状态」归辅助，也可视作业务功能
+#   upush                L1→L0  统一推送：各业务共用算基础组件，也可视作业务功能
+#   iworkflowmidlayer    L1→L0  工作流中间层：同上
+#   framework02          L1→L0  按与 framework01（Chronus 调度）同族推断，库内容未核实
+#   pubdm                L1→L3  公共数据集市（idm 取数）
+#   isalesdatamarketing  L1→L3  数据营销分析
+#
+# group / owner 两列仍来自升级跟踪表，仅作归属参考，不参与分级。
 instance,level,group,owner,note
-aws-luckyus-cdpactivity-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
-aws-luckyus-fitax-rw,L0,国际公共平台,尤志杰,升级跟踪表8.4.9
-aws-luckyus-ipermission-rw,L0,国际公共平台,陈亮/张晓松,升级跟踪表8.4.9
-aws-luckyus-iriskcontrolservice-rw,L0,信息安全,林宏鹏,升级跟踪表8.4.9
-aws-luckyus-isalescdp-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
-aws-luckyus-isalesprivatedomain-rw,L0,国际营销增长,张翔/上官锦程/王良,升级跟踪表8.4.9
-aws-luckyus-opproduction-rw,L0,国际运营,陈培浩/游熖,升级跟踪表8.4.9
-aws-luckyus-opshop-rw,L0,国际运营,陈培浩/游熖,升级跟踪表8.4.9
-aws-luckyus-opshopsale-rw,L0,国际运营,陈培浩/游熖,升级跟踪表8.4.9
-aws-luckyus-salescrm-rw,L0,国际营销增长,张翔/高如森,升级跟踪表8.4.9
-aws-luckyus-salesmarketing-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
-aws-luckyus-salesorder-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
-aws-luckyus-salespayment-rw,L0,国际营销增长,张晓松,升级跟踪表8.4.9
-aws-luckyus-scm-shopstock-rw,L0,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scmcommodity-rw,L0,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-devops-rw,L2,质量效能/运维,林鑫涛/吴心一/徐博轩/杨涛/姚清居/桂升斌/吴春林,2026-09-01 David 定：挂了不影响业务系统运行 → 非业务档；iZeus 告警平台库，原 L1
-aws-luckyus-framework01-rw,L1,架构,车永生/罗宁/黄国仲/林正权/王卫/张隆洋/刘俊琪,升级跟踪表8.4.9
-aws-luckyus-framework02-rw,L1,架构,罗宁/林正权/张黎明/代俊健/王卫,升级跟踪表8.4.9
-aws-luckyus-horae-rw,L1,业务,,升级表未收录；David 确认=业务库 L1(Chronus 调度库)；Prometheus mysqld_exporter 待 David 补，补完本行不用改
-aws-luckyus-iadmin-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
-aws-luckyus-ibehr-rw,L1,业务,,升级表未收录；David 确认=业务库 L1
-aws-luckyus-ibillingcentersrv-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
-aws-luckyus-ibizconfigcenter-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
-aws-luckyus-iehr-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
-aws-luckyus-igers-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
-aws-luckyus-ijumpserver-jumpserver-rw,L1,信息安全,刘成锡,升级跟踪表8.4.9
-aws-luckyus-iluckyams-rw,L1,业务,,升级表未收录；David 确认=业务库 L1
-aws-luckyus-iluckyauthapi-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
-aws-luckyus-iluckymedia-rw,L1,国际运营,张少群,升级跟踪表8.4.9
-aws-luckyus-iopenadmin-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-iopenlinker-rw,L1,国际营销增长,张晓松,升级跟踪表8.4.9
-aws-luckyus-iopenservice-rw,L1,国际公共平台,陈亮,升级跟踪表8.4.9
-aws-luckyus-iopshopexpand-rw,L1,国际运营,陈培浩,升级跟踪表8.4.9
-aws-luckyus-iotplatform-rw,L1,AIot,李晨端/左达奇,升级跟踪表8.4.9
-aws-luckyus-ireplenishment-rw,L1,供应链算法,高天牧/黄方进,升级跟踪表8.4.9
-aws-luckyus-isalescouponservice-rw,L1,国际营销增长,,升级表未收录；David 确认=优惠券服务 L1
-aws-luckyus-isalesdatamarketing-rw,L1,国际营销增长,李加彬/张翔/张晓松,升级跟踪表8.4.9
-aws-luckyus-isalesmembermarketing-rw,L1,国际营销增长,李加彬/张翔/张晓松,升级跟踪表8.4.9
-aws-luckyus-iunifiedreconcile-rw,L1,国际公共平台,陈亮/陈洪君,升级跟踪表8.4.9
-aws-luckyus-iworkflowmidlayer-rw,L1,国际公共平台,陈亮/陈洪君,升级跟踪表8.4.9
-aws-luckyus-ldas-rw,L3,运维/DBA自有,张杨/孔增/金盛昌/张黎明/翁延海,2026-09-01 David 定：挂了不影响业务系统运行 → 非业务档；DBA 自有 CMDB，与 ldas01 同族（David 只点名 ldas01，按同一口径一并下调，如不同意请驳回）
-aws-luckyus-ldas01-rw,L3,运维/DBA自有,张杨,2026-09-01 David 定：挂了不影响业务系统运行 → 非业务档；DBA 自有数据平台，与 ldasverify01/02 同族
-aws-luckyus-mfranchise-rw,L1,国际公共平台,陈亮/陈洪君,升级跟踪表8.4.9
-aws-luckyus-opempefficiency-rw,L1,国际运营,陈培浩,升级跟踪表8.4.9
-aws-luckyus-pubdm-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scm-asset-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scm-openapi-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scm-ordering-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scm-plan-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scm-purchase-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scm-wds-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-scmsrm-rw,L1,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-upush-rw,L1,架构,罗宁/林智贤/刘洋,升级跟踪表8.4.9
-aws-luckyus-fichargecontrol-rw,L2,国际公共平台,尤志杰,升级跟踪表8.4.9
-aws-luckyus-ifiaccounting-rw,L2,国际公共平台,尤志杰,升级跟踪表8.4.9
-aws-luckyus-ilsopdevopsdata-rw,L2,质量效能,夏文涛,升级跟踪表8.4.9
-aws-luckyus-iluckyhealth-rw,L2,运维,叶荣海,升级跟踪表8.4.9
-aws-luckyus-iopocp-rw,L2,国际运营,陈培浩,升级跟踪表8.4.9
-aws-luckyus-oplog-rw,L2,国际运营,张少群,升级跟踪表8.4.9
-aws-luckyus-opqualitycontrol-rw,L2,国际运营,陈培浩,升级跟踪表8.4.9
-aws-luckyus-scm-wmssimulate-rw,L2,国际供应链,方思扬,升级跟踪表8.4.9
-aws-luckyus-icyberdata-rw,L3,大数据,田洪彬,升级跟踪表8.4.9(原 L1，因业务分组=大数据降为 L3)
-aws-luckyus-iluckydorisops-rw,L3,大数据,苏晓博,升级跟踪表8.4.9(原 L2，因业务分组=大数据降为 L3)
-aws-luckyus-ldasverify01-rw,L3,运维/DBA自有,,升级表未收录；David 确认=运维数据库(DBA 自有验证实例)，归 L3 非业务档
-aws-luckyus-ldasverify02-rw,L3,运维/DBA自有,,升级表未收录；David 确认=运维数据库(DBA 自有验证实例)，归 L3 非业务档
+aws-luckyus-cdpactivity-rw,L1,国际营销增长,张晓松,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-fitax-rw,L1,国际公共平台,尤志杰,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ipermission-rw,L0,国际公共平台,陈亮/张晓松,2026-09-01 按 David 组件角色判据重排：权限——David 明示的基础组件
+aws-luckyus-iriskcontrolservice-rw,L2,信息安全,林宏鹏,2026-09-01 按 David 组件角色判据重排：风控——按『坏了业务处于不安全状态』归辅助系统
+aws-luckyus-isalescdp-rw,L1,国际营销增长,张晓松,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-isalesprivatedomain-rw,L1,国际营销增长,张翔/上官锦程/王良,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-opproduction-rw,L1,国际运营,陈培浩/游熖,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-opshop-rw,L1,国际运营,陈培浩/游熖,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-opshopsale-rw,L1,国际运营,陈培浩/游熖,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-salescrm-rw,L1,国际营销增长,张翔/高如森,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-salesmarketing-rw,L1,国际营销增长,张晓松,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-salesorder-rw,L1,国际营销增长,张晓松,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-salespayment-rw,L1,国际营销增长,张晓松,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scm-shopstock-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scmcommodity-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-devops-rw,L2,质量效能/运维,林鑫涛/吴心一/徐博轩/杨涛/姚清居/桂升斌/吴春林,2026-09-01 按 David 组件角色判据重排：iZeus 告警平台，坏了业务处于无监控的不安全状态
+aws-luckyus-framework01-rw,L0,架构,车永生/罗宁/黄国仲/林正权/王卫/张隆洋/刘俊琪,2026-09-01 按 David 组件角色判据重排：Chronus 调度中心（luckyus_horae 在 framework01，horae 为拆出库），全司定时任务依赖
+aws-luckyus-framework02-rw,L0,架构,罗宁/林正权/张黎明/代俊健/王卫,2026-09-01 按 David 组件角色判据重排：Chronus 调度中心（luckyus_horae 在 framework01，horae 为拆出库），全司定时任务依赖（framework02 库内容未核实，按与 framework01 同族推断，待确认）
+aws-luckyus-horae-rw,L0,业务,,2026-09-01 按 David 组件角色判据重排：Chronus 调度中心（luckyus_horae 在 framework01，horae 为拆出库），全司定时任务依赖
+aws-luckyus-iadmin-rw,L1,国际公共平台,陈亮,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ibehr-rw,L1,业务,,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ibillingcentersrv-rw,L1,国际公共平台,陈亮,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ibizconfigcenter-rw,L0,国际公共平台,陈亮,2026-09-01 按 David 组件角色判据重排：配置中心，全部服务启动/运行时读取
+aws-luckyus-iehr-rw,L1,国际公共平台,陈亮,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-igers-rw,L1,国际公共平台,陈亮,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ijumpserver-jumpserver-rw,L2,信息安全,刘成锡,2026-09-01 按 David 组件角色判据重排：堡垒机，运维访问管控
+aws-luckyus-iluckyams-rw,L1,业务,,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iluckyauthapi-rw,L0,国际公共平台,陈亮,2026-09-01 按 David 组件角色判据重排：登录/认证——David 明示的基础组件
+aws-luckyus-iluckymedia-rw,L1,国际运营,张少群,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iopenadmin-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iopenlinker-rw,L1,国际营销增长,张晓松,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iopenservice-rw,L1,国际公共平台,陈亮,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iopshopexpand-rw,L1,国际运营,陈培浩,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iotplatform-rw,L1,AIot,李晨端/左达奇,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ireplenishment-rw,L1,供应链算法,高天牧/黄方进,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-isalescouponservice-rw,L1,国际营销增长,,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-isalesdatamarketing-rw,L3,国际营销增长,李加彬/张翔/张晓松,2026-09-01 按 David 组件角色判据重排：数据营销分析
+aws-luckyus-isalesmembermarketing-rw,L1,国际营销增长,李加彬/张翔/张晓松,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iunifiedreconcile-rw,L1,国际公共平台,陈亮/陈洪君,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-iworkflowmidlayer-rw,L0,国际公共平台,陈亮/陈洪君,2026-09-01 按 David 组件角色判据重排：工作流中间层，多业务系统共用
+aws-luckyus-ldas-rw,L3,运维/DBA自有,张杨/孔增/金盛昌/张黎明/翁延海,2026-09-01 按 David 组件角色判据重排：DBA 自有数据平台/CMDB，慢 SQL 采集表所在
+aws-luckyus-ldas01-rw,L3,运维/DBA自有,张杨,2026-09-01 按 David 组件角色判据重排：DBA 自有数据平台/CMDB，慢 SQL 采集表所在
+aws-luckyus-mfranchise-rw,L1,国际公共平台,陈亮/陈洪君,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-opempefficiency-rw,L1,国际运营,陈培浩,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-pubdm-rw,L3,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：公共数据集市（idm 取数），统计分析
+aws-luckyus-scm-asset-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scm-openapi-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scm-ordering-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scm-plan-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scm-purchase-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scm-wds-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scmsrm-rw,L1,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-upush-rw,L0,架构,罗宁/林智贤/刘洋,2026-09-01 按 David 组件角色判据重排：统一推送，各业务系统共用
+aws-luckyus-fichargecontrol-rw,L1,国际公共平台,尤志杰,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ifiaccounting-rw,L1,国际公共平台,尤志杰,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-ilsopdevopsdata-rw,L2,质量效能,夏文涛,2026-09-01 按 David 组件角色判据重排：LSOP 质量效能运维数据
+aws-luckyus-iluckyhealth-rw,L2,运维,叶荣海,2026-09-01 按 David 组件角色判据重排：健康检查/巡检
+aws-luckyus-iopocp-rw,L1,国际运营,陈培浩,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-oplog-rw,L0,国际运营,张少群,2026-09-01 按 David 组件角色判据重排：日志——David 明示的基础组件
+aws-luckyus-opqualitycontrol-rw,L1,国际运营,陈培浩,2026-09-01 按 David 组件角色判据重排：业务功能——坏了影响单个业务功能（默认档）
+aws-luckyus-scm-wmssimulate-rw,L4,国际供应链,方思扬,2026-09-01 按 David 组件角色判据重排：WMS 模拟环境
+aws-luckyus-icyberdata-rw,L3,大数据,田洪彬,2026-09-01 按 David 组件角色判据重排：Doris 数据平台/调度元数据，统计分析
+aws-luckyus-iluckydorisops-rw,L3,大数据,苏晓博,2026-09-01 按 David 组件角色判据重排：Doris 数据平台/调度元数据，统计分析
+aws-luckyus-ldasverify01-rw,L4,运维/DBA自有,,2026-09-01 按 David 组件角色判据重排：DBA 自有验证实例
+aws-luckyus-ldasverify02-rw,L4,运维/DBA自有,,2026-09-01 按 David 组件角色判据重排：DBA 自有验证实例
