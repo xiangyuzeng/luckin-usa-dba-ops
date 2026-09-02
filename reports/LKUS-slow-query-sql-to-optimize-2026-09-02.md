@@ -7,6 +7,7 @@
 | 数据窗口 | 2026-08-25 ~ 2026-09-01（7 天） |
 | 范围 | L0 + L1 共 48 台实例 |
 | 排序 | 按 7 天累计 DB 时间降序 |
+| EXPLAIN 复核 | 2026-09-02 已跑第 1、4、9、10 条（原「待复核」四条），结论见各条 |
 
 ---
 
@@ -14,16 +15,16 @@
 
 | # | 实例 | 表 | 7天DB时间 | 7天次数 | 单次扫描 | 单次返回 | 动作类型 | 状态 |
 |---|---|---|---:|---:|---:|---:|---|---|
-| 1 | salesmarketing | t_cyber_ug_data_fetch_task | 23,060.7s | 66,990 | 51,467 | 0.14 | 加索引 | 待复核 |
+| 1 | salesmarketing | t_cyber_ug_data_fetch_task | 23,060.7s | 66,990 | 51,467 | 0.14 | 加索引 | **已验证** |
 | 2 | opshopsale | t_shopsale_spu + t_shopsale_rmk | 4,976.9s | 768 | 766,796 | 0 | 去重＋降频 | 已定论 |
 | 3 | salespayment | t_channel_fee | 3,780.6s | 2,304 | 164,324 | 5,000 | 修任务逻辑＋加索引 | 已定论 |
-| 4 | isalesprivatedomain | t_private_domain_user | 3,499.5s | 11,922 | 4,933 | 0 | 加索引 | 待复核 |
+| 4 | isalesprivatedomain | t_private_domain_user | 3,499.5s | 11,922 | 4,933 | 0 | 加索引 | **已验证** |
 | 5 | ipermission | t_permission_role_menu_relation | 2,716.8s | 11,280 | 67,727 | 33,974 | 应用侧缓存 | 待沟通 |
 | 6 | salesmarketing | t_coupon_template | 2,534.7s | 8,197 | 1,794 | 965 | 应用侧缓存 | 待沟通 |
 | 7 | salespayment | t_trade + t_pay_channel | 2,325.8s | 8,726 | 6,630 | 9.5 | 降频／改写面板 | DBA 自有 |
 | 8 | ipermission | t_permission_menu | 1,989.0s | 5,048 | 8,203 | 6,280 | 应用侧缓存 | 待沟通 |
-| 9 | salesorder | t_order | 1,957.7s | 5,599 | 779 | 0.44 | 收窄轮询窗口 | 待复核 |
-| 10 | salesmarketing | t_market_activity_partake | 1,929.8s | 11,484 | 290,421 | 1 | 加索引／计数缓存 | 待复核 |
+| 9 | salesorder | t_order | 1,957.7s | 5,599 | 779 | 0.44 | ~~加索引~~ 排查争用 | **已改判** |
+| 10 | salesmarketing | t_market_activity_partake | 1,929.8s | 11,484 | 290,421 | 1 | ~~加索引~~ 计数缓存 | **已改判** |
 | 11 | salesmarketing | t_coupon_record_expired | 371.2s | 8 | 3,041,567 | 1 | 加索引 | 已定论 |
 | 12 | cdpactivity | t_contact_activity_instance_record | 191.7s | 104 | 12,337 | 42 | 错峰＋加索引 | CR 已出 |
 | 13 | salesorder | t_finance_refund | 93.9s | 80 | 20,597 | 1 | 加索引 | CR 已出 |
@@ -55,8 +56,26 @@ select
 **现状**：7 天 66,990 次，累计 23,060.7 秒、扫描 34.5 亿行，单次扫 51,467 行只返回 0.14 行（37 万:1）。
 当前 L0+L1 范围内最大的单条优化机会。
 
-**动作**：建复合索引 `(tenant, task_status, deleted, create_time)`，等值列在前、范围列在末；
-并复核轮询频率是否需要 9 秒一次。索引列序需 `EXPLAIN` 验证后走变更申请。
+**EXPLAIN（2026-09-02）**：`type=index`、`possible_keys=NULL`、`key=PRIMARY`、`rows=20`、`filtered=0.25`。
+表上只有 `PRIMARY` 和 `idx_group_no`，四个过滤列一个都没索引 —— 优化器无索引可用，
+被 `ORDER BY id ASC LIMIT 20` 骗去按主键顺序扫，指望"扫几行就凑够 20 条"，实际把整张
+53,321 行的表走完。与第 11 条券归档探针是同一个 `ORDER BY 主键 + LIMIT` 陷阱。
+
+**选择率实测**：`task_status=0 AND deleted=0` 全表只有 **1 行**；`tenant='IQA2'` 一行都没有
+（IQA2 历史累计仅 99 行，且全是 `task_status=3`）。即这个轮询**永远扫全表、永远查无结果**。
+
+**实测耗时**：2026-09-02 16:00 UTC（业务高峰）现场跑同一语句 **55.6 ms**，记录均值 344 ms（6.2 倍差）。
+慢日志阈值 `long_query_time=0.1s`，所以 66,990 次只是超过 100ms 的尾部，真实执行次数更高。
+
+**动作（已验证）**：建复合索引 `(tenant, task_status, deleted, create_time)`，
+等值三列定位后 `create_time` 有序收敛，扫描 51,467 行 → 个位数行。
+`(tenant, task_status, deleted, id)` 亦可，还能顺带消掉 `ORDER BY id` 的 filesort；
+命中行数 ≤1，两者差别不大。**加索引后须复跑 `EXPLAIN` 确认优化器不再走 `PRIMARY`** ——
+这张表已经栽在 LIMIT 陷阱上一次。
+
+> 🔴 **顺带发现**：`task_status=0` 的那 1 行是 `id=18552` / `group_no=LKUSUG119455478458818560`，
+> `create_time = modify_time = 2026-05-29 03:58:07`，**卡了 3 个月没动过**。
+> 而轮询条件带 `create_time >= <最近若干小时>`，这行永远不会被捞起来。需要研发确认是否漏处理。
 
 ---
 
@@ -132,8 +151,24 @@ SELECT user_no
 
 **现状**：7 天 11,922 次、3,499.5 秒，单次扫 4,933 行**一行不返回** —— 与 opshopsale 同型的空转探针。
 
-**动作**：建复合索引 `(tenant, support_status, user_no)`，使 `LIMIT 1` 命中即返回；
-并复核这个探针是否需要保持当前频率。列序需 `EXPLAIN` 验证。
+**EXPLAIN（2026-09-02）**：`type=range`、`key=idx_user_no`、`rows=2584`、`filtered=1.0`、
+`Extra=Using index condition; Using where`。走的是 `user_no IS NOT NULL` 这个范围条件，
+按 `user_no` 顺序逐行回表检查 `support_status` 和 `tenant`；因为一行都不匹配，
+`LIMIT 1` 起不到提前结束的作用，整棵索引走到底。`support_status` 与 `tenant` 均无索引。
+
+**实测耗时**：现场跑 **12.9 ms**，记录均值 294 ms（23 倍差）。表只有 5,003 行，
+所以记录里的 294 ms 大头是执行时刻的争用，不是这条语句本身。
+
+**动作（已验证）**：建复合索引 `(tenant, support_status, user_no)` —— 等值两列定位后
+`user_no` 有序，`LIMIT 1` 可即时返回，同时消除 `ORDER BY user_no` 的额外代价。
+5,003 行的小表，DDL 秒级。**但绝对收益有限（12.9 ms → 亚毫秒），优先级低于第 1 条。**
+
+> 🔴 **顺带发现（比索引更值得看）**：`tenant='LKUS' AND support_status=0` 有 **85 行**，
+> 但这 85 行的 `user_no` **全部为 NULL**（最早 2025-11-07，最晚 2026-07-30）。
+> 轮询条件里的 `user_no IS NOT NULL` 把它们全部排除 —— 也就是说这个待处理队列里
+> 积压了 85 条、最久的将近 10 个月，而轮询任务永远看不到它们。
+> 要么是 `user_no` 该回填没回填，要么是轮询条件写错了。与第 3 条 salespayment
+> 空转 17 个月是同一类问题，建议交研发确认。
 
 ---
 
@@ -247,8 +282,19 @@ SELECT id, tenant, parent_id, channel, order_category, order_type, order_sub_typ
 **现状**：7 天 5,599 次、1,957.7 秒，单次扫 779 行返回 0.44 行（1,780:1）。
 每分钟重扫**过去 2 小时**的窗口，窗口高度重叠；且**没有 `tenant` 过滤**。
 
-**动作**：改为游标水位（`id > ${lastId}`）或把 2 小时窗口收窄到轮询间隔量级；
-补 `tenant` 条件；`STATUS = 10 OR (...)` 的 OR 条件建议拆成 UNION 以便走索引。列序需 `EXPLAIN` 验证。
+**EXPLAIN（2026-09-02）**：`type=range`、`key=idx_create_time`、`rows=1863`、`filtered=18.1`、
+`Extra=Using index condition; Using where; Using filesort`。
+**执行计划本身是对的** —— `idx_create_time(create_time, tenant, display_flag)` 已经把
+时间窗口收成 1,863 行的范围扫描，不是全表扫。
+
+**实测耗时**：2026-09-02 16:00 UTC（业务高峰，2 小时窗口）现场跑 **4.0 ms**，
+记录均值 350 ms —— **差 87 倍**。
+
+**动作（已改判）**：**不加索引。** 这条与第 16、17 两条 opempefficiency 同类，
+是争用受害者而不是慢 SQL —— 4 ms 的语句被记成 350 ms，问题在执行时刻不在语句。
+可做的两件低成本整改：① 每分钟重扫过去 2 小时、窗口重叠 120 倍，改为游标水位
+（`id > ${lastId}`）或把窗口收到轮询间隔量级；② 补 `tenant` 条件，
+让 `idx_create_time` 的第二列也能用上。两项都不是为了降这 4 ms，是减少无谓的重复读。
 
 ---
 
@@ -265,8 +311,18 @@ select count(1)
 **现状**：单次扫 290,421 行只为拿一个数字（29 万:1），7 天累计 1,929.8 秒。
 与第 1 条合计每周扫描 68 亿行。
 
-**动作**：给 `activity_no` 建索引（或确认现有索引为何未命中）；
-若该计数用于展示，改为计数缓存／增量维护，避免每次实时 `COUNT`。需 `EXPLAIN` 验证后走变更申请。
+**EXPLAIN（2026-09-02）**：`type=ref`、`key=idx_activity_no`、`rows=544352`、`filtered=100`、
+`Extra=Using index`。—— **索引已经有了，而且已经用上了，还是覆盖索引扫描。**
+
+**实测**：该 `activity_no` 名下实有 **300,636 行**；现场跑 **168.3 ms**，
+记录均值 168 ms —— **两者完全一致**。说明这不是争用问题，是稳定复现的真实成本：
+数 30 万条索引项就是要 168 ms。
+
+**动作（已改判）**：**加索引不是解法**（`idx_activity_no` 已存在且生效），
+上一版报告里"给 `activity_no` 建索引"这条作废。真正的修法只有两条路：
+① 计数改为缓存／增量维护（活动参与数写入时 +1，读时不做实时 `COUNT`）；
+② 若该数字只用于展示，放宽实时性，改为定时快照。
+需与营销研发（张晓松）确认这个计数的用途和实时性要求。
 
 ---
 
@@ -483,5 +539,11 @@ SELECT COUNT(*) AS total
   upush `04bc9a2d`（慢在提交延迟）、cdpactivity `t_contact_activity` 计数（单次只扫 52 行）、
   framework01 `es_qrtz_LOCKS ... FOR UPDATE`（Quartz 抢锁，扫 1 行）、
   ijumpserver `151b0ae8`（L3 安全运维，出范围）。
-- 标「待复核」的四条（第 1、4、9、10）给出的是优化方向，**索引列序未经 `EXPLAIN` 验证**，
-  提变更申请前必须先验证。
+- **第 1、4、9、10 条的 `EXPLAIN` 已于 2026-09-02 跑完**，结论写在各条内：
+  第 1、4 条索引方案**成立**；第 9 条**改判为争用受害者，不加索引**；
+  第 10 条**索引已存在且已生效，加索引作废**，只能靠计数缓存。
+- 三台被复核实例的 `long_query_time` 均为 **0.1 秒**，因此原文口径的「7 天次数」
+  只是超过 100 ms 的尾部，不是真实执行次数（真实次数更高）。
+- 复核中另外查出两处积压，与 SQL 优化无关但更值得处理：
+  第 1 条 1 行任务卡在 `task_status=0` 已 3 个月；
+  第 4 条 85 行 `support_status=0` 因 `user_no` 全为 NULL 被轮询条件永久排除，最久近 10 个月。
