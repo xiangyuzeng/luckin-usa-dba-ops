@@ -1,3 +1,20 @@
+> ## ⚠ 2026-09-11 结论修正（本文以下内容有一条证据不成立）
+>
+> **「`up{job="node-metrics", instance="10.238.65.5:10087"}` 17 小时窗口内持续为 0」
+> 不能作为宕机证据** —— 复核发现 `max_over_time(up{instance="10.238.65.5:10087"}[30d]) = 0`，
+> 且 `node_time_seconds{instance="10.238.65.5:10087"}` 查无任何数据：**该主机的 node_exporter
+> 目标在 30 天内从未采集成功过，`up=0` 是常态，与 09-07 宕机无关。**
+>
+> 宕机事实改以 **AWS `StatusCheckFailed_Instance`** 为准（09-07 10:45 由 0→1、09-08 03:45 由 1→0，
+> 1 分钟粒度精确对齐；同期 `StatusCheckFailed_System` 全程 0）。
+>
+> 同时 #76 排除名单的成因判断也要改：**不是**为计划性启停设的。全 fleet 229 个 node-metrics
+> 目标中有 **11 个 `up` 已连续 ≥7 天为 0**，其 service 恰好**全部**落在 #76 的排除正则内
+> （8 台 idoris + isslvpn01 + idpcd 的 NLB ENI + iluckydpbi03）—— 排除是为压掉**长期坏目标**的噪声。
+>
+> 完整复核过程、替代证据与复现命令：`incident-iluckydpbi03-evidence-pack-20260911.md`
+> #66 的分析不受影响（ICMP 全程为 1，双信号之和恒 ≥1，永不触发）。
+
 # 告警缺失分析报告 / Missing Alert Root Cause Report
 
 ## 【无告警】iluckydpbi03-prod-usa-aws 主机死机17小时，Zeus全程零告警
